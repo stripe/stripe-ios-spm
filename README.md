@@ -1,2 +1,2 @@
 # stripe-ios-spm
-Swift packages for the Stripe iOS SDK
+This is a lightweight Swift Package Manager mirror for the [Stripe iOS SDK](https://github.com/stripe/stripe-ios). It offers [tagged source releases](https://github.com/stripe/stripe-ios-spm/releases) for each version of the SDK.
