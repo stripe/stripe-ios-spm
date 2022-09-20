@@ -1,0 +1,107 @@
+"%@ (optional)" = "%@ (по желание)";
+
+"Account number" = "Номер на сметката";
+
+"Address" = "Адрес";
+
+"Address line 1" = "Ред 1 на адреса";
+
+"Address line 2" = "Ред 2 на адреса";
+
+"Area" = "Район";
+
+"BSB number" = "BSB номер";
+
+"Billing address is same as shipping" = "Адресът за фактуриране е същият като за доставка";
+
+"Cancel" = "Отмяна";
+
+"City" = "Град";
+
+"Company" = "Компания";
+
+"Continue" = "Продължаване";
+
+"Country" = "Държава";
+
+"Country or region" = "Държава или регион";
+
+"County" = "Окръг";
+
+"Department" = "Отдел";
+
+"District" = "Окръг";
+
+"Do Si" = "Do Si";
+
+"Done" = "Готово";
+
+"Eircode" = "Eircode";
+
+"Email" = "Имейл";
+
+"Emirate" = "Емирство";
+
+"Error" = "Грешка";
+
+"First" = "Собствено";
+
+"Full name" = "Трите имена";
+
+"Incomplete phone number" = "Непълен телефонен номер";
+
+"Island" = "Остров";
+
+"Last" = "Фамилия";
+
+"Name" = "Име";
+
+"Name on account" = "Име на сметката";
+
+"OK" = "OK";
+
+"Oblast" = "Област";
+
+"Other" = "Друга";
+
+"Parish" = "Енория";
+
+"Phone" = "Телефон";
+
+"Postal code" = "Пощенски код";
+
+"Prefecture" = "Префектура";
+
+"Province" = "Област";
+
+"Remove" = "Премахване";
+
+"Remove bank account" = "Премахване на банкова сметка";
+
+"Remove bank account ending in %@" = "Премахване на банкова сметка, завършваща на %@";
+
+"State" = "Щат";
+
+"Suburb" = "Предградие";
+
+"Suburb or city" = "Предградие или град";
+
+"The BSB you entered is incomplete." = "BSB, който сте въвели, е непълен.";
+
+"The ID number you entered is incomplete." = "Идентификационният номер, който сте въвели, е непълен.";
+
+"The account number you entered is incomplete." = "Въведеният от Вас номер на сметката е невалиден.";
+
+"Town or city" = "Град";
+
+"Unable to parse phone number" = "Неуспешно анализиране на телефонния номер";
+
+"Use rotor to access links" = "Използване на ротор за достъп до връзки";
+
+"Your ZIP is incomplete." = "Вашият ZIP код е непълен.";
+
+"Your email is invalid." = "Вашият имейл е невалиден.";
+
+"Your postal code is incomplete." = "Вашият пощенски код е непълен.";
+
+"ZIP" = "п.к.";

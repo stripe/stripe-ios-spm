@@ -1,0 +1,107 @@
+"%@ (optional)" = "%@ (tùy chọn)";
+
+"Account number" = "Số tài khoản";
+
+"Address" = "Địa chỉ";
+
+"Address line 1" = "Dòng địa chỉ 1";
+
+"Address line 2" = "Dòng địa chỉ 2";
+
+"Area" = "Khu vực";
+
+"BSB number" = "Số BSB";
+
+"Billing address is same as shipping" = "Địa chỉ xuất hóa đơn giống địa chỉ chuyển hàng";
+
+"Cancel" = "Hủy";
+
+"City" = "Thành phố";
+
+"Company" = "Công ty";
+
+"Continue" = "Tiếp tục";
+
+"Country" = "Quốc gia";
+
+"Country or region" = "Quốc gia hoặc khu vực";
+
+"County" = "Quận";
+
+"Department" = "Sở ngành";
+
+"District" = "Quận/Huyện";
+
+"Do Si" = "Tỉnh/Thành phố";
+
+"Done" = "Xong";
+
+"Eircode" = "Mã Eircode";
+
+"Email" = "Email";
+
+"Emirate" = "Tiểu vương quốc";
+
+"Error" = "Lỗi";
+
+"First" = "Tên";
+
+"Full name" = "Họ tên";
+
+"Incomplete phone number" = "Số điện thoại chưa đầy đủ";
+
+"Island" = "Đảo";
+
+"Last" = "Họ";
+
+"Name" = "Tên";
+
+"Name on account" = "Tên trên tài khoản";
+
+"OK" = "OK";
+
+"Oblast" = "Vùng";
+
+"Other" = "Khác";
+
+"Parish" = "Giáo xứ";
+
+"Phone" = "Điện thoại";
+
+"Postal code" = "Mã bưu điện";
+
+"Prefecture" = "Tỉnh";
+
+"Province" = "Tỉnh";
+
+"Remove" = "Xóa";
+
+"Remove bank account" = "Bỏ tài khoản ngân hàng";
+
+"Remove bank account ending in %@" = "Bỏ tài khoản ngân hàng có các số cuối là %@";
+
+"State" = "Tiểu bang";
+
+"Suburb" = "Ngoại ô";
+
+"Suburb or city" = "Ngoại ô hoặc thành phố";
+
+"The BSB you entered is incomplete." = "BSB mà bạn nhập chưa đầy đủ.";
+
+"The ID number you entered is incomplete." = "Số ID bạn đã nhập chưa đầy đủ.";
+
+"The account number you entered is incomplete." = "Số tài khoản quý vị đã nhập không đầy đủ.";
+
+"Town or city" = "Thị trấn hoặc thành phố";
+
+"Unable to parse phone number" = "Không thể phân tích cú pháp số điện thoại";
+
+"Use rotor to access links" = "Sử dụng rô-to để truy cập liên kết";
+
+"Your ZIP is incomplete." = "Mã ZIP chưa đầy đủ.";
+
+"Your email is invalid." = "Email của quý vị không hợp lệ.";
+
+"Your postal code is incomplete." = "Mã bưu điện chưa đầy đủ.";
+
+"ZIP" = "ZIP";

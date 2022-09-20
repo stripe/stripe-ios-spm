@@ -1,0 +1,107 @@
+"%@ (optional)" = "%@ (opțional)";
+
+"Account number" = "Număr cont";
+
+"Address" = "Adresa";
+
+"Address line 1" = "Rândul 1 pentru adresă";
+
+"Address line 2" = "Rândul 2 pentru adresă";
+
+"Area" = "Zonă";
+
+"BSB number" = "Număr BSB";
+
+"Billing address is same as shipping" = "Adresa de facturare este la fel cu cea de expediere";
+
+"Cancel" = "Anulare";
+
+"City" = "Oraș";
+
+"Company" = "Companie";
+
+"Continue" = "Continuare";
+
+"Country" = "Țară";
+
+"Country or region" = "Țară sau regiune";
+
+"County" = "Județ";
+
+"Department" = "Departament";
+
+"District" = "District";
+
+"Do Si" = "Do Si";
+
+"Done" = "Efectuat";
+
+"Eircode" = "Eircode";
+
+"Email" = "E-mail";
+
+"Emirate" = "Emirat";
+
+"Error" = "Eroare";
+
+"First" = "Prenume";
+
+"Full name" = "Nume complet";
+
+"Incomplete phone number" = "Număr de telefon incomplet";
+
+"Island" = "Insulă";
+
+"Last" = "Nume de familie";
+
+"Name" = "Nume";
+
+"Name on account" = "Numele contului";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Altele";
+
+"Parish" = "Parohie";
+
+"Phone" = "Număr de telefon";
+
+"Postal code" = "Cod poștal";
+
+"Prefecture" = "Prefectură";
+
+"Province" = "Provincie";
+
+"Remove" = "Eliminare";
+
+"Remove bank account" = "Eliminați contul bancar";
+
+"Remove bank account ending in %@" = "Eliminați contul bancar care se termină în %@";
+
+"State" = "Stat";
+
+"Suburb" = "Suburbie";
+
+"Suburb or city" = "Suburbie sau oraș";
+
+"The BSB you entered is incomplete." = "Numărul BSB pe care l-ați introdus nu este complet.";
+
+"The ID number you entered is incomplete." = "Numărul de identificare pe care l-ați introdus nu este complet.";
+
+"The account number you entered is incomplete." = "Numărul de cont pe care l-ați introdus nu este complet.";
+
+"Town or city" = "Municipalitate sau oraș";
+
+"Unable to parse phone number" = "Nu se poate analiza numărul de telefon";
+
+"Use rotor to access links" = "Utilizați rotorul pentru a accesa linkurile";
+
+"Your ZIP is incomplete." = "Codul dvs. poștal nu este complet.";
+
+"Your email is invalid." = "E-mailul dvs. nu este valid.";
+
+"Your postal code is incomplete." = "Codul dvs. poștal nu este complet.";
+
+"ZIP" = "Cod poștal";
