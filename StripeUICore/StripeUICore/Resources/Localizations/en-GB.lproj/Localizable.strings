@@ -1,0 +1,107 @@
+"%@ (optional)" = "%@ (optional)";
+
+"Account number" = "Account number";
+
+"Address" = "Address";
+
+"Address line 1" = "Address line 1";
+
+"Address line 2" = "Address line 2";
+
+"Area" = "Area";
+
+"BSB number" = "BSB number";
+
+"Billing address is same as shipping" = "Billing address is same as shipping";
+
+"Cancel" = "Cancel";
+
+"City" = "City";
+
+"Company" = "Company";
+
+"Continue" = "Continue";
+
+"Country" = "Country";
+
+"Country or region" = "Country or region";
+
+"County" = "County";
+
+"Department" = "Department";
+
+"District" = "District";
+
+"Do Si" = "Do Si";
+
+"Done" = "Done";
+
+"Eircode" = "Eircode";
+
+"Email" = "Email";
+
+"Emirate" = "Emirate";
+
+"Error" = "Error";
+
+"First" = "First";
+
+"Full name" = "Full name";
+
+"Incomplete phone number" = "Incomplete phone number";
+
+"Island" = "Island";
+
+"Last" = "Last";
+
+"Name" = "Name";
+
+"Name on account" = "Name on account";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Other";
+
+"Parish" = "Parish";
+
+"Phone" = "Phone";
+
+"Postal code" = "Postcode";
+
+"Prefecture" = "Prefecture";
+
+"Province" = "Province";
+
+"Remove" = "Remove";
+
+"Remove bank account" = "Remove bank account";
+
+"Remove bank account ending in %@" = "Remove bank account ending in %@";
+
+"State" = "State";
+
+"Suburb" = "Suburb";
+
+"Suburb or city" = "Suburb or city";
+
+"The BSB you entered is incomplete." = "The BSB you entered is incomplete.";
+
+"The ID number you entered is incomplete." = "The ID number you entered is incomplete.";
+
+"The account number you entered is incomplete." = "The account number you entered is incomplete.";
+
+"Town or city" = "Town or city";
+
+"Unable to parse phone number" = "Unable to parse phone number";
+
+"Use rotor to access links" = "Use rotor to access links";
+
+"Your ZIP is incomplete." = "Your ZIP is incomplete.";
+
+"Your email is invalid." = "Your email is invalid.";
+
+"Your postal code is incomplete." = "Your postcode is incomplete.";
+
+"ZIP" = "ZIP";

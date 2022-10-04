@@ -1,0 +1,107 @@
+"%@ (optional)" = "%@(opsyonal)";
+
+"Account number" = "Numero ng account";
+
+"Address" = "Adres";
+
+"Address line 1" = "Unang linya ng adres";
+
+"Address line 2" = "Linya 2 ng address";
+
+"Area" = "Lugar";
+
+"BSB number" = "Numero ng BSB";
+
+"Billing address is same as shipping" = "Ang address sa billing ay kapareho ng sa pagpapadala";
+
+"Cancel" = "Kanselahin";
+
+"City" = "Siyudad";
+
+"Company" = "Kompanya";
+
+"Continue" = "Magpatuloy";
+
+"Country" = "Bansa";
+
+"Country or region" = "Bansa o rehiyon";
+
+"County" = "County";
+
+"Department" = "Departamento";
+
+"District" = "Distrito";
+
+"Do Si" = "Do Si";
+
+"Done" = "Tapos Na";
+
+"Eircode" = "Eircode";
+
+"Email" = "Email";
+
+"Emirate" = "Emirate";
+
+"Error" = "Error";
+
+"First" = "Pangalan";
+
+"Full name" = "Buong pangalan";
+
+"Incomplete phone number" = "Kulang na numero ng telepono";
+
+"Island" = "Isla";
+
+"Last" = "Apelyido";
+
+"Name" = "Pangalan";
+
+"Name on account" = "Pangalan sa account";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Iba Pa";
+
+"Parish" = "Parokya";
+
+"Phone" = "Telepono";
+
+"Postal code" = "Postal code";
+
+"Prefecture" = "Prefecture";
+
+"Province" = "Probinsiya";
+
+"Remove" = "Alisin";
+
+"Remove bank account" = "Alisin ang account sa bangko";
+
+"Remove bank account ending in %@" = "Alisin ang account sa bangko na nagtatapos sa %@";
+
+"State" = "State";
+
+"Suburb" = "Suburb";
+
+"Suburb or city" = "Suburb o lungsod";
+
+"The BSB you entered is incomplete." = "Ang BSB na ipinasok mo ay di kumpleto.";
+
+"The ID number you entered is incomplete." = "Ang numero ng ID na inilagay mo ay kulang.";
+
+"The account number you entered is incomplete." = "Ang numero ng account na inilagay mo ay kulang.";
+
+"Town or city" = "Bayan o siyudad";
+
+"Unable to parse phone number" = "Hindi ma=parse ang numero ng telepono";
+
+"Use rotor to access links" = "Gumamit ng rotor para i-access ang mga link";
+
+"Your ZIP is incomplete." = "Ang iyong ZIP ay di kumpleto.";
+
+"Your email is invalid." = "Ang iyong email ay imbalido.";
+
+"Your postal code is incomplete." = "Ang iyong postal code ay di kumpleto.";
+
+"ZIP" = "ZIP";

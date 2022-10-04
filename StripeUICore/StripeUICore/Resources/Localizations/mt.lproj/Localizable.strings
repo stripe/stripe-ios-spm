@@ -1,0 +1,107 @@
+"%@ (optional)" = "%@ (mhux obbligatorja)";
+
+"Account number" = "In-numru tal-kont";
+
+"Address" = "Indirizz";
+
+"Address line 1" = "Indirizz linja 1";
+
+"Address line 2" = "It-tieni linja tal-indirizz";
+
+"Area" = "Żona";
+
+"BSB number" = "Numru BSB";
+
+"Billing address is same as shipping" = "L-indirizz tal-fatturazzjoni huwa l-istess bħall-indirizz tal-posta";
+
+"Cancel" = "Ikkanċella";
+
+"City" = "Belt";
+
+"Company" = "Kumpanija";
+
+"Continue" = "Kompli";
+
+"Country" = "Pajjiż";
+
+"Country or region" = "Pajjiż jew reġjun";
+
+"County" = "Kontea";
+
+"Department" = "Dipartiment";
+
+"District" = "Distrett";
+
+"Do Si" = "Do Si";
+
+"Done" = "Bil-lest";
+
+"Eircode" = "Eircode";
+
+"Email" = "Email";
+
+"Emirate" = "Emirat";
+
+"Error" = "Żball";
+
+"First" = "Ismek";
+
+"Full name" = "Isem sħiħ";
+
+"Incomplete phone number" = "In-numru tat-telefon mhuwiex komplut";
+
+"Island" = "Gżira";
+
+"Last" = "L-aħħar";
+
+"Name" = "Isem";
+
+"Name on account" = "Isem sid il-kont";
+
+"OK" = "Tajjeb";
+
+"Oblast" = "Oblast";
+
+"Other" = "Oħrajn";
+
+"Parish" = "Parroċċa";
+
+"Phone" = "Telefon";
+
+"Postal code" = "Kodiċi postali";
+
+"Prefecture" = "Prefettura";
+
+"Province" = "Provinċja";
+
+"Remove" = "Neħħi";
+
+"Remove bank account" = "Neħħi l-kont tal-bank";
+
+"Remove bank account ending in %@" = "Neħħi l-kont tal-bank li jispiċċa b'%@";
+
+"State" = "Stat";
+
+"Suburb" = "Subborg";
+
+"Suburb or city" = "Subborg jew belt";
+
+"The BSB you entered is incomplete." = "Il-BSB li daħħalt mhux komplut.";
+
+"The ID number you entered is incomplete." = "In-numru tal-ID li daħħalt mhuwiex komplut.";
+
+"The account number you entered is incomplete." = "In-numru tal-kont li daħħalt mhux komplut.";
+
+"Town or city" = "Belt";
+
+"Unable to parse phone number" = "Ma jistax jaqra n-numru tat-telefown";
+
+"Use rotor to access links" = "Uża r-rotor biex tiftaħ il-ħoloq";
+
+"Your ZIP is incomplete." = "Il-kodiċi postali tiegħek mhux komplut.";
+
+"Your email is invalid." = "L-indirizz tal-email li daħħalt mhux tajjeb.";
+
+"Your postal code is incomplete." = "Il-kodiċi postali tiegħek mhux komplut.";
+
+"ZIP" = "Kodiċi Postali";

@@ -1,0 +1,107 @@
+"%@ (optional)" = "%@ (opsional)";
+
+"Account number" = "Nomor rekening";
+
+"Address" = "Alamat";
+
+"Address line 1" = "Baris alamat ke-1";
+
+"Address line 2" = "Baris alamat ke-2";
+
+"Area" = "Area";
+
+"BSB number" = "Nomor BSB";
+
+"Billing address is same as shipping" = "Alamat tagihan sama dengan pengiriman";
+
+"Cancel" = "Batalkan";
+
+"City" = "Kota";
+
+"Company" = "Perusahaan";
+
+"Continue" = "Lanjutkan";
+
+"Country" = "Negara";
+
+"Country or region" = "Negara atau wilayah";
+
+"County" = "County";
+
+"Department" = "Departemen";
+
+"District" = "Distrik";
+
+"Do Si" = "Do Si";
+
+"Done" = "Selesai";
+
+"Eircode" = "Eircode";
+
+"Email" = "Email";
+
+"Emirate" = "Emirat";
+
+"Error" = "Kesalahan";
+
+"First" = "Depan";
+
+"Full name" = "Nama lengkap";
+
+"Incomplete phone number" = "Nomor telepon tidak lengkap";
+
+"Island" = "Pulau";
+
+"Last" = "Belakang";
+
+"Name" = "Nama";
+
+"Name on account" = "Nama pada rekening";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Lainnya";
+
+"Parish" = "Parish";
+
+"Phone" = "Telepon";
+
+"Postal code" = "Kode pos";
+
+"Prefecture" = "Prefektur";
+
+"Province" = "Provinsi";
+
+"Remove" = "Hapus";
+
+"Remove bank account" = "Hapus rekening bank";
+
+"Remove bank account ending in %@" = "Hapus rekening bank yang berakhiran dengan %@";
+
+"State" = "Negara Bagian";
+
+"Suburb" = "Suburb";
+
+"Suburb or city" = "Suburb atau kota";
+
+"The BSB you entered is incomplete." = "BSB yang Anda masukkan tidak lengkap.";
+
+"The ID number you entered is incomplete." = "Nomor identifikasi yang Anda masukkan tidak lengkap.";
+
+"The account number you entered is incomplete." = "Nomor rekening yang Anda masukkan tidak lengkap.";
+
+"Town or city" = "Kabupaten atau kota";
+
+"Unable to parse phone number" = "Tidak dapat menguraikan nomor telepon";
+
+"Use rotor to access links" = "Gunakan rotor untuk mengakses tautan";
+
+"Your ZIP is incomplete." = "ZIP Anda tidak lengkap.";
+
+"Your email is invalid." = "Email Anda tidak valid.";
+
+"Your postal code is incomplete." = "Kode pos Anda tidak lengkap.";
+
+"ZIP" = "ZIP";

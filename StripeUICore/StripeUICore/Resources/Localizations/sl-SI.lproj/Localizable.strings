@@ -1,0 +1,107 @@
+"%@ (optional)" = "%@ (izbirno)";
+
+"Account number" = "Številka računa";
+
+"Address" = "Naslov";
+
+"Address line 1" = "Naslov 1";
+
+"Address line 2" = "Vrstica naslova 2";
+
+"Area" = "Območje";
+
+"BSB number" = "Številka BSB";
+
+"Billing address is same as shipping" = "Naslov za obračunavanje je isti kot dostavni naslov";
+
+"Cancel" = "Prekliči";
+
+"City" = "Mesto";
+
+"Company" = "Podjetje";
+
+"Continue" = "Nadaljuj";
+
+"Country" = "Država";
+
+"Country or region" = "Država ali regija";
+
+"County" = "Okraj";
+
+"Department" = "Oddelek";
+
+"District" = "Okrožje";
+
+"Do Si" = "Do Si";
+
+"Done" = "Dokončano";
+
+"Eircode" = "Eircode";
+
+"Email" = "E-poštni naslov";
+
+"Emirate" = "Emirat";
+
+"Error" = "Napaka";
+
+"First" = "Ime";
+
+"Full name" = "Polno ime";
+
+"Incomplete phone number" = "Nepopolna telefonska številka mobilnega telefona.";
+
+"Island" = "Otok";
+
+"Last" = "Priimek";
+
+"Name" = "Ime";
+
+"Name on account" = "Ime na računu";
+
+"OK" = "V redu";
+
+"Oblast" = "Oblast";
+
+"Other" = "Drugo";
+
+"Parish" = "Župnija";
+
+"Phone" = "Telefon";
+
+"Postal code" = "Poštna številka";
+
+"Prefecture" = "Prefektura";
+
+"Province" = "Provinca";
+
+"Remove" = "Odstrani";
+
+"Remove bank account" = "Odstranjevanje bančnega računa";
+
+"Remove bank account ending in %@" = "Odstranite bančni račun, ki se konča s števkami %@";
+
+"State" = "Zvezna država";
+
+"Suburb" = "Predmestje";
+
+"Suburb or city" = "Predmestje ali mesto";
+
+"The BSB you entered is incomplete." = "Vneseni BSB ni popoln.";
+
+"The ID number you entered is incomplete." = "Vnesena številka osebnega dokumenta ni popolna.";
+
+"The account number you entered is incomplete." = "Vnesena številka računa ni popolna.";
+
+"Town or city" = "Kraj ali mesto";
+
+"Unable to parse phone number" = "Telefonske številke ni mogoče razčleniti";
+
+"Use rotor to access links" = "Uporabite rotor za dostop do povezav";
+
+"Your ZIP is incomplete." = "Vaša poštna številka ni popolna.";
+
+"Your email is invalid." = "Vaš e-poštni naslov ni veljaven.";
+
+"Your postal code is incomplete." = "Vaša poštna številka ni popolna.";
+
+"ZIP" = "Poštna številka";

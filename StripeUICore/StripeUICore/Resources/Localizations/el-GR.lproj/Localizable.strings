@@ -1,0 +1,107 @@
+"%@ (optional)" = "%@ (προαιρετικό)";
+
+"Account number" = "Αριθμός λογαριασμού";
+
+"Address" = "Διεύθυνση";
+
+"Address line 1" = "Γραμμή διεύθυνσης 1";
+
+"Address line 2" = "Γραμμή διεύθυνσης 2";
+
+"Area" = "Περιοχή";
+
+"BSB number" = "Αριθμός BSB";
+
+"Billing address is same as shipping" = "Η διεύθυνση τιμολόγησης είναι ίδια με τη διεύθυνση αποστολής";
+
+"Cancel" = "Ακύρωση";
+
+"City" = "Πόλη";
+
+"Company" = "Εταιρεία";
+
+"Continue" = "Συνέχεια";
+
+"Country" = "Χώρα";
+
+"Country or region" = "Χώρα ή περιοχή";
+
+"County" = "Κομητεία";
+
+"Department" = "Τμήμα";
+
+"District" = "Περιφέρεια";
+
+"Do Si" = "Do Si";
+
+"Done" = "Τέλος";
+
+"Eircode" = "Ταχυδρομικός κώδικας";
+
+"Email" = "Διεύθυνση ηλεκτρονικού ταχυδρομείου";
+
+"Emirate" = "Εμιράτο";
+
+"Error" = "Σφάλμα";
+
+"First" = "Όνομα";
+
+"Full name" = "Πλήρες όνομα";
+
+"Incomplete phone number" = "Ελλιπής αριθμός τηλεφώνου";
+
+"Island" = "Νησί";
+
+"Last" = "Επώνυμο";
+
+"Name" = "Όνομα";
+
+"Name on account" = "Όνομα στον λογαριασμό";
+
+"OK" = "OK";
+
+"Oblast" = "Περιφέρεια";
+
+"Other" = "Άλλο";
+
+"Parish" = "Δήμος";
+
+"Phone" = "Τηλέφωνο";
+
+"Postal code" = "Ταχυδρομικός κώδικας";
+
+"Prefecture" = "Νομός";
+
+"Province" = "Επαρχία";
+
+"Remove" = "Αφαίρεση";
+
+"Remove bank account" = "Αφαίρεση τραπεζικού λογαριασμού";
+
+"Remove bank account ending in %@" = "Αφαίρεση του τραπεζικού λογαριασμού που λήγει σε %@";
+
+"State" = "Πολιτεία";
+
+"Suburb" = "Προάστιο";
+
+"Suburb or city" = "Προάστιο ή πόλη";
+
+"The BSB you entered is incomplete." = "Ο κωδικός BSB που εισάγατε είναι ατελής.";
+
+"The ID number you entered is incomplete." = "Ο αριθμός ταυτότητας που εισαγάγατε είναι ελλιπής.";
+
+"The account number you entered is incomplete." = "Ο αριθμός λογαριασμού που εισαγάγατε είναι ελλιπής.";
+
+"Town or city" = "Κωμόπολη ή πόλη";
+
+"Unable to parse phone number" = "Δεν ήταν δυνατή η ανάλυση του αριθμού τηλεφώνου";
+
+"Use rotor to access links" = "Χρησιμοποιήστε τον ρότορα για να προσπελάσετε τους συνδέσμους";
+
+"Your ZIP is incomplete." = "Ο ταχυδρομικός σας κώδικας είναι ελλιπής.";
+
+"Your email is invalid." = "Η διεύθυνση email σας δεν είναι έγκυρη.";
+
+"Your postal code is incomplete." = "Ο ταχυδρομικός κώδικάς σας είναι ελλιπής.";
+
+"ZIP" = "Τ.Κ.";
