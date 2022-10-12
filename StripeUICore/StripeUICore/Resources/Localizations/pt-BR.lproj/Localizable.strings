@@ -1,0 +1,107 @@
+"%@ (optional)" = "%@ (opcional)";
+
+"Account number" = "Número da conta";
+
+"Address" = "Endereço";
+
+"Address line 1" = "Endereço – Linha 1";
+
+"Address line 2" = "Endereço – Linha 2";
+
+"Area" = "Área";
+
+"BSB number" = "Número BSB";
+
+"Billing address is same as shipping" = "O endereço de faturamento é igual ao de envio";
+
+"Cancel" = "Cancelar";
+
+"City" = "Cidade";
+
+"Company" = "Empresa";
+
+"Continue" = "Continuar";
+
+"Country" = "País";
+
+"Country or region" = "País ou região";
+
+"County" = "Condado";
+
+"Department" = "Departamento";
+
+"District" = "Distrito";
+
+"Do Si" = "Do Si";
+
+"Done" = "Concluído";
+
+"Eircode" = "Eircode";
+
+"Email" = "E-mail";
+
+"Emirate" = "Emirado";
+
+"Error" = "Erro";
+
+"First" = "Nome";
+
+"Full name" = "Nome completo";
+
+"Incomplete phone number" = "Número de telefone incompleto";
+
+"Island" = "Ilha";
+
+"Last" = "Sobrenome";
+
+"Name" = "Nome";
+
+"Name on account" = "Nome na conta";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Outro";
+
+"Parish" = "Paróquia";
+
+"Phone" = "Telefone";
+
+"Postal code" = "Código postal";
+
+"Prefecture" = "Prefeitura";
+
+"Province" = "Província";
+
+"Remove" = "Remover";
+
+"Remove bank account" = "Remover conta bancária";
+
+"Remove bank account ending in %@" = "Remover conta bancária com final %@";
+
+"State" = "Estado";
+
+"Suburb" = "Subúrbio";
+
+"Suburb or city" = "Subúrbio ou cidade";
+
+"The BSB you entered is incomplete." = "O BSB inserido está incompleto.";
+
+"The ID number you entered is incomplete." = "O número da identificação inserido está incompleto.";
+
+"The account number you entered is incomplete." = "O número de conta inserido está incompleto.";
+
+"Town or city" = "Cidade ou município";
+
+"Unable to parse phone number" = "Não foi possível analisar o número de telefone";
+
+"Use rotor to access links" = "Use o rotor para acessar os links";
+
+"Your ZIP is incomplete." = "Código postal incompleto.";
+
+"Your email is invalid." = "Seu e-mail é inválido.";
+
+"Your postal code is incomplete." = "Código postal incompleto.";
+
+"ZIP" = "CEP";

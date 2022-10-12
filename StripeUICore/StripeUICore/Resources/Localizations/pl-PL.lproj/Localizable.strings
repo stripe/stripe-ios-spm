@@ -1,0 +1,107 @@
+"%@ (optional)" = "%@ (opcjonalnie)";
+
+"Account number" = "Numer konta";
+
+"Address" = "Adres";
+
+"Address line 1" = "Linia adresu 1";
+
+"Address line 2" = "Linia adresu 2";
+
+"Area" = "Obszar";
+
+"BSB number" = "Numer BSB";
+
+"Billing address is same as shipping" = "Adres rozliczenia ten sam, co adres wysyłki";
+
+"Cancel" = "Anuluj";
+
+"City" = "Miejscowość";
+
+"Company" = "Firma";
+
+"Continue" = "Kontynuuj";
+
+"Country" = "Kraj";
+
+"Country or region" = "Kraj lub region";
+
+"County" = "Hrabstwo";
+
+"Department" = "Departament";
+
+"District" = "Dystrykt";
+
+"Do Si" = "Do Si";
+
+"Done" = "Gotowe";
+
+"Eircode" = "Eircode";
+
+"Email" = "Adres e-mail";
+
+"Emirate" = "Emiraty";
+
+"Error" = "Błąd";
+
+"First" = "Imię";
+
+"Full name" = "Imię i nazwisko";
+
+"Incomplete phone number" = "Niekompletny numer telefonu";
+
+"Island" = "Wyspa";
+
+"Last" = "Nazwisko";
+
+"Name" = "Imię i nazwisko";
+
+"Name on account" = "Imię i nazwisko na rachunku";
+
+"OK" = "OK";
+
+"Oblast" = "Obwód";
+
+"Other" = "Inne";
+
+"Parish" = "Parafia";
+
+"Phone" = "Telefon";
+
+"Postal code" = "Kod pocztowy";
+
+"Prefecture" = "Prefektura";
+
+"Province" = "Prowincja";
+
+"Remove" = "Usuń";
+
+"Remove bank account" = "Usuń konto bankowe";
+
+"Remove bank account ending in %@" = "Usuń konto bankowe kończące się na %@";
+
+"State" = "Stan";
+
+"Suburb" = "Przedmieścia";
+
+"Suburb or city" = "Przedmieścia lub miasto";
+
+"The BSB you entered is incomplete." = "Wprowadzony numer BSB jest niepełny.";
+
+"The ID number you entered is incomplete." = "Podany identyfikator jest niekompletny.";
+
+"The account number you entered is incomplete." = "Podany numer konta jest niekompletny.";
+
+"Town or city" = "Miejscowość";
+
+"Unable to parse phone number" = "Nie można dokonać parsowania numeru telefonu";
+
+"Use rotor to access links" = "Użyj pokrętła, aby uzyskać dostęp do łączy";
+
+"Your ZIP is incomplete." = "Kod pocztowy (ZIP) jest niekompletny.";
+
+"Your email is invalid." = "Adres e-mail jest nieprawidłowy.";
+
+"Your postal code is incomplete." = "Kod pocztowy jest niekompletny.";
+
+"ZIP" = "Kod p";

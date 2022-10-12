@@ -1,0 +1,107 @@
+"%@ (optional)" = "%@ (opcional)";
+
+"Account number" = "Número de cuenta";
+
+"Address" = "Dirección";
+
+"Address line 1" = "Primera línea de la dirección";
+
+"Address line 2" = "Segunda línea de la dirección";
+
+"Area" = "Área";
+
+"BSB number" = "Número de BSB";
+
+"Billing address is same as shipping" = "La dirección de facturación es la misma que la de envío.";
+
+"Cancel" = "Cancelar";
+
+"City" = "Ciudad";
+
+"Company" = "Empresa";
+
+"Continue" = "Continuar";
+
+"Country" = "País";
+
+"Country or region" = "País o región";
+
+"County" = "Condado";
+
+"Department" = "Departamento";
+
+"District" = "Distrito";
+
+"Do Si" = "Do Si";
+
+"Done" = "¡Listo!";
+
+"Eircode" = "Eircode";
+
+"Email" = "Correo electrónico";
+
+"Emirate" = "Emirato";
+
+"Error" = "Error";
+
+"First" = "Nombre";
+
+"Full name" = "Nombre completo";
+
+"Incomplete phone number" = "Número de teléfono incompleto";
+
+"Island" = "Isla";
+
+"Last" = "Apellido";
+
+"Name" = "Nombre";
+
+"Name on account" = "Nombre en la cuenta";
+
+"OK" = "Aceptar";
+
+"Oblast" = "Óblast";
+
+"Other" = "Otro";
+
+"Parish" = "Municipio";
+
+"Phone" = "Teléfono";
+
+"Postal code" = "Código postal";
+
+"Prefecture" = "Prefectura";
+
+"Province" = "Provincia";
+
+"Remove" = "Eliminar";
+
+"Remove bank account" = "Eliminar cuenta bancaria";
+
+"Remove bank account ending in %@" = "Eliminar la cuenta bancaria que termina en %@";
+
+"State" = "Estado";
+
+"Suburb" = "Suburbio";
+
+"Suburb or city" = "Suburbio o ciudad";
+
+"The BSB you entered is incomplete." = "El BSB que ingresaste está incompleto.";
+
+"The ID number you entered is incomplete." = "El número de documento que ingresaste está incompleto.";
+
+"The account number you entered is incomplete." = "El número de cuenta que ingresaste está incompleto.";
+
+"Town or city" = "Pueblo o ciudad";
+
+"Unable to parse phone number" = "No se pudo analizar el número de teléfono.";
+
+"Use rotor to access links" = "Usa el rotor para acceder a los enlaces";
+
+"Your ZIP is incomplete." = "El código postal está incompleto.";
+
+"Your email is invalid." = "El correo electrónico no es válido.";
+
+"Your postal code is incomplete." = "El código postal está incompleto.";
+
+"ZIP" = "ZIP";

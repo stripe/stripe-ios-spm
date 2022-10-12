@@ -1,0 +1,107 @@
+"%@ (optional)" = "%@ (необязательно)";
+
+"Account number" = "Номер счета";
+
+"Address" = "Адрес";
+
+"Address line 1" = "Адрес (строка 1)";
+
+"Address line 2" = "Адрес (строка 2)";
+
+"Area" = "Область";
+
+"BSB number" = "Номер BSB";
+
+"Billing address is same as shipping" = "Адрес выставления счетов такой же, как адрес доставки";
+
+"Cancel" = "Отмена";
+
+"City" = "Город";
+
+"Company" = "Компания";
+
+"Continue" = "Продолжить";
+
+"Country" = "Страна";
+
+"Country or region" = "Страна или регион";
+
+"County" = "Графство";
+
+"Department" = "Департамент";
+
+"District" = "Район";
+
+"Do Si" = "Do Si";
+
+"Done" = "Готово";
+
+"Eircode" = "Почтовый индекс (Eircode)";
+
+"Email" = "Эл. почта";
+
+"Emirate" = "Эмират";
+
+"Error" = "Ошибка";
+
+"First" = "Имя";
+
+"Full name" = "Имя, фамилия";
+
+"Incomplete phone number" = "Номер телефона введен не полностью";
+
+"Island" = "Остров";
+
+"Last" = "Фамилия";
+
+"Name" = "Имя";
+
+"Name on account" = "Владелец счета";
+
+"OK" = "ОК";
+
+"Oblast" = "Область";
+
+"Other" = "другой";
+
+"Parish" = "Приход";
+
+"Phone" = "Телефон";
+
+"Postal code" = "Почтовый индекс";
+
+"Prefecture" = "Префектура";
+
+"Province" = "Провинция";
+
+"Remove" = "Удалить";
+
+"Remove bank account" = "Удалить банковский счет";
+
+"Remove bank account ending in %@" = "Удалить банковский счет, оканчивающийся на %@";
+
+"State" = "Штат";
+
+"Suburb" = "Пригород";
+
+"Suburb or city" = "Населенный пункт";
+
+"The BSB you entered is incomplete." = "Введенный код BSB неполон.";
+
+"The ID number you entered is incomplete." = "Номер документа, удостоверяющего личность, введен не полностью.";
+
+"The account number you entered is incomplete." = "Номер счета введен не полностью.";
+
+"Town or city" = "Город";
+
+"Unable to parse phone number" = "Не удается разобрать номер телефона";
+
+"Use rotor to access links" = "Используйте ротор для доступа к ссылкам";
+
+"Your ZIP is incomplete." = "Почтовый индекс введен не полностью.";
+
+"Your email is invalid." = "Недействительный адрес эл. почты.";
+
+"Your postal code is incomplete." = "Введенный почтовый индекс неполон.";
+
+"ZIP" = "Почтовый индекс";

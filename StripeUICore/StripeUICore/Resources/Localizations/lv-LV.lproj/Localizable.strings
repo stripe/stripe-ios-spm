@@ -1,0 +1,107 @@
+"%@ (optional)" = "%@ (nav obligāti)";
+
+"Account number" = "Konta numurs";
+
+"Address" = "Adrese";
+
+"Address line 1" = "1. adreses rindiņa";
+
+"Address line 2" = "2. adreses rindiņa";
+
+"Area" = "Apgabals";
+
+"BSB number" = "BSB numurs";
+
+"Billing address is same as shipping" = "Norēķinu adrese un piegādes adrese sakrīt";
+
+"Cancel" = "Atcelt";
+
+"City" = "Pilsēta";
+
+"Company" = "Uzņēmums";
+
+"Continue" = "Turpināt";
+
+"Country" = "Valsts";
+
+"Country or region" = "Valsts vai reģions";
+
+"County" = "Apriņķis";
+
+"Department" = "Departaments";
+
+"District" = "Rajons";
+
+"Do Si" = "Province un pilsēta (Do Si)";
+
+"Done" = "Gatavs";
+
+"Eircode" = "Pasta indekss (Eirkods)";
+
+"Email" = "E-pasts";
+
+"Emirate" = "Emirāts";
+
+"Error" = "Kļūda";
+
+"First" = "Vārds";
+
+"Full name" = "Vārds, uzvārds";
+
+"Incomplete phone number" = "Nepilnīgs tālruņa numurs";
+
+"Island" = "Sala";
+
+"Last" = "Uzvārds";
+
+"Name" = "Vārds, uzvārds";
+
+"Name on account" = "Konta īpašnieks";
+
+"OK" = "Labi";
+
+"Oblast" = "Apgabals";
+
+"Other" = "Cits";
+
+"Parish" = "Pagasts";
+
+"Phone" = "Tālrunis";
+
+"Postal code" = "Pasta indekss";
+
+"Prefecture" = "Prefektūra";
+
+"Province" = "Province";
+
+"Remove" = "Noņemt";
+
+"Remove bank account" = "Noņemt bankas kontu";
+
+"Remove bank account ending in %@" = "Noņemt bankas kontu, kas beidzas ar %@";
+
+"State" = "Novads/štats";
+
+"Suburb" = "Priekšpilsēta";
+
+"Suburb or city" = "Priekšpilsēta vai pilsēta";
+
+"The BSB you entered is incomplete." = "Ievadītais BSB ir nepilnīgs.";
+
+"The ID number you entered is incomplete." = "Ievadītais ID numurs nav pilnīgs.";
+
+"The account number you entered is incomplete." = "Jūsu ievadītais konta numurs nav pilnīgs.";
+
+"Town or city" = "Ciems vai pilsēta";
+
+"Unable to parse phone number" = "Neizdevās parsēt tālruņa numuru";
+
+"Use rotor to access links" = "Izmantot rotoru, lai piekļūtu saitēm";
+
+"Your ZIP is incomplete." = "Pasta indekss nav pilnīgs.";
+
+"Your email is invalid." = "E-pasta adrese nav derīga.";
+
+"Your postal code is incomplete." = "Pasta indekss nav pilnīgs.";
+
+"ZIP" = "Pasta ind.";

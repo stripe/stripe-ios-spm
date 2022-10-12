@@ -1,0 +1,105 @@
+"%@ (optional)" = "%@ (volitelné)";
+
+"Account number" = "Číslo účtu";
+
+"Address" = "Adresa";
+
+"Address line 1" = "1. řádek adresy";
+
+"Address line 2" = "2. řádek adresy";
+
+"Area" = "Oblast";
+
+"BSB number" = "Číslo BSB";
+
+"Cancel" = "Zrušit";
+
+"City" = "Město";
+
+"Company" = "Společnost";
+
+"Continue" = "Pokračovat";
+
+"Country" = "Země";
+
+"Country or region" = "Země nebo region";
+
+"County" = "Okres";
+
+"Department" = "Oddělení";
+
+"District" = "Okrsek";
+
+"Do Si" = "Do Si";
+
+"Done" = "Hotovo";
+
+"Eircode" = "Eircode";
+
+"Email" = "E-mail";
+
+"Emirate" = "Emirát";
+
+"Error" = "Chyba";
+
+"First" = "Jméno";
+
+"Full name" = "Celé jméno";
+
+"Incomplete phone number" = "Neúplné telefonní číslo";
+
+"Island" = "Ostrov";
+
+"Last" = "Příjmení";
+
+"Name" = "Jméno";
+
+"Name on account" = "Jméno na účtu";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Jiné";
+
+"Parish" = "Obec";
+
+"Phone" = "Telefon";
+
+"Postal code" = "Poštovní směrovací číslo";
+
+"Prefecture" = "Prefektura";
+
+"Province" = "Provincie";
+
+"Remove" = "Odebrat";
+
+"Remove bank account" = "Odebrat bankovní účet";
+
+"Remove bank account ending in %@" = "Odebrat bankovní účet končící na %@";
+
+"State" = "Stát";
+
+"Suburb" = "Předměstí";
+
+"Suburb or city" = "Předměstí nebo město";
+
+"The BSB you entered is incomplete." = "Zadaný BSB je neúplný.";
+
+"The ID number you entered is incomplete." = "Identifikační číslo, které jste zadali, je neúplné.";
+
+"The account number you entered is incomplete." = "Zadané číslo účtu je neúplné.";
+
+"Town or city" = "Město nebo velkoměsto";
+
+"Unable to parse phone number" = "Nelze analyzovat telefonní číslo";
+
+"Use rotor to access links" = "Přístup k odkazům pomocí rotoru";
+
+"Your ZIP is incomplete." = "PSČ je neúplné.";
+
+"Your email is invalid." = "Váš e-mail je neplatný.";
+
+"Your postal code is incomplete." = "Vaše poštovní směrovací číslo je neúplné.";
+
+"ZIP" = "PSČ";
