@@ -1,0 +1,137 @@
+"Alternatively, you may manually upload a photo of your identity document." = "Fotografijo svojega osebnega dokumenta pa lahko tudi ročno naložite.";
+
+"App Settings" = "Nastavitve aplikacije";
+
+"Back driver's license photo successfully uploaded" = "Fotografija hrbtne strani vozniškega dovoljenja je bila uspešno naložena";
+
+"Back identity card photo successfully uploaded" = "Fotografija hrbtne strani osebne izkaznice je bila uspešno naložena";
+
+"Back of driver's license" = "Hrbtna stran vozniškega dovoljenja";
+
+"Back of identity card" = "Hrbtna stran osebne izkaznice";
+
+"Camera permission" = "Dovoljenje za kamero";
+
+"Camera unavailable" = "Kamera ni na voljo";
+
+"Capturing…" = "Zajemanje ...";
+
+"Choose File" = "Izberite datoteko";
+
+"Consent" = "Soglasje";
+
+"Could not capture image" = "Slike ni bilo mogoče posneti";
+
+"Date of birth" = "Datum rojstva";
+
+"File Upload" = "Naloži datoteko";
+
+"File upload" = "Nalaganje datotek";
+
+"Flip your driver's license over to the other side" = "Obrnite vozniško dovoljenje na drugo stran";
+
+"Flip your identity card over to the other side" = "Obrnite osebno izkaznico na drugo stran";
+
+"Front driver's license photo successfully uploaded" = "Fotografija sprednje strani vozniškega dovoljenja je bila uspešno naložena";
+
+"Front identity card photo successfully uploaded" = "Fotografija sprednje strani osebne izkaznice je bila uspešno naložena";
+
+"Front of driver's license" = "Sprednja stran vozniškega dovoljenja";
+
+"Front of identity card" = "Sprednja stran osebne izkaznice";
+
+"Go Back" = "Nazaj";
+
+"Hold still, scanning" = "Optično branje – držite pri miru";
+
+"ID Number" = "Številka osebnega dokumenta";
+
+"ID Type" = "Vrsta osebnega dokumenta";
+
+"Image of passport" = "Slika potnega lista";
+
+"Loading" = "Nalaganje";
+
+"Passport" = "Potni list";
+
+"Passport photo successfully uploaded" = "Fotografija potnega lista je bila uspešno naložena";
+
+"Personal ID number" = "Številka osebne izkaznice";
+
+"Photo Library" = "Knjižnica fotografij";
+
+"Please upload an image of your passport" = "Naložite sliko potnega lista";
+
+"Please upload images of the front and back of your driver's license" = "Naložite sliki sprednje in hrbtne strani vozniškega dovoljenja";
+
+"Please upload images of the front and back of your identity card" = "Naložite sliki sprednje in hrbtne strani osebne izkaznice";
+
+"Position your driver's license in the center of the frame" = "Zagotovite, da je vozniško dovoljenje na sredini okvirja";
+
+"Position your face in the center of the frame." = "Zagotovite, da je vaš obraz na sredini okvira.";
+
+"Position your identity card in the center of the frame" = "Zagotovite, da je osebna izkaznica na sredini okvirja";
+
+"Position your passport in the center of the frame" = "Zagotovite, da je potni list na sredini okvirja";
+
+"Scan" = "Optično preberi";
+
+"Scanned" = "Optično prebrano";
+
+"Select" = "Izberi";
+
+"Select a location to upload the back of your identity document from" = "Izberite mesto, s katerega želite naložiti hrbtno stran osebnega dokumenta";
+
+"Select a location to upload the front of your identity document from" = "Izberite mesto, s katerega želite naložiti sprednjo stran osebnega dokumenta";
+
+"Select back driver's license photo" = "Izberite fotografijo hrbtne strani vozniškega dovoljenja";
+
+"Select back identity card photo" = "Izberite fotografijo hrbtne strani osebne izkaznice";
+
+"Select front driver's license photo" = "Izberite fotografijo sprednje strani vozniškega dovoljenja";
+
+"Select front identity card photo" = "Izberite fotografijo sprednje strani osebne izkaznice";
+
+"Select passport photo" = "Izberite fotografijo potnega lista";
+
+"Selfie" = "Selfi";
+
+"Selfie captures" = "Posnetki selfija";
+
+"Selfie captures are complete" = "Selfiji so posneti";
+
+"Take Photo" = "Fotografiraj";
+
+"The images of your identity document have not been saved. Do you want to leave?" = "Slike vašega osebnega dokumenta niso shranjene. Ali želite zapreti to stran?";
+
+"There was an error accessing the camera." = "Pri dostopu do kamere je prišlo do napake.";
+
+"Try Again" = "Poskusi znova";
+
+"Unable to establish a connection." = "Povezave ni mogoče vzpostaviti.";
+
+"Unsaved changes" = "Neshranjene spremembe";
+
+"Upload" = "Naloži";
+
+"Upload a Photo" = "Naloži fotografijo";
+
+"Uploading back driver's license photo" = "Nalaganje fotografije hrbtne strani vozniškega dovoljenja";
+
+"Uploading back identity card photo" = "Nalaganje fotografije hrbtne strani osebne izkaznice";
+
+"Uploading front driver's license photo" = "Nalaganje fotografije sprednje strani vozniškega dovoljenja";
+
+"Uploading front identity card photo" = "Nalaganje fotografije sprednje strani osebne izkaznice";
+
+"Uploading passport photo" = "Nalaganje potnega lista";
+
+"Verify your identity" = "Preverite svojo identiteto";
+
+"We could not capture a high-quality image." = "Ni bilo mogoče zajeti visokokakovostne slike.";
+
+"We need permission to use your camera. Please allow camera access in app settings." = "Potrebujemo dovoljenje za uporabo vaše kamere. Dovolite dostop do kamere v nastavitvah aplikacije.";
+
+"You can either try again or upload an image from your device." = "Poskusite znova ali pa naložite sliko iz svoje naprave.";
+
+"Your selfie images have not been saved. Do you want to leave?" = "Slike vašega selfija niso shranjene. Ali želite zapreti to stran?";
