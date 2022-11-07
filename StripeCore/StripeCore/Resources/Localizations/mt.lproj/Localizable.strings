@@ -1,0 +1,31 @@
+"Close" = "Agħlaq";
+
+"Scan Card" = "Skennja l-Kard";
+
+"Scan card" = "Skennja l-karta";
+
+"The IBAN you entered is invalid." = "L-IBAN li daħħalt mhux tajjeb.";
+
+"There was an error processing your card -- try again in a few seconds" = "Kien hemm żball fl-ipproċessar tal-kard tiegħek -- erġa' pprova wara ftit sekondi";
+
+"There was an unexpected error -- try again in a few seconds" = "Kien hemm żball mhux mistenni -- erġa' pprova wara ftit sekondi";
+
+"Try again" = "Erġa' pprova";
+
+"We use Stripe to verify your card details. Stripe may use and store your data according its privacy policy. <a href='https://support.stripe.com/questions/stripes-card-image-verification'><u>Learn more</u></a>" = "Aħna naħdmu ma' Stripe biex nivverifikaw id-dettalji tal-karta tiegħek. Stripe tista' tuża u taħżen id-dejta tiegħek skont il-politika tal-privatezza tagħha. <a href='https://support.stripe.com/questions/stripes-card-image-verification'><u>Sir af iktar</u></a>";
+
+"Your card has expired" = "Il-kard tiegħek skadiet";
+
+"Your card was declined" = "Il-kard tiegħek ma ġietx aċċettata";
+
+"Your card's expiration month is invalid" = "Ix-xahar tal-iskadenza tal-kard tiegħek mhux validu";
+
+"Your card's expiration year is invalid" = "Is-sena tal-iskadenza tal-kard tiegħek mhijiex valida";
+
+"Your card's number is invalid" = "In-numru tal-kard tiegħek mhux validu";
+
+"Your card's security code is invalid" = "Il-kodiċi tas-sigurtà tal-kard tiegħek mhux validu";
+
+"Your name is invalid." = "L-isem li daħħalt mhux tajjeb.";
+
+"Your payment method was declined." = "Il-metodu tal-pagament tiegħek m'għaddiex.";
