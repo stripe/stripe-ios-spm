@@ -1,0 +1,119 @@
+"%@ (optional)" = "%@ (isteğe bağlı)";
+
+"Account number" = "Hesap numarası";
+
+"Address" = "Adres";
+
+"Address line 1" = "Adres satırı 1";
+
+"Address line 2" = "Adres satırı 2";
+
+"Area" = "Bölge";
+
+"BSB number" = "BSB numarası";
+
+"Billing address is same as shipping" = "Faturalama adresi, gönderim adresiyle aynı";
+
+"Cancel" = "İptal";
+
+"City" = "Şehir";
+
+"Code field" = "Kod alanı";
+
+"Company" = "Şirket";
+
+"Continue" = "Devam et";
+
+"Country" = "Ülke";
+
+"Country or region" = "Ülke veya bölge";
+
+"County" = "Ülke";
+
+"Department" = "İdari Bölüm";
+
+"District" = "İlçe";
+
+"Do Si" = "Do Si";
+
+"Done" = "Tamam";
+
+"Double tap to edit" = "Düzenlemek için iki kez dokunun";
+
+"Edit" = "Düzenle";
+
+"Eircode" = "Eircode";
+
+"Email" = "E-posta";
+
+"Emirate" = "Emirlik";
+
+"Error" = "Hata";
+
+"First" = "Ad";
+
+"Full name" = "Ad ve soyadınız";
+
+"Incomplete phone number" = "Eksik telefon numarası";
+
+"Invalid UPI ID" = "Geçersiz UPI Numarası";
+
+"Island" = "Ada";
+
+"Last" = "Soyadı";
+
+"Name" = "Ad";
+
+"Name on account" = "Hesaptaki ad";
+
+"OK" = "TAMAM";
+
+"Oblast" = "Oblast";
+
+"Other" = "Diğer";
+
+"Parish" = "Dini bölge";
+
+"Phone" = "Telefon";
+
+"Postal code" = "Posta kodu";
+
+"Prefecture" = "İdari bölge";
+
+"Province" = "İlçe";
+
+"Remove" = "Kaldır";
+
+"Remove bank account" = "Banka hesabını kaldır";
+
+"Remove bank account ending in %@" = "%@ ile biten banka hesabını kaldır";
+
+"Search" = "Ara";
+
+"State" = "Eyalet";
+
+"Suburb" = "Banliyö";
+
+"Suburb or city" = "Banliyö veya şehir";
+
+"The BSB you entered is incomplete." = "Girdiğiniz BSB eksik.";
+
+"The ID number you entered is incomplete." = "Girdiğiniz kimlik numarası eksik.";
+
+"The account number you entered is incomplete." = "Girdiğiniz hesap numarası eksik.";
+
+"Town or city" = "Kasaba veya şehir";
+
+"UPI ID" = "UPI Numarası";
+
+"Unable to parse phone number" = "Telefon numaranızı ayrıştırılamadı";
+
+"Use rotor to access links" = "Linklere erişmek için rotoru kullanın.";
+
+"Your ZIP is incomplete." = "Posta kodunuz eksik.";
+
+"Your email is invalid." = "E-postanız geçersiz.";
+
+"Your postal code is incomplete." = "Posta kodunuz eksik.";
+
+"ZIP" = "Posta Kodu";
