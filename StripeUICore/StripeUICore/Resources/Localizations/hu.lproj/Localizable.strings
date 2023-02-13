@@ -1,0 +1,119 @@
+"%@ (optional)" = "%@ (nem kötelező)";
+
+"Account number" = "Számlaszám";
+
+"Address" = "Cím";
+
+"Address line 1" = "Cím 1. sora";
+
+"Address line 2" = "2. címsor";
+
+"Area" = "Terület";
+
+"BSB number" = "BSB-szám";
+
+"Billing address is same as shipping" = "A számlázási cím megegyezik a szállítási címmel";
+
+"Cancel" = "Mégse";
+
+"City" = "Város";
+
+"Code field" = "Kódmező";
+
+"Company" = "Vállalat";
+
+"Continue" = "Folytatás";
+
+"Country" = "Ország";
+
+"Country or region" = "Ország vagy régió";
+
+"County" = "Ország";
+
+"Department" = "Megye";
+
+"District" = "Kerület";
+
+"Do Si" = "Do Si";
+
+"Done" = "Kész";
+
+"Double tap to edit" = "A szerkesztéshez koppintson kétszer";
+
+"Edit" = "Szerkesztés";
+
+"Eircode" = "Irányítószám";
+
+"Email" = "E-mail";
+
+"Emirate" = "Emirátus";
+
+"Error" = "Hiba";
+
+"First" = "Utónév";
+
+"Full name" = "Teljes név";
+
+"Incomplete phone number" = "Hiányos telefonszám";
+
+"Invalid UPI ID" = "Érvénytelen UPI-azonosító";
+
+"Island" = "Sziget";
+
+"Last" = "Vezetéknév";
+
+"Name" = "Név";
+
+"Name on account" = "A számlán szereplő név";
+
+"OK" = "OK";
+
+"Oblast" = "Terület";
+
+"Other" = "Egyéb";
+
+"Parish" = "Egyházközség";
+
+"Phone" = "Telefon";
+
+"Postal code" = "Irányítószám";
+
+"Prefecture" = "Prefektúra";
+
+"Province" = "Tartomány";
+
+"Remove" = "Eltávolítás";
+
+"Remove bank account" = "Bankszámla eltávolítása";
+
+"Remove bank account ending in %@" = "%@ számra végződő bankszámla eltávolítása";
+
+"Search" = "Keresés";
+
+"State" = "Állam";
+
+"Suburb" = "Külváros";
+
+"Suburb or city" = "Külváros vagy város";
+
+"The BSB you entered is incomplete." = "A beírt BSB-szám hiányos.";
+
+"The ID number you entered is incomplete." = "A beírt azonosítószám hiányos.";
+
+"The account number you entered is incomplete." = "A számlaszám hiányos.";
+
+"Town or city" = "Kisváros vagy város";
+
+"UPI ID" = "UPI-azonosító";
+
+"Unable to parse phone number" = "A telefonszám nem értelmezhető";
+
+"Use rotor to access links" = "Rotor használata a hivatkozások kezeléséhez";
+
+"Your ZIP is incomplete." = "A ZIP hiányos.";
+
+"Your email is invalid." = "Érvénytelen e-mail-cím.";
+
+"Your postal code is incomplete." = "Az irányítószám hiányos.";
+
+"ZIP" = "Irányítószám";
