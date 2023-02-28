@@ -1,0 +1,119 @@
+"%@ (optional)" = "%@ (opcional)";
+
+"Account number" = "Número de conta";
+
+"Address" = "Endereço";
+
+"Address line 1" = "Linha de endereço 1";
+
+"Address line 2" = "Linha de endereço 2";
+
+"Area" = "Área";
+
+"BSB number" = "Número de BSB";
+
+"Billing address is same as shipping" = "O endereço de faturação é igual ao endereço de envio";
+
+"Cancel" = "Cancelar";
+
+"City" = "Cidade";
+
+"Code field" = "Campo do código";
+
+"Company" = "Empresa";
+
+"Continue" = "Continuar";
+
+"Country" = "País";
+
+"Country or region" = "País ou região";
+
+"County" = "Concelho";
+
+"Department" = "Departamento";
+
+"District" = "Distrito";
+
+"Do Si" = "Do Si";
+
+"Done" = "Concluído";
+
+"Double tap to edit" = "Toque duas vezes para editar";
+
+"Edit" = "Editar";
+
+"Eircode" = "Eircode";
+
+"Email" = "E-mail";
+
+"Emirate" = "Emirado";
+
+"Error" = "Erro";
+
+"First" = "Nome próprio";
+
+"Full name" = "Nome completo";
+
+"Incomplete phone number" = "Número de telefone incompleto";
+
+"Invalid UPI ID" = "ID UPI inválida";
+
+"Island" = "Ilha";
+
+"Last" = "Apelido";
+
+"Name" = "Nome";
+
+"Name on account" = "Nome na conta";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Outro";
+
+"Parish" = "Paróquia";
+
+"Phone" = "Telefone";
+
+"Postal code" = "Código postal";
+
+"Prefecture" = "Câmara municipal";
+
+"Province" = "Província";
+
+"Remove" = "Remover";
+
+"Remove bank account" = "Remover conta bancária";
+
+"Remove bank account ending in %@" = "Remover conta bancária a terminar em %@";
+
+"Search" = "Pesquisar";
+
+"State" = "Estado";
+
+"Suburb" = "Subúrbio";
+
+"Suburb or city" = "Subúrbio ou cidade";
+
+"The BSB you entered is incomplete." = "O BSB que introduziu está incompleto.";
+
+"The ID number you entered is incomplete." = "O número de identificação que introduziu está incompleto.";
+
+"The account number you entered is incomplete." = "O número da conta que introduziu está incompleto.";
+
+"Town or city" = "Localidade ou cidade";
+
+"UPI ID" = "ID UPI";
+
+"Unable to parse phone number" = "Impossível analisar número de telefone";
+
+"Use rotor to access links" = "Utilizar o rotor para aceder a ligações";
+
+"Your ZIP is incomplete." = "O seu código ZIP está incompleto.";
+
+"Your email is invalid." = "O seu email é inválido.";
+
+"Your postal code is incomplete." = "O seu código postal está incompleto.";
+
+"ZIP" = "C.P.";

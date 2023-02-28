@@ -1,0 +1,119 @@
+"%@ (optional)" = "%@ (valfritt)";
+
+"Account number" = "Kontonummer";
+
+"Address" = "Adress";
+
+"Address line 1" = "Adressrad 1";
+
+"Address line 2" = "Adressrad 2";
+
+"Area" = "Område";
+
+"BSB number" = "BSB-nummer";
+
+"Billing address is same as shipping" = "Faktureringsadress är samma som leveransadress";
+
+"Cancel" = "Avbryt";
+
+"City" = "Ort";
+
+"Code field" = "Fält för kod";
+
+"Company" = "Företag";
+
+"Continue" = "Fortsätt";
+
+"Country" = "Land";
+
+"Country or region" = "Land eller region";
+
+"County" = "Landskap";
+
+"Department" = "Departement";
+
+"District" = "Distrikt";
+
+"Do Si" = "Provins och stad";
+
+"Done" = "Klar";
+
+"Double tap to edit" = "Dubbelklicka för att redigera";
+
+"Edit" = "Redigera";
+
+"Eircode" = "Eircode";
+
+"Email" = "E-post";
+
+"Emirate" = "Emirat";
+
+"Error" = "Fel";
+
+"First" = "Förnamn";
+
+"Full name" = "Fullständigt namn";
+
+"Incomplete phone number" = "Ofullständigt telefonnummer";
+
+"Invalid UPI ID" = "Ogiltigt UPI ID";
+
+"Island" = "Ö";
+
+"Last" = "Efternamn";
+
+"Name" = "Namn";
+
+"Name on account" = "Namn på kontot";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Annan";
+
+"Parish" = "Parish";
+
+"Phone" = "Telefonnummer";
+
+"Postal code" = "Postnummer";
+
+"Prefecture" = "Prefektur";
+
+"Province" = "Provins";
+
+"Remove" = "Ta bort";
+
+"Remove bank account" = "Ta bort bankkonto";
+
+"Remove bank account ending in %@" = "Ta bort bankkonto som slutar på %@";
+
+"Search" = "Sök";
+
+"State" = "Delstat";
+
+"Suburb" = "Förort";
+
+"Suburb or city" = "Förort eller stad";
+
+"The BSB you entered is incomplete." = "Det BSB du angav är ofullständigt.";
+
+"The ID number you entered is incomplete." = "ID-numret du angav är ofullständigt.";
+
+"The account number you entered is incomplete." = "Kontonumret du angav är ofullständigt.";
+
+"Town or city" = "Stad";
+
+"UPI ID" = "UPI ID";
+
+"Unable to parse phone number" = "Det gick inte att analysera telefonnumret";
+
+"Use rotor to access links" = "Använd rotorn för att komma åt länkar";
+
+"Your ZIP is incomplete." = "Ditt postnummer är ofullständigt.";
+
+"Your email is invalid." = "Din e-postadress är ogiltig.";
+
+"Your postal code is incomplete." = "Ditt postnummer är ofullständigt.";
+
+"ZIP" = "Postkod";

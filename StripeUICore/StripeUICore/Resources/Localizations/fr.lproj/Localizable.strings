@@ -1,0 +1,119 @@
+"%@ (optional)" = "%@ (facultatif)";
+
+"Account number" = "Numéro de compte";
+
+"Address" = "Adresse";
+
+"Address line 1" = "Adresse - Ligne 1";
+
+"Address line 2" = "Adresse - Ligne 2";
+
+"Area" = "Zone";
+
+"BSB number" = "Numéro BSB";
+
+"Billing address is same as shipping" = "L'adresse de facturation et l'adresse de livraison sont identiques";
+
+"Cancel" = "Annuler";
+
+"City" = "Ville";
+
+"Code field" = "Champ de code";
+
+"Company" = "Entreprise";
+
+"Continue" = "Continuer";
+
+"Country" = "Pays";
+
+"Country or region" = "Pays ou région";
+
+"County" = "Département";
+
+"Department" = "Département";
+
+"District" = "Arrondissement";
+
+"Do Si" = "Province et ville";
+
+"Done" = "Terminé";
+
+"Double tap to edit" = "Appuyez deux fois pour saisir votre texte";
+
+"Edit" = "Modifier";
+
+"Eircode" = "Code postal";
+
+"Email" = "E-mail";
+
+"Emirate" = "Émirat";
+
+"Error" = "Erreur";
+
+"First" = "Prénom";
+
+"Full name" = "Nom complet";
+
+"Incomplete phone number" = "Numéro de téléphone incomplet";
+
+"Invalid UPI ID" = "ID d'UPI non valide";
+
+"Island" = "Île";
+
+"Last" = "Nom";
+
+"Name" = "Nom";
+
+"Name on account" = "Nom du titulaire du compte";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Autre";
+
+"Parish" = "Paroisse";
+
+"Phone" = "Téléphone";
+
+"Postal code" = "Code postal";
+
+"Prefecture" = "Préfecture";
+
+"Province" = "Province";
+
+"Remove" = "Supprimer";
+
+"Remove bank account" = "Supprimer le compte bancaire";
+
+"Remove bank account ending in %@" = "Supprimer le compte bancaire se terminant par %@";
+
+"Search" = "Rechercher";
+
+"State" = "État";
+
+"Suburb" = "Banlieue";
+
+"Suburb or city" = "Banlieue ou ville";
+
+"The BSB you entered is incomplete." = "Le numéro BSB que vous avez saisi est incomplet.";
+
+"The ID number you entered is incomplete." = "Le numéro d'identification que vous avez saisi est incomplet.";
+
+"The account number you entered is incomplete." = "Le numéro de compte saisi est incomplet.";
+
+"Town or city" = "Ville";
+
+"UPI ID" = "ID d'UPI";
+
+"Unable to parse phone number" = "Impossible d'analyser le numéro de téléphone";
+
+"Use rotor to access links" = "Utilisez le rotor pour accéder aux liens";
+
+"Your ZIP is incomplete." = "Votre code postal est incomplet.";
+
+"Your email is invalid." = "Votre adresse e-mail n'est pas valide.";
+
+"Your postal code is incomplete." = "Votre code postal est incomplet.";
+
+"ZIP" = "ZIP";
