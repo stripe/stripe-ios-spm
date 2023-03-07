@@ -1,0 +1,119 @@
+"%@ (optional)" = "%@ (neobavezno)";
+
+"Account number" = "Broj računa";
+
+"Address" = "Adresa";
+
+"Address line 1" = "Ulica i kućni broj 1";
+
+"Address line 2" = "Broj stana, kat ili poštanski pretinac";
+
+"Area" = "Područje";
+
+"BSB number" = "BSB broj";
+
+"Billing address is same as shipping" = "Adresa računa jednaka je adresi dostave";
+
+"Cancel" = "Otkaži";
+
+"City" = "Grad";
+
+"Code field" = "Polje za kod";
+
+"Company" = "Poduzeće";
+
+"Continue" = "Nastavi";
+
+"Country" = "Zemlja";
+
+"Country or region" = "Zemlja ili regija";
+
+"County" = "Grofovija";
+
+"Department" = "Administrativna jedinica";
+
+"District" = "Okrug";
+
+"Do Si" = "Do Si";
+
+"Done" = "Gotovo";
+
+"Double tap to edit" = "Dodirnite dva puta za uređivanje";
+
+"Edit" = "Uredi";
+
+"Eircode" = "Eircode";
+
+"Email" = "E-mail";
+
+"Emirate" = "Emirat";
+
+"Error" = "Greška";
+
+"First" = "Ime";
+
+"Full name" = "Puno ime";
+
+"Incomplete phone number" = "Nepotpuni telefonski broj";
+
+"Invalid UPI ID" = "Nevažeći UPI ID";
+
+"Island" = "Otok";
+
+"Last" = "Prezime";
+
+"Name" = "Ime";
+
+"Name on account" = "Ime na računu";
+
+"OK" = "U redu";
+
+"Oblast" = "Oblast";
+
+"Other" = "Ostalo";
+
+"Parish" = "Župa";
+
+"Phone" = "Telefon";
+
+"Postal code" = "Poštanski broj";
+
+"Prefecture" = "Prefektura";
+
+"Province" = "Provincija";
+
+"Remove" = "Ukloni";
+
+"Remove bank account" = "Ukloni bankovni račun";
+
+"Remove bank account ending in %@" = "Ukloni bankovni račun koji završava na %@";
+
+"Search" = "Pretraži";
+
+"State" = "Država";
+
+"Suburb" = "Predgrađe";
+
+"Suburb or city" = "Predgrađe ili grad";
+
+"The BSB you entered is incomplete." = "Uneseni BSB nije kompletan.";
+
+"The ID number you entered is incomplete." = "Uneseni identifikacijski broj nije potpun.";
+
+"The account number you entered is incomplete." = "Uneseni broj računa je nepotpun.";
+
+"Town or city" = "Gradić ili grad";
+
+"UPI ID" = "UPI ID";
+
+"Unable to parse phone number" = "Broj telefona nije moguće pročitati";
+
+"Use rotor to access links" = "Upotrijebite rotor za pristup poveznicama";
+
+"Your ZIP is incomplete." = "Vaš ZIP broj nije kompletan.";
+
+"Your email is invalid." = "Vaš e-mail je neispravan.";
+
+"Your postal code is incomplete." = "Vaš poštanski broj nije kompletan.";
+
+"ZIP" = "ZIP";

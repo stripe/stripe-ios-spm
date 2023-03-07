@@ -1,0 +1,119 @@
+"%@ (optional)" = "%@ (opsyenal)";
+
+"Account number" = "Nombor akaun";
+
+"Address" = "Alamat";
+
+"Address line 1" = "Alamat baris 1";
+
+"Address line 2" = "Alamat baris 2";
+
+"Area" = "Kawasan";
+
+"BSB number" = "Nombor BSB";
+
+"Billing address is same as shipping" = "Alamat pengebilan sama dengan alamat penghantaran";
+
+"Cancel" = "Batalkan";
+
+"City" = "Bandar";
+
+"Code field" = "Medan kod";
+
+"Company" = "Syarikat";
+
+"Continue" = "Teruskan";
+
+"Country" = "Negara";
+
+"Country or region" = "Negara atau rantau";
+
+"County" = "Kaunti";
+
+"Department" = "Jabatan";
+
+"District" = "Daerah";
+
+"Do Si" = "Do Si";
+
+"Done" = "Selesai";
+
+"Double tap to edit" = "Ketik dua kali untuk edit";
+
+"Edit" = "Edit";
+
+"Eircode" = "Eircode";
+
+"Email" = "E-mel";
+
+"Emirate" = "Amiriah";
+
+"Error" = "Ralat";
+
+"First" = "Pertama";
+
+"Full name" = "Nama penuh";
+
+"Incomplete phone number" = "Nombor telefon tidak lengkap";
+
+"Invalid UPI ID" = "ID UPI tidak sah";
+
+"Island" = "Pulau";
+
+"Last" = "Akhir";
+
+"Name" = "Nama";
+
+"Name on account" = "Nama pada akaun";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Lain-lain";
+
+"Parish" = "Kariah";
+
+"Phone" = "Telefon";
+
+"Postal code" = "Poskod";
+
+"Prefecture" = "Wilayah";
+
+"Province" = "Wilayah";
+
+"Remove" = "Alih Keluar";
+
+"Remove bank account" = "Alih keluar akaun bank";
+
+"Remove bank account ending in %@" = "Alih keluar akaun bank yang berakhir dengan %@";
+
+"Search" = "Cari";
+
+"State" = "Negeri";
+
+"Suburb" = "Pinggir Bandar";
+
+"Suburb or city" = "Pinggir bandar atau bandar";
+
+"The BSB you entered is incomplete." = "BSB yang anda masukkan tidak lengkap.";
+
+"The ID number you entered is incomplete." = "Nombor ID yang anda masukkan tidak lengkap.";
+
+"The account number you entered is incomplete." = "Nombor akaun yang anda masukkan tidak lengkap.";
+
+"Town or city" = "Pekan atau bandar";
+
+"UPI ID" = "ID UPI";
+
+"Unable to parse phone number" = "Nombor telefon tidak dapat dihuraikan";
+
+"Use rotor to access links" = "Gunakan rotor untuk mengakses pautan";
+
+"Your ZIP is incomplete." = "Kod ZIP anda tidak lengkap.";
+
+"Your email is invalid." = "E-mel anda tidak sah.";
+
+"Your postal code is incomplete." = "Poskod anda tidak lengkap.";
+
+"ZIP" = "ZIP";

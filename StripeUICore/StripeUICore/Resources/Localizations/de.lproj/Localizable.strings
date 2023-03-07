@@ -1,0 +1,119 @@
+"%@ (optional)" = "%@ (optional)";
+
+"Account number" = "Kontonummer";
+
+"Address" = "Adresse";
+
+"Address line 1" = "Adresszeile 1";
+
+"Address line 2" = "Adresszeile 2";
+
+"Area" = "Region";
+
+"BSB number" = "BSB-Nummer";
+
+"Billing address is same as shipping" = "Rechnungsadresse und Versandadresse sind identisch.";
+
+"Cancel" = "Abbrechen";
+
+"City" = "Ort";
+
+"Code field" = "Code-Feld";
+
+"Company" = "Unternehmen";
+
+"Continue" = "Weiter";
+
+"Country" = "Land";
+
+"Country or region" = "Land oder Region";
+
+"County" = "Kreis/Bezirk";
+
+"Department" = "Departement";
+
+"District" = "Distrikt";
+
+"Do Si" = "Do Si";
+
+"Done" = "Fertig";
+
+"Double tap to edit" = "Doppelklick zum Bearbeiten";
+
+"Edit" = "Bearbeiten";
+
+"Eircode" = "Eircode";
+
+"Email" = "E-Mail";
+
+"Emirate" = "Emirat";
+
+"Error" = "Fehler";
+
+"First" = "Vorname";
+
+"Full name" = "Vollständiger Name";
+
+"Incomplete phone number" = "Unvollständige Telefonnummer";
+
+"Invalid UPI ID" = "Ungültige UPI-ID";
+
+"Island" = "Insel";
+
+"Last" = "Name";
+
+"Name" = "Name";
+
+"Name on account" = "Name des/der Kontoinhaber/in";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Sonstiges";
+
+"Parish" = "Parish";
+
+"Phone" = "Telefon";
+
+"Postal code" = "Postleitzahl";
+
+"Prefecture" = "Präfektur";
+
+"Province" = "Provinz / Kanton";
+
+"Remove" = "Entfernen";
+
+"Remove bank account" = "Bankkonto entfernen";
+
+"Remove bank account ending in %@" = "Bankkonto mit den Endziffern %@ entfernen";
+
+"Search" = "Suchen";
+
+"State" = "Bundesland";
+
+"Suburb" = "Vorort";
+
+"Suburb or city" = "Vorort oder Stadt";
+
+"The BSB you entered is incomplete." = "Die eingegebene BSB-Nummer ist unvollständig.";
+
+"The ID number you entered is incomplete." = "Die eingegebene Ausweisnummer ist unvollständig.";
+
+"The account number you entered is incomplete." = "Die von Ihnen eingegebene Kontonummer ist unvollständig.";
+
+"Town or city" = "Stadt oder Ort";
+
+"UPI ID" = "UPI-ID";
+
+"Unable to parse phone number" = "Telefonnummer kann nicht geparst werden";
+
+"Use rotor to access links" = "Rotor zum Zugriff auf Links nutzen";
+
+"Your ZIP is incomplete." = "PLZ ist unvollständig.";
+
+"Your email is invalid." = "Ihre E-Mail-Adresse ist ungültig.";
+
+"Your postal code is incomplete." = "Postleitzahl ist unvollständig.";
+
+"ZIP" = "ZIP";
