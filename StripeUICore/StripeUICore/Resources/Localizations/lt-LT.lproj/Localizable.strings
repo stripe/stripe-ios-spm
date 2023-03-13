@@ -1,0 +1,119 @@
+"%@ (optional)" = "%@ (pasirenkamas)";
+
+"Account number" = "Sąskaitos numeris";
+
+"Address" = "Adresas";
+
+"Address line 1" = "1 adreso eilutė";
+
+"Address line 2" = "2 adreso eilutė";
+
+"Area" = "Sritis";
+
+"BSB number" = "BSB numeris";
+
+"Billing address is same as shipping" = "Atsiskaitymo ir siuntimo adresai vienodi";
+
+"Cancel" = "Atšaukti";
+
+"City" = "Miestas";
+
+"Code field" = "Kodo laukas";
+
+"Company" = "Bendrovė";
+
+"Continue" = "Tęsti";
+
+"Country" = "Šalis";
+
+"Country or region" = "Šalis arba regionas";
+
+"County" = "Apygarda";
+
+"Department" = "Skyrius";
+
+"District" = "Rajonas";
+
+"Do Si" = "Do Si";
+
+"Done" = "Atlikta";
+
+"Double tap to edit" = "Norėdami redaguoti, dukart bakstelėkite";
+
+"Edit" = "Redaguoti";
+
+"Eircode" = "Pašto kodas (EIR)";
+
+"Email" = "El. paštas";
+
+"Emirate" = "Emyratas";
+
+"Error" = "Klaida";
+
+"First" = "Vardas";
+
+"Full name" = "Vardas, pavardė";
+
+"Incomplete phone number" = "Ne visas telefono numeris";
+
+"Invalid UPI ID" = "Netinkamas UPI ID";
+
+"Island" = "Sala";
+
+"Last" = "Pavardė";
+
+"Name" = "Vardas, pavardė";
+
+"Name on account" = "Sąskaitos turėtojo vardas ir pavardė";
+
+"OK" = "GERAI";
+
+"Oblast" = "Sritis";
+
+"Other" = "Kita";
+
+"Parish" = "Parapija";
+
+"Phone" = "Telefonas";
+
+"Postal code" = "Pašto kodas";
+
+"Prefecture" = "Prefektūra";
+
+"Province" = "Provincija";
+
+"Remove" = "Pašalinti";
+
+"Remove bank account" = "Pašalinti banko sąskaitą";
+
+"Remove bank account ending in %@" = "Pašalinti banko sąskaitą, kurios paskutiniai skaičiai %@";
+
+"Search" = "Paieška";
+
+"State" = "Valstija";
+
+"Suburb" = "Priemiestis";
+
+"Suburb or city" = "Priemiestis arba miestas";
+
+"The BSB you entered is incomplete." = "Įvestas neišsamus BSB numeris.";
+
+"The ID number you entered is incomplete." = "Įvedėte ne visą identifikacinį numerį.";
+
+"The account number you entered is incomplete." = "Įvedėte ne visą sąskaitos numerį.";
+
+"Town or city" = "Miestelis arba miestas";
+
+"UPI ID" = "UPI ID";
+
+"Unable to parse phone number" = "Nepavyko išanalizuoti telefono numerio";
+
+"Use rotor to access links" = "Naudoti pasukimo ratuką prieigai prie saitų";
+
+"Your ZIP is incomplete." = "Neišsamus jūsų pašto kodas.";
+
+"Your email is invalid." = "Jūsų el. paštas yra neteisingas.";
+
+"Your postal code is incomplete." = "Pašto kodas neišsamus.";
+
+"ZIP" = "Pašto kodas";

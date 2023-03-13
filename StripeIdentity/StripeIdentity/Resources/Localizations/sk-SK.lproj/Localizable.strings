@@ -1,0 +1,137 @@
+"Alternatively, you may manually upload a photo of your identity document." = "Prípadne môžete nahrať fotografiu vášho dokladu totožnosti.";
+
+"App Settings" = "Nastavenia aplikácie";
+
+"Back driver's license photo successfully uploaded" = "Fotografia zadnej strany vodičského preukazu bola úspešne nahraná";
+
+"Back identity card photo successfully uploaded" = "Fotografia zadnej strany preukazu totožnosti bola úspešne nahraná";
+
+"Back of driver's license" = "Zadná strana vodičského preukazu";
+
+"Back of identity card" = "Zadná strana preukazu totožnosti";
+
+"Camera permission" = "Povolenie fotoaparátu";
+
+"Camera unavailable" = "Fotoaparát je nedostupný";
+
+"Capturing…" = "Zaznamenáva sa...";
+
+"Choose File" = "Vybrať súbor";
+
+"Consent" = "Súhlas";
+
+"Could not capture image" = "Nepodarilo sa nasnímať fotografiu";
+
+"Date of birth" = "Dátum narodenia";
+
+"File Upload" = "Nahratie súboru";
+
+"File upload" = "Nahratie súboru";
+
+"Flip your driver's license over to the other side" = "Otočte svoj vodičský preukaz na druhú stranu";
+
+"Flip your identity card over to the other side" = "Otočte svoj preukaz totožnosti na druhú stranu";
+
+"Front driver's license photo successfully uploaded" = "Fotografia prednej strany vodičského preukazu bola úspešne nahraná";
+
+"Front identity card photo successfully uploaded" = "Fotografia prednej strany preukazu totožnosti bola úspešne nahraná";
+
+"Front of driver's license" = "Predná strana vodičského preukazu";
+
+"Front of identity card" = "Predná strana preukazu totožnosti";
+
+"Go Back" = "Späť";
+
+"Hold still, scanning" = "Držte pokojne, skenuje sa";
+
+"ID Number" = "Identifikačné číslo";
+
+"ID Type" = "Typ ID";
+
+"Image of passport" = "Fotografia pasu";
+
+"Loading" = "Nahrávanie";
+
+"Passport" = "Pas";
+
+"Passport photo successfully uploaded" = "Fotografia pasu bola úspešne nahraná";
+
+"Personal ID number" = "Osobné identifikačné číslo";
+
+"Photo Library" = "Knižnica fotografií";
+
+"Please upload an image of your passport" = "Nahrajte fotografiu pasu";
+
+"Please upload images of the front and back of your driver's license" = "Nahrajte fotografie prednej a zadnej strany vodičského preukazu";
+
+"Please upload images of the front and back of your identity card" = "Nahrajte fotografie prednej a zadnej strany preukazu totožnosti";
+
+"Position your driver's license in the center of the frame" = "Umiestnite svoj vodičský preukaz do stredu rámika";
+
+"Position your face in the center of the frame." = "Umiestnite tvár do stredu rámika.";
+
+"Position your identity card in the center of the frame" = "Umiestnite svoj preukaz totožnosti do stredu rámika";
+
+"Position your passport in the center of the frame" = "Umiestnite svoj pas do stredu rámika";
+
+"Scan" = "Skenovať";
+
+"Scanned" = "Naskenované";
+
+"Select" = "Zvoliť";
+
+"Select a location to upload the back of your identity document from" = "Vyberte umiestnenie, z ktorého chcete nahrať zadnú stranu dokladu totožnosti";
+
+"Select a location to upload the front of your identity document from" = "Vyberte umiestnenie, z ktorého chcete nahrať prednú stranu dokladu totožnosti";
+
+"Select back driver's license photo" = "Vyberte fotografiu zadnej strany vodičského preukazu";
+
+"Select back identity card photo" = "Vyberte fotografiu zadnej strany preukazu totožnosti";
+
+"Select front driver's license photo" = "Vyberte fotografiu prednej strany vodičského preukazu";
+
+"Select front identity card photo" = "Vyberte fotografiu prednej strany preukazu totožnosti";
+
+"Select passport photo" = "Vyberte fotografiu pasu";
+
+"Selfie" = "Selfie";
+
+"Selfie captures" = "Selfie zábery";
+
+"Selfie captures are complete" = "Selfie zábery sú dokončené";
+
+"Take Photo" = "Odfotiť";
+
+"The images of your identity document have not been saved. Do you want to leave?" = "Obrázky vášho dokladu totožnosti sa neuložili. Chcete odísť?";
+
+"There was an error accessing the camera." = "Pri prístupe k fotoaparátu sa vyskytla chyba.";
+
+"Try Again" = "Skúste to znova";
+
+"Unable to establish a connection." = "Nepodarilo sa vytvoriť spojenie.";
+
+"Unsaved changes" = "Neuložené zmeny";
+
+"Upload" = "Nahrať";
+
+"Upload a Photo" = "Nahrať fotografiu";
+
+"Uploading back driver's license photo" = "Nahrávanie fotografie zo zadnej strany vodičského preukazu";
+
+"Uploading back identity card photo" = "Nahrávanie fotografie zo zadnej strany preukazu totožnosti";
+
+"Uploading front driver's license photo" = "Nahrávanie fotografie z prednej strany vodičského preukazu";
+
+"Uploading front identity card photo" = "Nahrávanie fotografie z prednej strany preukazu totožnosti";
+
+"Uploading passport photo" = "Nahrať fotografiu z pasu";
+
+"Verify your identity" = "Overiť totožnosť";
+
+"We could not capture a high-quality image." = "Nepodarilo sa nasnímať obrázok vo vysokej kvalite.";
+
+"We need permission to use your camera. Please allow camera access in app settings." = "Potrebujeme povolenie na použitie vášho fotoaparátu. Povoľte prístup k fotoaparátu v nastaveniach aplikácie.";
+
+"You can either try again or upload an image from your device." = "Môžete to skúsiť znova alebo nahrať obrázok zo svojho zariadenia.";
+
+"Your selfie images have not been saved. Do you want to leave?" = "Obrázky selfie sa neuložili. Chcete odísť?";
