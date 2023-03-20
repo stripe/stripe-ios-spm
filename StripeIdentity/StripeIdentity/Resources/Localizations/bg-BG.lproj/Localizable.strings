@@ -1,0 +1,137 @@
+"Alternatively, you may manually upload a photo of your identity document." = "Като алтернатива можете да качите ръчно снимка на документа си за самоличност.";
+
+"App Settings" = "Настройки на приложението";
+
+"Back driver's license photo successfully uploaded" = "Успешно качена снимка на задната страна на шофьорска книжка";
+
+"Back identity card photo successfully uploaded" = "Успешно качена снимка на задната страна на лична карта";
+
+"Back of driver's license" = "Задна страна на свидетелство за управление на МПС";
+
+"Back of identity card" = "Задна страна на лична карта";
+
+"Camera permission" = "Разрешение за камерата";
+
+"Camera unavailable" = "Камерата не е достъпна";
+
+"Capturing…" = "Заснемане...";
+
+"Choose File" = "Избор на файл";
+
+"Consent" = "Съгласие";
+
+"Could not capture image" = "Заснемането беше неуспешно";
+
+"Date of birth" = "Дата на раждане";
+
+"File Upload" = "Качване на файл";
+
+"File upload" = "Качване на файл";
+
+"Flip your driver's license over to the other side" = "Обърнете шофьорската си книжка от другата страна";
+
+"Flip your identity card over to the other side" = "Обърнете личната си карта от другата страна.";
+
+"Front driver's license photo successfully uploaded" = "Успешно качена снимка на предната страна на шофьорска книжка";
+
+"Front identity card photo successfully uploaded" = "Успешно качена снимка на предната страна на лична карта";
+
+"Front of driver's license" = "Предна страна на свидетелство за управление на МПС";
+
+"Front of identity card" = "Предна страна на лична карта";
+
+"Go Back" = "Назад";
+
+"Hold still, scanning" = "Застанете неподвижно, сканира се";
+
+"ID Number" = "Идентификационен номер";
+
+"ID Type" = "Тип идентификация";
+
+"Image of passport" = "Изображение на паспорт";
+
+"Loading" = "Зареждане";
+
+"Passport" = "Паспорт";
+
+"Passport photo successfully uploaded" = "Успешно качена снимка на паспорт";
+
+"Personal ID number" = "Личен идентификационен номер";
+
+"Photo Library" = "Библиотека със снимки";
+
+"Please upload an image of your passport" = "Моля, качете изображение на Вашия паспорт.";
+
+"Please upload images of the front and back of your driver's license" = "Моля, качете изображение на предната и задната част от Вашето свидетелство за управление на МПС.";
+
+"Please upload images of the front and back of your identity card" = "Моля, качете изображение на предната и задната част на Вашата лична карта.";
+
+"Position your driver's license in the center of the frame" = "Позиционирайте шофьорската си книжка в центъра на рамката";
+
+"Position your face in the center of the frame." = "Позиционирайте лицето си в центъра на рамката.";
+
+"Position your identity card in the center of the frame" = "Позиционирайте личната си карта в центъра на рамката";
+
+"Position your passport in the center of the frame" = "Позиционирайте паспорта си в центъра на рамката";
+
+"Scan" = "Сканирай";
+
+"Scanned" = "Сканиран";
+
+"Select" = "Избиране";
+
+"Select a location to upload the back of your identity document from" = "Изберете местоположение за качване на изображение на задната страна на Вашия документ за самоличност от";
+
+"Select a location to upload the front of your identity document from" = "Изберете местоположение за качване на изображение на предната страна на Вашия документ за самоличност от";
+
+"Select back driver's license photo" = "Изберете снимка на задната част на шофьорска книжка";
+
+"Select back identity card photo" = "Изберете снимка на задната страна на лична карта";
+
+"Select front driver's license photo" = "Изберете снимка на предната страна на шофьорска книжка";
+
+"Select front identity card photo" = "Изберете снимка на предната страна на лична карта";
+
+"Select passport photo" = "Изберете снимка на паспорт";
+
+"Selfie" = "Селфи";
+
+"Selfie captures" = "Заснети селфита";
+
+"Selfie captures are complete" = "Заснемането на селфита е завършено";
+
+"Take Photo" = "Заснемане";
+
+"The images of your identity document have not been saved. Do you want to leave?" = "Изображенията на Вашия документ за самоличност не са запазени. Искате ли да излезете?";
+
+"There was an error accessing the camera." = "Възникна грешка, свързана с достъпа до камерата.";
+
+"Try Again" = "Опитайте отново";
+
+"Unable to establish a connection." = "Не може да бъде осъществена връзка.";
+
+"Unsaved changes" = "Незапазени промени";
+
+"Upload" = "Качване";
+
+"Upload a Photo" = "Качете снимка";
+
+"Uploading back driver's license photo" = "Качване на снимка на задната страна на шофьорска книжка";
+
+"Uploading back identity card photo" = "Качване на снимка на задната страна на лична карта";
+
+"Uploading front driver's license photo" = "Качване на снимка на предната страна на шофьорска книжка";
+
+"Uploading front identity card photo" = "Качване на снимка на предната страна на лична карта";
+
+"Uploading passport photo" = "Качване на снимка на паспорт";
+
+"Verify your identity" = "Удостоверете Вашата самоличност";
+
+"We could not capture a high-quality image." = "Не успяхме да заснемем изображение с високо качество.";
+
+"We need permission to use your camera. Please allow camera access in app settings." = "Нуждаем се от разрешение за използване на Вашата камера. Моля, разрешете достъп до камерата в настройките на приложението.";
+
+"You can either try again or upload an image from your device." = "Можете да опитате отново или да качите изображение от устройството си.";
+
+"Your selfie images have not been saved. Do you want to leave?" = "Вашите селфи изображения не са запазени. Искате ли да излезете?";

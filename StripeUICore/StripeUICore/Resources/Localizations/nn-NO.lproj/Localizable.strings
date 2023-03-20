@@ -1,0 +1,119 @@
+"%@ (optional)" = "%@ (valfritt)";
+
+"Account number" = "Kontonummer";
+
+"Address" = "Adresse";
+
+"Address line 1" = "Adresselinje 1";
+
+"Address line 2" = "Adresselinje 2";
+
+"Area" = "Område";
+
+"BSB number" = "BSB-nummer";
+
+"Billing address is same as shipping" = "Fakturaadressa er den same som leveringsadressa";
+
+"Cancel" = "Avbryt";
+
+"City" = "Stad";
+
+"Code field" = "Kodefelt";
+
+"Company" = "Selskap";
+
+"Continue" = "Fortsett";
+
+"Country" = "Land";
+
+"Country or region" = "Land eller region";
+
+"County" = "Fylke";
+
+"Department" = "Område";
+
+"District" = "Distrikt";
+
+"Do Si" = "Do Si";
+
+"Done" = "Ferdig";
+
+"Double tap to edit" = "Dobbeltæpp for å redigere";
+
+"Edit" = "Rediger";
+
+"Eircode" = "Eircode";
+
+"Email" = "E-post";
+
+"Emirate" = "Emirat";
+
+"Error" = "Feil";
+
+"First" = "Fornamn";
+
+"Full name" = "Fullt namn";
+
+"Incomplete phone number" = "Ufullstendig telefonnummer";
+
+"Invalid UPI ID" = "Ugyldig UPI ID";
+
+"Island" = "Øy";
+
+"Last" = "Etternamn";
+
+"Name" = "Namn";
+
+"Name on account" = "Namn på konto";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Annan";
+
+"Parish" = "Sogn";
+
+"Phone" = "Telefonnr.";
+
+"Postal code" = "Postnummer";
+
+"Prefecture" = "Prefektur";
+
+"Province" = "Område";
+
+"Remove" = "Fjern";
+
+"Remove bank account" = "Fjern bankkonto";
+
+"Remove bank account ending in %@" = "Fjern bankkonto som sluttar på %@";
+
+"Search" = "Søk";
+
+"State" = "Stat";
+
+"Suburb" = "Forstad";
+
+"Suburb or city" = "Forstad eller stad";
+
+"The BSB you entered is incomplete." = "BSB-koden du skreiv inn er ufullstendig.";
+
+"The ID number you entered is incomplete." = "ID-nummeret du skrev inn, er ufullstendig.";
+
+"The account number you entered is incomplete." = "Kontonummeret du skrev inn, er ufullstendig.";
+
+"Town or city" = "Stad";
+
+"UPI ID" = "UPI ID";
+
+"Unable to parse phone number" = "Kan ikkje analysere telefonnummer";
+
+"Use rotor to access links" = "Bruk rotor for å opne koplingar";
+
+"Your ZIP is incomplete." = "ZIP-koden er ufullstendig.";
+
+"Your email is invalid." = "E-postadressa di er ugyldig.";
+
+"Your postal code is incomplete." = "Postnummeret er ufullstendig.";
+
+"ZIP" = "POSTNR.";
