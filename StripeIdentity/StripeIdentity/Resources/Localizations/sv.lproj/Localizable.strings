@@ -1,0 +1,157 @@
+"A few photos will be taken automatically on the next step to verify it's you" = "Ett par foton kommer att tas automatiskt i nästa steg för att verifiera att det är du";
+
+"Alternatively, you may manually upload a photo of your identity document." = "Du kan även manuellt ladda upp ett foto av din id-handling.";
+
+"App Settings" = "Appinställningar";
+
+"Back driver's license photo successfully uploaded" = "Bilden på körkortets baksida har laddats upp";
+
+"Back identity card photo successfully uploaded" = "Bilden på id-kortets baksida har laddats upp";
+
+"Back of driver's license" = "Baksida av körkort";
+
+"Back of identity card" = "Baksida av id-kort";
+
+"Camera permission" = "Kamerabehörighet";
+
+"Camera unavailable" = "Kamera ej tillgänglig";
+
+"Capturing…" = "Tar bild …";
+
+"Choose File" = "Välj fil";
+
+"Consent" = "Samtycke";
+
+"Could not capture image" = "Det gick inte att ta bilden";
+
+"Date of Birth" = "Födelsedatum";
+
+"Date of birth does not look valid" = "Födelsedatumet verkar inte vara giltig";
+
+"Flip your driver's license over to the other side" = "Vänd på körkortet";
+
+"Flip your identity card over to the other side" = "Vänd på id-handlingen";
+
+"Front driver's license photo successfully uploaded" = "Bilden på körkortets framsida har laddats upp";
+
+"Front identity card photo successfully uploaded" = "Bilden på id-kortets framsida har laddats upp";
+
+"Front of driver's license" = "Framsida av körkort";
+
+"Front of identity card" = "Framsida av id-kort";
+
+"Get ready to take a selfie" = "Gör dig redo att ta en selfie";
+
+"Go Back" = "Gå tillbaka";
+
+"Hold still, scanning" = "Rör dig inte, dokumentet skannas in";
+
+"ID Number" = "ID-nummer";
+
+"ID Type" = "Typ av id-handling";
+
+"Image of passport" = "Bild av pass";
+
+"Individual CPF" = "Personligt CPF";
+
+"Last 4 of Social Security number" = "Fyra sista siffrorna i socialförsäkringsnumret";
+
+"Loading" = "Laddar";
+
+"NRIC or FIN" = "NRIC eller FIN";
+
+"Passport" = "Pass";
+
+"Passport photo successfully uploaded" = "Passfotot har laddats upp";
+
+"Personal ID number" = "Personligt ID-nummer";
+
+"Personal Information" = "Personuppgifter";
+
+"Phone Number" = "Telefonnummer";
+
+"Phone Verification" = "Telefonverifiering";
+
+"Photo Library" = "Fotobibliotek";
+
+"Please upload an image of your passport" = "Ladda upp en bild på ditt pass";
+
+"Please upload images of the front and back of your driver's license" = "Ladda upp bilderna på fram- och baksidan av ditt körkort";
+
+"Please upload images of the front and back of your identity card" = "Ladda upp bilderna på fram- och baksidan av ditt id-kort";
+
+"Position your driver's license in the center of the frame" = "Placera körkortet i mitten av ramen";
+
+"Position your face in the center of the frame." = "Placera ansiktet i mitten av ramen.";
+
+"Position your identity card in the center of the frame" = "Placera id-kortet i mitten av ramen";
+
+"Position your passport in the center of the frame" = "Placera passet i mitten av ramen";
+
+"Retake Photos" = "Ta bilden på nytt";
+
+"Scan" = "Skanna dokument";
+
+"Scanned" = "Dokumentet har skannats";
+
+"Select" = "Välj";
+
+"Select a location to upload the back of your identity document from" = "Välj från vilken plats du vill ladda upp baksidan på din id-handling";
+
+"Select a location to upload the front of your identity document from" = "Välj från vilken plats du vill ladda upp framsidan på din id-handling";
+
+"Select back driver's license photo" = "Välj en bild på körkortets baksida";
+
+"Select back identity card photo" = "Välj en bild på id-kortets baksida";
+
+"Select front driver's license photo" = "Välj en bild på körkortets framsida";
+
+"Select front identity card photo" = "Välj en bild på id-kortets framsida";
+
+"Select passport photo" = "Välj passfoto";
+
+"Selfie" = "Selfie";
+
+"Selfie captures" = "Selfiebilder";
+
+"Selfie captures are complete" = "Selfiebilderna har tagits";
+
+"Take Photo" = "Ta bild";
+
+"The images of your identity document have not been saved. Do you want to leave?" = "Bilderna av din id-handling har inte sparats. Vill du avsluta?";
+
+"There was an error accessing the camera." = "Ett fel uppstod vid åtkomst till kameran.";
+
+"Try Again" = "Försök igen";
+
+"Unable to establish a connection." = "Det gick inte att upprätta en anslutning.";
+
+"Unsaved changes" = "Ändringarna har inte sparats";
+
+"Upload" = "Ladda upp";
+
+"Upload a Photo" = "Ladda upp en bild";
+
+"Upload your photo ID" = "Ladda upp ditt foto-id";
+
+"Uploading back driver's license photo" = "Laddar upp bild på körkortets baksida";
+
+"Uploading back identity card photo" = "Laddar upp bild på id-kortets baksida";
+
+"Uploading front driver's license photo" = "Laddar upp bild på körkortets framsida";
+
+"Uploading front identity card photo" = "Laddar upp bild på id-kortets framsida";
+
+"Uploading passport photo" = "Laddar upp passfoto";
+
+"Verify your identity" = "Verifiera din identitet";
+
+"We could not capture a high-quality image." = "Det gick inte att ta en bild av hög kvalitet.";
+
+"We need permission to use your camera. Please allow camera access in app settings." = "Vi behöver behörighet att använda din kamera. Tillåt kameraåtkomst i appens inställningar.";
+
+"Welcome" = "Välkommen";
+
+"You can either try again or upload an image from your device." = "Du kan antingen försöka igen eller ladda upp en bild från din enhet.";
+
+"Your selfie images have not been saved. Do you want to leave?" = "Dina selfies har inte sparats. Vill du avsluta?";
