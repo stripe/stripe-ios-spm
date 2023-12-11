@@ -1,0 +1,31 @@
+"Close" = "閉じる";
+
+"Scan Card" = "クレジットカードをスキャン";
+
+"Scan card" = "カードをスキャン";
+
+"The IBAN you entered is invalid." = "入力した IBAN が無効です。";
+
+"There was an error processing your card -- try again in a few seconds" = "クレジットカード情報の処理中にエラーが発生しました。数秒後にもう一度お試しください";
+
+"There was an unexpected error -- try again in a few seconds" = "予期しないエラーが発生しました。数秒後にもう一度お試しください";
+
+"Try again" = "もう一度お試しください";
+
+"We use Stripe to verify your card details. Stripe may use and store your data according its privacy policy. <a href='https://support.stripe.com/questions/stripes-card-image-verification'><u>Learn more</u></a>" = "Stripe を使用してカード詳細を確認します。Stripe はプライバシーポリシーに従ってお客様のデータを使用および保管することがあります。<a href='https://support.stripe.com/questions/stripes-card-image-verification'><u>もっと知る</u></a>";
+
+"Your card has expired" = "クレジットカードの有効期限が切れています";
+
+"Your card was declined" = "クレジットカードが拒否されました";
+
+"Your card's expiration month is invalid" = "指定したクレジットカードの有効期限の月が無効です";
+
+"Your card's expiration year is invalid" = "指定したクレジットカードの有効期限の年が無効です";
+
+"Your card's number is invalid" = "指定したクレジットカードの番号が無効です";
+
+"Your card's security code is invalid" = "指定したクレジットカードのセキュリティコードが無効です";
+
+"Your name is invalid." = "名前が無効です。";
+
+"Your payment method was declined." = "お客様の支払い方法が拒否されました。";

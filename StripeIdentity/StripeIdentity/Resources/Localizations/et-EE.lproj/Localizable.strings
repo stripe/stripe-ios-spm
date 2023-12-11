@@ -1,0 +1,133 @@
+"A few photos will be taken automatically on the next step to verify it's you" = "Järgmises etapis tehakse automaatselt mõned fotod, et kinnitada, et see olete teie";
+
+"Accepted forms of ID include" = "Aktsepteeritud isikut tõendavad dokumendid hõlmavad järgmist";
+
+"Alternatively, you may manually upload a photo of your identity document." = "Samuti võite oma isikut tõendava dokumendi foto käsitsi üles laadida.";
+
+"App Settings" = "Rakenduse sätted";
+
+"Back identity card photo successfully uploaded" = "ID-kaardi tagakülje foto üleslaadimine õnnestus";
+
+"Back of identity card" = "ID-kaardi tagakülg";
+
+"Camera permission" = "Kaamera luba";
+
+"Camera unavailable" = "Kaamera pole saadaval";
+
+"Capturing…" = "Pildistamine …";
+
+"Choose File" = "Vali fail";
+
+"Consent" = "Nõusolek";
+
+"Could not capture image" = "Pilti ei saanud teha";
+
+"Date of Birth" = "Sünnikuupäev";
+
+"Date of birth does not look valid" = "Sünnikuupäev ei näi olevat õige";
+
+"Flip your identity card over to the other side" = "Pöörake ID-kaart ümber";
+
+"Front identity card photo successfully uploaded" = "ID-kaardi esikülje foto üleslaadimine õnnestus";
+
+"Front of identity card" = "ID-kaardi esikülg";
+
+"Get ready to scan your photo ID" = "Valmistuge oma fotoga isikut tõendava dokumendi skannimiseks";
+
+"Get ready to take a selfie" = "Valmistuge tegema selfit";
+
+"Go Back" = "Mine tagasi";
+
+"Hold still, scanning" = "Hoidke paigal, skannimine";
+
+"I'm ready" = "Olen valmis jätkama";
+
+"ID Number" = "Isikukood";
+
+"Individual CPF" = "Eraisiku CPF";
+
+"Last 4 of Social Security number" = "Sotsiaalkindlustuse numbri viimased 4 numbrit";
+
+"Loading" = "Laadimine";
+
+"Make sure you're in a well lit space." = "Veenduge, et olete hästi valgustatud kohas.";
+
+"NRIC or FIN" = "NRIC või FIN";
+
+"Personal ID number" = "Isikukood";
+
+"Personal Information" = "Isikuteave";
+
+"Phone Number" = "Telefoninumber";
+
+"Phone Verification" = "Telefoni kinnitus";
+
+"Photo Library" = "Fototeek";
+
+"Please upload images of the front and back of your identity card" = "Laadige üles oma ID-kaardi esi- ja tagakülje pildid";
+
+"Position your face in the center of the frame." = "Jälgige, et nägu oleks raami keskel.";
+
+"Position your identity card in the center of the frame" = "Jälgige, et ID-kaart oleks raami keskel";
+
+"Retake Photos" = "Tee fotod uuesti";
+
+"Scan" = "Skannimine";
+
+"Scanned" = "Skannitud";
+
+"Select" = "Vali";
+
+"Select a location to upload the back of your identity document from" = "Valige asukoht, kust laadida üles oma isikut tõendava dokumendi tagakülg";
+
+"Select a location to upload the front of your identity document from" = "Valige asukoht, kust laadida üles oma isikut tõendava dokumendi esikülg";
+
+"Select back identity card photo" = "Vali ID-kaardi tagakülje foto";
+
+"Select front identity card photo" = "Vali ID-kaardi esikülje foto";
+
+"Selfie" = "Selfi";
+
+"Selfie captures" = "Selfi pildistamine";
+
+"Selfie captures are complete" = "Selfi on jäädvustatud";
+
+"Take Photo" = "Pildista";
+
+"The images of your identity document have not been saved. Do you want to leave?" = "Teie isikut tõendava dokumendi pilte pole salvestatud. Kas soovite lahkuda?";
+
+"There was an error accessing the camera." = "Kaamerale juurdepääsemisel esines tõrge.";
+
+"Try Again" = "Proovi uuesti";
+
+"Unable to establish a connection." = "Ühendust ei saa luua.";
+
+"Unsaved changes" = "Salvestamata muudatused";
+
+"Upload" = "Üleslaadimine";
+
+"Upload a Photo" = "Laadi foto üles";
+
+"Upload your photo ID" = "Laadige üles fotoga isikut tõendav dokument";
+
+"Uploading back identity card photo" = "ID-kaardi tagakülje foto üleslaadimine";
+
+"Uploading front identity card photo" = "ID-kaardi esikülje foto üleslaadimine";
+
+"Verify your identity" = "Kinnitage oma isik";
+
+"We could not capture a high-quality image." = "Meil ei õnnestunud teha kõrge kvaliteediga pilti.";
+
+"We need permission to use your camera. Please allow camera access in app settings." = "Vajame teie kaamera kasutamiseks luba. Andke rakenduse sätete kaudu juurdepääs kaamerale.";
+
+"Welcome" = "Tere tulemast";
+
+"You can either try again or upload an image from your device." = "Võite kas uuesti proovida või pildi oma seadmest üles laadida.";
+
+"Your selfie images have not been saved. Do you want to leave?" = "Teie selfi pilte pole salvestatud. Kas soovite lahkuda?";
+
+"driver's license" = "juhiluba";
+
+"government-issued photo ID" = "riigi poolt väljastatud fotoga isikut tõendav dokument";
+
+"passport" = "pass";
