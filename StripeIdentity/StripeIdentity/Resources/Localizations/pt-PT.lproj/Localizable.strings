@@ -1,0 +1,133 @@
+"A few photos will be taken automatically on the next step to verify it's you" = "Serão tiradas algumas fotografias automaticamente no passo seguinte para verificar a sua identidade";
+
+"Accepted forms of ID include" = "Formas de documento de identificação aceites incluem";
+
+"Alternatively, you may manually upload a photo of your identity document." = "Em alternativa, pode carregar manualmente uma fotografia do seu documento de identificação.";
+
+"App Settings" = "Definições da aplicação";
+
+"Back identity card photo successfully uploaded" = "Fotografia do verso do cartão de identidade carregada com sucesso";
+
+"Back of identity card" = "Verso do cartão de identidade";
+
+"Camera permission" = "Permissão da câmara";
+
+"Camera unavailable" = "Câmara indisponível";
+
+"Capturing…" = "A captar…";
+
+"Choose File" = "Escolher ficheiro";
+
+"Consent" = "Autorizar";
+
+"Could not capture image" = "Não foi possível capturar a imagem";
+
+"Date of Birth" = "Data de nascimento";
+
+"Date of birth does not look valid" = "A data de nascimento não parece ser válida";
+
+"Flip your identity card over to the other side" = "Vire o seu cartão de identidade para o outro lado";
+
+"Front identity card photo successfully uploaded" = "Fotografia da frente do cartão de identidade carregada com sucesso";
+
+"Front of identity card" = "Frente do cartão de identidade";
+
+"Get ready to scan your photo ID" = "Prepare-se para digitalizar o seu documento de identificação com fotografia";
+
+"Get ready to take a selfie" = "Prepare-se para tirar uma selfie";
+
+"Go Back" = "Voltar";
+
+"Hold still, scanning" = "Segure com firmeza, a capturar";
+
+"I'm ready" = "Estou pronto";
+
+"ID Number" = "Número de identificação";
+
+"Individual CPF" = "CPF particular";
+
+"Last 4 of Social Security number" = "Últimos 4 dígitos do número da segurança social";
+
+"Loading" = "A carregar";
+
+"Make sure you're in a well lit space." = "Certifique-se de que se encontra num espaço bem iluminado.";
+
+"NRIC or FIN" = "NRIC ou FIN";
+
+"Personal ID number" = "Número de identificação pessoal";
+
+"Personal Information" = "Informações pessoais";
+
+"Phone Number" = "Número de telefone";
+
+"Phone Verification" = "Verificação de telefone";
+
+"Photo Library" = "Biblioteca de fotografias";
+
+"Please upload images of the front and back of your identity card" = "Carregue imagens da parte da frente e do verso do seu cartão de identidade";
+
+"Position your face in the center of the frame." = "Posicione o seu rosto no centro da moldura.";
+
+"Position your identity card in the center of the frame" = "Posicione o seu cartão de identidade no centro da moldura";
+
+"Retake Photos" = "Voltar a tirar fotografias";
+
+"Scan" = "Digitalizar";
+
+"Scanned" = "Digitalizado";
+
+"Select" = "Selecionar";
+
+"Select a location to upload the back of your identity document from" = "Selecione uma localização a partir da qual pretende carregar o verso do seu documento de identidade";
+
+"Select a location to upload the front of your identity document from" = "Selecione uma localização a partir da qual pretende carregar a frente do seu documento de identidade";
+
+"Select back identity card photo" = "Selecione a fotografia do verso do seu cartão de identidade";
+
+"Select front identity card photo" = "Selecione a fotografia da frente do seu cartão de identidade.";
+
+"Selfie" = "Selfie";
+
+"Selfie captures" = "Capturas de selfie";
+
+"Selfie captures are complete" = "Capturas de selfie concluídas";
+
+"Take Photo" = "Tirar fotografia";
+
+"The images of your identity document have not been saved. Do you want to leave?" = "As imagens do seu documento de identificação não foram guardadas. Tem a certeza que quer sair?";
+
+"There was an error accessing the camera." = "Ocorreu um erro ao aceder à câmara.";
+
+"Try Again" = "Tentar novamente";
+
+"Unable to establish a connection." = "Não é possível estabelecer ligação.";
+
+"Unsaved changes" = "Alterações não guardadas";
+
+"Upload" = "Carregar";
+
+"Upload a Photo" = "Carregar fotografia";
+
+"Upload your photo ID" = "Carregar o seu documento de identificação com fotografia";
+
+"Uploading back identity card photo" = "A carregar a fotografia do verso do cartão de identidade";
+
+"Uploading front identity card photo" = "A carregar a fotografia da frente do cartão de identidade";
+
+"Verify your identity" = "Verifique a sua identidade";
+
+"We could not capture a high-quality image." = "Não foi possível captar uma imagem de alta qualidade.";
+
+"We need permission to use your camera. Please allow camera access in app settings." = "Precisamos de permissão para utilizar a sua câmara. Permita o acesso à câmara nas definições da aplicação.";
+
+"Welcome" = "Bem-vindo";
+
+"You can either try again or upload an image from your device." = "Pode tentar novamente ou carregar uma imagem a partir do seu dispositivo.";
+
+"Your selfie images have not been saved. Do you want to leave?" = "As suas imagens de selfie não foram guardadas. Pretende sair?";
+
+"driver's license" = "carta de condução";
+
+"government-issued photo ID" = "documento de identificação com fotografia, emitido pelo governo";
+
+"passport" = "passaporte";
