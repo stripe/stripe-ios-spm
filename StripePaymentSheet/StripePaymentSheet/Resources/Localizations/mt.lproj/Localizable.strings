@@ -1,0 +1,141 @@
+"+ Add" = "+ Żid";
+
+"Add a card" = "Żid kard";
+
+"Add a payment method" = "Żid metodu tal-pagament";
+
+"Add bank account" = "Żid kont tal-bank";
+
+"Add new payment method" = "Żid metodu tal-ħlas ġdid";
+
+"Add your payment information" = "Żid l-informazzjoni dwar il-pagament tiegħek";
+
+"Approve payment" = "Approva l-pagament";
+
+"Back" = "Lura";
+
+"Bank account" = "Kont tal-bank";
+
+"Buy now or pay later with Klarna." = "Ixtri issa jew ħallas iktar tard bil-Klarna.";
+
+"Buy using a UPI ID" = "Ixtri billi tuża ID UPI";
+
+"By confirming your payment with PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Meta tikkonferma l-pagament b'PayPal tkun qed tħalli lil %@ tiġbor il-flus mill-kont ta' PayPal tiegħek għall-pagamenti tal-ġejjieni skont ir-regoli tagħha.";
+
+"By continuing to PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Meta tkompli għal PayPal tkun qed tħalli lil %@ tiġbor il-flus mill-kont ta' PayPal tiegħek għall-pagamenti tal-ġejjieni skont ir-regoli tagħha.";
+
+"By continuing to Revolut Pay, you allow %@ to charge your Revolut Pay account for future payments in accordance with their terms." = "Meta tkompli għal Revolut Pay tkun qed tħalli lil %@ tiġbor il-flus mill-kont ta' Revolut Pay tiegħek għall-pagamenti tal-ġejjieni skont ir-regoli tagħha.";
+
+"By continuing, you agree to authorize payments pursuant to <terms>these terms</terms>." = "Meta tkompli tkun qed taqbel li tawtorizza l-pagamenti skont <terms>dar-regoli</terms>.";
+
+"By continuing, you authorize %@ to debit your Cash App account for this payment and future payments in accordance with %@'s terms, until this authorization is revoked. You can change this anytime in your Cash App Settings." = "Meta tkompli tkun qed tagħti permess lil %1$@ biex, sakemm dal-permess jitneħħa, tkun tista' tiġbor il-flus mill-kont Cash App tiegħek għal dal-pagament u għall-pagamenti tal-ġejjieni skont ir-regoli ta' %2$@. Tista' tibdel dil-ħaġa meta trid mill-Għażliet ta' Cash App.";
+
+"By joining Link, you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Meta tingħaqad ma' Link tkun qed taqbel mat-<terms>Termini</terms> u l-<privacy>Politika tal-Privatezza</privacy>.";
+
+"By providing your payment information and confirming this payment, you authorise (A) %@ and Stripe, our payment service provider, to send instructions to your bank to debit your account and (B) your bank to debit your account in accordance with those instructions. As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited. Your rights are explained in a statement that you can obtain from your bank. You agree to receive notifications for future debits up to 2 days before they occur." = "Meta tagħti l-informazzjoni tal-pagament tiegħek u tikkonferma dan il-pagament, tkun qed tawtorizza lil (A) %@ u lil Stripe, l-operatur tas-servizz tal-pagamenti tagħna, biex jibagħtu struzzjonijiet lill-bank tiegħek biex jieħu l-fondi mill-kont tiegħek u (B) lill-bank tiegħek biex jieħu l-fondi mill-kont tiegħek skont dawn l-istruzzjonijiet. Bħala parti mid-drittijiet tiegħek, inti għandek dritt għall-ħlas lura mill-bank tiegħek skont it-termini u l-kundizzjonijiet tal-ftehim tiegħek mal-bank tiegħek. Ħlas lura għandu jintalab fi żmien 8 ġimgħat, li jibdew jgħoddu mid-data li fiha l-fondi jittieħdu mill-kont tiegħek. Id-drittijiet tiegħek huma spjegati f'dikjarazzjoni li tista' tikseb mingħand il-bank tiegħek. Inti taqbel li, sa jumejn qabel, tirċievi notifika kull darba li l-fondi jkunu se jittieħdu mill-kont tiegħek.";
+
+"By saving your bank account for %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Meta tissejvja l-kont tal-bank tiegħek għal %@ tkun qed taqbel li tawtorizza l-pagamenti skont <terms>dar-regoli</terms>.";
+
+"CPF/CPNJ" = "CPF/CPNJ";
+
+"Cancel and pay another way" = "Ikkanċella u ħallas mod ieħor";
+
+"Choose a payment method" = "Agħżel metodu tal-ħlas";
+
+"Close card scanner" = "Agħlaq l-iskenner tal-kard";
+
+"Confirm" = "Ikkonferma";
+
+"Confirm the payment in your bank or payment app within %@ to complete the purchase." = "Biex tlesti x-xirja kkonferma l-pagament, fl-app tal-bank jew fl-app tal-pagamenti, fi żmien %@.";
+
+"Confirm the payment in your bank's app within %@ to complete the purchase." = "Ikkonferma l-pagament fl-app tal-bank fi żmien %@ biex tlesti x-xirja.";
+
+"Confirm your CVC" = "Ikkonferma l-kodiċi CVC tiegħek";
+
+"Confirm your CVV" = "Ikkonferma l-kodiċi CVV tiegħek";
+
+"Contact information" = "Id-dettalji tal-kuntatt";
+
+"EPS Bank" = "EPS Bank";
+
+"Enter address manually" = "Ikteb l-indirizz int stess";
+
+"FPX Bank" = "FPX Bank";
+
+"IBAN" = "IBAN";
+
+"Manage your payment methods" = "Ħu ħsieb il-metodi tal-pagament tiegħek";
+
+"Name on card" = "L-isem fuq il-karta";
+
+"Open your UPI app to approve your payment within %@" = "Iftaħ l-app ta' UPI biex tapprova l-pagamenti tiegħek fi żmien %@";
+
+"Or" = "Jew";
+
+"Or pay using" = "Jew ħallas bil-";
+
+"Or pay with a card" = "Jew ħallas bil-kard";
+
+"Or use" = "Jew uża";
+
+"Or use a card" = "Jew uża karta";
+
+"Pay %@" = "Ħallas %@";
+
+"Pay another way" = "Ħallas mod ieħor";
+
+"Pay faster at %@ and thousands of businesses." = "Ħallas lil %@ u lil eluf ta' negozji oħra iktar malajr.";
+
+"Pay in <num_installments/> interest-free payments of <installment_price/> with <img/>" = "Ħallas f'dan-numru ta' pagamenti: <num_installments/> ta' <installment_price/> mingħajr imgħax grazzi għal <img/>";
+
+"Pay later with Klarna." = "Ħlas aktar tard bil-Klarna.";
+
+"Pay over time with %@" = "Ħallas bin-nifs grazzi għal %@";
+
+"Pay with Link" = "Ħallas b'Link";
+
+"Pay with your bank account in just a few steps." = "Ħallas bil-kont tal-bank tiegħek fi ftit passi.";
+
+"Payment failed" = "Il-pagament ma rnexxiex";
+
+"Please go back and select another payment method" = "Jekk jogħġbok mur lura u agħżel metodu tal-pagament ieħor";
+
+"Point the camera at your card." = "Dawwar il-kamera lejn il-kard tiegħek.";
+
+"Processing..." = "Qed jiġi pproċessat...";
+
+"Przelewy24 Bank" = "Bank permezz ta' Przelewy24";
+
+"Save" = "Erfa'";
+
+"Save a new payment method" = "Erfa' metodu tal-pagament ġdid";
+
+"Save address" = "Erfa' l-indirizz";
+
+"Save for future payments" = "Erfa' għall-pagamenti fil-ġejjieni";
+
+"Save this account for future %@ payments" = "Erfa' dal-kont għall-pagament lil %@ tal-ġejjieni";
+
+"Save this card for future %@ payments" = "Erfa' din il-kard għal pagamenti futuri %@";
+
+"Save your bank account in just a few steps." = "Erfa' l-kont tal-bank tiegħek fi ftit passi.";
+
+"Select your payment method" = "Agħżel il-metodu tal-ħlas tiegħek";
+
+"Set up" = "Stabilixxi";
+
+"Shipping to %@ is not supported." = "Ma nistgħux nibagħtu l-affarijiet lejn: %@";
+
+"Show menu" = "Uri l-menù";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you'll get an email with instructions to finish saving your bank account with %@." = "Stripe se tiddepożita $0.01 fil-kont tiegħek fi żmien jum/jumejn tax-xogħol. Imbagħad se tirċievi email bl-istruzzjonijiet biex tlesti l-proċess li terfa' l-kont tiegħek ma' %@.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you’ll get an email with instructions to complete payment to %@." = "Stripe se tiddepożita $0.01 fil-kont tiegħek fi żmien jum/jumejn tax-xogħol. Imbagħad se tirċievi email bl-istruzzjonijiet biex tagħmel il-pagament lil %@.";
+
+"The IBAN you entered is incomplete." = "L-IBAN li daħħalt mhux komplut.";
+
+"Update card" = "Aġġorna l-karta";
+
+"Your IBAN should start with a two-letter country code." = "L-IBAN tiegħek għandu jibda b'kodiċi tal-pajjiż magħmul minn żewġ ittri.";
+
+"iDEAL Bank" = "Il-Bank iDEAL";

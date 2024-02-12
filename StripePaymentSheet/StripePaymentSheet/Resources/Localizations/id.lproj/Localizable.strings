@@ -1,0 +1,141 @@
+"+ Add" = "+ Tambahkan";
+
+"Add a card" = "Tambahkan sebuah kartu";
+
+"Add a payment method" = "Tambahkan metode pembayaran";
+
+"Add bank account" = "Tambahkan rekening bank";
+
+"Add new payment method" = "Tambahkan metode pembayaran baru";
+
+"Add your payment information" = "Tambahkan informasi pembayaran Anda";
+
+"Approve payment" = "Setujui pembayaran";
+
+"Back" = "Kembali";
+
+"Bank account" = "Rekening bank";
+
+"Buy now or pay later with Klarna." = "Beli sekarang atau bayar nanti dengan Klarna.";
+
+"Buy using a UPI ID" = "Beli menggunakan identifikasi UPI";
+
+"By confirming your payment with PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Dengan mengonfirmasi pembayaran menggunakan PayPal, berarti Anda mengizinkan %@ mengenakan charge untuk pembayaran mendatang pada akun PayPal Anda sesuai dengan ketentuan mereka.";
+
+"By continuing to PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Dengan melanjutkan ke PayPal, berarti Anda mengizinkan %@ mengenakan charge untuk pembayaran mendatang pada akun PayPal Anda sesuai dengan ketentuan mereka.";
+
+"By continuing to Revolut Pay, you allow %@ to charge your Revolut Pay account for future payments in accordance with their terms." = "Dengan melanjutkan ke Revolut Pay, berarti Anda mengizinkan %@ mengenakan charge untuk pembayaran mendatang pada akun Revolut Pay Anda sesuai dengan ketentuan mereka.";
+
+"By continuing, you agree to authorize payments pursuant to <terms>these terms</terms>." = "Dengan melanjutkan, Anda berarti setuju untuk mengotorisasi pembayaran sesuai dengan <terms>ketentuan-ketentuan berikut</terms>.";
+
+"By continuing, you authorize %@ to debit your Cash App account for this payment and future payments in accordance with %@'s terms, until this authorization is revoked. You can change this anytime in your Cash App Settings." = "Dengan melanjutkan, berarti Anda memberi %1$@ otorisasi untuk mendebit akun Cash App Anda bagi pembayaran ini dan pembayaran mendatang sesuai dengan ketentuan %2$@, hingga otorisasi ini dicabut. Anda dapat mengubahnya kapan saja di Pengaturan Cash App.";
+
+"By joining Link, you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Dengan bergabung ke Link, Anda berarti menyetujui <terms>Ketentuan</terms> dan <privacy>Kebijakan Privasi</privacy>.";
+
+"By providing your payment information and confirming this payment, you authorise (A) %@ and Stripe, our payment service provider, to send instructions to your bank to debit your account and (B) your bank to debit your account in accordance with those instructions. As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited. Your rights are explained in a statement that you can obtain from your bank. You agree to receive notifications for future debits up to 2 days before they occur." = "Dengan memberikan informasi pembayaran dan mengonfirmasi pembayaran ini, berarti Anda mengotorisasi (A) %@ dan Stripe, penyedia layanan pembayaran kami, untuk mengirim instruksi kepada bank untuk mendebit rekening Anda dan (B) kepada bank untuk mendebit rekening Anda sesuai instruksi itu. Sebagai bagian dari hak Anda, Anda berhak mendapat pengembalian dana dari bank berdasarkan ketentuan dan persyaratan perjanjian Anda dengan bank. Pengembalian dana harus diklaim dalam waktu 8 minggu sejak tanggal pendebitan rekening Anda. Hak Anda dijelaskan dalam pernyataan yang dapat Anda peroleh dari bank Anda. Anda setuju untuk menerima notifikasi pendebitan di masa mendatang hingga 2 hari sebelum dilakukan.";
+
+"By saving your bank account for %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Dengan menyimpan rekening bank Anda untuk %@, Anda berarti setuju untuk mengotorisasi pembayaran sesuai dengan <terms>ketentuan-ketentuan berikut</terms>.";
+
+"CPF/CPNJ" = "CPF/CPNJ";
+
+"Cancel and pay another way" = "Batalkan dan bayar dengan cara lain";
+
+"Choose a payment method" = "Pilih metode pembayaran";
+
+"Close card scanner" = "Tutup pemindai kartu";
+
+"Confirm" = "Konfirmasikan";
+
+"Confirm the payment in your bank or payment app within %@ to complete the purchase." = "Konfirmasikan pembayaran di aplikasi pembayaran atau bank Anda dalam %@ untuk menyelesaikan pembelian.";
+
+"Confirm the payment in your bank's app within %@ to complete the purchase." = "Konfirmasikan pembayaran di aplikasi bank Anda dalam %@ untuk menyelesaikan pembelian.";
+
+"Confirm your CVC" = "Konfirmasikan CVC Anda";
+
+"Confirm your CVV" = "Konfirmasikan CVV Anda";
+
+"Contact information" = "Informasi kontak";
+
+"EPS Bank" = "Bank EPS";
+
+"Enter address manually" = "Masukkan alamat secara manual";
+
+"FPX Bank" = "FPX Bank";
+
+"IBAN" = "IBAN";
+
+"Manage your payment methods" = "Kelola metode pembayaran Anda";
+
+"Name on card" = "Nama pada kartu";
+
+"Open your UPI app to approve your payment within %@" = "Buka aplikasi UPI Anda untuk menyetujui pembayaran di dalam %@";
+
+"Or" = "Atau";
+
+"Or pay using" = "Atau bayar menggunakan";
+
+"Or pay with a card" = "Atau bayar dengan kartu";
+
+"Or use" = "Atau gunakan";
+
+"Or use a card" = "Atau gunakan kartu";
+
+"Pay %@" = "Bayar %@";
+
+"Pay another way" = "Bayar dengan cara lain";
+
+"Pay faster at %@ and thousands of businesses." = "Bayar lebih cepat di %@ dan ribuan bisnis.";
+
+"Pay in <num_installments/> interest-free payments of <installment_price/> with <img/>" = "Bayar dalam <num_installments/> angsuran bebas bunga sebesar <installment_price/> dengan <img/>";
+
+"Pay later with Klarna." = "Bayar nanti dengan Klarna.";
+
+"Pay over time with %@" = "Bayar dengan jangka waktu dengan %@";
+
+"Pay with Link" = "Bayar dengan Link";
+
+"Pay with your bank account in just a few steps." = "Bayar dengan rekening bank Anda hanya dalam beberapa langkah.";
+
+"Payment failed" = "Pembayaran gagal";
+
+"Please go back and select another payment method" = "Harap kembali dan pilih metode pembayaran lain";
+
+"Point the camera at your card." = "Arahkan kamera pada kartu Anda";
+
+"Processing..." = "Memproses...";
+
+"Przelewy24 Bank" = "Bank Przelewy24";
+
+"Save" = "Simpan";
+
+"Save a new payment method" = "Simpan metode pembayaran baru";
+
+"Save address" = "Simpan alamat";
+
+"Save for future payments" = "Simpan untuk pembayaran mendatang";
+
+"Save this account for future %@ payments" = "Simpan rekening ini untuk pembayaran %@ mendatang";
+
+"Save this card for future %@ payments" = "Simpan kartu ini untuk pembayaran %@ mendatang";
+
+"Save your bank account in just a few steps." = "Simpan rekening bank Anda hanya dalam beberapa langkah.";
+
+"Select your payment method" = "Pilih metode pembayaran Anda";
+
+"Set up" = "Siapkan";
+
+"Shipping to %@ is not supported." = "Pengiriman ke %@ tidak didukung.";
+
+"Show menu" = "Tampilkan menu";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you'll get an email with instructions to finish saving your bank account with %@." = "Stripe akan menyetorkan $0,01 ke rekening Anda dalam waktu 1–2 hari kerja. Kemudian Anda akan mendapatkan email yang berisi instruksi untuk menyelesaikan penyimpanan rekening bank pada %@.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you’ll get an email with instructions to complete payment to %@." = "Stripe akan menyetorkan $0,01 ke rekening Anda dalam waktu 1–2 hari kerja. Kemudian Anda akan mendapatkan email yang berisi petunjuk untuk menyelesaikan pembayaran kepada %@.";
+
+"The IBAN you entered is incomplete." = "IBAN yang Anda masukkan tidak lengkap.";
+
+"Update card" = "Perbarui kartu";
+
+"Your IBAN should start with a two-letter country code." = "IBAN Anda harus diawali dengan kode negara dua-huruf.";
+
+"iDEAL Bank" = "iDEAL Bank";
