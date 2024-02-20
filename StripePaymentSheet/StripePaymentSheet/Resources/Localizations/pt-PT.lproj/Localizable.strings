@@ -1,0 +1,141 @@
+"+ Add" = "+ Adicionar";
+
+"Add a card" = "Adicionar um cartão";
+
+"Add a payment method" = "Adicionar um método de pagamento";
+
+"Add bank account" = "Adicionar conta bancária";
+
+"Add new payment method" = "Adicionar novo método de pagamento";
+
+"Add your payment information" = "Adicione as suas informações de pagamento";
+
+"Approve payment" = "Aprovar pagamento";
+
+"Back" = "Voltar";
+
+"Bank account" = "Conta bancária";
+
+"Buy now or pay later with Klarna." = "Comprar agora ou pagar mais tarde com Klarna.";
+
+"Buy using a UPI ID" = "Comprar com uma ID UPI";
+
+"By confirming your payment with PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Ao confirmar o seu pagamento com o PayPal, autoriza %@ a cobrar pagamentos futuros à sua conta PayPal de acordo com as respetivas condições.";
+
+"By continuing to PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Ao continuar para o PayPal, autoriza %@ a cobrar pagamentos futuros à sua conta PayPal de acordo com as respetivas condições.";
+
+"By continuing to Revolut Pay, you allow %@ to charge your Revolut Pay account for future payments in accordance with their terms." = "Ao continuar para o Revolut Pay, autoriza %@ a cobrar pagamentos futuros à sua conta Revolut Pay de acordo com as respetivas condições.";
+
+"By continuing, you agree to authorize payments pursuant to <terms>these terms</terms>." = "Ao continuar, concorda em autorizar pagamentos de acordo com <terms>estas condições</terms>.";
+
+"By continuing, you authorize %@ to debit your Cash App account for this payment and future payments in accordance with %@'s terms, until this authorization is revoked. You can change this anytime in your Cash App Settings." = "Ao continuar, autoriza %1$@ a debitar a sua conta Cash App para este pagamento e pagamentos futuros de acordo com as condições de %2$@, até que esta autorização seja revogada. Pode alterar isto a qualquer altura nas definições da sua Cash App.";
+
+"By joining Link, you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Ao juntar-se ao Link, concorda com as <terms>Condições</terms> e com a <privacy>Política de Privacidade</privacy>.";
+
+"By providing your payment information and confirming this payment, you authorise (A) %@ and Stripe, our payment service provider, to send instructions to your bank to debit your account and (B) your bank to debit your account in accordance with those instructions. As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited. Your rights are explained in a statement that you can obtain from your bank. You agree to receive notifications for future debits up to 2 days before they occur." = "Quando fornecer os seus dados de pagamento e confirmar este pagamento, autoriza (A) %@ e a Stripe, o nosso provedor de serviços de pagamentos, a enviar instruções ao seu banco para debitar a sua conta e (B) o seu banco a debitar a sua conta de acordo com essas instruções. Como parte dos seus direitos, tem direito a um reembolso do seu banco de acordo com os termos e condições do seu acordo com o banco. Um reembolso deve ser solicitado até 8 semanas a partir da data na qual a sua conta foi debitada. Os seus direitos são explicados numa declaração que pode obter do seu banco. Aceita receber notificações de futuros débitos até 2 dias antes de serem efetuados.";
+
+"By saving your bank account for %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Ao guardar a sua conta bancária para %@, concorda em autorizar pagamentos de acordo com <terms>estas condições</terms>.";
+
+"CPF/CPNJ" = "CPF/CPNJ";
+
+"Cancel and pay another way" = "Cancelar e pagar de outra forma";
+
+"Choose a payment method" = "Selecione um método de pagamento";
+
+"Close card scanner" = "Fechar leitor de cartões";
+
+"Confirm" = "Confirmar";
+
+"Confirm the payment in your bank or payment app within %@ to complete the purchase." = "Confirme o pagamento na aplicação do seu banco ou de pagamento dentro de %@ para concluir a compra.";
+
+"Confirm the payment in your bank's app within %@ to complete the purchase." = "Confirme o pagamento na aplicação do seu banco dentro de %@ para concluir a compra.";
+
+"Confirm your CVC" = "Confirme o seu CVC";
+
+"Confirm your CVV" = "Confirme o seu CVV";
+
+"Contact information" = "Informações de contacto";
+
+"EPS Bank" = "Banco EPS";
+
+"Enter address manually" = "Introduzir endereço manualmente";
+
+"FPX Bank" = "Banco FPX";
+
+"IBAN" = "IBAN";
+
+"Manage your payment methods" = "Gerir os seus métodos de pagamento";
+
+"Name on card" = "Nome no cartão";
+
+"Open your UPI app to approve your payment within %@" = "Abra a sua aplicação UPI para aprovar o seu pagamento com %@";
+
+"Or" = "Ou";
+
+"Or pay using" = "Ou pagar com";
+
+"Or pay with a card" = "Ou pagar com um cartão";
+
+"Or use" = "Ou utilize";
+
+"Or use a card" = "Ou utilize um cartão";
+
+"Pay %@" = "Pagar %@";
+
+"Pay another way" = "Pagar de outra forma";
+
+"Pay faster at %@ and thousands of businesses." = "Pague mais rapidamente em %@ e milhares de outras empresas.";
+
+"Pay in <num_installments/> interest-free payments of <installment_price/> with <img/>" = "Pagar em <num_installments/> pagamentos sem juros de <installment_price/> com <img/>";
+
+"Pay later with Klarna." = "Pagar mais tarde com Klarna.";
+
+"Pay over time with %@" = "Pagar ao longo do tempo com %@";
+
+"Pay with Link" = "Pagar com Link";
+
+"Pay with your bank account in just a few steps." = "Pague com a sua conta bancária em apenas alguns passos.";
+
+"Payment failed" = "Falha no pagamento";
+
+"Please go back and select another payment method" = "Volte atrás e selecione outro método de pagamento";
+
+"Point the camera at your card." = "Aponte a câmara para o seu cartão.";
+
+"Processing..." = "A processar…";
+
+"Przelewy24 Bank" = "Banco Przelewy24";
+
+"Save" = "Guardar";
+
+"Save a new payment method" = "Guardar um novo método de pagamento";
+
+"Save address" = "Guardar endereço";
+
+"Save for future payments" = "Guardar para pagamentos futuros";
+
+"Save this account for future %@ payments" = "Guardar esta conta para pagamentos %@ futuros";
+
+"Save this card for future %@ payments" = "Guardar este cartão para pagamentos futuros %@";
+
+"Save your bank account in just a few steps." = "Guarde a sua conta bancária em apenas alguns passos.";
+
+"Select your payment method" = "Selecione o seu método de pagamento";
+
+"Set up" = "Configurar";
+
+"Shipping to %@ is not supported." = "O envio para %@ não é suportado.";
+
+"Show menu" = "Mostrar menu";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you'll get an email with instructions to finish saving your bank account with %@." = "A Stripe efetuará um depósito de 0,01 USD na sua conta dentro de 1 a 2 dias úteis. Receberá posteriormente um email com instruções para concluir o registo da sua conta bancária com %@.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you’ll get an email with instructions to complete payment to %@." = "A Stripe efetuará um depósito de 0,01 USD na sua conta dentro de 1 a 2 dias úteis. Receberá posteriormente um email com instruções para concluir o pagamento a %@.";
+
+"The IBAN you entered is incomplete." = "O IBAN que introduziu está incompleto.";
+
+"Update card" = "Atualizar cartão";
+
+"Your IBAN should start with a two-letter country code." = "O seu IBAN deve começar por um código de duas letras correspondente ao país.";
+
+"iDEAL Bank" = "Banco iDEAL";
