@@ -1,0 +1,141 @@
+"+ Add" = "+ Adăugare";
+
+"Add a card" = "Adăugare card";
+
+"Add a payment method" = "Adăugați o metodă de plată";
+
+"Add bank account" = "Adăugare cont bancar";
+
+"Add new payment method" = "Adăugare metodă de plată nouă";
+
+"Add your payment information" = "Adăugați informațiile dvs. privind plata";
+
+"Approve payment" = "Aprobare plată";
+
+"Back" = "Înapoi";
+
+"Bank account" = "Cont bancar";
+
+"Buy now or pay later with Klarna." = "Cumpărați acum sau plătiți mai târziu folosind Klarna.";
+
+"Buy using a UPI ID" = "Cumpărați folosind un ID UPI";
+
+"By confirming your payment with PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Prin confirmarea plății cu PayPal, permiteți %@ să vă taxeze contul PayPal pentru plățile viitoare în conformitate cu termenii acesteia.";
+
+"By continuing to PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Prin continuarea cu PayPal, permiteți %@ să vă taxeze contul PayPal pentru plățile viitoare în conformitate cu termenii acesteia.";
+
+"By continuing to Revolut Pay, you allow %@ to charge your Revolut Pay account for future payments in accordance with their terms." = "Prin continuarea cu Revolut Pay, permiteți %@ să vă taxeze contul Revolut Pay pentru plățile viitoare în conformitate cu termenii acesteia.";
+
+"By continuing, you agree to authorize payments pursuant to <terms>these terms</terms>." = "Continuând, sunteți de acord să autorizați plățile în conformitate cu <terms>acești termeni</terms>.";
+
+"By continuing, you authorize %@ to debit your Cash App account for this payment and future payments in accordance with %@'s terms, until this authorization is revoked. You can change this anytime in your Cash App Settings." = "Continuând, autorizați %1$@ să debiteze contul dvs. Cash App pentru această plată și pentru plățile viitoare în conformitate cu termenii %2$@, până când această autorizație este revocată. Puteți schimba acest lucru oricând în setările Cash App.";
+
+"By joining Link, you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Prin accesarea link-ului de asociere, sunteți de acord cu <terms>Termenii</terms> și <privacy>Politica de confidențialitate</privacy>.";
+
+"By providing your payment information and confirming this payment, you authorise (A) %@ and Stripe, our payment service provider, to send instructions to your bank to debit your account and (B) your bank to debit your account in accordance with those instructions. As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited. Your rights are explained in a statement that you can obtain from your bank. You agree to receive notifications for future debits up to 2 days before they occur." = "Prin furnizarea informațiilor dvs. privind plata și confirmarea acestei plăți, autorizați (A) %@ și Stripe, furnizorul nostru de servicii de plată, să trimită instrucțiuni băncii dvs. pentru a vă debita contul și pentru ca (B) banca dvs. să facă acest lucru în conformitate cu instrucțiunile respective. Conform drepturilor dvs., aveți dreptul la o rambursare din partea băncii dvs. în conformitate cu termenii și condițiile acordului dvs. cu aceasta. O rambursare trebuie revendicată în termen de opt săptămâni de la data debitării contului. Drepturile dvs. sunt explicate într-o declarație pe care o puteți obține de la bancă. Sunteți de acord să primiți notificări pentru debitări viitoare cu până la două zile înainte de efectuarea acestora.";
+
+"By saving your bank account for %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Prin salvarea contului dvs. bancar pentru %@ sunteți de acord să autorizați plățile în conformitate cu <terms>acești termeni</terms>.";
+
+"CPF/CPNJ" = "CPF/CPNJ";
+
+"Cancel and pay another way" = "Anulați și folosiți altă metodă de plată";
+
+"Choose a payment method" = "Alegeți o metodă de plată";
+
+"Close card scanner" = "Închidere scaner card";
+
+"Confirm" = "Confirmare";
+
+"Confirm the payment in your bank or payment app within %@ to complete the purchase." = "Confirmați plata în aplicația băncii dvs. sau în aplicația de plăți în termen de %@ pentru a finaliza achiziția.";
+
+"Confirm the payment in your bank's app within %@ to complete the purchase." = "Confirmați plata în aplicația băncii dvs. în termen de %@ pentru a finaliza achiziția.";
+
+"Confirm your CVC" = "Confirmați-vă CVC-ul";
+
+"Confirm your CVV" = "Confirmați-vă CVV-ul";
+
+"Contact information" = "Informații de contact";
+
+"EPS Bank" = "Banca EPS";
+
+"Enter address manually" = "Introduceți adresa manual";
+
+"FPX Bank" = "FPX Bank";
+
+"IBAN" = "IBAN";
+
+"Manage your payment methods" = "Gestionați metodele de plată";
+
+"Name on card" = "Numele titularului";
+
+"Open your UPI app to approve your payment within %@" = "Deschideți aplicația UPI pentru a aproba plata în termen de %@";
+
+"Or" = "Sau";
+
+"Or pay using" = "Sau folosiți ca metodă de plată";
+
+"Or pay with a card" = "Sau folosiți ca metodă de plată un card";
+
+"Or use" = "Sau utilizați";
+
+"Or use a card" = "Sau utilizați un card";
+
+"Pay %@" = "Plătiți %@";
+
+"Pay another way" = "Folosiți altă metodă de plată";
+
+"Pay faster at %@ and thousands of businesses." = "Plătiți mai rapid la %@ și la alte mii de întreprinderi.";
+
+"Pay in <num_installments/> interest-free payments of <installment_price/> with <img/>" = "Plătiți în <num_installments/> plăți fără dobândă a câte <installment_price/> cu <img/>";
+
+"Pay later with Klarna." = "Plătiți mai târziu folosind Klarna.";
+
+"Pay over time with %@" = "Folosiți ca metodă de plată de-a lungul timpului %@";
+
+"Pay with Link" = "Plătiți cu Link";
+
+"Pay with your bank account in just a few steps." = "Plătiți cu contul dvs. bancar în doar câțiva pași.";
+
+"Payment failed" = "Plata nu a reușit";
+
+"Please go back and select another payment method" = "Vă rugăm să reveniți și să selectați o altă metodă de plată";
+
+"Point the camera at your card." = "Îndreptați camera spre cardul dvs.";
+
+"Processing..." = "Se procesează...";
+
+"Przelewy24 Bank" = "Banca Przelewy24";
+
+"Save" = "Salvare";
+
+"Save a new payment method" = "Salvați o metodă de plată nouă";
+
+"Save address" = "Salvare adresă";
+
+"Save for future payments" = "Salvați pentru plăți viitoare";
+
+"Save this account for future %@ payments" = "Salvați acest cont pentru plăți viitoare către %@";
+
+"Save this card for future %@ payments" = "Salvați acest card pentru plăți viitoare către %@";
+
+"Save your bank account in just a few steps." = "Salvați-vă contul bancar în doar câțiva pași.";
+
+"Select your payment method" = "Selectați metoda de plată";
+
+"Set up" = "Configurare";
+
+"Shipping to %@ is not supported." = "Expedierea către %@ nu este acceptată.";
+
+"Show menu" = "Afișare meniu";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you'll get an email with instructions to finish saving your bank account with %@." = "Stripe va depune 0,01 USD în contul dvs. în 1-2 zile lucrătoare. Apoi veți primi un e-mail cu instrucțiuni pentru a finaliza salvarea contului dvs. bancar cu %@.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you’ll get an email with instructions to complete payment to %@." = "Stripe va depune 0,01 USD în contul dvs. în decurs de 1-2 zile lucrătoare. Apoi veți primi un e-mail cu instrucțiuni pentru a finaliza plata către %@.";
+
+"The IBAN you entered is incomplete." = "Codul IBAN pe care l-ați introdus nu este complet.";
+
+"Update card" = "Actualizare card";
+
+"Your IBAN should start with a two-letter country code." = "Codul dvs. IBAN trebuie să înceapă cu un cod de țară format din două litere.";
+
+"iDEAL Bank" = "iDEAL Bank";

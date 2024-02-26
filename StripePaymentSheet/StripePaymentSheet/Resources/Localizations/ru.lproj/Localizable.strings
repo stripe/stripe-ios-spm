@@ -1,0 +1,141 @@
+"+ Add" = "+ Добавить";
+
+"Add a card" = "Добавьте карту";
+
+"Add a payment method" = "Добавьте способ оплаты";
+
+"Add bank account" = "Добавить банковский счет";
+
+"Add new payment method" = "Добавить новый метод оплаты";
+
+"Add your payment information" = "Укажите платежные данные";
+
+"Approve payment" = "Подтвердить платеж";
+
+"Back" = "Назад";
+
+"Bank account" = "Банковский счет";
+
+"Buy now or pay later with Klarna." = "Купить немедленно или оплатить позже через систему Klarna.";
+
+"Buy using a UPI ID" = "Купить с помощью идентификатора UPI";
+
+"By confirming your payment with PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Подтверждая платеж через PayPal, вы тем самым разрешаете компании %@ списывать с вашего счета PayPal суммы будущих платежей согласно условиям.";
+
+"By continuing to PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Подтверждая платеж через PayPal, вы тем самым разрешаете компании %@ списывать с вашего счета PayPal суммы будущих платежей согласно условиям.";
+
+"By continuing to Revolut Pay, you allow %@ to charge your Revolut Pay account for future payments in accordance with their terms." = "Подтверждая платеж через Revolut Pay, вы тем самым разрешаете компании %@ списывать с вашего счета Revolut Pay суммы будущих платежей согласно условиям.";
+
+"By continuing, you agree to authorize payments pursuant to <terms>these terms</terms>." = "Продолжая, вы соглашаетесь авторизовать платежи в соответствии с <terms>этими условиями</terms>.";
+
+"By continuing, you authorize %@ to debit your Cash App account for this payment and future payments in accordance with %@'s terms, until this authorization is revoked. You can change this anytime in your Cash App Settings." = "Продолжая, вы уполномочиваете компанию %1$@ списывать с вашего счета Cash App суммы в соответствии с этим, а также будущими платежами согласно условиям компании %2$@, пока это разрешение не будет отозвано. Отозвать разрешение можно в любой момент в настройках приложения Cash App.";
+
+"By joining Link, you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Регистрируясь в Link, вы принимаете соответствующие <terms>Условия</terms> и <privacy>Политику конфиденциальности</privacy>.";
+
+"By providing your payment information and confirming this payment, you authorise (A) %@ and Stripe, our payment service provider, to send instructions to your bank to debit your account and (B) your bank to debit your account in accordance with those instructions. As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited. Your rights are explained in a statement that you can obtain from your bank. You agree to receive notifications for future debits up to 2 days before they occur." = "Указав свои платежные данные и подтвердив платеж, вы уполномочиваете (A) %@ и Stripe, нашего поставщика платежных услуг, на отправку вашему банку инструкций на списание средств с вашего счета и (B) ваш банк на списание средств с вашего счета согласно данным инструкциям. Вы имеете право на возврат средств от вашего банка согласно положениям и условиям Вашего соглашения с банком. Подать заявку на возврат средств следует в течение 8 недель с даты списания средств с вашего счета. Ваши права объясняются в выписке, которую вы можете получить в своем банке. Вы даете согласие на получение уведомлений о будущих дебетованиях в срок до 2 дней до их поступления.";
+
+"By saving your bank account for %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Сохраняя реквизиты своего банковского счета у %@, вы соглашаетесь авторизовать платежи в соответствии с <terms>этими условиями</terms>.";
+
+"CPF/CPNJ" = "CPF/CPNJ";
+
+"Cancel and pay another way" = "Отменить платеж и оплатить другим способом";
+
+"Choose a payment method" = "Выберите метод оплаты";
+
+"Close card scanner" = "Закрыть сканер карт";
+
+"Confirm" = "Подтвердить";
+
+"Confirm the payment in your bank or payment app within %@ to complete the purchase." = "Чтобы завершить оформление покупки, подтвердите платеж в своем банковском или платежном приложении в течение %@.";
+
+"Confirm the payment in your bank's app within %@ to complete the purchase." = "Подтвердите платеж в вашем банковском приложении в течение %@ для оформления покупки.";
+
+"Confirm your CVC" = "Подтвердить код CVV карты";
+
+"Confirm your CVV" = "Подтвердить код CVV карты";
+
+"Contact information" = "Контактные данные";
+
+"EPS Bank" = "Банк EPS";
+
+"Enter address manually" = "Введите адрес вручную";
+
+"FPX Bank" = "Банк FPX";
+
+"IBAN" = "IBAN";
+
+"Manage your payment methods" = "Управление способами оплаты";
+
+"Name on card" = "Имя и фамилия, указанные на карте";
+
+"Open your UPI app to approve your payment within %@" = "Откройте приложение UPI, чтобы подтвердить платеж, не позднее чем через %@";
+
+"Or" = "Или";
+
+"Or pay using" = "Или оплатить с помощью";
+
+"Or pay with a card" = "Или оплатить картой";
+
+"Or use" = "Или используйте";
+
+"Or use a card" = "Или используйте карту";
+
+"Pay %@" = "Оплатить %@";
+
+"Pay another way" = "Оплатить другим способом";
+
+"Pay faster at %@ and thousands of businesses." = "Ускоренная оплата продавцу %@ и тысячам других предприятий.";
+
+"Pay in <num_installments/> interest-free payments of <installment_price/> with <img/>" = "Оплатить в беспроцентную рассрочку <num_installments/> выплатами по <installment_price/> через <img/>";
+
+"Pay later with Klarna." = "Оплатить позже через систему Klarna.";
+
+"Pay over time with %@" = "Оплатить в рассрочку с помощью %@";
+
+"Pay with Link" = "Оплатить с помощью Link";
+
+"Pay with your bank account in just a few steps." = "Платите с использованием своего банковского счета в несколько простых действий.";
+
+"Payment failed" = "Выполнить платеж не удалось";
+
+"Please go back and select another payment method" = "Вернитесь назад и выберите другой способ оплаты";
+
+"Point the camera at your card." = "Направьте камеру телефона на карту.";
+
+"Processing..." = "Идет обработка...";
+
+"Przelewy24 Bank" = "Przelewy24 Bank";
+
+"Save" = "Сохранить";
+
+"Save a new payment method" = "Сохраните новый способ оплаты";
+
+"Save address" = "Сохранить адрес";
+
+"Save for future payments" = "Сохранить данные для будущих платежей";
+
+"Save this account for future %@ payments" = "Сохранить этот счет для будущих платежей %@";
+
+"Save this card for future %@ payments" = "Сохранить данные этой карты для будущих платежей %@";
+
+"Save your bank account in just a few steps." = "Сохраните реквизиты своего банковского счета всего за несколько шагов.";
+
+"Select your payment method" = "Выберите способ оплаты";
+
+"Set up" = "Настроить";
+
+"Shipping to %@ is not supported." = "Доставка в страну «%@» не поддерживается.";
+
+"Show menu" = "Показать меню";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you'll get an email with instructions to finish saving your bank account with %@." = "Через 1-2 рабочих дня Stripe зачислит вам на счет сумму $0,01. После этого вы получите электронное письмо с инструкциями, которые помогут вам закончить сохранение реквизитов своего банковского счета у %@.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you’ll get an email with instructions to complete payment to %@." = "Через 1-2 рабочих дня Stripe положит вам на счет сумму $0,01. После этого вы получите электронное письмо с инструкциями по завершению платежа в адрес %@.";
+
+"The IBAN you entered is incomplete." = "Введенный код IBAN неполон.";
+
+"Update card" = "Обновить реквизиты карты";
+
+"Your IBAN should start with a two-letter country code." = "Код IBAN должен начинаться с двухбуквенного кода страны.";
+
+"iDEAL Bank" = "Банк в системе iDEAL";

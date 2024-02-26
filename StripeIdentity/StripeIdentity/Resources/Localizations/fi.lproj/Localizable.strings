@@ -1,0 +1,133 @@
+"A few photos will be taken automatically on the next step to verify it's you" = "Seuraavassa vaiheessa otetaan automaattisesti muutama kuva sen vahvistamiseksi, että kyseessä olet sinä";
+
+"Accepted forms of ID include" = "Hyväksyttyjä henkilöllisyystodistusmuotoja ovat";
+
+"Alternatively, you may manually upload a photo of your identity document." = "Voit vaihtoehtoisesti ladata henkilöllisyysasiakirjan kuvan manuaalisesti.";
+
+"App Settings" = "Sovelluksen asetukset";
+
+"Back identity card photo successfully uploaded" = "Henkilökortin takapuolen kuva ladattu onnistuneesti";
+
+"Back of identity card" = "Henkilökortin takapuoli";
+
+"Camera permission" = "Kameran käyttöoikeus";
+
+"Camera unavailable" = "Kamera ei käytössä";
+
+"Capturing…" = "Otetaan kuvaa...";
+
+"Choose File" = "Valitse tiedosto";
+
+"Consent" = "Suostumus";
+
+"Could not capture image" = "Kuvaa ei voitu ottaa";
+
+"Date of Birth" = "Syntymäaika";
+
+"Date of birth does not look valid" = "Syntymäaika ei näytä kelvolliselta";
+
+"Flip your identity card over to the other side" = "Käännä henkilökortti toisinpäin";
+
+"Front identity card photo successfully uploaded" = "Henkilökortin etupuolen kuva ladattu onnistuneesti";
+
+"Front of identity card" = "Henkilökortin etupuoli";
+
+"Get ready to scan your photo ID" = "Valmistaudu skannaamaan kuvallinen henkilöllisyystodistus";
+
+"Get ready to take a selfie" = "Valmistaudu selfien ottoon";
+
+"Go Back" = "Siirry takaisin";
+
+"Hold still, scanning" = "Odota, skannaus kesken";
+
+"I'm ready" = "Olen valmis";
+
+"ID Number" = "Tunnusnumero";
+
+"Individual CPF" = "Yksityishenkilön CPF";
+
+"Last 4 of Social Security number" = "Sosiaaliturvatunnuksen 4 viimeistä merkkiä";
+
+"Loading" = "Ladataan";
+
+"Make sure you're in a well lit space." = "Varmista, että olet hyvin valaistussa tilassa.";
+
+"NRIC or FIN" = "NRIC tai FIN";
+
+"Personal ID number" = "Henkilötunnus";
+
+"Personal Information" = "Henkilötiedot";
+
+"Phone Number" = "Puhelinnumero";
+
+"Phone Verification" = "Vahvistus puhelimella";
+
+"Photo Library" = "Kuvakirjasto";
+
+"Please upload images of the front and back of your identity card" = "Lataa henkilökortin etu- ja takapuolen kuvat";
+
+"Position your face in the center of the frame." = "Aseta kasvosi kuvan keskelle.";
+
+"Position your identity card in the center of the frame" = "Aseta henkilökortti kehyksen keskelle";
+
+"Retake Photos" = "Ota kuvat uudelleen";
+
+"Scan" = "Skannaa";
+
+"Scanned" = "Skannattu";
+
+"Select" = "Valitse";
+
+"Select a location to upload the back of your identity document from" = "Valitse sijainti, josta haluat ladata henkilöllisyysasiakirjan takapuolen";
+
+"Select a location to upload the front of your identity document from" = "Valitse sijainti, josta haluat ladata henkilöllisyysasiakirjan etupuolen";
+
+"Select back identity card photo" = "Valitse henkilökortin takapuolen kuva";
+
+"Select front identity card photo" = "Valitse henkilökortin etupuolen kuva";
+
+"Selfie" = "Selfie";
+
+"Selfie captures" = "Selfiet";
+
+"Selfie captures are complete" = "Selfien ottaminen suortitettu";
+
+"Take Photo" = "Ota kuva";
+
+"The images of your identity document have not been saved. Do you want to leave?" = "Henkilöllisyysasiakirjan kuvia ei ole tallennettu. Haluatko poistua?";
+
+"There was an error accessing the camera." = "Kameran käytössä tapahtui virhe.";
+
+"Try Again" = "Yritä uudelleen";
+
+"Unable to establish a connection." = "Yhteyttä ei voida muodostaa.";
+
+"Unsaved changes" = "Tallentamattomat muutokset";
+
+"Upload" = "Lataa";
+
+"Upload a Photo" = "Lataa kuva";
+
+"Upload your photo ID" = "Lataa kuvallinen henkilöllisyystodistus";
+
+"Uploading back identity card photo" = "Ladataan henkilökortin takapuolen kuvaa";
+
+"Uploading front identity card photo" = "Ladataan henkilökortin etupuolen kuvaa";
+
+"Verify your identity" = "Vahvista henkilöllisyytesi";
+
+"We could not capture a high-quality image." = "Emme kyenneet ottamaan korkealaatuista kuvaa.";
+
+"We need permission to use your camera. Please allow camera access in app settings." = "Tarvitsemme kameran käyttöoikeuden. Salli käyttöoikeus sovelluksen asetuksissa.";
+
+"Welcome" = "Tervetuloa";
+
+"You can either try again or upload an image from your device." = "Voit joko yrittää uudelleen tai ladata kuvan laitteestasi.";
+
+"Your selfie images have not been saved. Do you want to leave?" = "Selfiekuviasi ei ole tallennettu. Haluatko poistua?";
+
+"driver's license" = "ajokortti";
+
+"government-issued photo ID" = "valtion myöntämä kuvallinen henkilöllisyystodistus";
+
+"passport" = "passi";
