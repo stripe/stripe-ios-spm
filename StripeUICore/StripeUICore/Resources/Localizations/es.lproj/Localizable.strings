@@ -1,0 +1,143 @@
+"%@ (optional)" = "%@ (opcional)";
+
+"Account number" = "Número de cuenta";
+
+"Address" = "Dirección";
+
+"Address line 1" = "Primera línea de la dirección";
+
+"Address line 2" = "Segunda línea de la dirección";
+
+"Area" = "Área";
+
+"BLIK code" = "Código BLIK";
+
+"BSB number" = "Número de BSB";
+
+"Billing address is same as shipping" = "La dirección de facturación es la misma que la de envío.";
+
+"Cancel" = "Cancelar";
+
+"Card brand" = "Marca de la tarjeta";
+
+"City" = "Ciudad";
+
+"Code field" = "Campo del código";
+
+"Company" = "Empresa";
+
+"Continue" = "Continuar";
+
+"Country" = "País";
+
+"Country or region" = "País o región";
+
+"County" = "Condado";
+
+"Date is empty." = "La fecha está vacía.";
+
+"Department" = "Departamento";
+
+"District" = "Distrito";
+
+"Do Si" = "Do Si";
+
+"Do you want to close this form?" = "¿Deseas cerrar este formulario?";
+
+"Done" = "Listo";
+
+"Double tap to edit" = "Pulsa dos veces para editar";
+
+"Edit" = "Modificar";
+
+"Eircode" = "Eircode";
+
+"Email" = "Correo electrónico";
+
+"Emirate" = "Emirato";
+
+"Error" = "Error";
+
+"First" = "Nombre";
+
+"Full name" = "Nombre completo";
+
+"Incomplete phone number" = "Número de teléfono incompleto";
+
+"Invalid UPI ID" = "ID de UPI no válida";
+
+"Island" = "Isla";
+
+"Last" = "Apellidos";
+
+"Name" = "Nombre";
+
+"Name on account" = "Nombre de la cuenta";
+
+"OK" = "Aceptar";
+
+"Oblast" = "Óblast";
+
+"Other" = "Otro";
+
+"Parish" = "Parroquia";
+
+"Phone" = "Teléfono";
+
+"Phone number" = "Número de teléfono";
+
+"Postal code" = "Código postal";
+
+"Prefecture" = "Prefectura";
+
+"Province" = "Provincia";
+
+"Remove" = "Eliminar";
+
+"Remove bank account" = "Eliminar cuenta bancaria";
+
+"Remove bank account ending in %@" = "Eliminar la cuenta bancaria que termina en %@";
+
+"Remove card" = "Eliminar tarjeta";
+
+"Search" = "Buscar";
+
+"Select card brand (optional)" = "Seleccionar marca de tarjeta (opcional)";
+
+"Sort code" = "Código de clasificación";
+
+"State" = "Estado";
+
+"Suburb" = "Zona residencial";
+
+"Suburb or city" = "Zona residencial o ciudad";
+
+"The BSB you entered is incomplete." = "El BSB introducido está incompleto.";
+
+"The ID number you entered is incomplete." = "El número de ID que has introducido está incompleto.";
+
+"The account number you entered is incomplete." = "El número de cuenta que has introducido está incompleto.";
+
+"The sort code you entered is invalid." = "El código Sort introducido no es válido.";
+
+"Town or city" = "Pueblo o ciudad";
+
+"UPI ID" = "ID de UPI";
+
+"Unable to parse phone number" = "No se ha podido analizar el número de teléfono";
+
+"Use rotor to access links" = "Utiliza el rotor para acceder a los enlaces";
+
+"Your BLIK code is incomplete." = "Tu código BLIK no está completo.";
+
+"Your BLIK code is invalid." = "El código BLIK no es válido.";
+
+"Your ZIP is incomplete." = "El código ZIP está incompleto.";
+
+"Your email is invalid." = "El correo electrónico no es válido.";
+
+"Your payment information will not be saved." = "Tus datos de pago no se guardarán.";
+
+"Your postal code is incomplete." = "El código postal está incompleto.";
+
+"ZIP" = "ZIP";
