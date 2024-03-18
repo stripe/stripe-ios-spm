@@ -1,0 +1,143 @@
+"%@ (optional)" = "%@ (nav obligāti)";
+
+"Account number" = "Konta numurs";
+
+"Address" = "Adrese";
+
+"Address line 1" = "1. adreses rindiņa";
+
+"Address line 2" = "2. adreses rindiņa";
+
+"Area" = "Apgabals";
+
+"BLIK code" = "BLIK kods";
+
+"BSB number" = "BSB numurs";
+
+"Billing address is same as shipping" = "Norēķinu adrese un piegādes adrese sakrīt";
+
+"Cancel" = "Atcelt";
+
+"Card brand" = "Kartes zīmols";
+
+"City" = "Pilsēta";
+
+"Code field" = "Koda lauks";
+
+"Company" = "Uzņēmums";
+
+"Continue" = "Turpināt";
+
+"Country" = "Valsts";
+
+"Country or region" = "Valsts vai reģions";
+
+"County" = "Apriņķis";
+
+"Date is empty." = "Datums ir tukšs.";
+
+"Department" = "Departaments";
+
+"District" = "Rajons";
+
+"Do Si" = "Province un pilsēta (Do Si)";
+
+"Do you want to close this form?" = "Vai vēlaties aizvērt šo formu?";
+
+"Done" = "Gatavs";
+
+"Double tap to edit" = "Pieskarieties divreiz, lai rediģētu";
+
+"Edit" = "Rediģēt";
+
+"Eircode" = "Pasta indekss (Eirkods)";
+
+"Email" = "E-pasts";
+
+"Emirate" = "Emirāts";
+
+"Error" = "Kļūda";
+
+"First" = "Vārds";
+
+"Full name" = "Vārds, uzvārds";
+
+"Incomplete phone number" = "Nepilnīgs tālruņa numurs";
+
+"Invalid UPI ID" = "Nederīgs UPI ID";
+
+"Island" = "Sala";
+
+"Last" = "Uzvārds";
+
+"Name" = "Vārds, uzvārds";
+
+"Name on account" = "Konta īpašnieks";
+
+"OK" = "Labi";
+
+"Oblast" = "Apgabals";
+
+"Other" = "Cits";
+
+"Parish" = "Pagasts";
+
+"Phone" = "Tālrunis";
+
+"Phone number" = "Tālruņa numurs";
+
+"Postal code" = "Pasta indekss";
+
+"Prefecture" = "Prefektūra";
+
+"Province" = "Province";
+
+"Remove" = "Noņemt";
+
+"Remove bank account" = "Noņemt bankas kontu";
+
+"Remove bank account ending in %@" = "Noņemt bankas kontu, kas beidzas ar %@";
+
+"Remove card" = "Noņemt karti";
+
+"Search" = "Meklēšana";
+
+"Select card brand (optional)" = "Atlasīt kartes zīmolu (pēc izvēles)";
+
+"Sort code" = "Bankas filiāles kods";
+
+"State" = "Novads/štats";
+
+"Suburb" = "Priekšpilsēta";
+
+"Suburb or city" = "Priekšpilsēta vai pilsēta";
+
+"The BSB you entered is incomplete." = "Ievadītais BSB ir nepilnīgs.";
+
+"The ID number you entered is incomplete." = "Ievadītais ID numurs nav pilnīgs.";
+
+"The account number you entered is incomplete." = "Jūsu ievadītais konta numurs nav pilnīgs.";
+
+"The sort code you entered is invalid." = "Jūsu ievadītais bankas filiāles kods nav derīgs.";
+
+"Town or city" = "Ciems vai pilsēta";
+
+"UPI ID" = "UPI ID";
+
+"Unable to parse phone number" = "Neizdevās parsēt tālruņa numuru";
+
+"Use rotor to access links" = "Izmantot rotoru, lai piekļūtu saitēm";
+
+"Your BLIK code is incomplete." = "Jūsu BLIK kods nav pilnīgs.";
+
+"Your BLIK code is invalid." = "Jūsu BLIK kods nav derīgs.";
+
+"Your ZIP is incomplete." = "Pasta indekss nav pilnīgs.";
+
+"Your email is invalid." = "E-pasta adrese nav derīga.";
+
+"Your payment information will not be saved." = "Jūsu maksājuma informācija nav saglabāta.";
+
+"Your postal code is incomplete." = "Pasta indekss nav pilnīgs.";
+
+"ZIP" = "Pasta ind.";
