@@ -1,0 +1,63 @@
+"AU Direct Debit" = "AU izravno terećenje";
+
+"Affirm" = "Affirm";
+
+"Afterpay" = "Afterpay";
+
+"Alipay" = "Alipay";
+
+"BLIK" = "BLIK";
+
+"Bacs Direct Debit" = "Bacs Direct Debit";
+
+"Bancontact" = "Bancontact";
+
+"Boleto" = "Boleto";
+
+"Card" = "Kartica";
+
+"Cash App Pay" = "Cash App Pay";
+
+"Clearpay" = "Clearpay";
+
+"EPS" = "EPS";
+
+"FPX" = "FPX";
+
+"GrabPay" = "GrabPay";
+
+"Klarna" = "Klarna";
+
+"Konbini" = "Konbini";
+
+"Link" = "Link";
+
+"NetBanking" = "NetBanking";
+
+"OXXO" = "OXXO";
+
+"PayPal" = "PayPal";
+
+"Przelewy24" = "Przelewy24";
+
+"SEPA Debit" = "SEPA Debit";
+
+"Sofort" = "Sofort";
+
+"Swish" = "Swish";
+
+"Timed out authenticating your payment method -- try again" = "Istek vremena pri provjeri načina plaćanja -- pokušajte ponovno";
+
+"UPI" = "UPI";
+
+"US bank account" = "Američki bankovni račun";
+
+"Unknown" = "Nepoznato";
+
+"We are unable to authenticate your payment method. Please choose a different payment method and try again." = "Nismo mogli potvrditi vaš način plaćanja. Odaberite drugi način plaćanja i pokušajte ponovno.";
+
+"WeChat Pay" = "WeChat Pay";
+
+"giropay" = "giropay";
+
+"iDEAL" = "iDEAL";

@@ -1,0 +1,63 @@
+"AU Direct Debit" = "AU-direkteoverføringer";
+
+"Affirm" = "Affirm";
+
+"Afterpay" = "Afterpay";
+
+"Alipay" = "Alipay";
+
+"BLIK" = "BLIK";
+
+"Bacs Direct Debit" = "Bacs-direktedebitering";
+
+"Bancontact" = "Bancontact";
+
+"Boleto" = "Boleto";
+
+"Card" = "Kort";
+
+"Cash App Pay" = "Cash App Pay";
+
+"Clearpay" = "Clearpay";
+
+"EPS" = "EPS";
+
+"FPX" = "FPX";
+
+"GrabPay" = "GrabPay";
+
+"Klarna" = "Klarna";
+
+"Konbini" = "Konbini";
+
+"Link" = "Link";
+
+"NetBanking" = "NetBanking";
+
+"OXXO" = "OXXO";
+
+"PayPal" = "PayPal";
+
+"Przelewy24" = "Przelewy24";
+
+"SEPA Debit" = "SEPA Debit";
+
+"Sofort" = "Sofort";
+
+"Swish" = "Swish";
+
+"Timed out authenticating your payment method -- try again" = "Tidsavbrudd ved godkjennelse av betalingsmåten din - prøv igjen";
+
+"UPI" = "UPI";
+
+"US bank account" = "Bankkonto i USA";
+
+"Unknown" = "Ukjent";
+
+"We are unable to authenticate your payment method. Please choose a different payment method and try again." = "Vi kan ikke godkjenne betalingsmåten din. Vennligst velg en annen betalingsmetode og prøv igjen.";
+
+"WeChat Pay" = "WeChat Pay";
+
+"giropay" = "giropay";
+
+"iDEAL" = "iDEAL";

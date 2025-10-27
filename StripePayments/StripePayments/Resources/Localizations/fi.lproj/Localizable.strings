@@ -1,0 +1,63 @@
+"AU Direct Debit" = "AU-suoraveloitus";
+
+"Affirm" = "Affirm";
+
+"Afterpay" = "Afterpay";
+
+"Alipay" = "Alipay";
+
+"BLIK" = "BLIK";
+
+"Bacs Direct Debit" = "Bacs-suoraveloitus";
+
+"Bancontact" = "Bancontact";
+
+"Boleto" = "Boleto";
+
+"Card" = "Kortti";
+
+"Cash App Pay" = "Cash App Pay";
+
+"Clearpay" = "Clearpay";
+
+"EPS" = "EPS";
+
+"FPX" = "FPX";
+
+"GrabPay" = "GrabPay";
+
+"Klarna" = "Klarna";
+
+"Konbini" = "Konbini";
+
+"Link" = "Linkki";
+
+"NetBanking" = "NetBanking";
+
+"OXXO" = "OXXO";
+
+"PayPal" = "PayPal";
+
+"Przelewy24" = "Przelewy24";
+
+"SEPA Debit" = "SEPA Debit";
+
+"Sofort" = "Sofort";
+
+"Swish" = "Swish";
+
+"Timed out authenticating your payment method -- try again" = "Maksutapasi todennus aikakatkaistiin – yritä uudelleen.";
+
+"UPI" = "UPI";
+
+"US bank account" = "Yhdysvaltalainen pankkitili";
+
+"Unknown" = "Tuntematon";
+
+"We are unable to authenticate your payment method. Please choose a different payment method and try again." = "Emme pystyneet todentamaan maksutapaasi. Valitse toinen maksutapa ja yritä uudelleen.";
+
+"WeChat Pay" = "WeChat Pay";
+
+"giropay" = "giropay";
+
+"iDEAL" = "iDEAL";

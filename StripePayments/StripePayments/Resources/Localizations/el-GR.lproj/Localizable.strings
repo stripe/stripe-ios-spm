@@ -1,0 +1,63 @@
+"AU Direct Debit" = "Άμεση χρέωση AU";
+
+"Affirm" = "Affirm";
+
+"Afterpay" = "Afterpay";
+
+"Alipay" = "Alipay";
+
+"BLIK" = "BLIK";
+
+"Bacs Direct Debit" = "Άμεση χρέωση Bacs";
+
+"Bancontact" = "Bancontact";
+
+"Boleto" = "Boleto";
+
+"Card" = "Κάρτα";
+
+"Cash App Pay" = "Cash App Pay";
+
+"Clearpay" = "Clearpay";
+
+"EPS" = "EPS";
+
+"FPX" = "FPX";
+
+"GrabPay" = "GrabPay";
+
+"Klarna" = "Klarna";
+
+"Konbini" = "Konbini";
+
+"Link" = "Link";
+
+"NetBanking" = "NetBanking";
+
+"OXXO" = "OXXO";
+
+"PayPal" = "PayPal";
+
+"Przelewy24" = "Przelewy24";
+
+"SEPA Debit" = "Χρέωση SEPA";
+
+"Sofort" = "Sofort";
+
+"Swish" = "Swish";
+
+"Timed out authenticating your payment method -- try again" = "Έληξε το χρονικό όριο επαλήθευσης της μεθόδου πληρωμής σας -- δοκιμάστε ξανά";
+
+"UPI" = "UPI";
+
+"US bank account" = "Τραπεζικός λογαριασμός στις Ηνωμένες Πολιτείες";
+
+"Unknown" = "Άγνωστο";
+
+"We are unable to authenticate your payment method. Please choose a different payment method and try again." = "Δεν μπορούμε να επαληθεύσουμε τη μέθοδο πληρωμής σας. Επιλέξτε διαφορετική μέθοδο πληρωμής και προσπαθήστε ξανά.";
+
+"WeChat Pay" = "WeChat Pay";
+
+"giropay" = "giropay";
+
+"iDEAL" = "iDEAL";
