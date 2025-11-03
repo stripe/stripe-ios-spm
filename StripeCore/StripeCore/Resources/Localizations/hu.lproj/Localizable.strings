@@ -1,0 +1,37 @@
+"An error occurred. Please try again." = "Hiba történt, próbálja újra.";
+
+"Card brand was not updated. Please try again." = "A kártyatípus frissítése nem sikerült, próbálja újra.";
+
+"Close" = "Bezárás";
+
+"Default payment method was not updated. Please try again." = "Az alapértelmezett fizetési mód nem frissült, próbálja újra.";
+
+"Scan Card" = "Kártya beolvasása";
+
+"Scan card" = "Kártya beolvasása";
+
+"The IBAN you entered is invalid." = "A beírt IBAN-szám érvénytelen.";
+
+"There was an error processing your card -- try again in a few seconds" = "Hiba történt kártyája feldolgozása során, próbálja újra néhány másodperc múlva";
+
+"There was an unexpected error -- try again in a few seconds" = "Váratlan hiba lépett fel, próbálja újra néhány másodperc múlva";
+
+"Try again" = "Próbálja újra";
+
+"We use Stripe to verify your card details. Stripe may use and store your data according its privacy policy. <a href='https://support.stripe.com/questions/stripes-card-image-verification'><u>Learn more</u></a>" = "A Stripe-ot használjuk a kártyájának az ellenőrzésére. A Stripe az adatvédelmi szabályzatának megfelelően használhatja és tárolhatja az Ön adatait. <a href='https://support.stripe.com/questions/stripes-card-image-verification'><u>További tudnivalók</u></a>";
+
+"Your card has expired" = "A kártyája lejárt";
+
+"Your card was declined" = "A kártyáját elutasítottuk";
+
+"Your card's expiration month is invalid" = "Kártyájának lejárati hónapja érvénytelen";
+
+"Your card's expiration year is invalid" = "A kártyája lejárati éve érvénytelen";
+
+"Your card's number is invalid" = "Kártyaszáma érvénytelen";
+
+"Your card's security code is invalid" = "Kártyájának biztonsági kódja érvénytelen";
+
+"Your name is invalid." = "Érvénytelen név.";
+
+"Your payment method was declined." = "Fizetési módja elutasításra került.";
