@@ -1,0 +1,151 @@
+"%1$@ •••• %2$@" = "%1$@ •••• %2$@";
+
+"%@ (optional)" = "%@(opsyonal)";
+
+"(not accepted)" = "(hindi tinatanggap)";
+
+"Account number" = "Numero ng account";
+
+"Address" = "Adres";
+
+"Address line 1" = "Unang linya ng adres";
+
+"Address line 2" = "Linya 2 ng address";
+
+"Area" = "Lugar";
+
+"BLIK code" = "BLIK code";
+
+"BSB number" = "Numero ng BSB";
+
+"Bank account •••• %@" = "Account sa bangko •••• %@";
+
+"Billing address is same as shipping" = "Ang address sa billing ay kapareho ng sa pagpapadala";
+
+"Cancel" = "Kanselahin";
+
+"Card brand" = "Brand ng card";
+
+"City" = "Siyudad";
+
+"Code field" = "Patlang ng code";
+
+"Company" = "Kompanya";
+
+"Continue" = "Magpatuloy";
+
+"Country" = "Bansa";
+
+"Country or region" = "Bansa o rehiyon";
+
+"County" = "County";
+
+"Date of Birth" = "Petsa ng Kapanganakan";
+
+"Department" = "Departamento";
+
+"District" = "Distrito";
+
+"Do Si" = "Do Si";
+
+"Do you want to close this form?" = "Gusto mo bang isara ang form na ito?";
+
+"Done" = "Tapos Na";
+
+"Double tap to edit" = "I-double tap para baguhin";
+
+"Edit" = "I-edit";
+
+"Eircode" = "Eircode";
+
+"Email" = "Email";
+
+"Emirate" = "Emirate";
+
+"Error" = "Error";
+
+"First" = "Pangalan";
+
+"Full name" = "Buong pangalan";
+
+"Incomplete phone number" = "Kulang na numero ng telepono";
+
+"Invalid UPI ID" = "Di valid na UPI ID";
+
+"Island" = "Isla";
+
+"Last" = "Apelyido";
+
+"Name" = "Pangalan";
+
+"Name on account" = "Pangalan sa account";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Iba Pa";
+
+"Parish" = "Parokya";
+
+"Phone number" = "Numero ng telepono";
+
+"Postal code" = "Postal code";
+
+"Prefecture" = "Prefecture";
+
+"Province" = "Probinsiya";
+
+"Remove" = "Alisin";
+
+"Remove bank account?" = "Alisin ang account sa bangko?";
+
+"Remove card" = "Alisin ang kard";
+
+"Search" = "Maghanap";
+
+"Select card brand (optional)" = "Pumili ng brand ng kard (opsyonal)";
+
+"Selection is empty." = "Walang laman ang seleksyon.";
+
+"Sort code" = "Sort code";
+
+"State" = "State";
+
+"Suburb" = "Suburb";
+
+"Suburb or city" = "Suburb o lungsod";
+
+"The BSB you entered is incomplete." = "Ang BSB na ipinasok mo ay di kumpleto.";
+
+"The ID number you entered is incomplete." = "Ang numero ng ID na inilagay mo ay kulang.";
+
+"The account number you entered is incomplete." = "Ang numero ng account na inilagay mo ay kulang.";
+
+"The sort code you entered is invalid." = "Ang sort code na inilagay mo ay hindi valid.";
+
+"Town or city" = "Bayan o siyudad";
+
+"UPI ID" = "UPI ID";
+
+"Unable to parse phone number" = "Hindi ma=parse ang numero ng telepono";
+
+"Use rotor to access links" = "Gumamit ng rotor para i-access ang mga link";
+
+"Your BLIK code is incomplete." = "Ang iyong BLIK code ay kulang.";
+
+"Your BLIK code is invalid." = "Ang iyong BLIK code ay hindi valid.";
+
+"Your ZIP code is incomplete." = "Hindi kumpleto ang iyong zip code.";
+
+"Your ZIP code is invalid." = "Ang iyong ZIP code ay hindi wasto.";
+
+"Your email is invalid." = "Ang iyong email ay imbalido.";
+
+"Your payment information will not be saved." = "Hindi mase-save ang iyong impormasyon ng pagbabayad.";
+
+"Your postal code is incomplete." = "Ang iyong postal code ay di kumpleto.";
+
+"Your postal code is invalid." = "Ang iyong postal code ay di balido.";
+
+"ZIP" = "ZIP";

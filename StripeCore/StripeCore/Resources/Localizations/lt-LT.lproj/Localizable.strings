@@ -1,0 +1,37 @@
+"An error occurred. Please try again." = "Įvyko klaida. Bandykite dar kartą.";
+
+"Card brand was not updated. Please try again." = "Kortelės prekės ženklas neatnaujintas. Bandykite dar kartą.";
+
+"Close" = "Užverti";
+
+"Default payment method was not updated. Please try again." = "Numatytasis mokėjimo būdas neatnaujintas. Bandykite dar kartą.";
+
+"Scan Card" = "Skenuoti kortelę";
+
+"Scan card" = "Nuskaityti kortelę";
+
+"The IBAN you entered is invalid." = "Įvedėte neteisingą IBAN.";
+
+"There was an error processing your card -- try again in a few seconds" = "Įvyko kortelės apdorojimo klaida, po kelių sekundžių bandykite dar kartą";
+
+"There was an unexpected error -- try again in a few seconds" = "Įvyko netikėta klaida, po kelių sekundžių bandykite dar kartą";
+
+"Try again" = "Bandyti dar kartą";
+
+"We use Stripe to verify your card details. Stripe may use and store your data according its privacy policy. <a href='https://support.stripe.com/questions/stripes-card-image-verification'><u>Learn more</u></a>" = "Naudojame \"Stripe\", kad patikrintume jūsų kortelės duomenis. \"Stripe\" gali naudoti ir saugoti jūsų duomenis pagal savo privatumo politiką. <a href='https://support.stripe.com/questions/stripes-card-image-verification'><u>Sužinokite daugiau</u></a>";
+
+"Your card has expired" = "Kortelė baigė galioti";
+
+"Your card was declined" = "Kortelė buvo atmesta";
+
+"Your card's expiration month is invalid" = "Negaliojantis kortelės galiojimo pabaigos mėnuo";
+
+"Your card's expiration year is invalid" = "Kortelės galiojimo pabaigos metai neteisingi";
+
+"Your card's number is invalid" = "Negaliojantis kortelės numeris";
+
+"Your card's security code is invalid" = "Kortelės saugos kodas negalioja";
+
+"Your name is invalid." = "Jūsų vardas neteisingas.";
+
+"Your payment method was declined." = "Jūsų mokėjimo būdas buvo atmestas.";

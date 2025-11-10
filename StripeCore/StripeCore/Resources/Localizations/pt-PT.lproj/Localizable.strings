@@ -1,0 +1,37 @@
+"An error occurred. Please try again." = "Ocorreu um erro. Tente novamente.";
+
+"Card brand was not updated. Please try again." = "A marca do cartão não foi atualizada. Tente novamente.";
+
+"Close" = "Fechar";
+
+"Default payment method was not updated. Please try again." = "O método de pagamento predefinido não foi atualizado. Tente novamente.";
+
+"Scan Card" = "Ler cartão";
+
+"Scan card" = "Ler cartão";
+
+"The IBAN you entered is invalid." = "O IBAN que introduziu é inválido.";
+
+"There was an error processing your card -- try again in a few seconds" = "Ocorreu um erro ao processar o seu cartão -- tente novamente dentro de alguns segundos";
+
+"There was an unexpected error -- try again in a few seconds" = "Ocorreu um erro inesperado -- tente novamente dentro de alguns segundos";
+
+"Try again" = "Tentar novamente";
+
+"We use Stripe to verify your card details. Stripe may use and store your data according its privacy policy. <a href='https://support.stripe.com/questions/stripes-card-image-verification'><u>Learn more</u></a>" = "Utilizamos a Stripe para verificar os detalhes do seu cartão. A Stripe pode utilizar e armazenar os seus dados de acordo com a sua política de privacidade. <a href='https://support.stripe.com/questions/stripes-card-image-verification'><u>Saiba mais</u></a>";
+
+"Your card has expired" = "O seu cartão expirou";
+
+"Your card was declined" = "O seu cartão foi recusado";
+
+"Your card's expiration month is invalid" = "O mês de validade do seu cartão é inválido";
+
+"Your card's expiration year is invalid" = "O ano de validade do seu cartão é inválido";
+
+"Your card's number is invalid" = "O número do seu cartão é inválido";
+
+"Your card's security code is invalid" = "O código de segurança do seu cartão é inválido";
+
+"Your name is invalid." = "O seu nome é inválido.";
+
+"Your payment method was declined." = "O seu método de pagamento foi recusado.";
