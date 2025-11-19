@@ -1,0 +1,151 @@
+"%1$@ •••• %2$@" = "%1$@ •••• %2$@";
+
+"%@ (optional)" = "%@ (opsyenal)";
+
+"(not accepted)" = "(tidak diterima)";
+
+"Account number" = "Nombor akaun";
+
+"Address" = "Alamat";
+
+"Address line 1" = "Alamat baris 1";
+
+"Address line 2" = "Alamat baris 2";
+
+"Area" = "Kawasan";
+
+"BLIK code" = "Kod BLIK";
+
+"BSB number" = "Nombor BSB";
+
+"Bank account •••• %@" = "Akaun bank •••• %@";
+
+"Billing address is same as shipping" = "Alamat pengebilan sama dengan alamat penghantaran";
+
+"Cancel" = "Batalkan";
+
+"Card brand" = "Jenama kad";
+
+"City" = "Bandar";
+
+"Code field" = "Medan kod";
+
+"Company" = "Syarikat";
+
+"Continue" = "Teruskan";
+
+"Country" = "Negara";
+
+"Country or region" = "Negara atau rantau";
+
+"County" = "Kaunti";
+
+"Date of Birth" = "Tarikh Lahir";
+
+"Department" = "Jabatan";
+
+"District" = "Daerah";
+
+"Do Si" = "Do Si";
+
+"Do you want to close this form?" = "Adakah anda ingin menutup borang ini?";
+
+"Done" = "Selesai";
+
+"Double tap to edit" = "Ketik dua kali untuk edit";
+
+"Edit" = "Edit";
+
+"Eircode" = "Eircode";
+
+"Email" = "E-mel";
+
+"Emirate" = "Amiriah";
+
+"Error" = "Ralat";
+
+"First" = "Pertama";
+
+"Full name" = "Nama penuh";
+
+"Incomplete phone number" = "Nombor telefon tidak lengkap";
+
+"Invalid UPI ID" = "ID UPI tidak sah";
+
+"Island" = "Pulau";
+
+"Last" = "Akhir";
+
+"Name" = "Nama";
+
+"Name on account" = "Nama pada akaun";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Lain-lain";
+
+"Parish" = "Kariah";
+
+"Phone number" = "Nombor telefon";
+
+"Postal code" = "Poskod";
+
+"Prefecture" = "Wilayah";
+
+"Province" = "Wilayah";
+
+"Remove" = "Alih Keluar";
+
+"Remove bank account?" = "Alih keluar akaun bank?";
+
+"Remove card" = "Alih keluar kad";
+
+"Search" = "Cari";
+
+"Select card brand (optional)" = "Pilih jenama kad (opsyenal)";
+
+"Selection is empty." = "Tiada pilihan dibuat.";
+
+"Sort code" = "Kod isihan";
+
+"State" = "Negeri";
+
+"Suburb" = "Pinggir Bandar";
+
+"Suburb or city" = "Pinggir bandar atau bandar";
+
+"The BSB you entered is incomplete." = "BSB yang anda masukkan tidak lengkap.";
+
+"The ID number you entered is incomplete." = "Nombor ID yang anda masukkan tidak lengkap.";
+
+"The account number you entered is incomplete." = "Nombor akaun yang anda masukkan tidak lengkap.";
+
+"The sort code you entered is invalid." = "Kod isihan yang anda masukkan tidak sah.";
+
+"Town or city" = "Pekan atau bandar";
+
+"UPI ID" = "ID UPI";
+
+"Unable to parse phone number" = "Nombor telefon tidak dapat dihuraikan";
+
+"Use rotor to access links" = "Gunakan rotor untuk mengakses pautan";
+
+"Your BLIK code is incomplete." = "Kod BLIK anda tidak lengkap.";
+
+"Your BLIK code is invalid." = "Kod BLIK anda tidak sah.";
+
+"Your ZIP code is incomplete." = "Poskod ZIP tidak lengkap.";
+
+"Your ZIP code is invalid." = "Poskod anda tidak sah.";
+
+"Your email is invalid." = "E-mel anda tidak sah.";
+
+"Your payment information will not be saved." = "Maklumat pembayaran anda tidak akan disimpan.";
+
+"Your postal code is incomplete." = "Poskod anda tidak lengkap.";
+
+"Your postal code is invalid." = "Poskod anda tidak sah.";
+
+"ZIP" = "ZIP";

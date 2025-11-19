@@ -1,0 +1,193 @@
+"A few photos will be taken automatically on the next step to verify it's you" = "Järgmises etapis tehakse automaatselt mõned fotod, et kinnitada, et see olete teie";
+
+"Accepted forms of ID include" = "Aktsepteeritud isikut tõendavad dokumendid hõlmavad järgmist";
+
+"Alternatively, you may manually upload a photo of your identity document." = "Samuti võite oma isikut tõendava dokumendi foto käsitsi üles laadida.";
+
+"App Settings" = "Rakenduse sätted";
+
+"Back %@ photo successfully uploaded" = "%@ tagumine foto on edukalt üles laaditud.";
+
+"Back identity document photo successfully uploaded" = "Foto isikut tõendava dokumendi tagaküljest on edukalt üles laaditud";
+
+"Back of %@" = "%@ tagakülg";
+
+"Back of driver's license or government-issued photo ID" = "Juhiloa või valitsuse väljastatud fotoga isikut tõendava dokumendi tagakülg";
+
+"Back of identity document" = "Isikut tõendava dokumendi tagakülg";
+
+"Camera permission" = "Kaamera luba";
+
+"Camera unavailable" = "Kaamera pole saadaval";
+
+"Capturing…" = "Pildistamine …";
+
+"Choose File" = "Vali fail";
+
+"Consent" = "Nõusolek";
+
+"Could not capture image" = "Pilti ei saanud teha";
+
+"Date of birth does not look valid" = "Sünnikuupäev ei näi olevat õige";
+
+"Details not visible" = "Üksikasjad pole nähtaval";
+
+"Flip your %@ over to the other side" = "Pöörake oma %@ teisele poole";
+
+"Flip your driver's license or government-issued photo ID over to the other side" = "Pöörake oma juhiloa või valitsuse väljastatud fotoga isikut tõendava dokumendi teine pool";
+
+"Flip your identity card over to the other side" = "Pöörake ID-kaart ümber";
+
+"Front %@ photo successfully uploaded" = "%@ foto esiosa on edukalt üles laaditud";
+
+"Front identity document photo successfully uploaded" = "Isikut tõendava dokumendi foto esiküljest on edukalt üles laaditud";
+
+"Front of %@" = "%@ esikülg";
+
+"Front of driver's license or government-issued photo ID" = "Juhiloa või valitsuse väljastatud fotoga isikut tõendava dokumendi esikülg";
+
+"Front of driver's license or passport" = "Juhiloa või passi esikülg";
+
+"Front of driver's license, passport, or government-issued photo ID" = "Juhiloa, passi või valitsuse väljastatud fotoga isikut tõendava dokumendi esikülg";
+
+"Front of identity document" = "Isikut tõendava dokumendi esikülg";
+
+"Front of passport or government-issued photo ID" = "Passi või valitsuse väljastatud fotoga isikut tõendava dokumendi esikülg";
+
+"Get ready to scan your photo ID" = "Valmistuge oma fotoga isikut tõendava dokumendi skannimiseks";
+
+"Get ready to take a selfie" = "Valmistuge tegema selfit";
+
+"Go Back" = "Mine tagasi";
+
+"Hold still, scanning" = "Hoidke paigal, skannimine";
+
+"I'm ready" = "Olen valmis jätkama";
+
+"ID Number" = "Isikukood";
+
+"Individual CPF" = "Eraisiku CPF";
+
+"Keep ID level" = "Hoidke isikut tõendavat dokumenti rõhtsalt";
+
+"Last 4 of Social Security number" = "Sotsiaalkindlustuse numbri viimased 4 numbrit";
+
+"Loading" = "Laadimine";
+
+"Make sure all details are visible and focus" = "Veenduge, et kõik üksikasjad oleksid nähtavad ja teravad";
+
+"Make sure you're in a well lit space." = "Veenduge, et olete hästi valgustatud kohas.";
+
+"Move closer" = "Asetage lähemale";
+
+"Move farther" = "Asetage kaugemale";
+
+"Move to a darker area" = "Liikuge pimedamasse kohta";
+
+"Move to a well-lit area" = "Liikuge hästi valgustatud kohta";
+
+"NRIC or FIN" = "NRIC või FIN";
+
+"No document detected" = "Dokumenti ei tuvastatud";
+
+"Personal ID number" = "Isikukood";
+
+"Personal Information" = "Isikuteave";
+
+"Phone Number" = "Telefoninumber";
+
+"Phone Verification" = "Telefoni kinnitus";
+
+"Photo Library" = "Fototeek";
+
+"Please upload images of the front and back of your %@" = "Palun laadige üles pildid oma %@ esi- ja tagaküljest";
+
+"Please upload images of the front and back of your identity document" = "Palun laadige üles pildid oma isikut tõendava dokumendi esi- ja tagaküljest.";
+
+"Position your %@ in the center of the frame" = "Asetage %@ kaadri keskele";
+
+"Position your driver's license or government-issued photo ID in the center of the frame" = "Asetage oma juhiluba või valitsuse väljastatud fotoga isikut tõendav dokument kaadri keskele";
+
+"Position your driver's license or passport in the center of the frame" = "Asetage oma juhiluba või pass kaadri keskele";
+
+"Position your driver's license, passport, or government-issued photo ID in the center of the frame" = "Asetage oma juhiluba, pass või valitsuse väljastatud fotoga isikut tõendav dokument kaadri keskele";
+
+"Position your face in the center of the frame." = "Jälgige, et nägu oleks raami keskel.";
+
+"Position your identity document in the center of the frame" = "Paigutage isikut tõendava dokument raami keskele";
+
+"Position your passport or government-issued photo ID in the center of the frame" = "Asetage oma pass või valitsuse väljastatud fotoga isikut tõendav dokument raami keskele";
+
+"Retake Photos" = "Tee fotod uuesti";
+
+"Scan" = "Skannimine";
+
+"Scanned" = "Skannitud";
+
+"Select" = "Vali";
+
+"Select a location to upload the back of your identity document from" = "Valige asukoht, kust laadida üles oma isikut tõendava dokumendi tagakülg";
+
+"Select a location to upload the front of your identity document from" = "Valige asukoht, kust laadida üles oma isikut tõendava dokumendi esikülg";
+
+"Select back %@ photo" = "Vali %@ tagakülje foto";
+
+"Select back identity document photo" = "Valige isikut tõendava dokumendi tagumine foto";
+
+"Select front %@ photo" = "Vali %@ esikülje foto";
+
+"Select front identity document photo" = "Valige isikut tõendava dokumendi esikülje foto";
+
+"Selfie" = "Selfi";
+
+"Selfie captures" = "Selfi pildistamine";
+
+"Selfie captures are complete" = "Selfi on jäädvustatud";
+
+"Take Photo" = "Pildista";
+
+"The images of your identity document have not been saved. Do you want to leave?" = "Teie isikut tõendava dokumendi pilte pole salvestatud. Kas soovite lahkuda?";
+
+"There was an error accessing the camera." = "Kaamerale juurdepääsemisel esines tõrge.";
+
+"Try Again" = "Proovi uuesti";
+
+"Try reduce glare and make ID visible" = "Proovige vähendada läiget ja veenduge, et ID oleks nähtav";
+
+"Unable to establish a connection." = "Ühendust ei saa luua.";
+
+"Unsaved changes" = "Salvestamata muudatused";
+
+"Upload" = "Üleslaadimine";
+
+"Upload a Photo" = "Laadi foto üles";
+
+"Upload your %@" = "Laadige üles oma %@";
+
+"Upload your photo ID" = "Laadige üles fotoga isikut tõendav dokument";
+
+"Uploading back %@ photo" = "Laaditakse üles %@ tagumist fotot.";
+
+"Uploading back identity document photo" = "Laaditakse üles isikut tõendava dokumendi tagakülje fotot.";
+
+"Uploading front %@ photo" = "%@ esikülje foto üleslaadimine";
+
+"Uploading front identity document photo" = "Isikut tõendava dokumendi esikülje foto üleslaadimine";
+
+"Verify your identity" = "Kinnitage oma isik";
+
+"We could not capture a high-quality image." = "Meil ei õnnestunud teha kõrge kvaliteediga pilti.";
+
+"We need permission to use your camera. Please allow camera access in app settings." = "Vajame teie kaamera kasutamiseks luba. Andke rakenduse sätete kaudu juurdepääs kaamerale.";
+
+"Welcome" = "Tere tulemast";
+
+"You can either try again or upload an image from your device." = "Võite kas uuesti proovida või pildi oma seadmest üles laadida.";
+
+"Your selfie images have not been saved. Do you want to leave?" = "Teie selfi pilte pole salvestatud. Kas soovite lahkuda?";
+
+"driver's license" = "juhiluba";
+
+"government-issued photo ID" = "riigi poolt väljastatud fotoga isikut tõendav dokument";
+
+"passport" = "pass";
