@@ -1,0 +1,193 @@
+"A few photos will be taken automatically on the next step to verify it's you" = "V naslednjem koraku bo samodejno posnetih nekaj fotografij, da bomo lahko preverili vašo identiteto.";
+
+"Accepted forms of ID include" = "Med sprejemljive oblike osebnih dokumentov spadajo";
+
+"Alternatively, you may manually upload a photo of your identity document." = "Fotografijo svojega osebnega dokumenta pa lahko tudi ročno naložite.";
+
+"App Settings" = "Nastavitve aplikacije";
+
+"Back %@ photo successfully uploaded" = "Fotografija na zadnji strani %@ je bila uspešno naložena";
+
+"Back identity document photo successfully uploaded" = "Fotografija na zadnji strani osebnega dokumenta je bila uspešno naložena";
+
+"Back of %@" = "Zadnja stran %@";
+
+"Back of driver's license or government-issued photo ID" = "Hrbtna stran vozniškega dovoljenja ali osebnega dokumenta s fotografijo, ki ga je izdal državni organ";
+
+"Back of identity document" = "Hrbtna stran osebnega dokumenta";
+
+"Camera permission" = "Dovoljenje za kamero";
+
+"Camera unavailable" = "Kamera ni na voljo";
+
+"Capturing…" = "Zajemanje ...";
+
+"Choose File" = "Izberite datoteko";
+
+"Consent" = "Soglasje";
+
+"Could not capture image" = "Slike ni bilo mogoče posneti";
+
+"Date of birth does not look valid" = "Videti je, da datum rojstva ni veljaven";
+
+"Details not visible" = "Podrobnosti niso vidne";
+
+"Flip your %@ over to the other side" = "Obrnite svojo %@ na drugo stran";
+
+"Flip your driver's license or government-issued photo ID over to the other side" = "Obrnite vozniško dovoljenje ali osebni dokument s fotografijo, ki ga je izdal državni organ, na drugo stran";
+
+"Flip your identity card over to the other side" = "Obrnite osebno izkaznico na drugo stran";
+
+"Front %@ photo successfully uploaded" = "Fotografija na sprednji strani %@ je bila uspešno naložena";
+
+"Front identity document photo successfully uploaded" = "Fotografija na sprednji strani osebnega dokumenta je bila uspešno naložena";
+
+"Front of %@" = "Sprednja stran %@";
+
+"Front of driver's license or government-issued photo ID" = "Sprednja stran vozniškega dovoljenja ali osebnega dokumenta s fotografijo, ki ga je izdal državni organ";
+
+"Front of driver's license or passport" = "Sprednja stran vozniškega dovoljenja ali potnega lista";
+
+"Front of driver's license, passport, or government-issued photo ID" = "Sprednja stran vozniškega dovoljenja, potnega lista ali osebnega dokumenta s fotografijo, ki ga je izdal državni organ";
+
+"Front of identity document" = "Sprednja stran osebnega dokumenta";
+
+"Front of passport or government-issued photo ID" = "Sprednja stran potnega lista ali osebnega dokumenta s fotografijo, ki ga je izdal državni organ";
+
+"Get ready to scan your photo ID" = "Pripravite se na optično branje osebnega dokumenta s fotografijo";
+
+"Get ready to take a selfie" = "Pripravite se na zajem selfija";
+
+"Go Back" = "Nazaj";
+
+"Hold still, scanning" = "Optično branje – držite pri miru";
+
+"I'm ready" = "Pripravljen(-a) sem";
+
+"ID Number" = "Številka osebnega dokumenta";
+
+"Individual CPF" = "CPF posameznika";
+
+"Keep ID level" = "Osebni dokument naj ostane raven";
+
+"Last 4 of Social Security number" = "Zadnje 4 števke številke socialnega zavarovanja";
+
+"Loading" = "Nalaganje";
+
+"Make sure all details are visible and focus" = "Prepričajte se, da so vse podrobnosti vidne in izostrene";
+
+"Make sure you're in a well lit space." = "Poskrbite, da ste v dobro osvetljenem prostoru.";
+
+"Move closer" = "Približajte";
+
+"Move farther" = "Oddaljite";
+
+"Move to a darker area" = "Pojdite v temnejši prostor";
+
+"Move to a well-lit area" = "Pojdite v dobro osvetljen prostor";
+
+"NRIC or FIN" = "NRIC ali FIN";
+
+"No document detected" = "Zaznan ni bil noben dokument";
+
+"Personal ID number" = "Številka osebne izkaznice";
+
+"Personal Information" = "Osebni podatki";
+
+"Phone Number" = "Telefonska številka";
+
+"Phone Verification" = "Preverjanje po telefonu";
+
+"Photo Library" = "Knjižnica fotografij";
+
+"Please upload images of the front and back of your %@" = "Prosimo, naložite slike sprednjo in zadnjo stran vašega %@";
+
+"Please upload images of the front and back of your identity document" = "Naložite slike sprednje in zadnje strani osebnega dokumenta.";
+
+"Position your %@ in the center of the frame" = "Namestite %@ na sredino okvirja";
+
+"Position your driver's license or government-issued photo ID in the center of the frame" = "Namestite vozniško dovoljenje ali osebni dokument s fotografijo, ki ga je izdal državni organ, v sredino okvirja";
+
+"Position your driver's license or passport in the center of the frame" = "Namestite vozniško dovoljenje ali potni list v sredino okvirja";
+
+"Position your driver's license, passport, or government-issued photo ID in the center of the frame" = "Namestite vozniško dovoljenje, potni list ali osebni dokument s fotografijo, ki ga je izdal državni organ, v sredino okvirja";
+
+"Position your face in the center of the frame." = "Zagotovite, da je vaš obraz na sredini okvira.";
+
+"Position your identity document in the center of the frame" = "Osebni dokument namestite na sredino okvirja.";
+
+"Position your passport or government-issued photo ID in the center of the frame" = "Namestite potni list ali osebni dokument s fotografijo, ki ga je izdal državni organ, v sredino okvirja";
+
+"Retake Photos" = "Znova posnemi fotografije";
+
+"Scan" = "Optično preberi";
+
+"Scanned" = "Optično prebrano";
+
+"Select" = "Izberi";
+
+"Select a location to upload the back of your identity document from" = "Izberite mesto, s katerega želite naložiti hrbtno stran osebnega dokumenta";
+
+"Select a location to upload the front of your identity document from" = "Izberite mesto, s katerega želite naložiti sprednjo stran osebnega dokumenta";
+
+"Select back %@ photo" = "Izberite fotografijo na zadnji strani %@";
+
+"Select back identity document photo" = "Izberite fotografijo osebnega dokumenta";
+
+"Select front %@ photo" = "Izberite fotografijo na sprednji strani %@";
+
+"Select front identity document photo" = "Izberite fotografijo na sprednji strani osebnega dokumenta";
+
+"Selfie" = "Selfi";
+
+"Selfie captures" = "Posnetki selfija";
+
+"Selfie captures are complete" = "Selfiji so posneti";
+
+"Take Photo" = "Fotografiraj";
+
+"The images of your identity document have not been saved. Do you want to leave?" = "Slike vašega osebnega dokumenta niso shranjene. Ali želite zapreti to stran?";
+
+"There was an error accessing the camera." = "Pri dostopu do kamere je prišlo do napake.";
+
+"Try Again" = "Poskusi znova";
+
+"Try reduce glare and make ID visible" = "Poskusite zmanjšati bleščanje in se prepričajte, da je osebni dokument viden";
+
+"Unable to establish a connection." = "Povezave ni mogoče vzpostaviti.";
+
+"Unsaved changes" = "Neshranjene spremembe";
+
+"Upload" = "Naloži";
+
+"Upload a Photo" = "Naloži fotografijo";
+
+"Upload your %@" = "Naložite svoj %@";
+
+"Upload your photo ID" = "Naložite osebni dokument s svojo fotografijo";
+
+"Uploading back %@ photo" = "Nalaganje fotografije %@ na zadnji strani";
+
+"Uploading back identity document photo" = "Nalaganje fotografije osebnega dokumenta";
+
+"Uploading front %@ photo" = "Nalaganje fotografije %@ na sprednji strani";
+
+"Uploading front identity document photo" = "Nalaganje fotografije na sprednji strani osebnega dokumenta";
+
+"Verify your identity" = "Preverite svojo identiteto";
+
+"We could not capture a high-quality image." = "Ni bilo mogoče zajeti visokokakovostne slike.";
+
+"We need permission to use your camera. Please allow camera access in app settings." = "Potrebujemo dovoljenje za uporabo vaše kamere. Dovolite dostop do kamere v nastavitvah aplikacije.";
+
+"Welcome" = "Dobrodošli";
+
+"You can either try again or upload an image from your device." = "Poskusite znova ali pa naložite sliko iz svoje naprave.";
+
+"Your selfie images have not been saved. Do you want to leave?" = "Slike vašega selfija niso shranjene. Ali želite zapreti to stran?";
+
+"driver's license" = "vozniško dovoljenje";
+
+"government-issued photo ID" = "uradni osebni dokument s fotografijo";
+
+"passport" = "potni list";
