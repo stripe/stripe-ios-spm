@@ -1,0 +1,427 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 70;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01AA289840E0AC9229A8CF63 /* StripeApplePay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29BFCC7B0FCEA743A857B51F /* StripeApplePay.framework */; };
+		4B2DE4109D876CCBDC53C2A3 /* StripeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62ECC1AA5583E4104C073B63 /* StripeCore.framework */; };
+		526AE8381F232C9FEABFFDCD /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8ED017D12DE81D3ABD013768 /* OHHTTPStubsSwift */; };
+		C0D4B1753F584397DD1AD946 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87A189B89110D3A8EF052425 /* XCTest.framework */; };
+		D8D613D3A85B81F8C4386E08 /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = CB64080D8A41D33BC3DEEAF8 /* OHHTTPStubs */; };
+		EEF84AC6C1EBF27BF6AAC0BF /* StripeCoreTestUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FA663325484F2D515613494 /* StripeCoreTestUtils.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6DAB385DAFF8DCB87110CC7E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 95898E5CA0A1871DDFFB66B0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 747C9FE1743C0B4444303569;
+			remoteInfo = StripeApplePay;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F937383B644A63BD5FC4A081 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF3CB7A978895136380088BB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0FA663325484F2D515613494 /* StripeCoreTestUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StripeCoreTestUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		229446797CC5FB07DB344D81 /* StripeApplePayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StripeApplePayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		29BFCC7B0FCEA743A857B51F /* StripeApplePay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StripeApplePay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		40D5ED47331313B6AD8B6F46 /* Project-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Debug.xcconfig"; sourceTree = "<group>"; };
+		425B19195E4B86F77229252D /* StripeiOS Tests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "StripeiOS Tests-Debug.xcconfig"; sourceTree = "<group>"; };
+		49B0926F8F65BC0102B99BF4 /* StripeiOS-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "StripeiOS-Debug.xcconfig"; sourceTree = "<group>"; };
+		4EE8157F3536C238AC337337 /* StripeiOS-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "StripeiOS-Release.xcconfig"; sourceTree = "<group>"; };
+		62ECC1AA5583E4104C073B63 /* StripeCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StripeCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87A189B89110D3A8EF052425 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		BDAEEEB96953ECBB9C68CF1C /* StripeiOS Tests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "StripeiOS Tests-Release.xcconfig"; sourceTree = "<group>"; };
+		CB01F67DF47C468825F8FF6A /* Project-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		31C5DF832EB2A880005770FA /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			publicHeaders = (
+				StripeApplePay.h,
+			);
+			target = 747C9FE1743C0B4444303569 /* StripeApplePay */;
+		};
+		31C5DF962EB2A884005770FA /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = ACAFA21CF224F80EFAEFDC2F /* StripeApplePayTests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		31C5DF652EB2A880005770FA /* StripeApplePay */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (31C5DF832EB2A880005770FA /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = StripeApplePay; sourceTree = "<group>"; };
+		31C5DF8D2EB2A884005770FA /* StripeApplePayTests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (31C5DF962EB2A884005770FA /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = StripeApplePayTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2A690CB3AEAD3A05D0DF3D47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B2DE4109D876CCBDC53C2A3 /* StripeCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		92797DEFFA4201115E38DEAD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0D4B1753F584397DD1AD946 /* XCTest.framework in Frameworks */,
+				01AA289840E0AC9229A8CF63 /* StripeApplePay.framework in Frameworks */,
+				EEF84AC6C1EBF27BF6AAC0BF /* StripeCoreTestUtils.framework in Frameworks */,
+				D8D613D3A85B81F8C4386E08 /* OHHTTPStubs in Frameworks */,
+				526AE8381F232C9FEABFFDCD /* OHHTTPStubsSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18E783E8B2360F08F2FCDEB9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				87A189B89110D3A8EF052425 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3581723D3A3FF58EE3E59033 /* BuildConfigurations */ = {
+			isa = PBXGroup;
+			children = (
+				40D5ED47331313B6AD8B6F46 /* Project-Debug.xcconfig */,
+				CB01F67DF47C468825F8FF6A /* Project-Release.xcconfig */,
+				425B19195E4B86F77229252D /* StripeiOS Tests-Debug.xcconfig */,
+				BDAEEEB96953ECBB9C68CF1C /* StripeiOS Tests-Release.xcconfig */,
+				49B0926F8F65BC0102B99BF4 /* StripeiOS-Debug.xcconfig */,
+				4EE8157F3536C238AC337337 /* StripeiOS-Release.xcconfig */,
+			);
+			name = BuildConfigurations;
+			path = ../BuildConfigurations;
+			sourceTree = "<group>";
+		};
+		56479504C3EB58BC9E0C860A = {
+			isa = PBXGroup;
+			children = (
+				DC6E0D845E48183E2C732ECF /* Project */,
+				18E783E8B2360F08F2FCDEB9 /* Frameworks */,
+				7C21384B46F40CB3F23DD515 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7C21384B46F40CB3F23DD515 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				29BFCC7B0FCEA743A857B51F /* StripeApplePay.framework */,
+				229446797CC5FB07DB344D81 /* StripeApplePayTests.xctest */,
+				62ECC1AA5583E4104C073B63 /* StripeCore.framework */,
+				0FA663325484F2D515613494 /* StripeCoreTestUtils.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DC6E0D845E48183E2C732ECF /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				3581723D3A3FF58EE3E59033 /* BuildConfigurations */,
+				31C5DF652EB2A880005770FA /* StripeApplePay */,
+				31C5DF8D2EB2A884005770FA /* StripeApplePayTests */,
+			);
+			name = Project;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		82FBB6E9E55342EADEEE1865 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		747C9FE1743C0B4444303569 /* StripeApplePay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49AD325F0339BB78EE36ABC4 /* Build configuration list for PBXNativeTarget "StripeApplePay" */;
+			buildPhases = (
+				82FBB6E9E55342EADEEE1865 /* Headers */,
+				0FA9CF39340C39235D831C53 /* Sources */,
+				52997B8984C3A02398E230F4 /* Resources */,
+				FF3CB7A978895136380088BB /* Embed Frameworks */,
+				2A690CB3AEAD3A05D0DF3D47 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				31C5DF652EB2A880005770FA /* StripeApplePay */,
+			);
+			name = StripeApplePay;
+			productName = StripeApplePay;
+			productReference = 29BFCC7B0FCEA743A857B51F /* StripeApplePay.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		ACAFA21CF224F80EFAEFDC2F /* StripeApplePayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 48EC33D43FBA14658B0E9567 /* Build configuration list for PBXNativeTarget "StripeApplePayTests" */;
+			buildPhases = (
+				C5D7D85B45B4D8BECDF5B7CD /* Sources */,
+				200F36028817645AC1730398 /* Resources */,
+				F937383B644A63BD5FC4A081 /* Embed Frameworks */,
+				92797DEFFA4201115E38DEAD /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9D2CBE0177D04009899ECFED /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				31C5DF8D2EB2A884005770FA /* StripeApplePayTests */,
+			);
+			name = StripeApplePayTests;
+			packageProductDependencies = (
+				CB64080D8A41D33BC3DEEAF8 /* OHHTTPStubs */,
+				8ED017D12DE81D3ABD013768 /* OHHTTPStubsSwift */,
+			);
+			productName = StripeApplePayTests;
+			productReference = 229446797CC5FB07DB344D81 /* StripeApplePayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		95898E5CA0A1871DDFFB66B0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = 2182982C71AEF088A6D2AA6A /* Build configuration list for PBXProject "StripeApplePay" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 56479504C3EB58BC9E0C860A;
+			packageReferences = (
+				B45F7C9F63270FAF880F5EEF /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
+			);
+			productRefGroup = 7C21384B46F40CB3F23DD515 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				747C9FE1743C0B4444303569 /* StripeApplePay */,
+				ACAFA21CF224F80EFAEFDC2F /* StripeApplePayTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		200F36028817645AC1730398 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52997B8984C3A02398E230F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0FA9CF39340C39235D831C53 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C5D7D85B45B4D8BECDF5B7CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9D2CBE0177D04009899ECFED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = StripeApplePay;
+			target = 747C9FE1743C0B4444303569 /* StripeApplePay */;
+			targetProxy = 6DAB385DAFF8DCB87110CC7E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		13B57D9AA89321957F3ACF3A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDAEEEB96953ECBB9C68CF1C /* StripeiOS Tests-Release.xcconfig */;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				INFOPLIST_FILE = StripeApplePayTests/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stripe.StripeApplePayTests;
+				PRODUCT_NAME = StripeApplePayTests;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		15219003E9DE09D774FB72BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EE8157F3536C238AC337337 /* StripeiOS-Release.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = StripeApplePay/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stripe.stripe-apple-pay";
+				PRODUCT_NAME = StripeApplePay;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = YES;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+			};
+			name = Release;
+		};
+		6EEB3D72619B3E4C89798C09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49B0926F8F65BC0102B99BF4 /* StripeiOS-Debug.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = StripeApplePay/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stripe.stripe-apple-pay";
+				PRODUCT_NAME = StripeApplePay;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = YES;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+			};
+			name = Debug;
+		};
+		73AE406DB5197038572F40A7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB01F67DF47C468825F8FF6A /* Project-Release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		7CA6A9C0F1D4C842935D7CEC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40D5ED47331313B6AD8B6F46 /* Project-Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		EB1D00A86E16D71A6153C2A0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 425B19195E4B86F77229252D /* StripeiOS Tests-Debug.xcconfig */;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				INFOPLIST_FILE = StripeApplePayTests/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stripe.StripeApplePayTests;
+				PRODUCT_NAME = StripeApplePayTests;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2182982C71AEF088A6D2AA6A /* Build configuration list for PBXProject "StripeApplePay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CA6A9C0F1D4C842935D7CEC /* Debug */,
+				73AE406DB5197038572F40A7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		48EC33D43FBA14658B0E9567 /* Build configuration list for PBXNativeTarget "StripeApplePayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB1D00A86E16D71A6153C2A0 /* Debug */,
+				13B57D9AA89321957F3ACF3A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49AD325F0339BB78EE36ABC4 /* Build configuration list for PBXNativeTarget "StripeApplePay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6EEB3D72619B3E4C89798C09 /* Debug */,
+				15219003E9DE09D774FB72BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B45F7C9F63270FAF880F5EEF /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/davidme-stripe/OHHTTPStubs";
+			requirement = {
+				branch = "stripe-mock";
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8ED017D12DE81D3ABD013768 /* OHHTTPStubsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OHHTTPStubsSwift;
+		};
+		CB64080D8A41D33BC3DEEAF8 /* OHHTTPStubs */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OHHTTPStubs;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 95898E5CA0A1871DDFFB66B0 /* Project object */;
+}

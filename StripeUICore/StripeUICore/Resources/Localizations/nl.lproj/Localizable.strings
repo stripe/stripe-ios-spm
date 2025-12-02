@@ -1,0 +1,151 @@
+"%1$@ •••• %2$@" = "%1$@ •••• %2$@";
+
+"%@ (optional)" = "%@ (optioneel)";
+
+"(not accepted)" = "(niet geaccepteerd)";
+
+"Account number" = "Rekeningnummer";
+
+"Address" = "Adres";
+
+"Address line 1" = "Adresregel 1";
+
+"Address line 2" = "Adresregel 2";
+
+"Area" = "Regio";
+
+"BLIK code" = "BLIK-code";
+
+"BSB number" = "BSB-nummer";
+
+"Bank account •••• %@" = "Bankrekening •••• %@";
+
+"Billing address is same as shipping" = "Factuuradres is hetzelfde als het verzendadres";
+
+"Cancel" = "Annuleren";
+
+"Card brand" = "Merk betaalkaart";
+
+"City" = "Plaats";
+
+"Code field" = "Codeveld";
+
+"Company" = "Bedrijf";
+
+"Continue" = "Doorgaan";
+
+"Country" = "Land";
+
+"Country or region" = "Land of regio";
+
+"County" = "Graafschap";
+
+"Date of Birth" = "Geboortedatum";
+
+"Department" = "Departement";
+
+"District" = "District";
+
+"Do Si" = "Do Si";
+
+"Do you want to close this form?" = "Wil je dit formulier sluiten?";
+
+"Done" = "Gereed";
+
+"Double tap to edit" = "Dubbeltikken om te bewerken";
+
+"Edit" = "Bewerken";
+
+"Eircode" = "Eircode";
+
+"Email" = "E-mailadres";
+
+"Emirate" = "Emiraat";
+
+"Error" = "Fout";
+
+"First" = "Voornaam";
+
+"Full name" = "Volledige naam";
+
+"Incomplete phone number" = "Onvolledig telefoonnummer";
+
+"Invalid UPI ID" = "Ongeldige UPI-ID";
+
+"Island" = "Eiland";
+
+"Last" = "Achternaam";
+
+"Name" = "Naam";
+
+"Name on account" = "Naam op account";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Overige";
+
+"Parish" = "Parochie";
+
+"Phone number" = "Telefoonnummer";
+
+"Postal code" = "Postcode";
+
+"Prefecture" = "Prefectuur";
+
+"Province" = "Provincie";
+
+"Remove" = "Verwijderen";
+
+"Remove bank account?" = "Bankrekening verwijderen?";
+
+"Remove card" = "Betaalkaart verwijderen";
+
+"Search" = "Zoeken";
+
+"Select card brand (optional)" = "Merk van betaalkaart selecteren (optioneel)";
+
+"Selection is empty." = "Selectie is leeg.";
+
+"Sort code" = "Bankcode";
+
+"State" = "Staat";
+
+"Suburb" = "Voorstad";
+
+"Suburb or city" = "Stad of voorstad";
+
+"The BSB you entered is incomplete." = "Het ingevoerde BSB-nummer is onvolledig.";
+
+"The ID number you entered is incomplete." = "Het opgegeven identificatienummer is onvolledig.";
+
+"The account number you entered is incomplete." = "Het opgegeven rekeningnummer is onvolledig.";
+
+"The sort code you entered is invalid." = "De opgegeven bankcode is ongeldig.";
+
+"Town or city" = "Stad of plaats";
+
+"UPI ID" = "UPI-ID";
+
+"Unable to parse phone number" = "Kan telefoonnummer niet parseren";
+
+"Use rotor to access links" = "Gebruik de rotor om een link te openen";
+
+"Your BLIK code is incomplete." = "Je BLIK-code is onvolledig.";
+
+"Your BLIK code is invalid." = "Je BLIK-code is ongeldig.";
+
+"Your ZIP code is incomplete." = "Uw postcode is incompleet.";
+
+"Your ZIP code is invalid." = "Uw postcode is ongeldig.";
+
+"Your email is invalid." = "Je e-mailadres is ongeldig.";
+
+"Your payment information will not be saved." = "Je betaalgegevens worden niet opgeslagen.";
+
+"Your postal code is incomplete." = "Je postcode is onvolledig.";
+
+"Your postal code is invalid." = "Je postcode is ongeldig.";
+
+"ZIP" = "Postcode";
