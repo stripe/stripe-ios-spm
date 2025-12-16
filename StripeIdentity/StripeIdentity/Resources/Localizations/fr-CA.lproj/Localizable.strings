@@ -1,0 +1,193 @@
+"A few photos will be taken automatically on the next step to verify it's you" = "À l'étape suivante, nous allons prendre automatiquement quelques photos afin de vérifier votre identité";
+
+"Accepted forms of ID include" = "Pièces d'identité acceptées";
+
+"Alternatively, you may manually upload a photo of your identity document." = "Vous pouvez également téléverser manuellement une photo de votre pièce d'identité.";
+
+"App Settings" = "Paramètres de l'application";
+
+"Back %@ photo successfully uploaded" = "Photo du verso de %@ téléversée avec succès";
+
+"Back identity document photo successfully uploaded" = "La photo du verso de la pièce d'identité a été téléversée avec succès";
+
+"Back of %@" = "Verso de %@";
+
+"Back of driver's license or government-issued photo ID" = "Verso de votre permis de conduire ou de votre pièce d'identité officielle avec photo";
+
+"Back of identity document" = "Verso de la pièce d'identité";
+
+"Camera permission" = "Autorisation d'accès à l'appareil photo";
+
+"Camera unavailable" = "Appareil photo non disponible";
+
+"Capturing…" = "Capture en cours...";
+
+"Choose File" = "Choisir un fichier";
+
+"Consent" = "Consentement";
+
+"Could not capture image" = "Impossible de prendre une photo";
+
+"Date of birth does not look valid" = "La date de naissance ne semble pas valide";
+
+"Details not visible" = "Détails non visibles";
+
+"Flip your %@ over to the other side" = "Retournez votre %@";
+
+"Flip your driver's license or government-issued photo ID over to the other side" = "Retournez votre permis de conduire ou votre pièce d'identité officielle avec photo sur l'autre face.";
+
+"Flip your identity card over to the other side" = "Retournez votre carte d'identité";
+
+"Front %@ photo successfully uploaded" = "Photo du recto de %@ téléversée avec succès";
+
+"Front identity document photo successfully uploaded" = "La photo du recto de la pièce d'identité avant a été téléversée avec succès";
+
+"Front of %@" = "Recto de %@";
+
+"Front of driver's license or government-issued photo ID" = "Le recto du permis de conduire ou d'une pièce d'identité officielle avec photo";
+
+"Front of driver's license or passport" = "Recto du permis de conduire ou du passeport";
+
+"Front of driver's license, passport, or government-issued photo ID" = "Le recto du permis de conduire, du passeport ou d'une pièce d'identité d'origine officielle avec photo.";
+
+"Front of identity document" = "Recto de la pièce d'identité";
+
+"Front of passport or government-issued photo ID" = "Recto du passeport ou d'une pièce d'identité officielle avec photo";
+
+"Get ready to scan your photo ID" = "Préparez-vous à scanner votre pièce d'identité";
+
+"Get ready to take a selfie" = "Préparez-vous à vous prendre en photo";
+
+"Go Back" = "Retour";
+
+"Hold still, scanning" = "Ne bougez pas, numérisation en cours";
+
+"I'm ready" = "Tout est prêt";
+
+"ID Number" = "Numéro d'identification";
+
+"Individual CPF" = "Numéro CPF";
+
+"Keep ID level" = "Maintenez votre pièce d'identité horizontale";
+
+"Last 4 of Social Security number" = "4 derniers chiffres du numéro de sécurité sociale";
+
+"Loading" = "Chargement en cours";
+
+"Make sure all details are visible and focus" = "Assurez-vous que tous les détails sont nets et visibles";
+
+"Make sure you're in a well lit space." = "Installez-vous dans un endroit bien éclairé.";
+
+"Move closer" = "Rapprochez le document";
+
+"Move farther" = "Éloignez le document";
+
+"Move to a darker area" = "Prenez votre photo dans un endroit plus sombre";
+
+"Move to a well-lit area" = "Prenez votre photo dans un endroit bien éclairé";
+
+"NRIC or FIN" = "Numéro NRIC ou FIN";
+
+"No document detected" = "Aucun document détecté";
+
+"Personal ID number" = "Numéro d'identification personnel";
+
+"Personal Information" = "Données personnelles";
+
+"Phone Number" = "Numéro de téléphone";
+
+"Phone Verification" = "Vérification du numéro de téléphone";
+
+"Photo Library" = "Bibliothèque de photos";
+
+"Please upload images of the front and back of your %@" = "Veuillez téléverser des images du recto et du verso de votre %@.";
+
+"Please upload images of the front and back of your identity document" = "Veuillez téléverser des images du recto et du verso de votre pièce d’identité";
+
+"Position your %@ in the center of the frame" = "Positionnez votre %@ au centre du cadre";
+
+"Position your driver's license or government-issued photo ID in the center of the frame" = "Placez votre permis de conduire ou votre pièce d'identité officielle au centre du cadre.";
+
+"Position your driver's license or passport in the center of the frame" = "Placez votre permis de conduire ou votre passeport au centre du cadre.";
+
+"Position your driver's license, passport, or government-issued photo ID in the center of the frame" = "Placez votre permis de conduire, votre passeport ou votre pièce d'identité officielle avec photo au centre du cadre";
+
+"Position your face in the center of the frame." = "Placez votre visage au centre du cadre.";
+
+"Position your identity document in the center of the frame" = "Positionnez votre pièce d’identité au centre du cadre";
+
+"Position your passport or government-issued photo ID in the center of the frame" = "Placez votre passeport ou votre pièce d'identité officielle avec photo au centre du cadre.";
+
+"Retake Photos" = "Reprendre des photos";
+
+"Scan" = "Numériser";
+
+"Scanned" = "Numérisé";
+
+"Select" = "Sélectionner";
+
+"Select a location to upload the back of your identity document from" = "Sélectionnez l'emplacement à partir duquel vous souhaitez téléverser le verso de votre pièce d'identité";
+
+"Select a location to upload the front of your identity document from" = "Sélectionnez l'emplacement à partir duquel vous souhaitez téléverser le recto de votre pièce d'identité";
+
+"Select back %@ photo" = "Sélectionner la photo du verso de %@.";
+
+"Select back identity document photo" = "Sélectionnez la photo du verso de la pièce d'identité";
+
+"Select front %@ photo" = "Sélectionnez la photo du recto de %@.";
+
+"Select front identity document photo" = "Sélectionnez la photo du recto de la pièce d'identité";
+
+"Selfie" = "Égoportrait";
+
+"Selfie captures" = "Captures d'égoportraits";
+
+"Selfie captures are complete" = "Les captures d'égoportraits sont terminées";
+
+"Take Photo" = "Prendre une photo";
+
+"The images of your identity document have not been saved. Do you want to leave?" = "Les photos de votre pièce d'identité n'ont pas été enregistrées. Voulez-vous quitter?";
+
+"There was an error accessing the camera." = "Une erreur est survenue lors de l'accès à l'appareil photo.";
+
+"Try Again" = "Réessayer";
+
+"Try reduce glare and make ID visible" = "Essayez de réduire la luminosité et assurez-vous que la pièce d'identité est visible";
+
+"Unable to establish a connection." = "Connexion impossible.";
+
+"Unsaved changes" = "Modifications non enregistrées";
+
+"Upload" = "Téléverser";
+
+"Upload a Photo" = "Téléverser une photo";
+
+"Upload your %@" = "Téléversez votre %@";
+
+"Upload your photo ID" = "Téléverser votre pièce d'identité avec photo";
+
+"Uploading back %@ photo" = "Téléversement de la photo du verso de %@.";
+
+"Uploading back identity document photo" = "Téléversement de la photo du verso de la pièce d'identité";
+
+"Uploading front %@ photo" = "Téléversement de la photo du recto de %@.";
+
+"Uploading front identity document photo" = "Téléversement de la photo du recto de la pièce d'identité";
+
+"Verify your identity" = "Confirmer votre identité";
+
+"We could not capture a high-quality image." = "Impossible de prendre une photo de bonne qualité.";
+
+"We need permission to use your camera. Please allow camera access in app settings." = "Pour que nous puissions accéder à votre appareil photo, vous devez nous donner votre autorisation dans les paramètres de l'application.";
+
+"Welcome" = "Bienvenue";
+
+"You can either try again or upload an image from your device." = "Vous pouvez réessayer ou téléverser une photo à partir de votre appareil.";
+
+"Your selfie images have not been saved. Do you want to leave?" = "Vos égoportraits n'ont pas été enregistrés. Voulez-vous quitter?";
+
+"driver's license" = "permis de conduire";
+
+"government-issued photo ID" = "pièce d'identité officielle avec photo";
+
+"passport" = "passeport";

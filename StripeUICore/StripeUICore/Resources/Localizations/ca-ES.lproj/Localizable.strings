@@ -1,0 +1,151 @@
+"%1$@ •••• %2$@" = "%1$@ •••• %2$@";
+
+"%@ (optional)" = "%@ (opcional)";
+
+"(not accepted)" = "(no s'accepta)";
+
+"Account number" = "Número de Compte";
+
+"Address" = "Adreça";
+
+"Address line 1" = "Línia de l'adreça 1";
+
+"Address line 2" = "Línia de l'adreça 2";
+
+"Area" = "Àrea";
+
+"BLIK code" = "Codi BLIK";
+
+"BSB number" = "Número BSB";
+
+"Bank account •••• %@" = "Compte bancari •••• %@";
+
+"Billing address is same as shipping" = "L'adreça de facturació és la mateixa que la d'enviament";
+
+"Cancel" = "Cancel·la";
+
+"Card brand" = "Marca de la targeta";
+
+"City" = "Ciutat";
+
+"Code field" = "Camp pel codi";
+
+"Company" = "Empresa";
+
+"Continue" = "Continua";
+
+"Country" = "País";
+
+"Country or region" = "País o regió";
+
+"County" = "Comtat";
+
+"Date of Birth" = "Data de naixement";
+
+"Department" = "Departament";
+
+"District" = "Districte";
+
+"Do Si" = "Do Si";
+
+"Do you want to close this form?" = "Voleu tancar el formulari?";
+
+"Done" = "Fet";
+
+"Double tap to edit" = "Toca dos cops per editar";
+
+"Edit" = "Editar";
+
+"Eircode" = "Eircode";
+
+"Email" = "Correu electrònic";
+
+"Emirate" = "Emirat";
+
+"Error" = "Error";
+
+"First" = "Nom";
+
+"Full name" = "Nom complet";
+
+"Incomplete phone number" = "Número de telèfon incomplet";
+
+"Invalid UPI ID" = "ID d'UPI no vàlid";
+
+"Island" = "Illa";
+
+"Last" = "Cognom";
+
+"Name" = "Nom";
+
+"Name on account" = "Nom al compte";
+
+"OK" = "D'acord";
+
+"Oblast" = "Óblast";
+
+"Other" = "Un altre";
+
+"Parish" = "Parròquia";
+
+"Phone number" = "Número de telèfon";
+
+"Postal code" = "Codi postal";
+
+"Prefecture" = "Prefectura";
+
+"Province" = "Província";
+
+"Remove" = "Eliminar";
+
+"Remove bank account?" = "Voleu eliminar el compte bancari?";
+
+"Remove card" = "Elimina la targeta";
+
+"Search" = "Cerca";
+
+"Select card brand (optional)" = "Seleccioneu la marca de la targeta (opcional)";
+
+"Selection is empty." = "La selecció és buida.";
+
+"Sort code" = "Codi de classificació";
+
+"State" = "País";
+
+"Suburb" = "Suburbi";
+
+"Suburb or city" = "Suburbi o ciutat";
+
+"The BSB you entered is incomplete." = "El BSB que has introduït és incomplet.";
+
+"The ID number you entered is incomplete." = "El número d'identificació que has introduït és incomplet.";
+
+"The account number you entered is incomplete." = "El número de compte que heu introduït és incomplet.";
+
+"The sort code you entered is invalid." = "El codi d'ordenació que heu introduït no és vàlid.";
+
+"Town or city" = "Municipi o ciutat";
+
+"UPI ID" = "ID d'UPI";
+
+"Unable to parse phone number" = "No s'ha pogut analitzar el número de telèfon";
+
+"Use rotor to access links" = "Empreu el rotor per accedir als enllaços";
+
+"Your BLIK code is incomplete." = "El codi BLIK no està complet.";
+
+"Your BLIK code is invalid." = "El codi BLIK no és vàlid.";
+
+"Your ZIP code is incomplete." = "El teu codi postal està incomplet.";
+
+"Your ZIP code is invalid." = "El codi ZIP no és vàlid.";
+
+"Your email is invalid." = "L'adreça electrònica no és vàlida.";
+
+"Your payment information will not be saved." = "La informació de pagament no es desarà.";
+
+"Your postal code is incomplete." = "El teu codi postal no està complet.";
+
+"Your postal code is invalid." = "El teu codi postal no és vàlid.";
+
+"ZIP" = "ZIP";

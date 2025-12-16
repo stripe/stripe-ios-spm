@@ -1,0 +1,83 @@
+"%1$@ Card" = "„%1$@“ kortelė";
+
+"%1$@ Credit" = "„%1$@“ kredito";
+
+"%1$@ Debit" = "„%1$@“ debeto";
+
+"%1$@ Prepaid" = "„%1$@“ išankstinio mokėjimo";
+
+"%1$@ account ending in %2$@" = "%1$@ sąskaita, kurios paskutiniai skaičiai %2$@";
+
+"%1$@ and %2$@" = "%1$@ ir %2$@";
+
+"%1$@ ending in %2$@" = "%1$@, kuri baigiasi %2$@";
+
+"%1$@ is not accepted" = "\"%1$@\" nepriimamas";
+
+"Address line 2 (optional)" = "2 adreso eilutė (pasirenkama)";
+
+"Apple Pay" = "\"Apple Pay\"";
+
+"BSB" = "BSB";
+
+"Bank Account" = "Banko sąskaita";
+
+"Billing address" = "Atsiskaitymo adresas";
+
+"CVC" = "CVC";
+
+"Card information" = "Kortelės duomenys";
+
+"Card number" = "Kortelės numeris";
+
+"Confirm your %@" = "Patvirtinkite savo %@";
+
+"Credit" = "Kredito";
+
+"Debit" = "Debeto";
+
+"Invalid data." = "Netinkami duomenys.";
+
+"MM / YY" = "mm / MM";
+
+"MM/YY" = "mm / MM";
+
+"Only %1$@ cards are accepted" = "Priimamos tik %1$@ kortelės";
+
+"Postal Code" = "Pašto kodas";
+
+"Prepaid" = "Išankstinio mokėjimo";
+
+"Shipping Address" = "Siuntimo adresas";
+
+"State / Province / Region" = "Valstija / provincija / regionas";
+
+"The BSB you entered is invalid." = "Įvestas netinkamas BSB numeris.";
+
+"The selected brand is not allowed" = "Pasirinktas prekės ženklas neleidžiamas";
+
+"To scan your card, allow camera access in Settings." = "Kad nuskaitytumėte kortelę, nustatymuose suteikite prieigą fotoaparatui.";
+
+"Your card has expired." = "Jūsų kortelė baigė galioti.";
+
+"Your card number is incomplete." = "Neišsamus kortelės numeris.";
+
+"Your card number is invalid." = "Netinkamas kortelės numeris.";
+
+"Your card's expiration date is incomplete." = "Neišsami kortelės galiojimo pabaigos data.";
+
+"Your card's expiration date is invalid." = "Netinkama kortelės galiojimo pabaigos data.";
+
+"Your card's expiration month is invalid." = "Negaliojantis kortelės galiojimo pabaigos mėnuo.";
+
+"Your card's expiration year is invalid." = "Kortelės galiojimo pabaigos metai neteisingi.";
+
+"Your card's security code is incomplete." = "Neišsamus kortelės saugos kodas.";
+
+"Your card's security code is invalid." = "Kortelės saugos kodas negalioja.";
+
+"card number" = "kortelės numeris";
+
+"example@example.com" = "example@example.com";
+
+"expiration date" = "galiojimo pabaigos data";
