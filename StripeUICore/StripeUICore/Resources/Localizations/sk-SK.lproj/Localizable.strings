@@ -1,0 +1,151 @@
+"%1$@ •••• %2$@" = "%1$@ •••• %2$@";
+
+"%@ (optional)" = "%@ (voliteľné)";
+
+"(not accepted)" = "(neprijaté)";
+
+"Account number" = "Číslo účtu";
+
+"Address" = "Adresa";
+
+"Address line 1" = "Riadok adresy 1";
+
+"Address line 2" = "Riadok adresy 2";
+
+"Area" = "Okres";
+
+"BLIK code" = "Kód BLIK";
+
+"BSB number" = "BSB číslo";
+
+"Bank account •••• %@" = "Bankový účet •••• %@";
+
+"Billing address is same as shipping" = "Fakturačná adresa je totožná s dodacou";
+
+"Cancel" = "Zrušiť";
+
+"Card brand" = "Značka karty";
+
+"City" = "Mesto";
+
+"Code field" = "Pole kódu";
+
+"Company" = "Spoločnosť";
+
+"Continue" = "Pokračovať";
+
+"Country" = "Krajina";
+
+"Country or region" = "Krajina alebo región";
+
+"County" = "Kraj";
+
+"Date of Birth" = "Dátum narodenia";
+
+"Department" = "Oddelenie";
+
+"District" = "Obvod";
+
+"Do Si" = "Do Si";
+
+"Do you want to close this form?" = "Chcete zatvoriť tento formulár?";
+
+"Done" = "Hotovo";
+
+"Double tap to edit" = "Dvojitým ťuknutím upravte";
+
+"Edit" = "Upraviť";
+
+"Eircode" = "Kód Eir";
+
+"Email" = "E-mail";
+
+"Emirate" = "Emirát";
+
+"Error" = "Chyba";
+
+"First" = "Meno";
+
+"Full name" = "Celé meno";
+
+"Incomplete phone number" = "Neúplné telefónne číslo";
+
+"Invalid UPI ID" = "Neplatné identifikačné číslo UPI";
+
+"Island" = "Island";
+
+"Last" = "Priezvisko";
+
+"Name" = "Meno";
+
+"Name on account" = "Meno uvedené v účte";
+
+"OK" = "OK";
+
+"Oblast" = "Oblasť";
+
+"Other" = "Iné";
+
+"Parish" = "Parish";
+
+"Phone number" = "Telefónne číslo";
+
+"Postal code" = "PSČ";
+
+"Prefecture" = "Prefektúra";
+
+"Province" = "Provincia";
+
+"Remove" = "Odstrániť";
+
+"Remove bank account?" = "Odstrániť bankový účet?";
+
+"Remove card" = "Odstrániť kartu";
+
+"Search" = "Vyhľadať";
+
+"Select card brand (optional)" = "Vybrať značku karty (voliteľne)";
+
+"Selection is empty." = "Výber je prázdny.";
+
+"Sort code" = "Triediaci kód";
+
+"State" = "Štát";
+
+"Suburb" = "Predmestie";
+
+"Suburb or city" = "Predmestie alebo mesto";
+
+"The BSB you entered is incomplete." = "Zadané BSB je neúplné.";
+
+"The ID number you entered is incomplete." = "Zadané identifikačné číslo je neúplné.";
+
+"The account number you entered is incomplete." = "Zadané číslo účtu je neúplné.";
+
+"The sort code you entered is invalid." = "Zadaný triediaci kód je neplatný.";
+
+"Town or city" = "Obec alebo mesto";
+
+"UPI ID" = "Identifikačné číslo UPI";
+
+"Unable to parse phone number" = "Nepodarilo sa analyzovať telefónne číslo";
+
+"Use rotor to access links" = "Použite funkciu rotora na prístup k odkazom";
+
+"Your BLIK code is incomplete." = "Váš kód BLIK je neúplný.";
+
+"Your BLIK code is invalid." = "Váš kód BLIK je neplatný.";
+
+"Your ZIP code is incomplete." = "Vaše PSČ je neúplné.";
+
+"Your ZIP code is invalid." = "Vaše PSČ je neplatné.";
+
+"Your email is invalid." = "Váš e-mail je neplatný.";
+
+"Your payment information will not be saved." = "Vaše informácie o platbe nebudú uložené.";
+
+"Your postal code is incomplete." = "Vaše poštové smerovacie číslo je neúplné.";
+
+"Your postal code is invalid." = "Vaše PSČ je neplatné.";
+
+"ZIP" = "PSČ";

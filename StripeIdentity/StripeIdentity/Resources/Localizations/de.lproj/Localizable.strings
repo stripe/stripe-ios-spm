@@ -1,0 +1,193 @@
+"A few photos will be taken automatically on the next step to verify it's you" = "Im nächsten Schritt werden automatisch einige Fotos gemacht, um Ihre Identität zu verifizieren";
+
+"Accepted forms of ID include" = "Zulässige Ausweisdokumente sind";
+
+"Alternatively, you may manually upload a photo of your identity document." = "Alternativ können Sie manuell ein Foto Ihres Ausweisdokuments hochladen.";
+
+"App Settings" = "App-Einstellungen";
+
+"Back %@ photo successfully uploaded" = "Foto der Rückseite Ihres %@ erfolgreich hochgeladen";
+
+"Back identity document photo successfully uploaded" = "Foto der Rückseite Ihres Ausweisdokuments erfolgreich hochgeladen";
+
+"Back of %@" = "Rückseite Ihres %@";
+
+"Back of driver's license or government-issued photo ID" = "Rückseite des Führerscheins oder des amtlichen Lichtbildausweises";
+
+"Back of identity document" = "Rückseite des Ausweisdokuments";
+
+"Camera permission" = "Kameraberechtigung";
+
+"Camera unavailable" = "Kamera nicht verfügbar";
+
+"Capturing…" = "Aufnahme läuft ...";
+
+"Choose File" = "Datei auswählen";
+
+"Consent" = "Zustimmen";
+
+"Could not capture image" = "Aufnahme nicht möglich";
+
+"Date of birth does not look valid" = "Das Geburtsdatum scheint ungültig zu sein";
+
+"Details not visible" = "Details sind nicht erkennbar";
+
+"Flip your %@ over to the other side" = "Drehen Sie Ihr %@ auf die andere Seite";
+
+"Flip your driver's license or government-issued photo ID over to the other side" = "Führerschein oder amtlichen Lichtbildausweis auf die andere Seite umdrehen";
+
+"Flip your identity card over to the other side" = "Drehen Sie Ihr Ausweisdokument um";
+
+"Front %@ photo successfully uploaded" = "Foto der Vorderseite Ihres %@ erfolgreich hochgeladen";
+
+"Front identity document photo successfully uploaded" = "Foto der Vorderseite Ihres Ausweisdokuments erfolgreich hochgeladen";
+
+"Front of %@" = "Vorderseite Ihres %@";
+
+"Front of driver's license or government-issued photo ID" = "Vorderseite des Führerscheins oder amtlicher Lichtbildausweis";
+
+"Front of driver's license or passport" = "Vorderseite des Führerscheins oder Reisepasses";
+
+"Front of driver's license, passport, or government-issued photo ID" = "Vorderseite des Führerscheins, Reisepasses oder amtlichen Lichtbildausweises";
+
+"Front of identity document" = "Vorderseite des Ausweisdokuments";
+
+"Front of passport or government-issued photo ID" = "Vorderseite des Reisepasses oder amtlichen Lichtbildausweises";
+
+"Get ready to scan your photo ID" = "Machen Sie sich zum Scannen Ihres Lichtbildausweises bereit";
+
+"Get ready to take a selfie" = "Machen Sie sich für ein Selfie bereit";
+
+"Go Back" = "Zurück";
+
+"Hold still, scanning" = "Bitte nicht bewegen, Scanvorgang läuft";
+
+"I'm ready" = "Ich bin bereit";
+
+"ID Number" = "Ausweisnummer";
+
+"Individual CPF" = "Individuelle CPF";
+
+"Keep ID level" = "Ausweisdokument gerade halten";
+
+"Last 4 of Social Security number" = "Letzte vier Ziffern der Sozialversicherungsnummer";
+
+"Loading" = "Wird geladen";
+
+"Make sure all details are visible and focus" = "Vergewissern Sie sich, dass alle Details sichtbar und scharf sind";
+
+"Make sure you're in a well lit space." = "Sorgen Sie für ausreichende Beleuchtung.";
+
+"Move closer" = "Abstand verringern";
+
+"Move farther" = "Mehr Abstand halten";
+
+"Move to a darker area" = "Begeben Sie sich in eine dunklere Umgebung";
+
+"Move to a well-lit area" = "Begeben Sie sich in eine gut beleuchtete Umgebung";
+
+"NRIC or FIN" = "NRIC oder FIN";
+
+"No document detected" = "Kein Dokument erkannt";
+
+"Personal ID number" = "Personalausweisnummer";
+
+"Personal Information" = "Persönliche Angaben";
+
+"Phone Number" = "Telefonnummer";
+
+"Phone Verification" = "Telefonische Überprüfung";
+
+"Photo Library" = "Fotobibliothek";
+
+"Please upload images of the front and back of your %@" = "Bitte laden Sie Bilder von der Vorder- und Rückseite Ihres %@ hoch";
+
+"Please upload images of the front and back of your identity document" = "Bitte laden Sie Bilder der Vorder- und Rückseite Ihre Ausweisdokuments hoch";
+
+"Position your %@ in the center of the frame" = "Positionieren Sie Ihren %@ in der Mitte des Ausschnitts";
+
+"Position your driver's license or government-issued photo ID in the center of the frame" = "Positionieren Sie Ihren Führerschein oder amtlichen Lichtbildausweis in der Mitte des Rahmens";
+
+"Position your driver's license or passport in the center of the frame" = "Positionieren Sie Ihren Führerschein oder Reisepass in der Mitte des Rahmens";
+
+"Position your driver's license, passport, or government-issued photo ID in the center of the frame" = "Positionieren Sie Ihren Führerschein, Reisepass oder amtlichen Lichtbildausweis in der Mitte des Rahmens";
+
+"Position your face in the center of the frame." = "Platzieren Sie Ihr Gesicht genau in der Mitte des Rahmens.";
+
+"Position your identity document in the center of the frame" = "Platzieren Sie Ihr Ausweisdokument genau in der Mitte des Rahmens";
+
+"Position your passport or government-issued photo ID in the center of the frame" = "Positionieren Sie Ihren Reisepass oder amtlichen Lichtbildausweis in der Mitte des Rahmens";
+
+"Retake Photos" = "Foto erneut aufnehmen";
+
+"Scan" = "Scannen";
+
+"Scanned" = "Eingescannt";
+
+"Select" = "Auswählen";
+
+"Select a location to upload the back of your identity document from" = "Wählen Sie einen Ort zum Hochladen der Rückseite Ihres Ausweisdokuments aus";
+
+"Select a location to upload the front of your identity document from" = "Wählen Sie einen Ort zum Hochladen der Vorderseite Ihres Ausweisdokuments aus";
+
+"Select back %@ photo" = "Wählen Sie Foto der Rückseite Ihres %@ aus";
+
+"Select back identity document photo" = "Wählen Sie das Foto der Rückseite Ihres Ausweisdokuments aus";
+
+"Select front %@ photo" = "Wählen Sie Foto der Vorderseite Ihres %@ aus";
+
+"Select front identity document photo" = "Wählen Sie das Foto der Vorderseite Ihres Ausweisdokuments aus";
+
+"Selfie" = "Selfie";
+
+"Selfie captures" = "Selfie-Aufnahmen";
+
+"Selfie captures are complete" = "Die Selfie-Aufnahmen sind abgeschlossen.";
+
+"Take Photo" = "Aufnahme machen";
+
+"The images of your identity document have not been saved. Do you want to leave?" = "Die Bilder Ihres Ausweisdokuments wurden nicht gespeichert. Möchten Sie die Seite verlassen?";
+
+"There was an error accessing the camera." = "Beim Zugriff auf die Kamera ist ein Fehler aufgetreten.";
+
+"Try Again" = "Erneut versuchen";
+
+"Try reduce glare and make ID visible" = "Verringern Sie Blendeffekte und achten Sie auf die Sichtbarkeit des Ausweisdokuments";
+
+"Unable to establish a connection." = "Es kann keine Verbindung hergestellt werden.";
+
+"Unsaved changes" = "Nicht gespeicherte Änderungen";
+
+"Upload" = "Hochladen";
+
+"Upload a Photo" = "Foto hochladen";
+
+"Upload your %@" = "Laden Sie Ihr %@ hoch";
+
+"Upload your photo ID" = "Lichtbildausweis hochladen";
+
+"Uploading back %@ photo" = "Hochladen des Fotos der Rückseite Ihres %@";
+
+"Uploading back identity document photo" = "Hochladen des Fotos der Rückseite Ihres Ausweisdokuments";
+
+"Uploading front %@ photo" = "Hochladen des Fotos der Vorderseite Ihres %@";
+
+"Uploading front identity document photo" = "Hochladen des Fotos der Vorderseite Ihres Ausweisdokuments";
+
+"Verify your identity" = "Identität verifizieren";
+
+"We could not capture a high-quality image." = "Wir konnten kein qualitativ hochwertiges Bild aufnehmen.";
+
+"We need permission to use your camera. Please allow camera access in app settings." = "Wir benötigen die Erlaubnis, Ihre Kamera zu verwenden. Bitte gewähren Sie den Kamerazugriff in den App-Einstellungen.";
+
+"Welcome" = "Willkommen";
+
+"You can either try again or upload an image from your device." = "Sie können es noch einmal versuchen oder ein Bild von Ihrem Endgerät hochladen.";
+
+"Your selfie images have not been saved. Do you want to leave?" = "Ihre Selfie-Aufnahmen wurden nicht gespeichert. Möchten Sie die Seite verlassen?";
+
+"driver's license" = "Führerschein";
+
+"government-issued photo ID" = "Behördlich ausgestellter Lichtbildausweis";
+
+"passport" = "Reisepass";

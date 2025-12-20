@@ -1,0 +1,586 @@
+//
+//  TextFieldElement+CardTest.swift
+//  StripeiOS Tests
+//
+//  Created by Yuki Tokuhiro on 2/25/22.
+//  Copyright © 2022 Stripe, Inc. All rights reserved.
+//
+
+import XCTest
+
+@testable@_spi(STP) import StripeCore
+@testable@_spi(STP) import StripePayments
+@testable@_spi(STP) @_spi(CardFundingFilteringPrivatePreview) import StripePaymentSheet
+@testable@_spi(STP) import StripePaymentsTestUtils
+@testable@_spi(STP) import StripePaymentsUI
+@testable@_spi(STP) import StripeUICore
+
+class TextFieldElementCardTest: STPNetworkStubbingTestCase {
+    func testPANValidation() throws {
+        typealias Error = TextFieldElement.PANConfiguration.Error
+        let testcases: [String: ElementValidationState] = [
+            "": .invalid(error: Error.empty, shouldDisplay: false),
+
+            // Incomplete
+            "4": .invalid(error: Error.incomplete, shouldDisplay: true),
+            "424242424242": .invalid(error: Error.incomplete, shouldDisplay: true),
+            // diners club (14 digit, but 13 digits given)
+            "3622720627166": .invalid(error: Error.incomplete, shouldDisplay: true),
+
+            // Unknown card brand
+            "0000000000000000": .invalid(error: Error.invalidBrand, shouldDisplay: true),
+            "1000000000000000": .invalid(error: Error.invalidBrand, shouldDisplay: true),
+            "1234567812345678": .invalid(error: Error.invalidBrand, shouldDisplay: true),
+            "9999999999999995": .invalid(error: Error.invalidBrand, shouldDisplay: true),
+            "1234123412341234": .invalid(error: Error.invalidBrand, shouldDisplay: true),
+            "9999999999999999999999": .invalid(error: Error.invalidBrand, shouldDisplay: true),
+
+            // Fails luhn check
+            "4012888888881889": .invalid(error: Error.invalidLuhn, shouldDisplay: true),
+            "2223000010089809": .invalid(error: Error.invalidLuhn, shouldDisplay: true),
+            "3530111333300009": .invalid(error: Error.invalidLuhn, shouldDisplay: true),
+            // mastercard (prepaid)
+            "5105105105105109": .invalid(error: Error.invalidLuhn, shouldDisplay: true),
+            // discover
+            "6011111111111119": .invalid(error: Error.invalidLuhn, shouldDisplay: true),
+            // cup
+            "6200000000000009": .invalid(error: Error.invalidLuhn, shouldDisplay: true),
+
+            // Valid (luhn-passing) PANs
+            "4012888888881881": .valid,
+            "2223000010089800": .valid,
+            "3530111333300000": .valid,
+            "4242424242424242": .valid,  // visa
+            "4000056655665556": .valid,  // visa (debit)
+            "5555555555554444": .valid,  // mastercard
+            "2223003122003222": .valid,  // mastercard (2-series)
+            "5200828282828210": .valid,  // mastercard (debit)
+            "5105105105105100": .valid,  // mastercard (prepaid)
+            "378282246310005": .valid,  // amex
+            "371449635398431": .valid,  // amex
+            "6011111111111117": .valid,  // discover
+            "6011000990139424": .valid,  // discover
+            "3056930009020004": .valid,  // diners club
+            "36227206271667": .valid,  // diners club (14 digit)
+            "3566002020360505": .valid,  // jcb
+            "6200000000000005": .valid,  // cup
+
+            // ⚠️ Don't test variable length PANs here -
+            // they trigger STPBINRange async calls that pollute other tests
+
+            // Non-US
+            "4000000760000002": .valid,  // br
+            "4000001240000000": .valid,  // ca
+            "4000004840008001": .valid,  // mx
+        ]
+
+        let configuration = TextFieldElement.PANConfiguration()
+        for (text, expected) in testcases {
+            let actual = configuration.simulateValidationState(text)
+            XCTAssertTrue(
+                actual == expected,
+                "Input \"\(text)\": expected \(expected) but got \(actual)"
+            )
+        }
+    }
+
+    func testBINRangeThatRequiresNetworkCallToValidate() {
+        // Set a publishable key for the metadata service
+        STPAPIClient.shared.publishableKey = STPTestingDefaultPublishableKey
+
+        var configuration = TextFieldElement.PANConfiguration()
+        let binController = STPBINController()
+        configuration.binController = binController
+
+        // Given a 19-digit Union Pay variable length number i.e., requires a network call in order to be know the correct length...
+        // (I got this number from https://hubble.corp.stripe.com/queries/ek/5612e1d3)
+        let unionPay19 = "6235510000000000009"  // 19-digit, valid luhn Union Pay
+        // a 16-digit valid luhn Union Pay that should be 19 digits according to its BIN prefix.
+        let unionPay19_but_16_digits_entered = "6235510000000002"
+        XCTAssertFalse(binController.hasBINRanges(forPrefix: unionPay19_but_16_digits_entered))
+        XCTAssertFalse(binController.hasBINRanges(forPrefix: unionPay19))
+
+        // ...we should allow a 16 digit number, since we don't know the correct length yet...
+        XCTAssertEqual(
+            configuration.simulateValidationState(unionPay19_but_16_digits_entered),
+            .valid
+        )
+        // ...and we should allow a 19 digit number
+        XCTAssertEqual(
+            configuration.simulateValidationState(unionPay19_but_16_digits_entered),
+            .valid
+        )
+        // ...and we should mark a 15 digit number as incomplete
+        XCTAssertEqual(
+            configuration.simulateValidationState(
+                unionPay19_but_16_digits_entered.stp_safeSubstring(to: 15)
+            ),
+            .invalid(error: TextFieldElement.PANConfiguration.Error.incomplete, shouldDisplay: true)
+        )
+
+        // ...and load the BIN range.
+        XCTAssertTrue(
+            binController.isLoadingCardMetadata(forPrefix: unionPay19_but_16_digits_entered)
+        )
+
+        // After we've loaded the bin range...
+        let e = expectation(description: "Fetch BIN Range")
+        binController.retrieveBINRanges(forPrefix: unionPay19_but_16_digits_entered) { _ in
+            e.fulfill()
+        }
+        waitForExpectations(timeout: 10, handler: nil)
+        XCTAssertTrue(binController.hasBINRanges(forPrefix: unionPay19_but_16_digits_entered))
+        XCTAssertTrue(binController.hasBINRanges(forPrefix: unionPay19))
+
+        // ...a 16 digit number should be considered incomplete
+        XCTAssertEqual(
+            configuration.simulateValidationState(unionPay19_but_16_digits_entered),
+            .invalid(error: TextFieldElement.PANConfiguration.Error.incomplete, shouldDisplay: true)
+        )
+        // ...and the 19 digit number should still be valid
+        XCTAssertEqual(
+            configuration.simulateValidationState(unionPay19),
+            .valid
+        )
+
+        // Hack to let STPBINRange finish network calls before running another test
+        let allRetrievalsAreComplete = expectation(description: "Fetch BIN Range")
+        binController.retrieveBINRanges(forPrefix: unionPay19_but_16_digits_entered) { _ in
+            allRetrievalsAreComplete.fulfill()
+        }
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    func testBINRangeThatRequiresNetworkCallToValidateWhenCallFails() {
+        // We set an invalid publishable key so that STPBINRange calls to the API fail
+        STPAPIClient.shared.publishableKey = ""
+        var configuration = TextFieldElement.PANConfiguration()
+        let binController = STPBINController()
+        configuration.binController = binController
+
+        // Given a 19-digit Union Pay variable length number i.e., requires a network call in order to be know the correct length...
+        // (I got this number from https://hubble.corp.stripe.com/queries/ek/5612e1d3)
+        let unionPay19 = "6235510000000000009"  // 19-digit, valid luhn Union Pay
+        // a 16-digit valid luhn Union Pay that should be 19 digits according to its BIN prefix.
+        let unionPay19_but_16_digits_entered = "6235510000000002"
+        XCTAssertFalse(binController.hasBINRanges(forPrefix: unionPay19_but_16_digits_entered))
+        XCTAssertFalse(binController.hasBINRanges(forPrefix: unionPay19))
+
+        // ...we should allow a 16 digit number, since we don't know the correct length yet...
+        XCTAssertEqual(
+            configuration.simulateValidationState(unionPay19_but_16_digits_entered),
+            .valid
+        )
+        // ...and we should allow a 19 digit number
+        XCTAssertEqual(
+            configuration.simulateValidationState(unionPay19_but_16_digits_entered),
+            .valid
+        )
+
+        // ...and load the BIN range.
+        XCTAssertTrue(
+            binController.isLoadingCardMetadata(forPrefix: unionPay19_but_16_digits_entered)
+        )
+
+        // After we've unsuccessfully loaded the bin range...
+        let e = expectation(description: "Fetch BIN Range")
+        binController.retrieveBINRanges(forPrefix: unionPay19_but_16_digits_entered) { _ in
+            e.fulfill()
+        }
+        waitForExpectations(timeout: 10, handler: nil)
+        XCTAssertFalse(binController.hasBINRanges(forPrefix: unionPay19_but_16_digits_entered))
+        XCTAssertFalse(binController.hasBINRanges(forPrefix: unionPay19))
+
+        // ...16 and 19 digit numbers should still be allowed, since we still don't know the correct length
+        XCTAssertEqual(configuration.maxLength(for: unionPay19_but_16_digits_entered), 19)
+        XCTAssertEqual(
+            configuration.simulateValidationState(unionPay19_but_16_digits_entered),
+            .valid
+        )
+        // ...and the 19 digit number should still be valid
+        XCTAssertEqual(configuration.maxLength(for: unionPay19), 19)
+        XCTAssertEqual(
+            configuration.simulateValidationState(unionPay19),
+            .valid
+        )
+
+        // Hack to let STPBINRange finish network calls before running another test
+        let allRetrievalsAreComplete = expectation(description: "Fetch BIN Range")
+        binController.retrieveBINRanges(forPrefix: unionPay19_but_16_digits_entered) { _ in
+            allRetrievalsAreComplete.fulfill()
+        }
+        waitForExpectations(timeout: 10, handler: nil)
+    }
+
+    func testCVCValidation() {
+        let emptyError = TextFieldElement.Error.empty(localizedDescription: .Localized.your_cards_security_code_is_incomplete)
+        let incompleteError = TextFieldElement.Error.incomplete(
+            localizedDescription: .Localized.your_cards_security_code_is_incomplete
+        )
+        let testcases: [(String, STPCardBrand, ElementValidationState)] = [
+            // VISA CVC are 3 digits
+            ("", .visa, .invalid(error: emptyError, shouldDisplay: false)),
+            ("1", .visa, .invalid(error: incompleteError, shouldDisplay: true)),
+            ("12", .visa, .invalid(error: incompleteError, shouldDisplay: true)),
+            ("123", .visa, .valid),
+
+            // Unknown card brand allows 3 or 4 digits
+            ("", .unknown, .invalid(error: emptyError, shouldDisplay: false)),
+            ("1", .unknown, .invalid(error: incompleteError, shouldDisplay: true)),
+            ("12", .unknown, .invalid(error: incompleteError, shouldDisplay: true)),
+            ("123", .unknown, .valid),
+            ("1234", .unknown, .valid),
+
+            // Amex CVV allow 3 or 4 digits
+            ("", .amex, .invalid(error: emptyError, shouldDisplay: false)),
+            ("1", .amex, .invalid(error: incompleteError, shouldDisplay: true)),
+            ("12", .amex, .invalid(error: incompleteError, shouldDisplay: true)),
+            ("123", .amex, .valid),
+            ("1234", .amex, .valid),
+        ]
+        for (text, brand, expected) in testcases {
+            let config = TextFieldElement.CVCConfiguration(cardBrandProvider: {
+                return brand
+            })
+            let actual = config.simulateValidationState(text)
+            XCTAssertTrue(
+                actual == expected,
+                "Input \"\(text), \(brand)\": expected \(expected) but got \(actual)"
+            )
+        }
+    }
+
+    func testExpiryValidation() throws {
+        typealias Error = TextFieldElement.ExpiryDateConfiguration.Error
+
+        let calendar = Calendar(identifier: .gregorian)
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMyy"
+        dateFormatter.calendar = calendar
+
+        let currentMonth = try XCTUnwrap(
+            calendar.date(from: calendar.dateComponents([.year, .month], from: Date()))
+        )
+        let lastMonth = try XCTUnwrap(calendar.date(byAdding: .month, value: -1, to: currentMonth))
+        let nextMonth = try XCTUnwrap(calendar.date(byAdding: .month, value: 1, to: currentMonth))
+        let oneYearFromNow = try XCTUnwrap(
+            calendar.date(byAdding: .year, value: 1, to: currentMonth)
+        )
+
+        let testcases: [String: ElementValidationState] = [
+            // Test empty -> incomplete -> complete
+            "": .invalid(error: TextFieldElement.Error.empty(localizedDescription: String.Localized.your_cards_expiration_date_is_incomplete), shouldDisplay: false),
+            "0": .invalid(error: Error.incomplete, shouldDisplay: true),
+            "1": .invalid(error: Error.incomplete, shouldDisplay: true),
+            "12": .invalid(error: Error.incomplete, shouldDisplay: true),
+            "12/2": .invalid(error: Error.incomplete, shouldDisplay: true),
+            "12/49": .valid,
+            // Cards expire at end of last day of printed month.
+            dateFormatter.string(from: currentMonth): .valid,
+            dateFormatter.string(from: oneYearFromNow): .valid,
+            dateFormatter.string(from: nextMonth): .valid,
+
+            // Test invalid months
+            "00": .invalid(error: Error.invalidMonth, shouldDisplay: true),
+            "00/9": .invalid(error: Error.invalidMonth, shouldDisplay: true),
+            "00/99": .invalid(error: Error.invalidMonth, shouldDisplay: true),
+            "13": .invalid(error: Error.invalidMonth, shouldDisplay: true),
+
+            // Test expired dates
+            "12/21": .invalid(error: Error.expired, shouldDisplay: true),
+            "01/22": .invalid(error: Error.expired, shouldDisplay: true),
+            dateFormatter.string(from: lastMonth): .invalid(
+                error: Error.expired,
+                shouldDisplay: true
+            ),
+        ]
+        let configuration = TextFieldElement.ExpiryDateConfiguration()
+        for (text, expected) in testcases {
+            let actual = configuration.simulateValidationState(text)
+            XCTAssertTrue(
+                actual == expected,
+                "Input \"\(text)\": expected \(expected) but got \(actual)"
+            )
+        }
+    }
+
+    func testExpiryDisplayText() {
+        let configuration = TextFieldElement.ExpiryDateConfiguration()
+        let textFieldElement = TextFieldElement(configuration: configuration)
+
+        let testcases = [
+            "0": "0",
+            "1": "1",
+            "2": "02",
+            "3": "03",
+            "4": "04",
+            "5": "05",
+            "6": "06",
+            "7": "07",
+            "8": "08",
+            "9": "09",
+            "10": "10",
+            "102": "10/2",
+            "1021": "10/21",
+        ]
+
+        for (text, expected) in testcases {
+            // Simulate user input
+            textFieldElement.textFieldView.textField.text = text
+            textFieldElement.textFieldView.textDidChange()
+            let actual = textFieldElement.textFieldView.textField.text
+            XCTAssertTrue(
+                actual == expected,
+                "Input \"\(text)\": expected \(expected) but got \(actual!)"
+            )
+        }
+    }
+
+    class STPAnalyticsClientTestDelegate: NSObject, STPAnalyticsClientDelegate {
+        let didLogBlock: (([String: Any]) -> Void)
+
+        init(didLogBlock: @escaping ([String: Any]) -> Void) {
+            self.didLogBlock = didLogBlock
+        }
+
+        func analyticsClientDidLog(analyticsClient: STPAnalyticsClient, payload: [String: Any]) {
+            didLogBlock(payload)
+        }
+    }
+
+    func testAlertsOnExpected19DigitCard() {
+        // Set a publishable key for the metadata service
+        STPAPIClient.shared.publishableKey = STPTestingDefaultPublishableKey
+
+        // Set up a CardSectionElement:
+        let cardSection = CardSectionElement(
+            collectName: false,
+            defaultValues: .init(),
+            preferredNetworks: nil,
+            cardBrandChoiceEligible: false,
+            hostedSurface: .paymentSheet,
+            theme: .default,
+            analyticsHelper: ._testValue(),
+            cardBrandFilter: .default,
+            opensCardScannerAutomatically: false
+        )
+        let textFieldElement = cardSection.panElement
+
+        // A 16 digit card number that should be 19 digits:
+        let unionPay19_but_16_digits_entered = "6235510000000002"
+
+        // Cache the UnionPay BIN range first:
+        let allRetrievalsAreComplete = expectation(description: "Fetch BIN Range")
+        (textFieldElement.configuration as! TextFieldElement.PANConfiguration).binController.retrieveBINRanges(forPrefix: unionPay19_but_16_digits_entered) { _ in
+            allRetrievalsAreComplete.fulfill()
+        }
+        // Wait for the fetch to complete
+        wait(for: [allRetrievalsAreComplete], timeout: 10)
+
+        // Set up a delegate to watch for the more-than-16-digits-expected log
+        let logExpectation = expectation(description: "Did log analytics event")
+        let analyticsDelegate = STPAnalyticsClientTestDelegate { payload in
+            if payload["event"] as? String == "stripeios.card_metadata.expected_extra_digits_but_user_entered_16_then_switched_fields" {
+                logExpectation.fulfill()
+            }
+        }
+        STPAnalyticsClient.sharedClient.delegate = analyticsDelegate
+
+        // Enter the card number, trigger the textDidChange event, and make sure the field isn't focused:
+        textFieldElement.textFieldView.textField.text = unionPay19_but_16_digits_entered
+        textFieldElement.textFieldView.textDidChange()
+
+        // Wait for the analytics event
+        wait(for: [logExpectation], timeout: 10)
+        // Put back the analytics delegate to avoid polluting the other test states
+        STPAnalyticsClient.sharedClient.delegate = nil
+    }
+
+    func testCardSectionElement_cardFundingFiltering_showsWarningButRemainsValid() {
+        let originalPublishableKey = STPAPIClient.shared.publishableKey
+        STPAPIClient.shared.publishableKey = STPTestingDefaultPublishableKey
+        defer { STPAPIClient.shared.publishableKey = originalPublishableKey }
+
+        // Set up a CardSectionElement with funding filter that only allows debit:
+        let cardSection = CardSectionElement(
+            collectName: false,
+            defaultValues: .init(),
+            preferredNetworks: nil,
+            cardBrandChoiceEligible: false,
+            hostedSurface: .paymentSheet,
+            theme: .default,
+            analyticsHelper: ._testValue(),
+            cardBrandFilter: .default,
+            cardFundingFilter: .init(allowedFundingTypes: .debit, filteringEnabled: true),
+            opensCardScannerAutomatically: false
+        )
+        let textFieldElement = cardSection.panElement
+
+        // Visa credit card
+        let visaCredit = "4242424242424242"
+
+        // First, fetch BIN ranges so we have funding info
+        let fetchExpectation = expectation(description: "Fetch BIN Range")
+        (textFieldElement.configuration as! TextFieldElement.PANConfiguration).binController.retrieveBINRanges(
+            forPrefix: String(visaCredit.prefix(6)),
+            recordErrorsAsSuccess: false,
+            onlyFetchForVariableLengthBINs: false
+        ) { _ in
+            fetchExpectation.fulfill()
+        }
+        wait(for: [fetchExpectation], timeout: 10)
+
+        // Enter the credit card number
+        textFieldElement.textFieldView.textField.text = visaCredit
+        textFieldElement.textFieldView.textDidChange()
+
+        // Check - card should still be VALID (not blocking)
+        XCTAssertTrue(
+            textFieldElement.validationState.isValid,
+            "Credit card should remain valid (warning-only, not blocking)"
+        )
+
+        // But should show a warning via warningLabelText
+        XCTAssertEqual(
+            textFieldElement.warningLabelText,
+            "Only debit cards are accepted"
+        )
+    }
+
+    func testPANValidation_cardBrandFiltering() throws {
+        typealias Error = TextFieldElement.PANConfiguration.Error
+        let testcases: [String: ElementValidationState] = [
+            // Valid (luhn-passing) PANs
+            "4012888888881881": .valid,
+            "2223000010089800": .invalid(error: Error.disallowedBrand(brand: .mastercard), shouldDisplay: true),  // mastercard
+            "3530111333300000": .valid,
+            "4242424242424242": .valid,  // visa
+            "4000056655665556": .valid,  // visa (debit)
+            "5555555555554444": .invalid(error: Error.disallowedBrand(brand: .mastercard), shouldDisplay: true),  // mastercard
+            "2223003122003222": .invalid(error: Error.disallowedBrand(brand: .mastercard), shouldDisplay: true),  // mastercard (2-series)
+            "5200828282828210": .invalid(error: Error.disallowedBrand(brand: .mastercard), shouldDisplay: true),  // mastercard (debit)
+            "5105105105105100": .invalid(error: Error.disallowedBrand(brand: .mastercard), shouldDisplay: true),  // mastercard (prepaid)
+            "378282246310005": .invalid(error: Error.disallowedBrand(brand: .amex), shouldDisplay: true),  // amex
+            "371449635398431": .invalid(error: Error.disallowedBrand(brand: .amex), shouldDisplay: true),  // amex
+            "6011111111111117": .valid,  // discover
+            "6011000990139424": .valid,  // discover
+            "3056930009020004": .valid,  // diners club
+            "36227206271667": .valid,  // diners club (14 digit)
+            "3566002020360505": .valid,  // jcb
+            "6200000000000005": .valid,  // cup
+        ]
+
+        let configuration = TextFieldElement.PANConfiguration(cardBrandFilter: .init(cardBrandAcceptance: .disallowed(brands: [.amex, .mastercard])))
+        for (text, expected) in testcases {
+            let actual = configuration.simulateValidationState(text)
+            XCTAssertTrue(
+                actual == expected,
+                "Input \"\(text)\": expected \(expected) but got \(actual)"
+            )
+        }
+    }
+
+    func testPANValidation_cardFundingFiltering_noWarningWithoutNetworkFetch() throws {
+        // Without fetching from the network, hardcoded BIN ranges have .other funding
+        // so no funding warning should be shown (we don't have reliable funding info)
+
+        let testcases = [
+            "4242424242424242",  // visa (credit in reality, but hardcoded has .other)
+            "4000056655665556",  // visa (debit in reality, but hardcoded has .other)
+            "5555555555554444",  // mastercard
+        ]
+
+        // Only allow debit - but without network fetch, we don't know the funding type
+        var configuration = TextFieldElement.PANConfiguration(
+            cardFundingFilter: .init(allowedFundingTypes: .debit, filteringEnabled: true)
+        )
+        configuration.binController = STPBINController()
+
+        for text in testcases {
+            // Card should be valid (not blocked)
+            let validationState = configuration.simulateValidationState(text)
+            XCTAssertTrue(validationState.isValid, "Card should be valid even with funding filter before network fetch")
+
+            // No warning should be shown (hardcoded ranges don't have funding info)
+            let warningText = configuration.warningLabel(text: text)
+            XCTAssertNil(warningText, "No warning should be shown for hardcoded BIN ranges")
+        }
+    }
+
+    func testPANValidation_cardFundingFiltering_noWarningForAllowedFunding() throws {
+        var configuration = TextFieldElement.PANConfiguration(
+            cardFundingFilter: .init(allowedFundingTypes: .debit, filteringEnabled: true)
+        )
+        let binController = STPBINController()
+        configuration.binController = binController
+
+        // Visa debit card number
+        let visaDebit = "4000056655665556"
+
+        // Fetch BIN ranges from the network
+        let fetchExpectation = expectation(description: "Fetch BIN Range")
+        binController.retrieveBINRanges(
+            forPrefix: String(visaDebit.prefix(6)),
+            recordErrorsAsSuccess: false,
+            onlyFetchForVariableLengthBINs: false
+        ) { _ in
+            fetchExpectation.fulfill()
+        }
+        wait(for: [fetchExpectation], timeout: 10)
+
+        let binRange = binController.mostSpecificBINRange(forNumber: visaDebit)
+        if !binRange.isHardcoded && binRange.funding == .debit {
+            // Should be valid with no warning for debit card when debit is allowed
+            XCTAssertTrue(configuration.simulateValidationState(visaDebit).isValid)
+            XCTAssertNil(configuration.warningLabel(text: visaDebit), "No warning should be shown for allowed funding type")
+        }
+    }
+
+    func testPANValidation_cardFundingFiltering_noWarningWhenAllAllowed() throws {
+        // Test that no warning is shown when all funding types are allowed
+        let testcases = [
+            "4242424242424242",  // visa
+            "4000056655665556",  // visa (debit)
+            "5555555555554444",  // mastercard
+        ]
+
+        // Allow all funding types (default)
+        let configuration = TextFieldElement.PANConfiguration(
+            cardFundingFilter: .default
+        )
+
+        for text in testcases {
+            XCTAssertEqual(configuration.simulateValidationState(text), .valid)
+            XCTAssertNil(configuration.warningLabel(text: text), "No warning should be shown when all funding types are allowed")
+        }
+    }
+}
+
+extension TextFieldElementConfiguration {
+    // MARK: - Helpers
+    func simulateValidationState(_ input: String) -> ElementValidationState {
+        let textFieldElement = TextFieldElement(configuration: self)
+        textFieldElement.textFieldView.textField.text = input
+        textFieldElement.textFieldView.textDidChange()
+        return textFieldElement.validationState
+    }
+}
+
+extension ElementValidationState: Equatable {
+    /// - Note: Assumes errors are equal if their localized descriptions are equal
+    public static func == (lhs: ElementValidationState, rhs: ElementValidationState) -> Bool {
+        switch (lhs, rhs) {
+        case (.valid, .valid):
+            return true
+        case (
+            .invalid(let lhs_error, let lhs_shouldDisplay),
+            .invalid(let rhs_error, let rhs_shouldDisplay)
+        ):
+            return lhs_error.localizedDescription == rhs_error.localizedDescription
+                && lhs_shouldDisplay == rhs_shouldDisplay
+        default:
+            return false
+        }
+    }
+}
