@@ -1,0 +1,193 @@
+"A few photos will be taken automatically on the next step to verify it's you" = "V dalším kroku se automaticky pořídí několik fotografií, aby se ověřilo, že jste to vy.";
+
+"Accepted forms of ID include" = "Přijímané formy průkazu totožnosti zahrnují";
+
+"Alternatively, you may manually upload a photo of your identity document." = "Můžete také ručně nahrát fotografii dokladu totožnosti.";
+
+"App Settings" = "Nastavení aplikace";
+
+"Back %@ photo successfully uploaded" = "Zadní strana fotografie %@ byla úspěšně nahrána";
+
+"Back identity document photo successfully uploaded" = "Zadní strana fotografie dokladu totožnosti byla úspěšně nahrána";
+
+"Back of %@" = "Zadní strana %@";
+
+"Back of driver's license or government-issued photo ID" = "Zadní strana řidičského průkazu nebo státem vydaného průkazu totožnosti s fotografií";
+
+"Back of identity document" = "Zadní strana průkazu totožnosti";
+
+"Camera permission" = "Povolení k použití fotoaparátu";
+
+"Camera unavailable" = "Fotoaparát není dostupný";
+
+"Capturing…" = "Probíhá fotografování...";
+
+"Choose File" = "Vybrat soubor";
+
+"Consent" = "Souhlas";
+
+"Could not capture image" = "Nebylo možné pořídit obrázek";
+
+"Date of birth does not look valid" = "Datum narození nevypadá jako platný údaj";
+
+"Details not visible" = "Detaily nejsou viditelné";
+
+"Flip your %@ over to the other side" = "Překlopte %@ na druhou stranu";
+
+"Flip your driver's license or government-issued photo ID over to the other side" = "Otočte řidičský průkaz nebo státem vydaný průkaz totožnosti s fotografií na druhou stranu";
+
+"Flip your identity card over to the other side" = "Převraťte průkaz totožnosti na druhou stranu";
+
+"Front %@ photo successfully uploaded" = "Přední strana fotografie %@ byla úspěšně nahrána";
+
+"Front identity document photo successfully uploaded" = "Přední strana fotografie dokladu totožnosti byla úspěšně nahrána";
+
+"Front of %@" = "Přední strana %@";
+
+"Front of driver's license or government-issued photo ID" = "Přední strana řidičského průkazu nebo státem vydaného průkazu totožnosti s fotografií";
+
+"Front of driver's license or passport" = "Přední strana řidičského průkazu nebo pasu";
+
+"Front of driver's license, passport, or government-issued photo ID" = "Přední strana řidičského průkazu, pasu nebo státem vydaného průkazu totožnosti s fotografií";
+
+"Front of identity document" = "Přední strana průkazu totožnosti";
+
+"Front of passport or government-issued photo ID" = "Přední strana pasu nebo státem vydaného průkazu totožnosti s fotografií";
+
+"Get ready to scan your photo ID" = "Připravte se na skenování průkazu totožnosti s fotografií";
+
+"Get ready to take a selfie" = "Připravte se na pořízení selfie";
+
+"Go Back" = "Zpět";
+
+"Hold still, scanning" = "Držte rovně, probíhá skenování";
+
+"I'm ready" = "Jsem připraven/a";
+
+"ID Number" = "Identifikační číslo";
+
+"Individual CPF" = "Individuální CPF";
+
+"Keep ID level" = "Zachovat úroveň dokladu";
+
+"Last 4 of Social Security number" = "Poslední 4 pozice čísla sociálního pojištění";
+
+"Loading" = "Načítání";
+
+"Make sure all details are visible and focus" = "Ujistěte se, že jsou všechny detaily viditelné a zaostřené";
+
+"Make sure you're in a well lit space." = "Ujistěte se, že jste v řádně  osvětleném prostoru.";
+
+"Move closer" = "Posuňte blíže";
+
+"Move farther" = "Posuňte dále";
+
+"Move to a darker area" = "Přesuňte se do tmavší oblasti.";
+
+"Move to a well-lit area" = "Přesuňte se na dobře osvětlené místo";
+
+"NRIC or FIN" = "NRIC nebo FIN";
+
+"No document detected" = "Nebyl zjištěn žádný dokument";
+
+"Personal ID number" = "Osobní identifikační číslo";
+
+"Personal Information" = "Osobní informace";
+
+"Phone Number" = "Telefonní číslo";
+
+"Phone Verification" = "Telefonické ověření";
+
+"Photo Library" = "Knihovna fotek";
+
+"Please upload images of the front and back of your %@" = "Nahrajte prosím snímky přední a zadní strany vašeho %@";
+
+"Please upload images of the front and back of your identity document" = "Nahrajte prosím fotografie přední a zadní strany vašeho dokladu totožnosti";
+
+"Position your %@ in the center of the frame" = "Umístěte %@ do středu snímku";
+
+"Position your driver's license or government-issued photo ID in the center of the frame" = "Umístěte řidičský průkaz nebo státem vydaný průkaz totožnosti s fotografií do středu rámečku";
+
+"Position your driver's license or passport in the center of the frame" = "Umístěte řidičský průkaz nebo pas do středu rámečku";
+
+"Position your driver's license, passport, or government-issued photo ID in the center of the frame" = "Umístěte řidičský průkaz, pas nebo státem vydaný průkaz totožnosti s fotografií do středu rámečku";
+
+"Position your face in the center of the frame." = "Svoji tvář umístěte do středu rámečku.";
+
+"Position your identity document in the center of the frame" = "Umístěte svůj doklad totožnosti do středu rámečku";
+
+"Position your passport or government-issued photo ID in the center of the frame" = "Umístěte pas nebo státem vydaný průkaz totožnosti s fotografií do středu rámečku";
+
+"Retake Photos" = "Znovu pořídit fotografie";
+
+"Scan" = "Skenovat";
+
+"Scanned" = "Naskenováno";
+
+"Select" = "Vybrat";
+
+"Select a location to upload the back of your identity document from" = "Vyberte místo k nahrání zadní strany vašeho průkazu totožnosti z";
+
+"Select a location to upload the front of your identity document from" = "Vyberte místo k nahrání přední strany vašeho průkazu totožnosti z";
+
+"Select back %@ photo" = "Vyberte zadní stranu %@ fotografie";
+
+"Select back identity document photo" = "Vyberte zadní stranu fotografie dokladu totožnosti";
+
+"Select front %@ photo" = "Vyberte přední stranu fotografie %@";
+
+"Select front identity document photo" = "Vyberte přední stranu fotografie dokladu totožnosti";
+
+"Selfie" = "Selfie";
+
+"Selfie captures" = "Pořízené snímky selfie";
+
+"Selfie captures are complete" = "Pořízení snímků selfie je dokončené";
+
+"Take Photo" = "Pořídit fotku";
+
+"The images of your identity document have not been saved. Do you want to leave?" = "Obrázky z vašeho průkazu totožnosti nebyly uloženy. Chcete odejít?";
+
+"There was an error accessing the camera." = "Při přístupu k fotoaparátu došlo k chybě.";
+
+"Try Again" = "Zkusit znovu";
+
+"Try reduce glare and make ID visible" = "Zkuste snížit jas a zviditelnit doklad.";
+
+"Unable to establish a connection." = "Nelze navázat spojení.";
+
+"Unsaved changes" = "Neuložené změny";
+
+"Upload" = "Nahrát";
+
+"Upload a Photo" = "Nahrát fotografii";
+
+"Upload your %@" = "Nahrajte svůj %@";
+
+"Upload your photo ID" = "Nahrajte svou fotografii";
+
+"Uploading back %@ photo" = "Nahrávání zadní strany fotografie %@";
+
+"Uploading back identity document photo" = "Nahrávání zadní strany fotografie dokladu totožnosti";
+
+"Uploading front %@ photo" = "Nahrávání přední strany fotografie %@";
+
+"Uploading front identity document photo" = "Nahrávání přední strany fotografie dokladu totožnosti";
+
+"Verify your identity" = "Potvrďte svou totožnost";
+
+"We could not capture a high-quality image." = "Nepodařilo se nám pořídit vysoce kvalitní snímek.";
+
+"We need permission to use your camera. Please allow camera access in app settings." = "Potřebujeme povolení k použití vašeho fotoaparátu. V nastavení aplikace povolte přístup k fotoaparátu.";
+
+"Welcome" = "Vítejte";
+
+"You can either try again or upload an image from your device." = "Můžete to zkusit znovu nebo nahrát obrázek ze svého zařízení.";
+
+"Your selfie images have not been saved. Do you want to leave?" = "Vaše selfie snímky nebyly uloženy. Chcete skutečně skončit?";
+
+"driver's license" = "řidičský průkaz";
+
+"government-issued photo ID" = "průkaz totožnosti s fotografií vydaný státem";
+
+"passport" = "pas";

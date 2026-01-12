@@ -1,0 +1,151 @@
+"%1$@ •••• %2$@" = "%1$@ •••• %2$@";
+
+"%@ (optional)" = "%@ (valikuline)";
+
+"(not accepted)" = "(pole aktsepteeritud)";
+
+"Account number" = "Kontonumber";
+
+"Address" = "Aadress";
+
+"Address line 1" = "Aadressirida 1";
+
+"Address line 2" = "Aadressirida 2";
+
+"Area" = "Piirkond";
+
+"BLIK code" = "BLIK-kood";
+
+"BSB number" = "BSB-number";
+
+"Bank account •••• %@" = "Pangakonto •••• %@";
+
+"Billing address is same as shipping" = "Arveldusaadress on sama mis tarneaadress";
+
+"Cancel" = "Tühista";
+
+"Card brand" = "Kaardi bränd";
+
+"City" = "Linn";
+
+"Code field" = "Koodi väli";
+
+"Company" = "Ettevõte";
+
+"Continue" = "Jätka";
+
+"Country" = "Riik";
+
+"Country or region" = "Riik või regioon";
+
+"County" = "Maakond";
+
+"Date of Birth" = "Sünnikuupäev";
+
+"Department" = "Departemang";
+
+"District" = "Regioon";
+
+"Do Si" = "Do Si";
+
+"Do you want to close this form?" = "Kas soovite selle vormi sulgeda?";
+
+"Done" = "Valmis";
+
+"Double tap to edit" = "Redigeerimiseks topeltklõpsake";
+
+"Edit" = "Muutmine";
+
+"Eircode" = "Eircode";
+
+"Email" = "Meiliaadress";
+
+"Emirate" = "Emiraat";
+
+"Error" = "Viga";
+
+"First" = "Esimene";
+
+"Full name" = "Täisnimi";
+
+"Incomplete phone number" = "Telefoninumber puudulik";
+
+"Invalid UPI ID" = "Kehtetu UPI ID";
+
+"Island" = "Saar";
+
+"Last" = "Viimane";
+
+"Name" = "Nimi";
+
+"Name on account" = "Nimi kontol";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Muu";
+
+"Parish" = "Vald";
+
+"Phone number" = "Telefoninumber";
+
+"Postal code" = "Sihtnumber";
+
+"Prefecture" = "Prefektuur";
+
+"Province" = "Maakond";
+
+"Remove" = "Eemalda";
+
+"Remove bank account?" = "Kas soovite pangakonto eemaldada?";
+
+"Remove card" = "Eemalda kaart";
+
+"Search" = "Otsing";
+
+"Select card brand (optional)" = "Valige kaardi kaubamärk (valikuline)";
+
+"Selection is empty." = "Valik on tühi.";
+
+"Sort code" = "Sorteerimiskood";
+
+"State" = "Osariik";
+
+"Suburb" = "Eeslinn";
+
+"Suburb or city" = "Eeslinn või linn";
+
+"The BSB you entered is incomplete." = "Sisestatud BSB-number on puudulik.";
+
+"The ID number you entered is incomplete." = "Sisestatud isikukood on puudulik.";
+
+"The account number you entered is incomplete." = "Sisestatud kontonumber on puudulik.";
+
+"The sort code you entered is invalid." = "Sisestatud sorteerimiskood ei ole kehtiv.";
+
+"Town or city" = "Linn";
+
+"UPI ID" = "UPI ID";
+
+"Unable to parse phone number" = "Telefoninumbri parsimine ebaõnnestus";
+
+"Use rotor to access links" = "Kasutage linkidele juurdepääsuks rootorit";
+
+"Your BLIK code is incomplete." = "Teie BLIK-kood on puudulik.";
+
+"Your BLIK code is invalid." = "Teie BLIK-kood on kehtetu.";
+
+"Your ZIP code is incomplete." = "Teie postiindeks on puudulik.";
+
+"Your ZIP code is invalid." = "Teie postiindeks on vigane.";
+
+"Your email is invalid." = "Teie meiliaadress on kehtetu.";
+
+"Your payment information will not be saved." = "Teie makseteavet ei salvestata.";
+
+"Your postal code is incomplete." = "Sihtnumber on puudulik.";
+
+"Your postal code is invalid." = "Teie sihtnumber on kehtetu.";
+
+"ZIP" = "Sihtnr";
