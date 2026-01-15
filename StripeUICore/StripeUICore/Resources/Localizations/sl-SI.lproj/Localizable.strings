@@ -1,0 +1,151 @@
+"%1$@ •••• %2$@" = "%1$@ •••• %2$@";
+
+"%@ (optional)" = "%@ (izbirno)";
+
+"(not accepted)" = "(ni sprejeto)";
+
+"Account number" = "Številka računa";
+
+"Address" = "Naslov";
+
+"Address line 1" = "Naslov 1";
+
+"Address line 2" = "Vrstica naslova 2";
+
+"Area" = "Območje";
+
+"BLIK code" = "Koda BLIK";
+
+"BSB number" = "Številka BSB";
+
+"Bank account •••• %@" = "Bančni račun •••• %@";
+
+"Billing address is same as shipping" = "Naslov za obračunavanje je isti kot dostavni naslov";
+
+"Cancel" = "Prekliči";
+
+"Card brand" = "Blagovna znamka kartice";
+
+"City" = "Mesto";
+
+"Code field" = "Polje za kodo";
+
+"Company" = "Podjetje";
+
+"Continue" = "Nadaljuj";
+
+"Country" = "Država";
+
+"Country or region" = "Država ali regija";
+
+"County" = "Okraj";
+
+"Date of Birth" = "Datum rojstva";
+
+"Department" = "Oddelek";
+
+"District" = "Okrožje";
+
+"Do Si" = "Do Si";
+
+"Do you want to close this form?" = "Ali želite zapreti ta obrazec?";
+
+"Done" = "Dokončano";
+
+"Double tap to edit" = "Dvotapnite, da uredite";
+
+"Edit" = "Uredi";
+
+"Eircode" = "Eircode";
+
+"Email" = "E-poštni naslov";
+
+"Emirate" = "Emirat";
+
+"Error" = "Napaka";
+
+"First" = "Ime";
+
+"Full name" = "Polno ime";
+
+"Incomplete phone number" = "Nepopolna telefonska številka mobilnega telefona.";
+
+"Invalid UPI ID" = "Neveljaven UPI ID";
+
+"Island" = "Otok";
+
+"Last" = "Priimek";
+
+"Name" = "Ime";
+
+"Name on account" = "Ime na računu";
+
+"OK" = "V redu";
+
+"Oblast" = "Oblast";
+
+"Other" = "Drugo";
+
+"Parish" = "Župnija";
+
+"Phone number" = "Telefonska številka";
+
+"Postal code" = "Poštna številka";
+
+"Prefecture" = "Prefektura";
+
+"Province" = "Provinca";
+
+"Remove" = "Odstrani";
+
+"Remove bank account?" = "Ali želite odstraniti bančni račun?";
+
+"Remove card" = "Odstrani kartico";
+
+"Search" = "Išči";
+
+"Select card brand (optional)" = "Izberite blagovno znamko kartice (neobvezno)";
+
+"Selection is empty." = "Izbor je prazen.";
+
+"Sort code" = "Številka banke";
+
+"State" = "Zvezna država";
+
+"Suburb" = "Predmestje";
+
+"Suburb or city" = "Predmestje ali mesto";
+
+"The BSB you entered is incomplete." = "Vneseni BSB ni popoln.";
+
+"The ID number you entered is incomplete." = "Vnesena številka osebnega dokumenta ni popolna.";
+
+"The account number you entered is incomplete." = "Vnesena številka računa ni popolna.";
+
+"The sort code you entered is invalid." = "Ta številka banke ni veljavna.";
+
+"Town or city" = "Kraj ali mesto";
+
+"UPI ID" = "UPI ID";
+
+"Unable to parse phone number" = "Telefonske številke ni mogoče razčleniti";
+
+"Use rotor to access links" = "Uporabite rotor za dostop do povezav";
+
+"Your BLIK code is incomplete." = "Vaša koda BLIK ni popolna.";
+
+"Your BLIK code is invalid." = "Vaša koda BLIK ni veljavna.";
+
+"Your ZIP code is incomplete." = "Vaša poštna številka je nepopolna.";
+
+"Your ZIP code is invalid." = "Vaša poštna številka ni veljavna.";
+
+"Your email is invalid." = "Vaš e-poštni naslov ni veljaven.";
+
+"Your payment information will not be saved." = "Vaši podatki o plačilo ne bodo shranjeni.";
+
+"Your postal code is incomplete." = "Vaša poštna številka ni popolna.";
+
+"Your postal code is invalid." = "Vaša poštna številka ni veljavna.";
+
+"ZIP" = "Poštna številka";
