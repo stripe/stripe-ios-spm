@@ -1,0 +1,151 @@
+"%1$@ •••• %2$@" = "%1$@ •••• %2$@";
+
+"%@ (optional)" = "%@ (необязательно)";
+
+"(not accepted)" = "(не принимается)";
+
+"Account number" = "Номер счета";
+
+"Address" = "Адрес";
+
+"Address line 1" = "Адрес (строка 1)";
+
+"Address line 2" = "Адрес (строка 2)";
+
+"Area" = "Область";
+
+"BLIK code" = "Код BLIK";
+
+"BSB number" = "Номер BSB";
+
+"Bank account •••• %@" = "Банковский счет ••••%@";
+
+"Billing address is same as shipping" = "Адрес выставления счетов такой же, как адрес доставки";
+
+"Cancel" = "Отмена";
+
+"Card brand" = "Бренд карты";
+
+"City" = "Город";
+
+"Code field" = "Поле кода";
+
+"Company" = "Компания";
+
+"Continue" = "Продолжить";
+
+"Country" = "Страна";
+
+"Country or region" = "Страна или регион";
+
+"County" = "Графство";
+
+"Date of Birth" = "Дата рождения";
+
+"Department" = "Департамент";
+
+"District" = "Район";
+
+"Do Si" = "Do Si";
+
+"Do you want to close this form?" = "Закрыть форму?";
+
+"Done" = "Готово";
+
+"Double tap to edit" = "Коснитесь дважды, чтобы отредактировать";
+
+"Edit" = "Редактировать";
+
+"Eircode" = "Почтовый индекс (Eircode)";
+
+"Email" = "Эл. почта";
+
+"Emirate" = "Эмират";
+
+"Error" = "Ошибка";
+
+"First" = "Имя";
+
+"Full name" = "Имя, фамилия";
+
+"Incomplete phone number" = "Номер телефона введен не полностью";
+
+"Invalid UPI ID" = "Недействительный идентификатор UPI";
+
+"Island" = "Остров";
+
+"Last" = "Фамилия";
+
+"Name" = "Имя";
+
+"Name on account" = "Владелец счета";
+
+"OK" = "ОК";
+
+"Oblast" = "Область";
+
+"Other" = "другой";
+
+"Parish" = "Приход";
+
+"Phone number" = "Номер телефона";
+
+"Postal code" = "Почтовый индекс";
+
+"Prefecture" = "Префектура";
+
+"Province" = "Провинция";
+
+"Remove" = "Удалить";
+
+"Remove bank account?" = "Удалить банковский счет?";
+
+"Remove card" = "Удалить карту";
+
+"Search" = "Поиск";
+
+"Select card brand (optional)" = "Выберите бренд карты (необязательно)";
+
+"Selection is empty." = "Ничего не выбрано.";
+
+"Sort code" = "Код банка";
+
+"State" = "Штат";
+
+"Suburb" = "Пригород";
+
+"Suburb or city" = "Населенный пункт";
+
+"The BSB you entered is incomplete." = "Введенный код BSB неполон.";
+
+"The ID number you entered is incomplete." = "Номер документа, удостоверяющего личность, введен не полностью.";
+
+"The account number you entered is incomplete." = "Номер счета введен не полностью.";
+
+"The sort code you entered is invalid." = "Введенный код сортировки неверен.";
+
+"Town or city" = "Город";
+
+"UPI ID" = "Идентификатор UPI";
+
+"Unable to parse phone number" = "Не удается разобрать номер телефона";
+
+"Use rotor to access links" = "Используйте ротор для доступа к ссылкам";
+
+"Your BLIK code is incomplete." = "Ваш код BLIK неполный.";
+
+"Your BLIK code is invalid." = "Ваш код BLIK недействителен.";
+
+"Your ZIP code is incomplete." = "Ваш почтовый индекс неполный.";
+
+"Your ZIP code is invalid." = "Ваш почтовый индекс недействителен.";
+
+"Your email is invalid." = "Недействительный адрес эл. почты.";
+
+"Your payment information will not be saved." = "Ваши платежные реквизиты не будут сохранены.";
+
+"Your postal code is incomplete." = "Введенный почтовый индекс неполон.";
+
+"Your postal code is invalid." = "Введенный почтовый индекс недействителен.";
+
+"ZIP" = "Почтовый индекс";

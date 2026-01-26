@@ -1,0 +1,151 @@
+"%1$@ •••• %2$@" = "%1$@ •••• %2$@";
+
+"%@ (optional)" = "%@ (tùy chọn)";
+
+"(not accepted)" = "(không được chấp nhận)";
+
+"Account number" = "Số tài khoản";
+
+"Address" = "Địa chỉ";
+
+"Address line 1" = "Dòng địa chỉ 1";
+
+"Address line 2" = "Dòng địa chỉ 2";
+
+"Area" = "Khu vực";
+
+"BLIK code" = "Mã BLIK";
+
+"BSB number" = "Số BSB";
+
+"Bank account •••• %@" = "Tài khoản ngân hàng •••• %@";
+
+"Billing address is same as shipping" = "Địa chỉ xuất hóa đơn giống địa chỉ chuyển hàng";
+
+"Cancel" = "Hủy";
+
+"Card brand" = "Thương hiệu thẻ";
+
+"City" = "Thành phố";
+
+"Code field" = "Trường mã";
+
+"Company" = "Công ty";
+
+"Continue" = "Tiếp tục";
+
+"Country" = "Quốc gia";
+
+"Country or region" = "Quốc gia hoặc khu vực";
+
+"County" = "Quận";
+
+"Date of Birth" = "Ngày sinh";
+
+"Department" = "Sở ngành";
+
+"District" = "Quận/Huyện";
+
+"Do Si" = "Tỉnh/Thành phố";
+
+"Do you want to close this form?" = "Bạn có muốn đóng biểu mẫu này không?";
+
+"Done" = "Xong";
+
+"Double tap to edit" = "Nhấp chạm đúp để hiệu đính";
+
+"Edit" = "Sửa";
+
+"Eircode" = "Mã Eircode";
+
+"Email" = "Email";
+
+"Emirate" = "Tiểu vương quốc";
+
+"Error" = "Lỗi";
+
+"First" = "Tên";
+
+"Full name" = "Họ tên";
+
+"Incomplete phone number" = "Số điện thoại chưa đầy đủ";
+
+"Invalid UPI ID" = "Số ID UPI không hợp lệ";
+
+"Island" = "Đảo";
+
+"Last" = "Họ";
+
+"Name" = "Tên";
+
+"Name on account" = "Tên trên tài khoản";
+
+"OK" = "OK";
+
+"Oblast" = "Vùng";
+
+"Other" = "Khác";
+
+"Parish" = "Giáo xứ";
+
+"Phone number" = "Số điện thoại";
+
+"Postal code" = "Mã bưu điện";
+
+"Prefecture" = "Tỉnh";
+
+"Province" = "Tỉnh";
+
+"Remove" = "Xóa";
+
+"Remove bank account?" = "Bỏ tài khoản ngân hàng?";
+
+"Remove card" = "Xóa thẻ";
+
+"Search" = "Tìm kiếm";
+
+"Select card brand (optional)" = "Chọn thương hiệu thẻ (tùy chọn)";
+
+"Selection is empty." = "Lựa chọn đang để trống.";
+
+"Sort code" = "Mã sắp xếp";
+
+"State" = "Tiểu bang";
+
+"Suburb" = "Ngoại ô";
+
+"Suburb or city" = "Ngoại ô hoặc thành phố";
+
+"The BSB you entered is incomplete." = "BSB mà bạn nhập chưa đầy đủ.";
+
+"The ID number you entered is incomplete." = "Số ID bạn đã nhập chưa đầy đủ.";
+
+"The account number you entered is incomplete." = "Số tài khoản quý vị đã nhập không đầy đủ.";
+
+"The sort code you entered is invalid." = "Mã sắp xếp bạn đã nhập không hợp lệ.";
+
+"Town or city" = "Thị trấn hoặc thành phố";
+
+"UPI ID" = "Số ID UPI";
+
+"Unable to parse phone number" = "Không thể phân tích cú pháp số điện thoại";
+
+"Use rotor to access links" = "Sử dụng rô-to để truy cập liên kết";
+
+"Your BLIK code is incomplete." = "Mã BLIK của quý vị chưa đầy đủ.";
+
+"Your BLIK code is invalid." = "Mã BLIK của quý vị không hợp lệ.";
+
+"Your ZIP code is incomplete." = "Mã ZIP của bạn không đầy đủ.";
+
+"Your ZIP code is invalid." = "Mã bưu điện của bạn không hợp lệ.";
+
+"Your email is invalid." = "Email của quý vị không hợp lệ.";
+
+"Your payment information will not be saved." = "Thông tin thanh toán của bạn sẽ không lưu lại.";
+
+"Your postal code is incomplete." = "Mã bưu điện chưa đầy đủ.";
+
+"Your postal code is invalid." = "Mã bưu điện không hợp lệ.";
+
+"ZIP" = "ZIP";
