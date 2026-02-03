@@ -1,0 +1,151 @@
+"%1$@ •••• %2$@" = "%1$@ •••• %2$@";
+
+"%@ (optional)" = "%@ (isteğe bağlı)";
+
+"(not accepted)" = "(kabul edilmedi)";
+
+"Account number" = "Hesap numarası";
+
+"Address" = "Adres";
+
+"Address line 1" = "Adres satırı 1";
+
+"Address line 2" = "Adres satırı 2";
+
+"Area" = "Bölge";
+
+"BLIK code" = "BLIK kodu";
+
+"BSB number" = "BSB numarası";
+
+"Bank account •••• %@" = "Banka hesabı •••• %@";
+
+"Billing address is same as shipping" = "Faturalama adresi, gönderim adresiyle aynı";
+
+"Cancel" = "İptal";
+
+"Card brand" = "Kartın markası";
+
+"City" = "Şehir";
+
+"Code field" = "Kod alanı";
+
+"Company" = "Şirket";
+
+"Continue" = "Devam et";
+
+"Country" = "Ülke";
+
+"Country or region" = "Ülke veya bölge";
+
+"County" = "Ülke";
+
+"Date of Birth" = "Doğum Tarihi";
+
+"Department" = "İdari Bölüm";
+
+"District" = "İlçe";
+
+"Do Si" = "Do Si";
+
+"Do you want to close this form?" = "Bu formu kapatmak istiyor musunuz?";
+
+"Done" = "Tamam";
+
+"Double tap to edit" = "Düzenlemek için iki kez dokunun";
+
+"Edit" = "Düzenle";
+
+"Eircode" = "Eircode";
+
+"Email" = "E-posta";
+
+"Emirate" = "Emirlik";
+
+"Error" = "Hata";
+
+"First" = "Ad";
+
+"Full name" = "Ad ve soyadınız";
+
+"Incomplete phone number" = "Eksik telefon numarası";
+
+"Invalid UPI ID" = "Geçersiz UPI Numarası";
+
+"Island" = "Ada";
+
+"Last" = "Soyadı";
+
+"Name" = "Ad";
+
+"Name on account" = "Hesaptaki ad";
+
+"OK" = "TAMAM";
+
+"Oblast" = "Oblast";
+
+"Other" = "Diğer";
+
+"Parish" = "Dini bölge";
+
+"Phone number" = "Telefon numarası";
+
+"Postal code" = "Posta kodu";
+
+"Prefecture" = "İdari bölge";
+
+"Province" = "İlçe";
+
+"Remove" = "Kaldır";
+
+"Remove bank account?" = "Banka hesabı kaldırılsın mı?";
+
+"Remove card" = "Kartı kaldır";
+
+"Search" = "Ara";
+
+"Select card brand (optional)" = "Kart markasını seçin (isteğe bağlı)";
+
+"Selection is empty." = "Seçim boş.";
+
+"Sort code" = "Şube kodu";
+
+"State" = "Eyalet";
+
+"Suburb" = "Banliyö";
+
+"Suburb or city" = "Banliyö veya şehir";
+
+"The BSB you entered is incomplete." = "Girdiğiniz BSB eksik.";
+
+"The ID number you entered is incomplete." = "Girdiğiniz kimlik numarası eksik.";
+
+"The account number you entered is incomplete." = "Girdiğiniz hesap numarası eksik.";
+
+"The sort code you entered is invalid." = "Girdiğiniz banka/şube kodu geçersiz.";
+
+"Town or city" = "Kasaba veya şehir";
+
+"UPI ID" = "UPI Numarası";
+
+"Unable to parse phone number" = "Telefon numaranızı ayrıştırılamadı";
+
+"Use rotor to access links" = "Linklere erişmek için rotoru kullanın.";
+
+"Your BLIK code is incomplete." = "BLIK kodunuz eksik.";
+
+"Your BLIK code is invalid." = "BLIK kodunuz geçersiz.";
+
+"Your ZIP code is incomplete." = "Posta kodunuz eksik.";
+
+"Your ZIP code is invalid." = "Posta kodunuz geçersiz.";
+
+"Your email is invalid." = "E-postanız geçersiz.";
+
+"Your payment information will not be saved." = "Ödeme bilgileriniz kaydedilmeyecek.";
+
+"Your postal code is incomplete." = "Posta kodunuz eksik.";
+
+"Your postal code is invalid." = "Posta kodunuz geçersiz.";
+
+"ZIP" = "Posta Kodu";
