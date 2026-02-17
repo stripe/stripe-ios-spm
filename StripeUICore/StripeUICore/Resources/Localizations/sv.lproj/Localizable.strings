@@ -1,0 +1,151 @@
+"%1$@ •••• %2$@" = "%1$@ •••• %2$@";
+
+"%@ (optional)" = "%@ (valfritt)";
+
+"(not accepted)" = "(accepteras inte)";
+
+"Account number" = "Kontonummer";
+
+"Address" = "Adress";
+
+"Address line 1" = "Adressrad 1";
+
+"Address line 2" = "Adressrad 2";
+
+"Area" = "Område";
+
+"BLIK code" = "BLIK-kod";
+
+"BSB number" = "BSB-nummer";
+
+"Bank account •••• %@" = "Bankkonto •••• %@";
+
+"Billing address is same as shipping" = "Faktureringsadress är samma som leveransadress";
+
+"Cancel" = "Avbryt";
+
+"Card brand" = "Kortmärke";
+
+"City" = "Ort";
+
+"Code field" = "Fält för kod";
+
+"Company" = "Företag";
+
+"Continue" = "Fortsätt";
+
+"Country" = "Land";
+
+"Country or region" = "Land eller region";
+
+"County" = "Landskap";
+
+"Date of Birth" = "Födelsedatum";
+
+"Department" = "Departement";
+
+"District" = "Distrikt";
+
+"Do Si" = "Provins och stad";
+
+"Do you want to close this form?" = "Vill du stänga det här formuläret?";
+
+"Done" = "Klar";
+
+"Double tap to edit" = "Dubbelklicka för att redigera";
+
+"Edit" = "Redigera";
+
+"Eircode" = "Eircode";
+
+"Email" = "E-post";
+
+"Emirate" = "Emirat";
+
+"Error" = "Fel";
+
+"First" = "Förnamn";
+
+"Full name" = "Fullständigt namn";
+
+"Incomplete phone number" = "Ofullständigt telefonnummer";
+
+"Invalid UPI ID" = "Ogiltigt UPI ID";
+
+"Island" = "Ö";
+
+"Last" = "Efternamn";
+
+"Name" = "Namn";
+
+"Name on account" = "Namn på kontot";
+
+"OK" = "OK";
+
+"Oblast" = "Oblast";
+
+"Other" = "Annan";
+
+"Parish" = "Parish";
+
+"Phone number" = "Telefonnummer";
+
+"Postal code" = "Postnummer";
+
+"Prefecture" = "Prefektur";
+
+"Province" = "Provins";
+
+"Remove" = "Ta bort";
+
+"Remove bank account?" = "Ta bort bankkonto?";
+
+"Remove card" = "Ta bort kort";
+
+"Search" = "Sök";
+
+"Select card brand (optional)" = "Välj korttyp (valfritt)";
+
+"Selection is empty." = "Urvalet är tomt.";
+
+"Sort code" = "Clearingnummer";
+
+"State" = "Delstat";
+
+"Suburb" = "Förort";
+
+"Suburb or city" = "Förort eller stad";
+
+"The BSB you entered is incomplete." = "Det BSB du angav är ofullständigt.";
+
+"The ID number you entered is incomplete." = "ID-numret du angav är ofullständigt.";
+
+"The account number you entered is incomplete." = "Kontonumret du angav är ofullständigt.";
+
+"The sort code you entered is invalid." = "Det angivna clearingnumret (sort code) är ogiltigt.";
+
+"Town or city" = "Stad";
+
+"UPI ID" = "UPI ID";
+
+"Unable to parse phone number" = "Det gick inte att analysera telefonnumret";
+
+"Use rotor to access links" = "Använd rotorn för att komma åt länkar";
+
+"Your BLIK code is incomplete." = "Din BLIK-kod är ofullständig.";
+
+"Your BLIK code is invalid." = "Din BLIK-kod är ogiltig.";
+
+"Your ZIP code is incomplete." = "Ditt postnummer är ofullständigt.";
+
+"Your ZIP code is invalid." = "Ditt postnummer är ogiltigt.";
+
+"Your email is invalid." = "Din e-postadress är ogiltig.";
+
+"Your payment information will not be saved." = "Din betalningsinformation kommer inte att sparas.";
+
+"Your postal code is incomplete." = "Ditt postnummer är ofullständigt.";
+
+"Your postal code is invalid." = "Ditt postnummer är ogiltigt.";
+
+"ZIP" = "Postkod";
