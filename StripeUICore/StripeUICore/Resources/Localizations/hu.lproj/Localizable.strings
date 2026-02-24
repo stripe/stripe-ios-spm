@@ -1,0 +1,151 @@
+"%1$@ •••• %2$@" = "%1$@ •••• %2$@";
+
+"%@ (optional)" = "%@ (nem kötelező)";
+
+"(not accepted)" = "(nem elfogadott)";
+
+"Account number" = "Számlaszám";
+
+"Address" = "Cím";
+
+"Address line 1" = "Cím 1. sora";
+
+"Address line 2" = "2. címsor";
+
+"Area" = "Terület";
+
+"BLIK code" = "BLIK kód";
+
+"BSB number" = "BSB-szám";
+
+"Bank account •••• %@" = "Bankszámla •••• %@";
+
+"Billing address is same as shipping" = "A számlázási cím megegyezik a szállítási címmel";
+
+"Cancel" = "Mégse";
+
+"Card brand" = "Kártyatípus";
+
+"City" = "Város";
+
+"Code field" = "Kódmező";
+
+"Company" = "Vállalat";
+
+"Continue" = "Folytatás";
+
+"Country" = "Ország";
+
+"Country or region" = "Ország vagy régió";
+
+"County" = "Ország";
+
+"Date of Birth" = "Születési dátum";
+
+"Department" = "Megye";
+
+"District" = "Kerület";
+
+"Do Si" = "Do Si";
+
+"Do you want to close this form?" = "Bezárja ezt az űrlapot?";
+
+"Done" = "Kész";
+
+"Double tap to edit" = "A szerkesztéshez koppintson kétszer";
+
+"Edit" = "Szerkesztés";
+
+"Eircode" = "Irányítószám";
+
+"Email" = "E-mail";
+
+"Emirate" = "Emirátus";
+
+"Error" = "Hiba";
+
+"First" = "Utónév";
+
+"Full name" = "Teljes név";
+
+"Incomplete phone number" = "Hiányos telefonszám";
+
+"Invalid UPI ID" = "Érvénytelen UPI-azonosító";
+
+"Island" = "Sziget";
+
+"Last" = "Vezetéknév";
+
+"Name" = "Név";
+
+"Name on account" = "A számlán szereplő név";
+
+"OK" = "OK";
+
+"Oblast" = "Terület";
+
+"Other" = "Egyéb";
+
+"Parish" = "Egyházközség";
+
+"Phone number" = "Telefonszám";
+
+"Postal code" = "Irányítószám";
+
+"Prefecture" = "Prefektúra";
+
+"Province" = "Tartomány";
+
+"Remove" = "Eltávolítás";
+
+"Remove bank account?" = "Eltávolítja a bankszámlát?";
+
+"Remove card" = "Kártya törlése";
+
+"Search" = "Keresés";
+
+"Select card brand (optional)" = "Válassza ki a kártya márkáját (nem kötelező)";
+
+"Selection is empty." = "A kiválasztás üres.";
+
+"Sort code" = "Bankazonosító";
+
+"State" = "Állam";
+
+"Suburb" = "Külváros";
+
+"Suburb or city" = "Külváros vagy város";
+
+"The BSB you entered is incomplete." = "A beírt BSB-szám hiányos.";
+
+"The ID number you entered is incomplete." = "A beírt azonosítószám hiányos.";
+
+"The account number you entered is incomplete." = "A számlaszám hiányos.";
+
+"The sort code you entered is invalid." = "A beírt bankazonosító érvénytelen.";
+
+"Town or city" = "Kisváros vagy város";
+
+"UPI ID" = "UPI-azonosító";
+
+"Unable to parse phone number" = "A telefonszám nem értelmezhető";
+
+"Use rotor to access links" = "Rotor használata a hivatkozások kezeléséhez";
+
+"Your BLIK code is incomplete." = "BLIK kódja hiányos.";
+
+"Your BLIK code is invalid." = "BLIK kódja érvénytelen.";
+
+"Your ZIP code is incomplete." = "Az irányítószám hiányos.";
+
+"Your ZIP code is invalid." = "Az irányítószáma érvénytelen.";
+
+"Your email is invalid." = "Érvénytelen e-mail-cím.";
+
+"Your payment information will not be saved." = "Fizetési adatai nem lesznek mentve.";
+
+"Your postal code is incomplete." = "Az irányítószám hiányos.";
+
+"Your postal code is invalid." = "Az irányítószám érvénytelen.";
+
+"ZIP" = "Irányítószám";

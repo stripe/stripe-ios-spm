@@ -1,0 +1,151 @@
+"%1$@ •••• %2$@" = "%1$@ •••• %2$@";
+
+"%@ (optional)" = "%@（可选）";
+
+"(not accepted)" = "（未接受）";
+
+"Account number" = "账号";
+
+"Address" = "地址";
+
+"Address line 1" = "地址第 1 行";
+
+"Address line 2" = "地址第 2 行";
+
+"Area" = "地区";
+
+"BLIK code" = "BLIK 代码";
+
+"BSB number" = "BSB 号码";
+
+"Bank account •••• %@" = "银行账户 •••• %@";
+
+"Billing address is same as shipping" = "账单地址与收货地址相同";
+
+"Cancel" = "取消";
+
+"Card brand" = "银行卡品牌";
+
+"City" = "城市";
+
+"Code field" = "代码字段";
+
+"Company" = "公司";
+
+"Continue" = "继续";
+
+"Country" = "国家";
+
+"Country or region" = "国家或地区";
+
+"County" = "县";
+
+"Date of Birth" = "出生日期";
+
+"Department" = "部门";
+
+"District" = "区";
+
+"Do Si" = "道/县";
+
+"Do you want to close this form?" = "您想关闭此表单吗？";
+
+"Done" = "完成";
+
+"Double tap to edit" = "双击可编辑";
+
+"Edit" = "编辑";
+
+"Eircode" = "爱尔兰邮编";
+
+"Email" = "电子邮件";
+
+"Emirate" = "酋长国";
+
+"Error" = "错误";
+
+"First" = "名字";
+
+"Full name" = "全名";
+
+"Incomplete phone number" = "电话号码不完整";
+
+"Invalid UPI ID" = "UPI ID 无效";
+
+"Island" = "岛";
+
+"Last" = "姓氏";
+
+"Name" = "姓名";
+
+"Name on account" = "账户名";
+
+"OK" = "确定";
+
+"Oblast" = "州";
+
+"Other" = "其他";
+
+"Parish" = "堂区";
+
+"Phone number" = "手机号码";
+
+"Postal code" = "邮政编码";
+
+"Prefecture" = "辖区";
+
+"Province" = "省";
+
+"Remove" = "移除";
+
+"Remove bank account?" = "移除银行账户？";
+
+"Remove card" = "移除卡";
+
+"Search" = "搜索";
+
+"Select card brand (optional)" = "选择银行卡品牌（可选）";
+
+"Selection is empty." = "选择为空。";
+
+"Sort code" = "分类代码";
+
+"State" = "州";
+
+"Suburb" = "市郊";
+
+"Suburb or city" = "市郊或城市";
+
+"The BSB you entered is incomplete." = "您输入的 BSB 不完整。";
+
+"The ID number you entered is incomplete." = "您输入的证件号码不完整。";
+
+"The account number you entered is incomplete." = "您输入的账号不完整。";
+
+"The sort code you entered is invalid." = "您输入的分类代码无效。";
+
+"Town or city" = "城镇或城市";
+
+"UPI ID" = "UPI ID";
+
+"Unable to parse phone number" = "无法粘贴手机号码";
+
+"Use rotor to access links" = "用转子访问链接";
+
+"Your BLIK code is incomplete." = "您的 BLIK 代码不完整。";
+
+"Your BLIK code is invalid." = "您的 BLIK 代码无效。";
+
+"Your ZIP code is incomplete." = "您的邮政编码不完整。";
+
+"Your ZIP code is invalid." = "您的邮编无效。";
+
+"Your email is invalid." = "您的邮件地址无效。";
+
+"Your payment information will not be saved." = "不会保存您的付款信息。";
+
+"Your postal code is incomplete." = "您的邮编不完整。";
+
+"Your postal code is invalid." = "您的邮编无效。";
+
+"ZIP" = "邮编";
