@@ -1,0 +1,18 @@
+POST
+https:\/\/stp-mobile-ci-test-backend-e1b3\.stripedemos\.com\/create_customer_session_cs$
+200
+text/html
+Content-Type: text/html;charset=utf-8
+Alt-Svc: h3=":443"; ma=2592000,h3-29=":443"; ma=2592000
+Set-Cookie: rack.session=11yz2WDZGk%2BSTefPiGITnIs%2BPeG%2FzPC1%2ByVSj6dLARX1x031GhUSe%2FtrdJxIY%2FH%2FEUML2D%2Fqdo%2B6Kd4UBCHjsDrsoRqcf9uuQu5rbaxy8LkVKtvBL5k5en6M%2FEVBzYIfOnw3CpJLwZQovIG7kiO%2Fk15uciG1Va4bsPZmMIXosKfswX8FiDaOU9Rz6mRopLifBGaG3EEMo9e8LyG0auGc5XO%2BNAqrdOQX7iGRZnHnGeg%3D; path=/
+Server: Google Frontend
+x-cloud-trace-context: 8da97996099ee9d6b5ace36858810896
+Via: 1.1 google
+x-xss-protection: 1; mode=block
+Date: Mon, 16 Mar 2026 19:36:50 GMT
+x-robots-tag: noindex, nofollow
+Content-Length: 128
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+
+{"customer_session_client_secret":"cuss_secret_UA0yZnU4vpc5z8VrrfyCBfSmNBYPbliBQ8DsWz01ynMIBMN","customer":"cus_UA0yFGSX0RynMQ"}
