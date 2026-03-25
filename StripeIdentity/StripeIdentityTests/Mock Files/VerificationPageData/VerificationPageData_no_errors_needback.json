@@ -1,0 +1,12 @@
+{
+   "id": "VS_123",
+   "status": "requires_input",
+   "submitted": false,
+   "closed": false,
+   "requirements": {
+       "errors": [],
+       "missing": [
+           "id_document_back"
+       ]
+   },
+}
