@@ -1,0 +1,151 @@
+"%1$@ •••• %2$@" = "%1$@ •••• %2$@";
+
+"%@ (optional)" = "%@ (προαιρετικό)";
+
+"(not accepted)" = "(μη αποδεκτή)";
+
+"Account number" = "Αριθμός λογαριασμού";
+
+"Address" = "Διεύθυνση";
+
+"Address line 1" = "Γραμμή διεύθυνσης 1";
+
+"Address line 2" = "Γραμμή διεύθυνσης 2";
+
+"Area" = "Περιοχή";
+
+"BLIK code" = "Κωδικός BLIK";
+
+"BSB number" = "Αριθμός BSB";
+
+"Bank account •••• %@" = "Τραπεζικός λογαριασμός •••• %@";
+
+"Billing address is same as shipping" = "Η διεύθυνση τιμολόγησης είναι ίδια με τη διεύθυνση αποστολής";
+
+"Cancel" = "Ακύρωση";
+
+"Card brand" = "Επωνυμία κάρτας";
+
+"City" = "Πόλη";
+
+"Code field" = "Πεδίο κωδικού";
+
+"Company" = "Εταιρεία";
+
+"Continue" = "Συνέχεια";
+
+"Country" = "Χώρα";
+
+"Country or region" = "Χώρα ή περιοχή";
+
+"County" = "Κομητεία";
+
+"Date of Birth" = "Ημερομηνία γέννησης";
+
+"Department" = "Τμήμα";
+
+"District" = "Περιφέρεια";
+
+"Do Si" = "Do Si";
+
+"Do you want to close this form?" = "Θέλετε να κλείσετε αυτή τη φόρμα;";
+
+"Done" = "Τέλος";
+
+"Double tap to edit" = "Πατήστε δύο φορές για επεξεργασία";
+
+"Edit" = "Επεξεργασία";
+
+"Eircode" = "Ταχυδρομικός κώδικας";
+
+"Email" = "Διεύθυνση ηλεκτρονικού ταχυδρομείου";
+
+"Emirate" = "Εμιράτο";
+
+"Error" = "Σφάλμα";
+
+"First" = "Όνομα";
+
+"Full name" = "Πλήρες όνομα";
+
+"Incomplete phone number" = "Ελλιπής αριθμός τηλεφώνου";
+
+"Invalid UPI ID" = "Μη έγκυρο αναγνωριστικό UPI";
+
+"Island" = "Νησί";
+
+"Last" = "Επώνυμο";
+
+"Name" = "Όνομα";
+
+"Name on account" = "Όνομα στον λογαριασμό";
+
+"OK" = "OK";
+
+"Oblast" = "Περιφέρεια";
+
+"Other" = "Άλλο";
+
+"Parish" = "Δήμος";
+
+"Phone number" = "Αριθμός τηλεφώνου";
+
+"Postal code" = "Ταχυδρομικός κώδικας";
+
+"Prefecture" = "Νομός";
+
+"Province" = "Επαρχία";
+
+"Remove" = "Αφαίρεση";
+
+"Remove bank account?" = "Αφαίρεση τραπεζικού λογαριασμού;";
+
+"Remove card" = "Αφαίρεση κάρτας";
+
+"Search" = "Αναζήτηση";
+
+"Select card brand (optional)" = "Επιλέξτε επωνυμία κάρτας (προαιρετικό)";
+
+"Selection is empty." = "Η επιλογή είναι κενή.";
+
+"Sort code" = "Κωδικός sort";
+
+"State" = "Πολιτεία";
+
+"Suburb" = "Προάστιο";
+
+"Suburb or city" = "Προάστιο ή πόλη";
+
+"The BSB you entered is incomplete." = "Ο κωδικός BSB που εισάγατε είναι ατελής.";
+
+"The ID number you entered is incomplete." = "Ο αριθμός ταυτότητας που εισαγάγατε είναι ελλιπής.";
+
+"The account number you entered is incomplete." = "Ο αριθμός λογαριασμού που εισαγάγατε είναι ελλιπής.";
+
+"The sort code you entered is invalid." = "Ο κωδικός sort που εισαγάγατε δεν είναι έγκυρος.";
+
+"Town or city" = "Κωμόπολη ή πόλη";
+
+"UPI ID" = "Αναγνωριστικό UPI";
+
+"Unable to parse phone number" = "Δεν ήταν δυνατή η ανάλυση του αριθμού τηλεφώνου";
+
+"Use rotor to access links" = "Χρησιμοποιήστε τον ρότορα για να προσπελάσετε τους συνδέσμους";
+
+"Your BLIK code is incomplete." = "Ο κωδικός σας BLIK είναι ελλιπής.";
+
+"Your BLIK code is invalid." = "Ο κωδικός σας BLIK δεν είναι έγκυρος.";
+
+"Your ZIP code is incomplete." = "Ο ταχυδρομικός κώδικας είναι ελλιπής.";
+
+"Your ZIP code is invalid." = "Ο ταχυδρομικός κώδικας δεν είναι έγκυρος.";
+
+"Your email is invalid." = "Η διεύθυνση email σας δεν είναι έγκυρη.";
+
+"Your payment information will not be saved." = "Τα στοιχεία πληρωμής δε θα αποθηκευτούν.";
+
+"Your postal code is incomplete." = "Ο ταχυδρομικός κώδικάς σας είναι ελλιπής.";
+
+"Your postal code is invalid." = "Ο ταχυδρομικός κώδικάς σας δεν είναι έγκυρος.";
+
+"ZIP" = "Τ.Κ.";
