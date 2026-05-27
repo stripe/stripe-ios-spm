@@ -1,0 +1,123 @@
+//
+//  LinkVerificationViewSnapshotTests.swift
+//  StripeiOS Tests
+//
+//  Created by Ramon Torres on 12/7/21.
+//  Copyright © 2021 Stripe, Inc. All rights reserved.
+//
+
+import StripeCoreTestUtils
+import UIKit
+import XCTest
+
+@testable@_spi(STP) import StripeCore
+@testable@_spi(STP) import StripePayments
+@testable@_spi(STP) @_spi(CryptoOnrampAlpha) import StripePaymentSheet
+@testable@_spi(STP) import StripePaymentsUI
+@testable@_spi(STP) import StripeUICore
+
+class LinkVerificationViewSnapshotTests: STPSnapshotTestCase {
+    func testHeader_usesProvidedBrandForAccessibilityLabel() {
+        let sut = LinkVerificationView.Header(brand: .onelink)
+        let logoView = sut.subviews.compactMap { $0 as? UIImageView }.first
+
+        XCTAssertEqual(logoView?.accessibilityLabel, "Onelink")
+    }
+
+    func testModal() {
+        let sut = makeSUT(mode: .modal)
+        verify(sut)
+    }
+
+    func testModalOnelink() {
+        let sut = makeSUT(mode: .modal, brand: .onelink)
+        verify(sut, identifier: "onelink")
+    }
+
+    func testModalWithLogout() {
+        let sut = makeSUT(mode: .modal, allowLogoutInDialog: true)
+        verify(sut)
+    }
+
+    func testModalWithErrorMessage() {
+        let sut = makeSUT(mode: .modal)
+        sut.errorMessage = "The provided verification code has expired."
+        verify(sut)
+    }
+
+    func testInlineLogin() {
+        let sut = makeSUT(mode: .inlineLogin)
+        verify(sut)
+    }
+
+    func testEmbedded() {
+        let sut = makeSUT(mode: .embedded)
+        verify(sut)
+    }
+
+    func testEmbeddedWithInput() {
+        let sut = makeSUT(mode: .embedded)
+        sut.codeField.value = "1234"
+        verify(sut)
+    }
+
+    func testCustomColors() {
+        let appearance = LinkAppearance(
+            colors: .init(
+                primary: .systemTeal,
+                selectedBorder: .red
+            )
+        )
+        let sut = makeSUT(mode: .modal, appearance: appearance)
+        sut.codeField.value = "1234"
+        verify(sut)
+    }
+
+    func verify(
+        _ view: LinkVerificationView,
+        identifier: String? = nil,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        view.autosizeHeight(width: 340)
+        STPSnapshotVerifyView(view, identifier: identifier, file: file, line: line)
+    }
+
+}
+
+extension LinkVerificationViewSnapshotTests {
+
+    struct LinkAccountStub: PaymentSheetLinkAccountInfoProtocol {
+        let email: String
+        let redactedPhoneNumber: String?
+        let isRegistered: Bool
+        let sessionState: PaymentSheetLinkAccount.SessionState
+        let consumerSessionClientSecret: String?
+    }
+
+    func makeSUT(
+        mode: LinkVerificationView.Mode,
+        brand: LinkBrand = .link,
+        appearance: LinkAppearance? = nil,
+        allowLogoutInDialog: Bool = false
+    ) -> LinkVerificationView {
+        let sut = LinkVerificationView(
+            mode: mode,
+            linkAccount: LinkAccountStub(
+                email: "user@example.com",
+                redactedPhoneNumber: "(•••) ••• ••55",
+                isRegistered: true,
+                sessionState: .verified,
+                consumerSessionClientSecret: nil
+            ),
+            brand: brand,
+            appearance: appearance,
+            allowLogoutInDialog: allowLogoutInDialog
+        )
+
+        sut.tintColor = .linkIconBrand
+
+        return sut
+    }
+
+}
