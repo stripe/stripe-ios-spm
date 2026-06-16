@@ -1,0 +1,57 @@
+// Source: https://stripe.com/docs/sources/three-d-secure
+{
+    "id": "src_456",
+    "object": "source",
+    "amount": 1099,
+    "client_secret": "src_client_secret_456",
+    "created": 1483663790,
+    "currency": "eur",
+    "flow": "redirect",
+    "livemode": false,
+    "metadata": {},
+    "owner": {
+        "address": {
+            "city": "Pittsburgh",
+            "country": "US",
+            "line1": "123 Fake St",
+            "line2": "Apt 1",
+            "postal_code": "19219",
+            "state": "PA"
+        },
+        "email": "jenny.rosen@example.com",
+        "name": "Jenny Rosen",
+        "phone": "555-867-5309",
+        "verified_address": {
+            "city": "Pittsburgh",
+            "country": "US",
+            "line1": "123 Fake St",
+            "line2": "Apt 1",
+            "postal_code": "19219",
+            "state": "PA"
+        },
+        "verified_email": "jenny.rosen@example.com",
+        "verified_name": "Jenny Rosen",
+        "verified_phone": "555-867-5309"
+    },
+    "receiver": {
+        "address": "test_1MBhWS3uv4ynCfQXF3xQjJkzFPukr4K56N",
+        "amount_charged": 300,
+        "amount_received": 200,
+        "amount_returned": 100,
+        "refund_attributes_method": "email",
+        "refund_attributes_status": "missing"
+    },
+    "redirect": {
+        "return_url": "exampleappschema://stripe_callback",
+        "status": "pending",
+        "url": "https://hooks.stripe.com/redirect/authenticate/src_19YlvWAHEMiOZZp1QQlOD79v?client_secret=src_client_secret_kBwCSm6Xz5MQETiJ43hUH8qv"
+    },
+    "status": "pending",
+    "type": "three_d_secure",
+    "usage": "single_use",
+    "three_d_secure": {
+        "card": "src_123",
+        "customer": null,
+        "authenticated": false
+    }
+}
