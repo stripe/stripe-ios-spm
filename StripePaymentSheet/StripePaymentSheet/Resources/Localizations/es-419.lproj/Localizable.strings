@@ -1,0 +1,361 @@
+"%1$@ ×%2$d" = "%1$@ ×%2$li";
+
+"%@ will no longer be saved to your wallet." = "%@ ya no se guardarán en tu cartera.";
+
+"+ Add" = "Agregar otro";
+
+"1 %1$@ = %2$@ %3$@ (includes %4$@%% conversion fee)." = "1 %1$@ = %2$@ %3$@ (incluye una comisión de conversión del %4$@%%).";
+
+"1 %@ = %@ %@" = "1 %1$@ = %2$@ %3$@";
+
+"Accept" = "Aceptar";
+
+"Add US bank account" = "Agrega una cuenta bancaria de EE. UU.";
+
+"Add a card" = "Agrega una tarjeta";
+
+"Add a payment method" = "Agregar un método de pago";
+
+"Add bank account" = "Agregar cuenta bancaria";
+
+"Add card" = "Agregar tarjeta";
+
+"Add new card" = "Agrega una nueva tarjeta";
+
+"Add new payment method" = "Agregar nuevo método de pago";
+
+"Add your payment information" = "Agrega la información de pago";
+
+"Approve payment" = "Aprobar pago";
+
+"Back" = "Atrás";
+
+"Bank" = "Banco";
+
+"Bank account" = "Cuenta bancaria";
+
+"Bank account details cannot be changed." = "Los datos de la cuenta bancaria no se pueden modificar.";
+
+"Buy Now, Pay Later with  <img/>" = "Compra ahora, paga después con <img/>";
+
+"Buy Now, Pay Later with Afterpay" = "Compra ahora, paga después con Afterpay";
+
+"Buy Now, Pay Later with Cash App Afterpay" = "Compra ahora, paga después con Cash App Afterpay";
+
+"Buy Now, Pay Later with Clearpay" = "Compra ahora, paga después con Clearpay";
+
+"Buy now or pay later with Klarna" = "Compra ahora o paga después con Klarna";
+
+"By confirming your payment with PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Si confirmas tu pago con PayPal, permitirás que %@ efectúe cargos de pagos futuros en tu cuenta de PayPal conforme a las condiciones estipuladas.";
+
+"By continuing to Amazon Pay, you allow %@ to charge your Amazon Pay account for future payments in accordance with their terms." = "Si accedes a Amazon Pay, permitirás que %@ efectúe cargos de pagos futuros en tu cuenta de Amazon Pay conforme a las condiciones estipuladas.";
+
+"By continuing to Klarna, you allow %@ to charge your Klarna account for future payments in accordance with their terms and Klarna's terms. You can change this at any time in your Klarna app or by reaching out to %@." = "Al acceder a Klarna, permitirás que %1$@ efectúe cargos de pagos futuros en tu cuenta de Klarna conforme a sus condiciones y a las condiciones de Klarna. Puedes cambiar esta configuración en cualquier momento en tu aplicación de Klarna o poniéndote en contacto con %2$@.";
+
+"By continuing to PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Si accedes a PayPal, permitirás que %@ efectúe cargos de pagos futuros en tu cuenta de PayPal conforme a las condiciones estipuladas.";
+
+"By continuing to Revolut Pay, you allow %@ to charge your Revolut Pay account for future payments in accordance with their terms." = "Si accedes a Revolut Pay, permitirás que %@ efectúe cargos de pagos futuros en tu cuenta de Revolut Pay conforme a las condiciones estipuladas.";
+
+"By continuing you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Al continuar, aceptas las <terms>Condiciones</terms> y la <privacy>Política de privacidad</privacy>.";
+
+"By continuing, you agree to authorize payments pursuant to <terms>these terms</terms>." = "Al continuar, aceptas autorizar pagos conforme a <terms>estas condiciones</terms>.";
+
+"By continuing, you agree to save your information for future purchases with %1$@ and <link>%2$@</link> according to %2$@ <terms>terms</terms> and <privacy>privacy</privacy>." = "Si continúas, aceptas guardar tu información para futuras compras con %1$@ y <link>%2$@</link> de acuerdo con las <terms>condiciones</terms> y la <privacy>política de privacidad</privacy> de %2$@.";
+
+"By continuing, you agree to save your information for future purchases with %@ and <link>Link</link> according to Link <terms>terms</terms> and <privacy>privacy</privacy>." = "Al continuar, aceptas guardar tu información para futuras compras con %@ y <link>Link</link> de acuerdo con las <terms>Condiciones</terms> y <privacy>privacidad</privacy> de Link.";
+
+"By continuing, you agree to save your information for future purchases with %@." = "Al continuar, aceptas guardar tu información para futuras compras con %@.";
+
+"By continuing, you authorize %@ to automatically debit your Satispay Balance on a recurring basis in accordance with your purchase or subscription plan." = "Si continuas, autorizas a %@ a debitar automáticamente su Saldo de Satispay de forma recurrente de acuerdo con tu plan de compra o suscripción.";
+
+"By continuing, you authorize %@ to automatically debit your Twint Balance on a recurring basis in accordance with your purchase or subscription plan." = "Si continúas, autorizas a %@ a debitar automáticamente tu saldo de Twint de forma recurrente, de acuerdo con tu plan de compra o suscripción.";
+
+"By continuing, you authorize %@ to debit your Cash App account for this payment and future payments in accordance with %@'s terms, until this authorization is revoked. You can change this anytime in your Cash App Settings." = "Si continúas, autorizas a %1$@ a que cargue en tu cuenta de Cash App este pago y futuros pagos conforme a las condiciones de %2$@ hasta que se revoque esta autorización. Puedes cambiarla en cualquier momento en la configuración de Cash App.";
+
+"By joining %@, you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Si te unes a %@, aceptas las <terms>Condiciones</terms> y la <privacy>Política de privacidad</privacy>.";
+
+"By joining Link, you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Al unirte a Link, aceptas las <terms>Condiciones de servicio</terms> y la <privacy>Política de privacidad</privacy>.";
+
+"By providing phone number and email, you agree to create a %1$@ account subject to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Al proporcionar el número de teléfono y el correo electrónico, aceptas crear una cuenta de %1$@ sujeta a las <terms>Condiciones</terms> y la <privacy>Política de privacidad</privacy> de %1$@.";
+
+"By providing phone number and email, you agree to create a Link account subject to the Link <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Al proporcionar un número de teléfono y un correo electrónico, aceptas crear una cuenta de Link sujeta a las <terms>Condiciones</terms> y la <privacy>Política de privacidad</privacy> de Link.";
+
+"By providing your bank account details and confirming this payment, you agree to this Direct Debit Request and the <terms>Direct Debit Request service agreement</terms>, and authorise Stripe Payments Australia Pty Ltd ACN 160 180 343 Direct Debit User ID number 507156 (“Stripe”) to debit your account through the Bulk Electronic Clearing System (BECS) on behalf of %@ (the \"Merchant\") for any amounts separately communicated to you by the Merchant. You certify that you are either an account holder or an authorised signatory on the account listed above." = "Si proporcionas los datos de la cuenta bancaria y confirmas este pago, aceptas esta Solicitud de débito directo y el <terms>contrato de servicio de solicitud de débito directo</terms>. Además, autorizas a Stripe Payments Australia Pty Ltd ACN 160 180 343, con número de usuario de débito directo 507156 («Stripe»), a debitar tu cuenta a través del Bulk Electronic Clearing System (BECS) en nombre de %@ (el «Comerciante») por cualquier importe que el Comerciante te comunique de manera individual. Certificas que eres titular de la cuenta o un firmante autorizado de la cuenta indicada arriba.";
+
+"By providing your card information, you allow %@ to charge your card for future payments in accordance with their terms." = "Al facilitarnos los datos de la tarjeta, permites que {%@} cargue en tu tarjeta futuros pagos conforme a las condiciones estipuladas.";
+
+"By providing your email, you agree to create a %1$@ account and save your payment info to %1$@, according to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Si proporcionas tu correo electrónico, aceptas crear una cuenta de %1$@ y guardar tu información de pago en %1$@, según las <terms>Condiciones</terms> y la <privacy>Política de privacidad</privacy> de %1$@.";
+
+"By providing your email, you agree to create a Link account and save your payment info to Link, according to the Link <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Al proporcionar tu correo electrónico, aceptas crear una cuenta de Link y guardar tus datos de pago en Link, conforme a las <terms>Condiciones</terms> y la <privacy>Política de privacidad</privacy> de Link.";
+
+"By providing your payment information and confirming this payment, you authorise (A) %@ and Stripe, our payment service provider, to send instructions to your bank to debit your account and (B) your bank to debit your account in accordance with those instructions. As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited. Your rights are explained in a statement that you can obtain from your bank. You agree to receive notifications for future debits up to 2 days before they occur." = "Al suministrar tus datos de pago y confirmar el pago, autorizas (A) a %@ y a Stripe, nuestro proveedor de servicios de pago, a enviar instrucciones a tu banco para que efectúe débitos en tu cuenta y (B) al banco a que efectúe los débitos en tu cuenta siguiendo esas instrucciones. Como parte de tus prerrogativas, tienes derecho a un rembolso del banco conforme a los términos y condiciones del contrato suscripto con dicha entidad. La solicitud de rembolso deberá efectuarse dentro de las 8 semanas posteriores a la fecha en que se efectuó el débito en tu cuenta. Tus derechos se explican en una declaración que puedes solicitarle a tu banco. Aceptas recibir notificaciones sobre próximos débitos con hasta 2 días de antelación a que estos ocurran.";
+
+"By providing your phone number, you agree to create a %1$@ account and save your payment info to %1$@, according to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Si proporcionas tu número de teléfono, aceptas crear una cuenta de %1$@ y guardar tu información de pago en %1$@, según las <terms>Condiciones</terms> y la <privacy>Política de privacidad</privacy> de %1$@.";
+
+"By providing your phone number, you agree to create a Link account and save your payment info to Link, according to the Link <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Al proporcionar tu número de teléfono, aceptas crear una cuenta de Link y guardar tus datos de pago en Link, conforme a las <terms>Condiciones</terms> y la <privacy>Política de privacidad</privacy> de Link.";
+
+"By saving your bank account for %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Al guardar tu cuenta bancaria para %@, aceptas autorizar pagos conforme a estas <terms>condiciones</terms>.";
+
+"By submitting your order to %@ and %@, you agree to save your information with %@ for future purchases, and agree to authorize payments pursuant to <terms>these terms</terms>." = "Si envías tu pedido a %1$@ y %2$@, aceptas guardar tu información con %3$@ para futuras compras y autorizar pagos conforme <terms>estas Condiciones</terms>.";
+
+"By submitting your order to %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Al enviarle tu pedido a %@, aceptas autorizar pagos conforme a <terms>estas Condiciones</terms>.";
+
+"CPF/CPNJ" = "CPF/CPNJ";
+
+"Cancel and pay another way" = "Cancelar y pagar por otra vía";
+
+"Card details cannot be changed." = "Los datos de la tarjeta no se pueden modificar.";
+
+"Card number. Supported cards include %@" = "Número de tarjeta. Las tarjetas admitidas incluyen %@";
+
+"Change" = "Cambia los datos";
+
+"Choose a card brand" = "Elige una marca de tarjeta";
+
+"Choose a payment method" = "Elegir un método de pago";
+
+"Close card scanner" = "Cerrar escáner de tarjetas";
+
+"Code sent" = "Código enviado";
+
+"Confirm" = "Confirmar";
+
+"Confirm payment details" = "Confirma los datos del pago";
+
+"Confirm the payment in your bank or payment app within %@ to complete the purchase." = "Confirma el pago en la aplicación del banco o de pago en el transcurso de %@ para completar la compra.";
+
+"Confirm the payment in your bank's app within %@ to complete the purchase." = "Confirma el pago en la aplicación de tu banco en el transcurso de %@ para completar la compra.";
+
+"Confirm your CVC" = "Confirma tu CVC";
+
+"Confirm your information" = "Confirma tus datos";
+
+"Contact information" = "Información de contacto";
+
+"Continue another way" = "Continúa de otra manera";
+
+"Create an account with %@ for faster checkout across the web" = "Crea una cuenta con %@ para que el proceso de compra sea más rápido en toda la Web";
+
+"Create an account with Link for faster checkout across the web" = "Crea una cuenta con un enlace para que el proceso de compra sea más rápido en toda la Web";
+
+"Debit or credit card" = "Tarjeta de débito o crédito";
+
+"Declarations" = "Declaraciones";
+
+"Default" = "Predeterminado";
+
+"Default payment method" = "Método de pago predeterminado";
+
+"Did you mean %@? %@." = "¿Quisiste decir %1$@? %2$@.";
+
+"Discount" = "Descuento";
+
+"EPS Bank" = "Banco que opera con EPS";
+
+"Enter address manually" = "Ingresar dirección manualmente";
+
+"Exchange rate and fees of your bank may apply." = "Es posible que se aplique la tasa de cambio y las comisiones de tu banco.";
+
+"FPX Bank" = "Banco para FPX";
+
+"Fast, secure checkout" = "Proceso de compra rápido y seguro";
+
+"Get %@ back when you pay for the first time with your bank. <terms>See terms</terms>" = "Obtén %@ cuando pagues por primera vez con tu banco. <terms>Consulta las condiciones</terms>";
+
+"Get %@ back when you pay with your bank. <terms>See terms</terms>" = "Obtén %@ al pagar con tu banco. <terms>Consulta las condiciones</terms>";
+
+"Hide details" = "Ocultar detalles";
+
+"I understand that Stripe will be collecting Direct Debits on behalf of %@ and confirm that I am the account holder and the only person required to authorise debits from this account." = "Entiendo que Stripe cobrará débitos directos en nombre de %@ y confirmo que soy el titular de la cuenta y la única persona que se requiere que autorice los débitos a esta cuenta.";
+
+"IBAN" = "IBAN";
+
+"Last 4 digits of SSN" = "Últimos 4 dígitos del número de seguridad social (SSN)";
+
+"Log in or sign up" = "Inicia sesión o crea tu cuenta";
+
+"Log out of %@" = "Cerrar la sesión de %@";
+
+"Log out of Link" = "Cerrar sesión de Link";
+
+"Manage SEPA debit" = "Gestiona el débito SEPA";
+
+"Manage US bank account" = "Gestiona la cuenta bancaria de EE. UU.";
+
+"Manage bank account" = "Gestiona la cuenta bancaria";
+
+"Manage card" = "Administra tu tarjeta";
+
+"Manage cards" = "Administra las tarjetas";
+
+"Manage payment method" = "Gestionar el método de pago";
+
+"Manage payment methods" = "Gestiona los métodos de pago";
+
+"Manage your payment methods" = "Gestiona tus métodos de pago";
+
+"Name on card" = "Nombre del titular de la tarjeta";
+
+"New card" = "Nueva tarjeta";
+
+"New payment method" = "Nuevo método de pago";
+
+"No %@ promo" = "Sin promoción de %@";
+
+"Not you?" = "¿No eres tú?";
+
+"Only card brand can be changed." = "Solo se puede cambiar la marca de la tarjeta.";
+
+"Open to see more information." = "Abrir para ver más información.";
+
+"Or" = "O";
+
+"Or pay using" = "O pagar con";
+
+"Or pay with a card" = "O pagar con tarjeta";
+
+"Or use" = "También puedes usar";
+
+"Or use a card" = "También puedes usar una tarjeta";
+
+"Pay %@" = "Pagar %@";
+
+"Pay another way" = "Pagar de otra manera";
+
+"Pay faster at %@ and thousands of businesses." = "Paga más rápido en %@ y miles de negocios.";
+
+"Pay faster everywhere %@ is accepted." = "Paga más rápido en todos los comercios que acepten %@.";
+
+"Pay faster everywhere Link is accepted." = "Paga más rápido en todos los comercios que acepten Link.";
+
+"Pay over time with %@" = "Paga a lo largo del tiempo con %@";
+
+"Pay over time with Affirm" = "Paga a plazos con Affirm";
+
+"Pay with %@" = "Pagar con %@";
+
+"Pay with Link" = "Pagar con Link";
+
+"Pay with your bank account in just a few steps." = "Paga con tu cuenta bancaria en unos pocos pasos.";
+
+"Payment" = "Pago";
+
+"Payment failed" = "Error en el pago";
+
+"Payment method details cannot be changed." = "Los datos del método de pago no se pueden modificar.";
+
+"Payment methods" = "Métodos de pago";
+
+"Please choose a valid payment method." = "Selecciona un método de pago válido.";
+
+"Please go back and select another payment method" = "Regresa y selecciona otro método de pago";
+
+"Point the camera at your card." = "Apunta la cámara a la tarjeta.";
+
+"Processing..." = "Procesando...";
+
+"Przelewy24 Bank" = "Banco que opera con Przelewy24";
+
+"Remove %@" = "Elimina %@";
+
+"Remove bank?" = "¿Quieres eliminar el banco?";
+
+"Remove card?" = "¿Deseas eliminar la tarjeta?";
+
+"Remove linked account" = "Eliminar cuenta vinculada";
+
+"Remove payment method" = "Elimina el método de pago";
+
+"Remove payment method?" = "¿Deseas eliminar el método de pago?";
+
+"SEPA debit details cannot be changed." = "Los datos del débito SEPA no se pueden modificar.";
+
+"Save" = "Guardar";
+
+"Save a new payment method" = "Guarda un nuevo método de pago";
+
+"Save address" = "Guardar dirección";
+
+"Save for future payments" = "Guardar para futuros pagos";
+
+"Save my info for faster checkout with %@" = "Guardar mis datos para un proceso de compra más rápido con %@";
+
+"Save my info for faster checkout with Link" = "Guarda mis datos para un proceso de compra más rápido con Link";
+
+"Save payment details to %@ for future purchases" = "Guardar los datos de pago en %@ para futuras compras";
+
+"Save this account for future %@ payments" = "Guardar esta cuenta para realizar futuros pagos a %@";
+
+"Save your bank account in just a few steps." = "Guarda tu cuenta bancaria en solo unos pasos.";
+
+"Save your info for secure 1-click checkout with %@" = "Guarda tus datos y disfruta de un proceso de compra seguro en un clic con %@";
+
+"Save your info for secure 1-click checkout with Link" = "Guardar mis datos para una confirmación de compra segura en un clic con Link";
+
+"Saved" = "Guardado";
+
+"Select card" = "Selecciona la tarjeta";
+
+"Select payment method" = "Selecciona el método de pago";
+
+"Select your payment method" = "Selecciona el método de pago";
+
+"Set as default" = "Establecer como valor predeterminado";
+
+"Set as default payment method" = "Establecer como método de pago predeterminado";
+
+"Set up" = "Configurar";
+
+"Shipping" = "Envío";
+
+"Shipping to %@ is not supported." = "No se aceptan envíos a %@.";
+
+"Show details" = "Mostrar datos";
+
+"Show menu" = "Mostrar menú";
+
+"Simple, secure one-click payments" = "Pagos seguros y sencillos en un clic";
+
+"Something went wrong when linking your account.\nPlease try again later." = "Se produjo un error al vincular tu cuenta.\nVuelve a intentarlo más tarde.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you'll get an email with instructions to finish saving your bank account with %@." = "Stripe depositará $0.01 en tu cuenta dentro de 1 o 2 días hábiles. Luego, recibirás un correo electrónico con instrucciones para terminar de guardar tu cuenta bancaria con %@.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you’ll get an email with instructions to complete payment to %@." = "Stripe depositará $0.01 en tu cuenta dentro de 1 o 2 días hábiles. Luego, recibirás un correo electrónico con instrucciones para completar el pago de %@.";
+
+"Subtotal" = "Subtotal";
+
+"Tap to close" = "Pulsa para cerrar";
+
+"Tap to expand" = "Pulsa para expandir";
+
+"Tax" = "Impuesto";
+
+"The IBAN you entered is incomplete." = "El IBAN que ingresaste está incompleto.";
+
+"The IBAN you entered is invalid, \"%@\" is not a supported country code." = "El código Internacional de Cuenta Bancaria (IBAN) ingresado no es válido. El código de país «%@» no se admite.";
+
+"The provided verification code has expired." = "El código de verificación suministrado está vencido.";
+
+"The provided verification code is incorrect." = "El código de verificación proporcionado es incorrecto.";
+
+"This is your default" = "Tu método predeterminado";
+
+"This payment method will be removed but will remain available for %@ subscriptions." = "Este método de pago se eliminará, pero seguirá disponible para las suscripciones de %@.";
+
+"Too many attempts. Please try again in a few minutes." = "Se hicieron demasiados intentos. Vuelve a intentarlo en unos minutos.";
+
+"Unavailable for this purchase" = "No disponible para esta compra";
+
+"Update card" = "Actualizar tarjeta";
+
+"Update payment method" = "Actualizar método de pago";
+
+"Use billing address for shipping" = "Usar dirección de facturación para el envío";
+
+"View more" = "Ver más";
+
+"Yes, update" = "Sí, actualizar";
+
+"Your IBAN should start with a two-letter country code." = "El IBAN debe empezar con un código de país de dos letras.";
+
+"iDEAL Bank" = "Banco iDEAL";

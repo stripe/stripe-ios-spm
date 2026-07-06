@@ -1,0 +1,764 @@
+//
+//  DocumentFileUploadViewController.swift
+//  StripeIdentity
+//
+//  Created by Mel Ludowise on 1/11/22.
+//  Copyright © 2022 Stripe, Inc. All rights reserved.
+//
+
+@_spi(STP) import StripeCameraCore
+@_spi(STP) import StripeCore
+@_spi(STP) import StripeUICore
+import UIKit
+
+enum DocumentFileUploadViewControllerError: String, AnalyticLoggableStringErrorV2 {
+    /// The app cannot access to the photo library on this device
+    case imagePickerSourcePhotoLibraryUnavailable
+    /// This device does not have a camera available or the app does not have permissions to access it
+    case imagePickerSourceCameraUnavailable
+    /// No image was returned by the image picker
+    case imagePickerImageUnretrievable
+    /// The UIImage returned by the image or document picker does not have a CGImage
+    case cgImageUnretrievableFromUIImage
+    /// A document side was not selected before picking an image
+    case documentSideNotSelected
+    /// The document picker did not return a file URL
+    case documentPickerDidNotReturnURL
+    /// The data object corresponding to file URL returned by the picker cannot be loaded as an image
+    case documentPickerDataNotFormattedAsImage
+}
+
+final class DocumentFileUploadViewController: IdentityFlowViewController {
+
+    override var warningAlertViewModel: WarningAlertViewModel? {
+        guard hasUnsavedDocumentChanges else {
+            return nil
+        }
+
+        return .init(
+            titleText: .Localized.unsavedChanges,
+            messageText: STPLocalizedString(
+                "The images of your identity document have not been saved. Do you want to leave?",
+                "Text for message of warning alert"
+            ),
+            acceptButtonText: String.Localized.continue,
+            declineButtonText: String.Localized.cancel
+        )
+    }
+
+    struct Styling {
+        static let uploadCompleteIcon = Image.iconCheckmark.makeImage(template: true)
+    }
+
+    private enum UploadSource: String {
+        case camera
+        case documentPicker = "document_picker"
+        case photoLibrary = "photo_library"
+    }
+
+    // MARK: - Instance Properties
+
+    let imageLoadingQueue = DispatchQueue(label: "com.stripe.identity.document-image-loading")
+
+    let instructionListView = InstructionListView()
+
+    /// If the image must come from a live camera feed
+    let requireLiveCapture: Bool
+
+    let availableIDTypes: [String]
+
+    private(set) var currentlySelectingSide: DocumentSide?
+
+    /// If the front image file is loading from the file system
+    private(set) var isLoadingFrontImageFile = false
+    /// If the back image file is loading from the file system
+    private(set) var isLoadingBackImageFile = false
+
+    /// True while waiting for `saveDocumentFileData` to complete
+    private(set) var isSubmitting = false {
+        didSet {
+            updateUI()
+        }
+    }
+
+    private(set) var continueButtonEnabled = false {
+        didSet {
+            updateUI()
+        }
+    }
+
+    private var hasUnsavedDocumentChanges: Bool {
+        if isSubmitting || isLoadingFrontImageFile || isLoadingBackImageFile {
+            return true
+        }
+
+        if sheetController?.collectedData.idDocumentFront != nil
+            || sheetController?.collectedData.idDocumentBack != nil
+        {
+            return true
+        }
+
+        return [documentUploader.frontUploadStatus, documentUploader.backUploadStatus].contains {
+            switch $0 {
+            case .inProgress, .complete:
+                return true
+            case .notStarted, .error:
+                return false
+            }
+        }
+    }
+
+    // MARK: - UIViewController
+
+    override func viewWillAppear(_ animated: Bool) {
+        self.updateUI()
+    }
+
+    // MARK: - Coordinators
+
+    let documentUploader: DocumentUploaderProtocol
+    let cameraPermissionsManager: CameraPermissionsManagerProtocol
+    let appSettingsHelper: AppSettingsHelperProtocol
+
+    // MARK: - View Model
+
+    var viewModel: InstructionListView.ViewModel {
+        var items: [ListItemView.ViewModel] = [
+            .init(
+                text: listItemText(for: .front, availableIDTypes: availableIDTypes),
+                accessibilityLabel: accessibilityLabel(
+                    for: .front,
+                    uploadStatus: documentUploader.frontUploadStatus,
+                    availableIDTypes: availableIDTypes
+                ),
+                accessory: listItemAccessory(
+                    for: .front,
+                    isLoadingImageFile: isLoadingFrontImageFile,
+                    uploadStatus: documentUploader.frontUploadStatus
+                ),
+                onTap: nil
+            ),
+        ]
+        if sheetController?.collectedData.idDocumentFront != nil {
+            items.append(
+                .init(
+                    text: listItemText(for: .back, availableIDTypes: availableIDTypes),
+                    accessibilityLabel: accessibilityLabel(
+                        for: .back,
+                        uploadStatus: documentUploader.backUploadStatus,
+                        availableIDTypes: availableIDTypes
+                    ),
+                    accessory: listItemAccessory(
+                        for: .back,
+                        isLoadingImageFile: isLoadingBackImageFile,
+                        uploadStatus: documentUploader.backUploadStatus
+                    ),
+                    onTap: nil
+                )
+            )
+        }
+
+        let instructionText: String
+
+        if let idType = (availableIDTypes.count == 1 ? availableIDTypes[0] : nil)?.uiIDType() {
+            instructionText = String(format: .Localized.fileUploadInstructionTextSpecific, idType)
+        } else {
+            instructionText = .Localized.fileUploadInstructionText
+        }
+
+        return .init(instructionText: instructionText, listViewModel: .init(items: items))
+    }
+
+    var buttonState: IdentityFlowView.ViewModel.Button.State {
+        switch (isSubmitting, continueButtonEnabled) {
+        case (true, _):
+            return .loading
+        case (false, true):
+            return .enabled
+        default:
+            return .disabled
+        }
+    }
+
+    // MARK: - Init
+
+    init(
+        requireLiveCapture: Bool,
+        sheetController: VerificationSheetControllerProtocol,
+        documentUploader: DocumentUploaderProtocol,
+        cameraPermissionsManager: CameraPermissionsManagerProtocol = CameraPermissionsManager
+            .shared,
+        appSettingsHelper: AppSettingsHelperProtocol = AppSettingsHelper.shared,
+        availableIDTypes: [String]
+    ) {
+        self.requireLiveCapture = requireLiveCapture
+        self.documentUploader = documentUploader
+        self.cameraPermissionsManager = cameraPermissionsManager
+        self.appSettingsHelper = appSettingsHelper
+        self.availableIDTypes = availableIDTypes
+        super.init(sheetController: sheetController, analyticsScreenName: .documentFileUpload)
+
+        documentUploader.delegate = self
+
+        updateUI()
+    }
+
+    required init?(
+        coder: NSCoder
+    ) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - UI
+
+    func updateUI() {
+        instructionListView.configure(with: viewModel)
+
+        let titleText: String
+
+        if let idType = (availableIDTypes.count == 1 ? availableIDTypes[0] : nil)?.uiIDType() {
+            titleText = String(format: String.Localized.uploadYourSpecificDocument, idType)
+        } else {
+            titleText = .Localized.upload_your_photo_id
+        }
+
+        configure(
+            backButtonTitle: STPLocalizedString(
+                "Upload",
+                "Back button label for the identity document file upload screen"
+            ),
+            viewModel: .init(
+                headerViewModel: .init(
+                    backgroundColor: .systemBackground,
+                    headerType: .plain,
+                    titleText: titleText
+                ),
+                contentViewModel: .init(
+                    view: instructionListView,
+                    inset: .zero
+                ),
+                buttons: [
+                    .continueButton(
+                        state: buttonState,
+                        didTap: { [weak self] in
+                            self?.didTapContinueButton()
+                        }
+                    ),
+                ]
+            )
+        )
+    }
+
+    /// Focuses the accessibility VoiceOver on the list item for the given document side
+    func focusAccessibilityOnListItem(for side: DocumentSide) {
+        instructionListView.listView.focusAccessibility(onItemIndex: (side == .front) ? 0 : 1)
+    }
+
+    func listItemAccessory(
+        for side: DocumentSide,
+        isLoadingImageFile: Bool,
+        uploadStatus: DocumentUploader.UploadStatus
+    ) -> ListItemView.ViewModel.Accessory {
+        // Show activity indicator if we're still loading the file from the file system
+        if isLoadingImageFile {
+            return .activityIndicator
+        }
+        switch uploadStatus {
+        case .notStarted,
+            .error:
+            return .button(
+                title: String.Localized.select,
+                onTap: { [weak self] button in
+                    self?.didTapSelect(for: side, from: button)
+                }
+            )
+        case .inProgress:
+            return .activityIndicator
+        case .complete:
+            if side == .front && sheetController?.collectedData.idDocumentFront == nil {
+                return .activityIndicator
+            } else {
+                return .icon(Styling.uploadCompleteIcon)
+            }
+        }
+    }
+
+    func setIsLoadingImageFromFile(
+        _ value: Bool,
+        for side: DocumentSide
+    ) {
+        switch side {
+        case .front:
+            isLoadingFrontImageFile = value
+        case .back:
+            isLoadingBackImageFile = value
+        }
+    }
+
+    // MARK: - File selection
+
+    func didTapSelect(for side: DocumentSide, from button: UIButton) {
+        currentlySelectingSide = side
+
+        let message: String?
+        switch (requireLiveCapture, side) {
+        case (true, _):
+            message = nil
+        case (false, .front):
+            message = STPLocalizedString(
+                "Select a location to upload the front of your identity document from",
+                "Help text for action sheet that presents ways to upload the front of an identity document image"
+            )
+        case (false, .back):
+            message = STPLocalizedString(
+                "Select a location to upload the back of your identity document from",
+                "Help text for action sheet that presents ways to upload the back of an identity document image"
+            )
+        }
+
+        let alert = UIAlertController(
+            title: nil,
+            message: message,
+            preferredStyle: .actionSheet
+        )
+        alert.popoverPresentationController?.sourceView = button
+        alert.popoverPresentationController?.sourceRect = button.bounds
+
+        if !requireLiveCapture && UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            alert.addAction(
+                .init(
+                    title: STPLocalizedString(
+                        "Photo Library",
+                        "When selected in an action sheet, opens the device's photo library"
+                    ),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.selectPhotoFromLibrary()
+                    }
+                )
+            )
+        }
+
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            alert.addAction(
+                .init(
+                    title: STPLocalizedString(
+                        "Take Photo",
+                        "When selected in an action sheet, opens the device's camera interface"
+                    ),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.takePhoto()
+                    }
+                )
+            )
+        }
+
+        if !requireLiveCapture {
+            alert.addAction(
+                .init(
+                    title: STPLocalizedString(
+                        "Choose File",
+                        "When selected in an action sheet, opens the device's file system browser"
+                    ),
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.selectFileFromSystem()
+                    }
+                )
+            )
+        }
+
+        alert.addAction(
+            .init(
+                title: String.Localized.cancel,
+                style: .cancel
+            )
+        )
+
+        present(alert, animated: true, completion: nil)
+    }
+
+    func selectPhotoFromLibrary() {
+        guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
+            logFileUploadError(
+                DocumentFileUploadViewControllerError.imagePickerSourcePhotoLibraryUnavailable,
+                side: currentlySelectingSide,
+                uploadSource: .photoLibrary
+            )
+            return
+        }
+
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        imagePicker.allowsEditing = false
+        present(imagePicker, animated: true, completion: nil)
+    }
+
+    func takePhoto() {
+        // Check for camera permissions first.
+        cameraPermissionsManager.requestCameraAccess(completeOnQueue: .main) {
+            [weak self] granted in
+            guard let self = self else { return }
+            self.logDeniedCameraPermissionIfNeeded(granted)
+            guard granted == true else {
+                self.showCameraPermissionsAlert()
+                return
+            }
+
+            guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+                self.logCameraError(
+                    DocumentFileUploadViewControllerError.imagePickerSourceCameraUnavailable
+                )
+                return
+            }
+
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = .camera
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+
+    func selectFileFromSystem() {
+        // NOTE: We must request a copy of the image because the original
+        // will likely be outside of this app's sandbox.
+        let documentPicker = UIDocumentPickerViewController(
+            forOpeningContentTypes: [.image],
+            asCopy: true
+        )
+        documentPicker.allowsMultipleSelection = false
+        documentPicker.delegate = self
+        present(documentPicker, animated: true, completion: nil)
+    }
+
+    func upload(
+        image: UIImage,
+        for side: DocumentSide,
+        method: StripeAPI.VerificationPageDataDocumentFileData.FileUploadMethod
+    ) {
+        guard let cgImage = image.cgImage else {
+            logFileUploadError(
+                DocumentFileUploadViewControllerError.cgImageUnretrievableFromUIImage,
+                side: side,
+                uploadMethod: method
+            )
+
+            return
+        }
+
+        documentUploader.uploadImages(
+            for: side,
+            originalImage: cgImage,
+            documentScannerOutput: nil,
+            exifMetadata: nil,
+            method: method
+        )
+    }
+
+    func showCameraPermissionsAlert() {
+        let alert = UIAlertController(
+            title: STPLocalizedString(
+                "Camera permission",
+                "Title displayed when requesting camera permissions"
+            ),
+            message: STPLocalizedString(
+                "We need permission to use your camera. Please allow camera access in app settings.",
+                "Text displayed when requesting camera permissions"
+            ),
+            preferredStyle: .alert
+        )
+
+        if appSettingsHelper.canOpenAppSettings {
+            alert.addAction(
+                .init(
+                    title: String.Localized.app_settings,
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.appSettingsHelper.openAppSettings()
+                    }
+                )
+            )
+        }
+
+        alert.addAction(
+            .init(
+                title: String.Localized.ok,
+                style: .cancel,
+                handler: nil
+            )
+        )
+
+        present(alert, animated: true, completion: nil)
+    }
+
+    private func logDeniedCameraPermissionIfNeeded(_ isGranted: Bool?) {
+        guard let sheetController else {
+            return
+        }
+        sheetController.analyticsClient.logCameraPermissionDeniedOrUnknown(
+            sheetController: sheetController,
+            isGranted: isGranted,
+            screenName: analyticsScreenName,
+            cameraSource: .imagePicker
+        )
+    }
+
+    private func uploadSource(
+        for pickerSourceType: UIImagePickerController.SourceType
+    ) -> UploadSource {
+        switch pickerSourceType {
+        case .camera:
+            return .camera
+        case .photoLibrary,
+            .savedPhotosAlbum:
+            return .photoLibrary
+        @unknown default:
+            return .photoLibrary
+        }
+    }
+
+    private func logFileUploadError(
+        _ error: Error,
+        side: DocumentSide? = nil,
+        uploadSource: UploadSource? = nil,
+        uploadMethod: StripeAPI.VerificationPageDataDocumentFileData.FileUploadMethod? = nil,
+        filePath: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        guard let sheetController else {
+            return
+        }
+
+        var additionalMetadata: [String: Any] = [
+            "screen_name": analyticsScreenName.rawValue,
+        ]
+        if let side {
+            additionalMetadata["side"] = side.rawValue
+        }
+        if let uploadSource {
+            additionalMetadata["upload_source"] = uploadSource.rawValue
+        }
+        if let uploadMethod {
+            additionalMetadata["upload_method"] = uploadMethod.rawValue
+        }
+
+        sheetController.analyticsClient.logGenericError(
+            error: error,
+            additionalMetadata: additionalMetadata,
+            filePath: filePath,
+            line: line,
+            sheetController: sheetController
+        )
+    }
+
+    private func logCameraError(
+        _ error: Error,
+        filePath: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        guard let sheetController else {
+            return
+        }
+
+        sheetController.analyticsClient.logCameraError(
+            sheetController: sheetController,
+            error: error,
+            screenName: analyticsScreenName,
+            cameraSource: .imagePicker,
+            filePath: filePath,
+            line: line
+        )
+    }
+
+    // MARK: - Continue button
+
+    func didTapContinueButton() {
+        isSubmitting = true
+        sheetController?.saveDocumentBackAndTransition(
+            from: analyticsScreenName,
+            documentUploader: self.documentUploader
+        ) { [weak self] in
+            self?.isSubmitting = false
+            self?.continueButtonEnabled = false
+        }
+    }
+
+    // MARK: - Testing
+
+    #if DEBUG
+
+        // ce `presentedViewController` isn't updated within the test target,
+        // re book keeping it here for the purpose of testing the presented view
+        // troller is what we expect.
+
+        private(set) var test_presentedViewController: UIViewController?
+
+        override func present(
+            _ viewControllerToPresent: UIViewController,
+            animated flag: Bool,
+            completion: (() -> Void)? = nil
+        ) {
+            test_presentedViewController = viewControllerToPresent
+            super.present(viewControllerToPresent, animated: flag, completion: completion)
+        }
+
+    #endif
+}
+
+// MARK: - UINavigationControllerDelegate
+
+extension DocumentFileUploadViewController: UINavigationControllerDelegate {
+    // Conformance is required for UIImagePickerController
+}
+
+// MARK: - UIImagePickerControllerDelegate
+
+extension DocumentFileUploadViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+    ) {
+        defer {
+            currentlySelectingSide = nil
+        }
+
+        guard let side = currentlySelectingSide else {
+            logFileUploadError(
+                DocumentFileUploadViewControllerError.documentSideNotSelected,
+                uploadSource: uploadSource(for: picker.sourceType)
+            )
+            return picker.dismiss(animated: true, completion: nil)
+        }
+
+        guard let image = info[.originalImage] as? UIImage else {
+            logFileUploadError(
+                DocumentFileUploadViewControllerError.imagePickerImageUnretrievable,
+                side: side,
+                uploadSource: uploadSource(for: picker.sourceType)
+            )
+            return picker.dismiss(animated: true, completion: nil)
+        }
+
+        upload(
+            image: image,
+            for: side,
+            method: (picker.sourceType == .camera) ? .manualCapture : .fileUpload
+        )
+        updateUI()
+        picker.dismiss(animated: true) { [weak self] in
+            // Set focus back onto the list item after the picker is dismissed
+            self?.focusAccessibilityOnListItem(for: side)
+        }
+    }
+}
+
+// MARK: - UIDocumentPickerDelegate
+
+extension DocumentFileUploadViewController: UIDocumentPickerDelegate {
+    func documentPicker(
+        _ controller: UIDocumentPickerViewController,
+        didPickDocumentsAt urls: [URL]
+    ) {
+        defer {
+            currentlySelectingSide = nil
+        }
+
+        guard let side = currentlySelectingSide else {
+            logFileUploadError(
+                DocumentFileUploadViewControllerError.documentSideNotSelected,
+                uploadSource: .documentPicker
+            )
+            return
+        }
+
+        guard let url = urls.first else {
+            logFileUploadError(
+                DocumentFileUploadViewControllerError.documentPickerDidNotReturnURL,
+                side: side,
+                uploadSource: .documentPicker
+            )
+            return
+        }
+
+        setIsLoadingImageFromFile(true, for: side)
+        imageLoadingQueue.async { [weak self] in
+            guard let self = self else { return }
+
+            do {
+                let data = try Data(contentsOf: url)
+                guard let image = UIImage(data: data) else {
+                    self.logFileUploadError(
+                        DocumentFileUploadViewControllerError.documentPickerDataNotFormattedAsImage,
+                        side: side,
+                        uploadSource: .documentPicker
+                    )
+                    return
+                }
+                self.upload(image: image, for: side, method: .fileUpload)
+            } catch {
+                self.logFileUploadError(
+                    error,
+                    side: side,
+                    uploadSource: .documentPicker
+                )
+            }
+            self.setIsLoadingImageFromFile(false, for: side)
+            DispatchQueue.main.async { [weak self] in
+                self?.updateUI()
+            }
+        }
+
+        // Update UI to show spinner
+        updateUI()
+        // Set focus back onto the list item after the picker is dismissed
+        focusAccessibilityOnListItem(for: side)
+    }
+}
+
+// MARK: - DocumentUploaderDelegate
+
+extension DocumentFileUploadViewController: DocumentUploaderDelegate {
+    func documentUploaderDidUploadFront(_ documentUploader: DocumentUploaderProtocol) {
+        sheetController?.saveDocumentFrontAndDecideBack(
+            from: analyticsScreenName,
+            documentUploader: documentUploader,
+            onCompletion: { [weak self] isBackRequired in
+                guard isBackRequired else { return }
+                DispatchQueue.main.async {
+                    self?.updateUI()
+                }
+            }
+        )
+    }
+
+    func documentUploaderDidUploadBack(_ documentUploader: DocumentUploaderProtocol) {
+        continueButtonEnabled = true
+    }
+
+    func documentUploaderDidUpdateStatus(_ documentUploader: DocumentUploader) {
+        DispatchQueue.main.async { [weak self] in
+            self?.updateUI()
+        }
+    }
+}
+
+// MARK: - IdentityDataCollecting
+
+extension DocumentFileUploadViewController: IdentityDataCollecting {
+    var collectedFields: Set<StripeAPI.VerificationPageFieldType> {
+        // Note: Always include the document back, even if the document type
+        // doesn't have a back. The initial VerificationPage request is made
+        // before the user selects which document type they've selected, so it
+        // will always include the back. Including `idDocumentBack` here ensures
+        // that the user isn't erroneously prompted to scan their document twice.
+        return [.idDocumentFront, .idDocumentBack]
+    }
+
+    func reset() {
+        documentUploader.reset()
+        clearCollectedFields()
+    }
+}
