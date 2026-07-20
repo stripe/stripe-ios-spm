@@ -1,0 +1,505 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 70;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2C43175C7B6D2ECE4F494BC4 /* StripeCoreTestUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B63CD6DDE18E457A337169B /* StripeCoreTestUtils.framework */; };
+		3B3DA818797C12F8AAE7E28E /* StripeUICore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD1E6AEC38AEF70D9E54ADBB /* StripeUICore.framework */; };
+		4F2317E3CD41D6D903E331C2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BFE846D5129FB85A61ADB219 /* XCTest.framework */; };
+		5B2E3D7442C8F86C75FDE246 /* StripePayments.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDFE1FFD109926218DD38D82 /* StripePayments.framework */; };
+		66B5D8F8B4E844E25822EC9E /* StripePaymentsObjcTestUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C879B38322224FD1B0F7FD75 /* StripePaymentsObjcTestUtils.framework */; };
+		67AA177C99537EF1B881438B /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AB72B38DF948C628E00C7809 /* OHHTTPStubsSwift */; };
+		6C9E37FEA36C4C0399224179 /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = 666F15086CA3B7948999CAEF /* iOSSnapshotTestCase */; };
+		8E285418BD0AC81A8E4EEFE5 /* StripePaymentsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8C0921DF28F5F7911653888 /* StripePaymentsUI.framework */; };
+		ACD6549B4AB90EFF2A968209 /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = C290D597D57A745334EA462A /* OHHTTPStubs */; };
+		EAE0A0ECA1CCB3E2F69EA963 /* StripeCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B3640AACAD9398E8AD28571 /* StripeCore.framework */; };
+		F662D937F0427B766D60A898 /* Stripe3DS2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86923C0EED63CCA4827A40C9 /* Stripe3DS2.framework */; };
+		FADECFCAF335F37ED043D66A /* StripePaymentsTestUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FCE26DB24F39485B1BF9675 /* StripePaymentsTestUtils.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		301A65780F8FE00408CF5994 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A75C038903CA5BA2375E90C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C159BFB17E834CD30378F9F3;
+			remoteInfo = StripePaymentsUI;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CE4914E8623300BC66C40EE6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		09478FB2F62490A3E4C30710 /* Project-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Debug.xcconfig"; sourceTree = "<group>"; };
+		2B3640AACAD9398E8AD28571 /* StripeCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StripeCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F0B90C79DD7D9E7CE7D74DE /* StripePaymentsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StripePaymentsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		31AD3BDD2B0C24410080C800 /* StripePayments.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = StripePayments.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		31AD3BE02B0C24450080C800 /* StripeUICore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = StripeUICore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		31AD3BE32B0C24490080C800 /* StripeCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = StripeCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		378D7AAFE63F6D4ADC1D4EC8 /* StripeiOS-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "StripeiOS-Release.xcconfig"; sourceTree = "<group>"; };
+		3FCE26DB24F39485B1BF9675 /* StripePaymentsTestUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StripePaymentsTestUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		637471CFD8720545CA35D0A8 /* Project-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Project-Release.xcconfig"; sourceTree = "<group>"; };
+		6B63CD6DDE18E457A337169B /* StripeCoreTestUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StripeCoreTestUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FE56C292DBB21E554AADCFC /* StripeiOS Tests-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "StripeiOS Tests-Debug.xcconfig"; sourceTree = "<group>"; };
+		86923C0EED63CCA4827A40C9 /* Stripe3DS2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Stripe3DS2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFE846D5129FB85A61ADB219 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		C879B38322224FD1B0F7FD75 /* StripePaymentsObjcTestUtils.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StripePaymentsObjcTestUtils.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDFE1FFD109926218DD38D82 /* StripePayments.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StripePayments.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DACC385F4CE5DE8BCFAA8A49 /* StripeiOS-Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "StripeiOS-Debug.xcconfig"; sourceTree = "<group>"; };
+		E22E366C1397E3E321EFBA72 /* StripeiOS Tests-Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "StripeiOS Tests-Release.xcconfig"; sourceTree = "<group>"; };
+		E8C0921DF28F5F7911653888 /* StripePaymentsUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StripePaymentsUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD1E6AEC38AEF70D9E54ADBB /* StripeUICore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StripeUICore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		31C5EFDD2EB2AC37005770FA /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			publicHeaders = (
+				StripePaymentsUI.h,
+			);
+			target = C159BFB17E834CD30378F9F3 /* StripePaymentsUI */;
+		};
+		31C5EFE72EB2AC39005770FA /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = CFDEE20ADA9F0099259938AF /* StripePaymentsUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		31C5EF9E2EB2AC36005770FA /* StripePaymentsUI */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (31C5EFDD2EB2AC37005770FA /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = StripePaymentsUI; sourceTree = "<group>"; };
+		31C5EFE22EB2AC39005770FA /* StripePaymentsUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (31C5EFE72EB2AC39005770FA /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = StripePaymentsUITests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		080B9DE24C5BA81F780F8F21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F2317E3CD41D6D903E331C2 /* XCTest.framework in Frameworks */,
+				2C43175C7B6D2ECE4F494BC4 /* StripeCoreTestUtils.framework in Frameworks */,
+				66B5D8F8B4E844E25822EC9E /* StripePaymentsObjcTestUtils.framework in Frameworks */,
+				FADECFCAF335F37ED043D66A /* StripePaymentsTestUtils.framework in Frameworks */,
+				8E285418BD0AC81A8E4EEFE5 /* StripePaymentsUI.framework in Frameworks */,
+				6C9E37FEA36C4C0399224179 /* iOSSnapshotTestCase in Frameworks */,
+				ACD6549B4AB90EFF2A968209 /* OHHTTPStubs in Frameworks */,
+				67AA177C99537EF1B881438B /* OHHTTPStubsSwift in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B90D4A8DDE24FEFA64A3A0B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F662D937F0427B766D60A898 /* Stripe3DS2.framework in Frameworks */,
+				EAE0A0ECA1CCB3E2F69EA963 /* StripeCore.framework in Frameworks */,
+				5B2E3D7442C8F86C75FDE246 /* StripePayments.framework in Frameworks */,
+				3B3DA818797C12F8AAE7E28E /* StripeUICore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		199A9B8AB68BE566A72856B3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				86923C0EED63CCA4827A40C9 /* Stripe3DS2.framework */,
+				2B3640AACAD9398E8AD28571 /* StripeCore.framework */,
+				6B63CD6DDE18E457A337169B /* StripeCoreTestUtils.framework */,
+				CDFE1FFD109926218DD38D82 /* StripePayments.framework */,
+				C879B38322224FD1B0F7FD75 /* StripePaymentsObjcTestUtils.framework */,
+				3FCE26DB24F39485B1BF9675 /* StripePaymentsTestUtils.framework */,
+				E8C0921DF28F5F7911653888 /* StripePaymentsUI.framework */,
+				2F0B90C79DD7D9E7CE7D74DE /* StripePaymentsUITests.xctest */,
+				FD1E6AEC38AEF70D9E54ADBB /* StripeUICore.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7ADB2E49AFEC066694F8E7D1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				31AD3BE32B0C24490080C800 /* StripeCore.framework */,
+				31AD3BE02B0C24450080C800 /* StripeUICore.framework */,
+				31AD3BDD2B0C24410080C800 /* StripePayments.framework */,
+				BFE846D5129FB85A61ADB219 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BE7250EEEC959E5598AFB9FA = {
+			isa = PBXGroup;
+			children = (
+				E6EE39118733528E48738DF2 /* Project */,
+				7ADB2E49AFEC066694F8E7D1 /* Frameworks */,
+				199A9B8AB68BE566A72856B3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E6EE39118733528E48738DF2 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				E760746A90857E3575BEBCDA /* BuildConfigurations */,
+				31C5EF9E2EB2AC36005770FA /* StripePaymentsUI */,
+				31C5EFE22EB2AC39005770FA /* StripePaymentsUITests */,
+			);
+			name = Project;
+			sourceTree = "<group>";
+		};
+		E760746A90857E3575BEBCDA /* BuildConfigurations */ = {
+			isa = PBXGroup;
+			children = (
+				09478FB2F62490A3E4C30710 /* Project-Debug.xcconfig */,
+				637471CFD8720545CA35D0A8 /* Project-Release.xcconfig */,
+				6FE56C292DBB21E554AADCFC /* StripeiOS Tests-Debug.xcconfig */,
+				E22E366C1397E3E321EFBA72 /* StripeiOS Tests-Release.xcconfig */,
+				DACC385F4CE5DE8BCFAA8A49 /* StripeiOS-Debug.xcconfig */,
+				378D7AAFE63F6D4ADC1D4EC8 /* StripeiOS-Release.xcconfig */,
+			);
+			name = BuildConfigurations;
+			path = ../BuildConfigurations;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		0B3ED58B321B8C3B8C8F3078 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		C159BFB17E834CD30378F9F3 /* StripePaymentsUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 701C03CD723265CEBC62C4D5 /* Build configuration list for PBXNativeTarget "StripePaymentsUI" */;
+			buildPhases = (
+				0B3ED58B321B8C3B8C8F3078 /* Headers */,
+				27438CDC7098A318A6672A71 /* Sources */,
+				643EE5B9BDDF28D0C19F8601 /* Resources */,
+				CE4914E8623300BC66C40EE6 /* Embed Frameworks */,
+				B90D4A8DDE24FEFA64A3A0B8 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				31C5EF9E2EB2AC36005770FA /* StripePaymentsUI */,
+			);
+			name = StripePaymentsUI;
+			productName = StripePaymentsUI;
+			productReference = E8C0921DF28F5F7911653888 /* StripePaymentsUI.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		CFDEE20ADA9F0099259938AF /* StripePaymentsUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC4EB44D4453B210FF076CF2 /* Build configuration list for PBXNativeTarget "StripePaymentsUITests" */;
+			buildPhases = (
+				A1F6776A0960C4F06147074E /* Sources */,
+				D3B646E158379063DC903CD9 /* Resources */,
+				080B9DE24C5BA81F780F8F21 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				176864E5FBCD395A07E36D5A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				31C5EFE22EB2AC39005770FA /* StripePaymentsUITests */,
+			);
+			name = StripePaymentsUITests;
+			packageProductDependencies = (
+				666F15086CA3B7948999CAEF /* iOSSnapshotTestCase */,
+				C290D597D57A745334EA462A /* OHHTTPStubs */,
+				AB72B38DF948C628E00C7809 /* OHHTTPStubsSwift */,
+			);
+			productName = StripePaymentsUITests;
+			productReference = 2F0B90C79DD7D9E7CE7D74DE /* StripePaymentsUITests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5A75C038903CA5BA2375E90C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+			};
+			buildConfigurationList = 02E5F9E426DAA8E86C0A1EB9 /* Build configuration list for PBXProject "StripePaymentsUI" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				"bg-BG",
+				"ca-ES",
+				"cs-CZ",
+				da,
+				de,
+				"el-GR",
+				en,
+				"en-GB",
+				es,
+				"es-419",
+				"et-EE",
+				fi,
+				fil,
+				fr,
+				"fr-CA",
+				hr,
+				hu,
+				id,
+				it,
+				ja,
+				ko,
+				"lt-LT",
+				"lv-LV",
+				"ms-MY",
+				mt,
+				nb,
+				nl,
+				"pl-PL",
+				"pt-BR",
+				"pt-PT",
+				"ro-RO",
+				ru,
+				"sk-SK",
+				"sl-SI",
+				sv,
+				tk,
+				tr,
+				vi,
+				"zh-HK",
+				"zh-Hans",
+				"zh-Hant",
+				th,
+			);
+			mainGroup = BE7250EEEC959E5598AFB9FA;
+			packageReferences = (
+				4A06DAB6985257ECC67643BD /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
+				EBDA13D7CF2595A44DA31C22 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */,
+			);
+			productRefGroup = 199A9B8AB68BE566A72856B3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C159BFB17E834CD30378F9F3 /* StripePaymentsUI */,
+				CFDEE20ADA9F0099259938AF /* StripePaymentsUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		643EE5B9BDDF28D0C19F8601 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D3B646E158379063DC903CD9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		27438CDC7098A318A6672A71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A1F6776A0960C4F06147074E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		176864E5FBCD395A07E36D5A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = StripePaymentsUI;
+			target = C159BFB17E834CD30378F9F3 /* StripePaymentsUI */;
+			targetProxy = 301A65780F8FE00408CF5994 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2E1485C80C43DF1F0781E06D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 637471CFD8720545CA35D0A8 /* Project-Release.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		2F68C82F178D19F60E20B79E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FE56C292DBB21E554AADCFC /* StripeiOS Tests-Debug.xcconfig */;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				INFOPLIST_FILE = StripePaymentsUITests/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stripe.StripePaymentsUITests;
+				PRODUCT_NAME = StripePaymentsUITests;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = YES;
+				TARGETED_DEVICE_FAMILY = "1,7";
+			};
+			name = Debug;
+		};
+		35A9B080D9B9528E35B7CFF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09478FB2F62490A3E4C30710 /* Project-Debug.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		421A61384C2E7B43B6189743 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E22E366C1397E3E321EFBA72 /* StripeiOS Tests-Release.xcconfig */;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
+				);
+				INFOPLIST_FILE = StripePaymentsUITests/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stripe.StripePaymentsUITests;
+				PRODUCT_NAME = StripePaymentsUITests;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = YES;
+				TARGETED_DEVICE_FAMILY = "1,7";
+			};
+			name = Release;
+		};
+		DB0783873B146C8B452FF684 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 378D7AAFE63F6D4ADC1D4EC8 /* StripeiOS-Release.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = StripePaymentsUI/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stripe.stripe-payments-ui";
+				PRODUCT_NAME = StripePaymentsUI;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = YES;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+			};
+			name = Release;
+		};
+		ED4EF1A6C4021E0C9170DAB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DACC385F4CE5DE8BCFAA8A49 /* StripeiOS-Debug.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = StripePaymentsUI/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.stripe.stripe-payments-ui";
+				PRODUCT_NAME = StripePaymentsUI;
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
+				SUPPORTS_MACCATALYST = YES;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		02E5F9E426DAA8E86C0A1EB9 /* Build configuration list for PBXProject "StripePaymentsUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				35A9B080D9B9528E35B7CFF8 /* Debug */,
+				2E1485C80C43DF1F0781E06D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		701C03CD723265CEBC62C4D5 /* Build configuration list for PBXNativeTarget "StripePaymentsUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED4EF1A6C4021E0C9170DAB3 /* Debug */,
+				DB0783873B146C8B452FF684 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC4EB44D4453B210FF076CF2 /* Build configuration list for PBXNativeTarget "StripePaymentsUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F68C82F178D19F60E20B79E /* Debug */,
+				421A61384C2E7B43B6189743 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		4A06DAB6985257ECC67643BD /* XCRemoteSwiftPackageReference "OHHTTPStubs" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/davidme-stripe/OHHTTPStubs";
+			requirement = {
+				branch = "stripe-mock";
+				kind = branch;
+			};
+		};
+		EBDA13D7CF2595A44DA31C22 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uber/ios-snapshot-test-case";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		666F15086CA3B7948999CAEF /* iOSSnapshotTestCase */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = iOSSnapshotTestCase;
+		};
+		AB72B38DF948C628E00C7809 /* OHHTTPStubsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OHHTTPStubsSwift;
+		};
+		C290D597D57A745334EA462A /* OHHTTPStubs */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OHHTTPStubs;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 5A75C038903CA5BA2375E90C /* Project object */;
+}
