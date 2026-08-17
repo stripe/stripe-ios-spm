@@ -1,0 +1,499 @@
+//
+//  PaymentPagesAPIResponse.swift
+//  StripePaymentSheet
+//
+//  Created by Nick Porter on 1/14/26.
+//  Copyright © 2026 Stripe, Inc. All rights reserved.
+//
+
+import Foundation
+@_spi(STP) import StripeCore
+@_spi(STP) import StripePayments
+
+/// Internal response model for the Payment Pages API endpoints.
+///
+/// Properties in this model mirror the API payload. Conversion to the public Checkout
+/// representation belongs in `makePublicSession()`.
+struct PaymentPagesAPIResponse: UnknownFieldsDecodable, CustomStringConvertible {
+    var _allResponseFieldsStorage: NonEncodableParameters?
+
+    let sessionId: String
+    let clientSecret: String?
+    let paymentIntentId: String?
+    let paymentIntent: STPPaymentIntent?
+    let setupIntentId: String?
+    let setupIntent: STPSetupIntent?
+    let currency: String
+    let checkoutItems: [CheckoutItem]
+    let livemode: Bool
+    let status: Checkout.Session.Status
+    let paymentStatus: Checkout.Session.Status.PaymentStatus
+    let customerEmail: String?
+    let url: String?
+    let savedPaymentMethodsOfferSave: SavedPaymentMethodsOfferSave?
+    let setupFutureUsage: String?
+    let setupFutureUsageForPaymentMethodType: [String: String]?
+    let billingAddressCollection: String?
+    let shippingAddressCollection: ShippingAddressCollection?
+    let recurringDetails: RecurringDetails?
+    let adaptivePricingInfo: AdaptivePricingInfo?
+    let developerToolContext: DeveloperToolContext?
+    let taxContext: TaxContext?
+    let taxMeta: TaxMeta?
+    let paymentMethodOptions: STPPaymentMethodOptions?
+    let customer: Customer?
+    let elementsSession: ElementsSession
+
+    /// Extracts the client secret from whichever expanded intent is present in the response.
+    func intentClientSecret() throws -> String {
+        if let setupIntent {
+            return setupIntent.clientSecret
+        } else if let paymentIntent {
+            return paymentIntent.clientSecret
+        }
+        throw PaymentSheetError.unknown(
+            debugDescription: "No intent found in checkout session response"
+        )
+    }
+
+    var description: String {
+        let props: [String] = [
+            "PaymentPagesAPIResponse",
+            "sessionId = \(sessionId)",
+            "clientSecret = <redacted>",
+            "currency = \(currency)",
+            "mode = \(String(describing: allResponseFields["mode"]))",
+            "status = \(status)",
+            "paymentIntentId = \(String(describing: paymentIntentId))",
+            "setupIntentId = \(String(describing: setupIntentId))",
+            "paymentMethodTypes = \(String(describing: allResponseFields["payment_method_types"]))",
+            "livemode = \(livemode)",
+            "customerId = \(String(describing: customer?.id))",
+            "customerEmail = \(String(describing: customerEmail))",
+            "url = \(String(describing: url))",
+            "savedPaymentMethodsOfferSave = \(String(describing: savedPaymentMethodsOfferSave))",
+        ]
+        return "<\(props.joined(separator: "; "))>"
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case sessionId
+        case clientSecret
+        case paymentIntent
+        case setupIntent
+        case currency
+        case checkoutItems
+        case livemode
+        case mode
+        case status
+        case paymentStatus
+        case paymentMethodTypes
+        case customerEmail
+        case url
+        case savedPaymentMethodsOfferSave = "customer_managed_saved_payment_methods_offer_save"
+        case setupFutureUsage
+        case setupFutureUsageForPaymentMethodType
+        case billingAddressCollection
+        case shippingAddressCollection
+        case recurringDetails
+        case adaptivePricingInfo
+        case developerToolContext
+        case taxContext
+        case taxMeta
+        case paymentMethodOptions
+        case customer
+        case elementsSession
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        sessionId = try container.decode(String.self, forKey: .sessionId)
+        clientSecret = try container.decodeIfPresent(String.self, forKey: .clientSecret)
+        let decodedPaymentIntent = try container.decodeIfPresent(
+            LegacyExpandable<STPPaymentIntent>.self,
+            forKey: .paymentIntent
+        )
+        paymentIntentId = decodedPaymentIntent?.id
+        paymentIntent = decodedPaymentIntent?.expandedObject
+        let decodedSetupIntent = try container.decodeIfPresent(
+            LegacyExpandable<STPSetupIntent>.self,
+            forKey: .setupIntent
+        )
+        setupIntentId = decodedSetupIntent?.id
+        setupIntent = decodedSetupIntent?.expandedObject
+        let decodedCurrency = try container.decode(String.self, forKey: .currency)
+        guard !decodedCurrency.isEmpty else {
+            throw decoder.dataCorrupted("currency must not be empty")
+        }
+        currency = decodedCurrency
+
+        let mode = try container.decode(String.self, forKey: .mode)
+        guard mode == "modeless" else {
+            throw decoder.dataCorrupted("Only modeless Checkout Sessions are supported")
+        }
+
+        let decodedCheckoutItems = try container.decode([CheckoutItem].self, forKey: .checkoutItems)
+        guard !decodedCheckoutItems.isEmpty else {
+            throw decoder.dataCorrupted("checkout_items must not be empty")
+        }
+        guard decodedCheckoutItems.allSatisfy({ checkoutItem in
+            checkoutItem.oneTimePrice.items.allSatisfy { $0.price.currency == decodedCurrency }
+        }) else {
+            throw decoder.dataCorrupted("Every Checkout item currency must match currency")
+        }
+        checkoutItems = decodedCheckoutItems
+
+        livemode = try container.decode(Bool.self, forKey: .livemode)
+        let decodedPaymentStatus = try container.decode(String.self, forKey: .paymentStatus)
+        guard let paymentStatus = Checkout.Session.Status.PaymentStatus.paymentStatus(
+            from: decodedPaymentStatus
+        ) else {
+            throw decoder.dataCorrupted("Unsupported payment_status: \(decodedPaymentStatus)")
+        }
+        self.paymentStatus = paymentStatus
+
+        let decodedStatus = try container.decode(String.self, forKey: .status)
+        guard let status = Checkout.Session.Status.status(
+            from: decodedStatus,
+            paymentStatus: paymentStatus
+        ) else {
+            throw decoder.dataCorrupted("Unsupported Checkout Session status: \(decodedStatus)")
+        }
+        self.status = status
+        _ = try container.decode([String].self, forKey: .paymentMethodTypes)
+
+        customerEmail = try container.decodeIfPresent(String.self, forKey: .customerEmail)
+        url = try container.decodeIfPresent(String.self, forKey: .url)
+        savedPaymentMethodsOfferSave = try container.decodeIfPresent(
+            SavedPaymentMethodsOfferSave.self,
+            forKey: .savedPaymentMethodsOfferSave
+        )
+        setupFutureUsage = try container.decodeIfPresent(String.self, forKey: .setupFutureUsage)
+        setupFutureUsageForPaymentMethodType = try container.decodeIfPresent(
+            [String: String].self,
+            forKey: .setupFutureUsageForPaymentMethodType
+        )
+        billingAddressCollection = try container.decodeIfPresent(
+            String.self,
+            forKey: .billingAddressCollection
+        )
+        shippingAddressCollection = try container.decodeIfPresent(
+            ShippingAddressCollection.self,
+            forKey: .shippingAddressCollection
+        )
+        recurringDetails = try container.decodeIfPresent(RecurringDetails.self, forKey: .recurringDetails)
+        adaptivePricingInfo = try container.decodeIfPresent(
+            AdaptivePricingInfo.self,
+            forKey: .adaptivePricingInfo
+        )
+        developerToolContext = try container.decodeIfPresent(
+            DeveloperToolContext.self,
+            forKey: .developerToolContext
+        )
+        taxContext = try container.decodeIfPresent(TaxContext.self, forKey: .taxContext)
+        taxMeta = try container.decodeIfPresent(TaxMeta.self, forKey: .taxMeta)
+        paymentMethodOptions = try container.decodeIfPresent(
+            LegacyDecoded<STPPaymentMethodOptions>.self,
+            forKey: .paymentMethodOptions
+        )?.value
+        customer = try container.decodeIfPresent(Customer.self, forKey: .customer)
+        elementsSession = try container.decode(ElementsSession.self, forKey: .elementsSession)
+    }
+}
+
+extension PaymentPagesAPIResponse {
+    /// Adapts a dictionary-backed API model to `Decodable` while it is migrated.
+    struct LegacyDecoded<Value: STPAPIResponseDecodable>: Decodable {
+        let value: Value
+
+        init(from decoder: Decoder) throws {
+            let dictionary = try decoder.stripeJSONDictionary
+            guard let value = Value.decodedObject(fromAPIResponse: dictionary) else {
+                throw DecodingError.dataCorrupted(
+                    .init(
+                        codingPath: decoder.codingPath,
+                        debugDescription: "Could not decode \(Value.self) using its legacy parser"
+                    )
+                )
+            }
+            self.value = value
+        }
+    }
+
+    private struct LegacyExpandable<Value: STPAPIResponseDecodable>: Decodable {
+        let id: String
+        let expandedObject: Value?
+
+        private enum CodingKeys: String, CodingKey {
+            case id
+        }
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.singleValueContainer()
+            if let id = try? container.decode(String.self) {
+                self.id = id
+                self.expandedObject = nil
+                return
+            }
+
+            let expandedObject = try LegacyDecoded<Value>(from: decoder).value
+            guard let id = expandedObject.allResponseFields["id"] as? String else {
+                throw DecodingError.keyNotFound(
+                    CodingKeys.id,
+                    .init(
+                        codingPath: decoder.codingPath,
+                        debugDescription: "Expanded \(Value.self) is missing id"
+                    )
+                )
+            }
+            self.id = id
+            self.expandedObject = expandedObject
+        }
+    }
+}
+
+// MARK: - API-shaped nested models
+
+extension PaymentPagesAPIResponse {
+    struct CheckoutItem: Decodable {
+        let key: String
+        let oneTimePrice: OneTimePrice
+
+        private enum CodingKeys: String, CodingKey {
+            case key
+            case type
+            case oneTimePrice
+        }
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            key = try container.decode(String.self, forKey: .key)
+            let type = try container.decode(String.self, forKey: .type)
+            guard type == "one_time_price" else {
+                throw decoder.dataCorrupted("Unsupported Checkout item type: \(type)")
+            }
+            oneTimePrice = try container.decode(OneTimePrice.self, forKey: .oneTimePrice)
+        }
+    }
+
+    struct OneTimePrice: Decodable {
+        let items: [OneTimePriceItem]
+        let subtotal: Int
+        let total: Int
+    }
+
+    struct OneTimePriceItem: Decodable {
+        let price: Price
+        let quantity: Int
+        let unitAmount: Int?
+        let unitAmountDecimal: Double?
+        let unitLabel: String?
+        let taxAmounts: [TaxAmount]
+        let taxInclusive: Int
+        let taxExclusive: Int
+        let adjustableQuantity: AdjustableQuantity?
+
+        private enum CodingKeys: String, CodingKey {
+            case innerItemKey
+            case price
+            case quantity
+            case subtotal
+            case total
+            case unitAmount
+            case unitAmountDecimal
+            case unitLabel
+            case taxAmounts
+            case taxInclusive
+            case taxExclusive
+            case adjustableQuantity
+        }
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            _ = try container.decode(String.self, forKey: .innerItemKey)
+            price = try container.decode(Price.self, forKey: .price)
+            quantity = try container.decode(Int.self, forKey: .quantity)
+            guard quantity >= 0 else {
+                throw decoder.dataCorrupted("quantity must not be negative")
+            }
+            _ = try container.decode(Int.self, forKey: .subtotal)
+            _ = try container.decode(Int.self, forKey: .total)
+            unitAmount = try container.decodeIfPresent(Int.self, forKey: .unitAmount)
+
+            if let rawUnitAmountDecimal = try container.decodeIfPresent(
+                String.self,
+                forKey: .unitAmountDecimal
+            ) {
+                guard let parsedUnitAmountDecimal = Double(rawUnitAmountDecimal),
+                      parsedUnitAmountDecimal.isFinite else {
+                    throw decoder.dataCorrupted("unit_amount_decimal must be a finite number")
+                }
+                unitAmountDecimal = parsedUnitAmountDecimal
+            } else {
+                unitAmountDecimal = nil
+            }
+
+            guard unitAmount != nil || price.unitAmount != nil || unitAmountDecimal != nil else {
+                throw decoder.dataCorrupted("A one-time Price item must have a unit amount")
+            }
+
+            unitLabel = try container.decodeIfPresent(String.self, forKey: .unitLabel)
+            taxAmounts = try container.decode([TaxAmount].self, forKey: .taxAmounts)
+            taxInclusive = try container.decode(Int.self, forKey: .taxInclusive)
+            taxExclusive = try container.decode(Int.self, forKey: .taxExclusive)
+            adjustableQuantity = try container.decodeIfPresent(
+                AdjustableQuantity.self,
+                forKey: .adjustableQuantity
+            )
+        }
+    }
+
+    struct Price: Decodable {
+        let id: String
+        let currency: String
+        let unitAmount: Int?
+        let product: Product
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            id = try container.decode(String.self, forKey: .id)
+            currency = try container.decode(String.self, forKey: .currency)
+            guard !currency.isEmpty else {
+                throw decoder.dataCorrupted("Price currency must not be empty")
+            }
+            unitAmount = try container.decodeIfPresent(Int.self, forKey: .unitAmount)
+            product = try container.decode(Product.self, forKey: .product)
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case id
+            case currency
+            case unitAmount
+            case product
+        }
+    }
+
+    struct Product: Decodable {
+        let name: String
+        let images: [String]
+    }
+
+    struct RecurringDetails: Decodable {
+        let totalDiscountAmounts: [DiscountAmount]?
+        let totalTaxAmounts: [TaxAmount]?
+    }
+
+    struct DiscountAmount: Decodable {
+        let amount: Int?
+        let displayName: String?
+        let coupon: Coupon?
+        let promotionCode: PromotionCode?
+    }
+
+    struct Coupon: Decodable {
+        let id: String?
+        let name: String?
+    }
+
+    struct PromotionCode: Decodable {
+        let code: String?
+    }
+
+    struct TaxAmount: Decodable {
+        let amount: Int
+        let inclusive: Bool
+        let taxRate: TaxRate
+    }
+
+    struct TaxRate: Decodable {
+        let displayName: String
+        let percentage: Double
+        let rateType: String?
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            displayName = try container.decode(String.self, forKey: .displayName)
+            percentage = try container.decode(Double.self, forKey: .percentage)
+            rateType = try container.decodeIfPresent(String.self, forKey: .rateType)
+            guard rateType == nil || rateType == "flat_amount" || rateType == "percentage" else {
+                throw decoder.dataCorrupted("Unsupported tax rate type: \(rateType!)")
+            }
+        }
+
+        private enum CodingKeys: String, CodingKey {
+            case displayName
+            case percentage
+            case rateType
+        }
+    }
+
+    struct AdjustableQuantity: Decodable {
+        let enabled: Bool
+        let maximum: Int?
+        let minimum: Int?
+    }
+
+    struct ShippingAddressCollection: Decodable {
+        let allowedCountries: [String]?
+    }
+
+    struct AdaptivePricingInfo: Decodable {
+        let activePresentmentCurrency: String?
+        let integrationAmount: Int?
+        let integrationCurrency: String?
+        let localCurrencyOptions: [LocalCurrencyOption]?
+    }
+
+    struct LocalCurrencyOption: Decodable {
+        let amount: Int?
+        let conversionMarkupBps: Int?
+        let currency: String?
+        let presentmentExchangeRate: String?
+    }
+
+    struct DeveloperToolContext: Decodable {
+        let adaptivePricing: AdaptivePricing?
+
+        struct AdaptivePricing: Decodable {
+            let active: Bool?
+        }
+    }
+
+    struct TaxContext: Decodable {
+        let automaticTaxEnabled: Bool?
+        let automaticTaxAddressSource: String?
+    }
+
+    struct TaxMeta: Decodable {
+        let computationType: String?
+        let status: String?
+    }
+
+    struct SavedPaymentMethodsOfferSave: Decodable {
+        let enabled: Bool?
+        let status: String?
+    }
+
+    struct ElementsSession: Decodable {
+        let businessName: String?
+        let value: STPElementsSession
+
+        private enum CodingKeys: String, CodingKey {
+            case businessName
+        }
+
+        init(from decoder: Decoder) throws {
+            let container = try decoder.container(keyedBy: CodingKeys.self)
+            businessName = try container.decodeIfPresent(String.self, forKey: .businessName)
+            value = try LegacyDecoded<STPElementsSession>(from: decoder).value
+        }
+    }
+}
+
+private extension Decoder {
+    func dataCorrupted(_ description: String) -> DecodingError {
+        return DecodingError.dataCorrupted(
+            .init(codingPath: codingPath, debugDescription: description)
+        )
+    }
+}
