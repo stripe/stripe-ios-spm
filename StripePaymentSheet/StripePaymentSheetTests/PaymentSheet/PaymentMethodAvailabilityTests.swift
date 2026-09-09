@@ -1,0 +1,457 @@
+//
+//  PaymentSheet+PaymentMethodAvailabilityTest.swift
+//  StripePaymentSheetTests
+//
+//  Created by Nick Porter on 1/22/25.
+//
+
+@testable @_spi(STP) import StripeCore
+@testable @_spi(STP) import StripePayments
+@testable @_spi(STP) import StripePaymentSheet
+@testable @_spi(STP) import StripePaymentsTestUtils
+import XCTest
+
+final class PaymentMethodAvailabilityTests: XCTestCase {
+    func testResolvedLinkBrand_usesElementsSessionBrand() {
+        let elementsSession = STPElementsSession._testValue(
+            linkSettings: ._testValue(brand: .onelink)
+        )
+        let configuration = PaymentSheet.Configuration()
+
+        XCTAssertEqual(configuration.resolvedLinkBrand(elementsSession: elementsSession, linkAccount: nil), .onelink)
+    }
+
+    func testResolvedLinkBrand_prefersConfigurationOverride() {
+        let elementsSession = STPElementsSession._testValue(
+            linkSettings: ._testValue(brand: .link)
+        )
+        var configuration = PaymentSheet.Configuration()
+        configuration.link = .init(brand: .onelink)
+
+        XCTAssertEqual(configuration.resolvedLinkBrand(elementsSession: elementsSession, linkAccount: nil), .onelink)
+    }
+
+    func testResolvedLinkBrand_defaultsToLinkWhenElementsSessionHasNoBrand() {
+        let elementsSession = STPElementsSession._testValue()
+        let configuration = PaymentSheet.Configuration()
+
+        XCTAssertEqual(configuration.resolvedLinkBrand(elementsSession: elementsSession, linkAccount: nil), .link)
+    }
+
+    func testFinancialConnectionsLinkBrandOverride_onlyOverridesOnelink() {
+        var configuration = PaymentSheet.Configuration()
+
+        XCTAssertNil(configuration.financialConnectionsLinkBrandOverride)
+
+        configuration.link = .init(brand: .link)
+        XCTAssertNil(configuration.financialConnectionsLinkBrandOverride)
+
+        configuration.link = .init(brand: .onelink)
+        XCTAssertEqual(configuration.financialConnectionsLinkBrandOverride, .onelink)
+    }
+
+    func testFinancialConnectionsLinkBrandOverride_usesAuthenticatedConsumerBrand() {
+        // Given an authenticated Onelink consumer
+        let session = ConsumerSession.make(
+            clientSecret: "consumer_session_secret",
+            emailAddress: "test@example.com",
+            redactedFormattedPhoneNumber: "(***) *** **55",
+            unredactedPhoneNumber: nil,
+            phoneNumberCountry: "US",
+            verificationSessions: [.init(type: .sms, state: .verified)],
+            supportedPaymentDetailsTypes: [],
+            mobileFallbackWebviewParams: nil,
+            currentAuthenticationLevel: .twoFactorAuth,
+            minimumAuthenticationLevel: .oneFactorAuth,
+            linkBrand: .onelink
+        )
+        let linkAccount = PaymentSheetLinkAccount(
+            email: "test@example.com",
+            session: session,
+            publishableKey: nil,
+            displayablePaymentDetails: nil,
+            useMobileEndpoints: false,
+            canSyncAttestationState: false
+        )
+        let configuration = PaymentSheet.Configuration()
+
+        // Then the brand is forwarded to Financial Connections without consumer credentials
+        XCTAssertEqual(
+            configuration.financialConnectionsLinkBrandOverride(linkAccount: linkAccount),
+            .onelink
+        )
+    }
+
+    func testFinancialConnectionsLinkBrandOverride_doesNotOverrideLink() {
+        let configuration = PaymentSheet.Configuration()
+
+        // Then the backend Financial Connections brand remains authoritative
+        XCTAssertNil(configuration.financialConnectionsLinkBrandOverride(linkAccount: nil))
+    }
+
+    func testResolvedLinkBrand_withSignedOutLinkAccount_fallsBackToElementsSessionBrand() {
+        let elementsSession = STPElementsSession._testValue(
+            linkSettings: ._testValue(brand: .link)
+        )
+        let configuration = PaymentSheet.Configuration()
+        let linkAccount = PaymentSheetLinkAccount(
+            email: "test@example.com",
+            session: nil,
+            publishableKey: nil,
+            displayablePaymentDetails: nil,
+            useMobileEndpoints: false,
+            canSyncAttestationState: false
+        )
+
+        XCTAssertEqual(
+            configuration.resolvedLinkBrand(elementsSession: elementsSession, linkAccount: linkAccount),
+            .link
+        )
+    }
+
+    func testResolvedLinkBrand_withLinkAccount_stillPrefersConfigurationOverride() {
+        let elementsSession = STPElementsSession._testValue(
+            linkSettings: ._testValue(brand: .link)
+        )
+        var configuration = PaymentSheet.Configuration()
+        configuration.link = .init(brand: .link)
+        let linkAccount = PaymentSheetLinkAccount(
+            email: "test@example.com",
+            session: nil,
+            publishableKey: nil,
+            displayablePaymentDetails: nil,
+            useMobileEndpoints: false,
+            canSyncAttestationState: false
+        )
+
+        XCTAssertEqual(
+            configuration.resolvedLinkBrand(elementsSession: elementsSession, linkAccount: linkAccount),
+            .link
+        )
+    }
+
+    func testIsLinkEnabled_supportsLinkFalse_linkNotPresent() {
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card"],
+            isLinkPassthroughModeEnabled: false
+        )
+        let configuration = PaymentSheet.Configuration()
+        let isLinkEnabled = PaymentSheet.isLinkEnabled(elementsSession: elementsSession, configuration: configuration)
+
+        XCTAssertFalse(isLinkEnabled, "Link should be disabled when supportsLink is false and link is not in payment method types")
+    }
+
+    func testIsLinkEnabled_supportsLinkTrue_linkPresent() {
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card", "link"],
+            isLinkPassthroughModeEnabled: false
+        )
+        let configuration = PaymentSheet.Configuration()
+        let isLinkEnabled = PaymentSheet.isLinkEnabled(elementsSession: elementsSession, configuration: configuration)
+
+        XCTAssertTrue(isLinkEnabled, "Link should be enabled when isLinkPassthroughModeEnabled is false, since Link is present in the payment method types")
+    }
+
+    func testIsLinkEnabled_supportsLinkTrue_linkNotPresent_passthroughEnabled() {
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card"],
+            isLinkPassthroughModeEnabled: true
+        )
+        let configuration = PaymentSheet.Configuration()
+        let isLinkEnabled = PaymentSheet.isLinkEnabled(elementsSession: elementsSession, configuration: configuration)
+
+        XCTAssertTrue(isLinkEnabled, "Link should be enabled when supportsLink is true because passthrough mode is enabled")
+    }
+
+    func testIsLinkEnabled_requiresBillingDetailCollection() {
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card", "link"],
+            isLinkPassthroughModeEnabled: true
+
+        )
+        var configuration = PaymentSheet.Configuration()
+        configuration.billingDetailsCollectionConfiguration.name = .always
+        let isLinkEnabled = PaymentSheet.isLinkEnabled(elementsSession: elementsSession, configuration: configuration)
+
+        XCTAssertFalse(isLinkEnabled, "Link should be disabled when billing details collection is required")
+    }
+
+    func testIsLinkEnabled_cardBrandAcceptanceNotAll() {
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card", "link"],
+            isLinkPassthroughModeEnabled: true
+
+        )
+        var configuration = PaymentSheet.Configuration()
+        configuration.cardBrandAcceptance = .allowed(brands: [.visa])
+        let isLinkEnabled = PaymentSheet.isLinkEnabled(elementsSession: elementsSession, configuration: configuration)
+
+        XCTAssertFalse(isLinkEnabled, "Link should be disabled when card brand acceptance is not 'all'")
+    }
+
+    func testIsLinkEnabled_allConditionsMet() {
+        // Given
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card", "link"],
+            isLinkPassthroughModeEnabled: true
+        )
+        let configuration = PaymentSheet.Configuration()
+        let isLinkEnabled = PaymentSheet.isLinkEnabled(elementsSession: elementsSession, configuration: configuration)
+
+        XCTAssertTrue(isLinkEnabled, "Link should be enabled when all conditions are met")
+    }
+
+    func testIsLinkEnabled_linkNotExplicitlyAllowedButPassthroughEnabled() {
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card"],
+            isLinkPassthroughModeEnabled: true
+        )
+        let configuration = PaymentSheet.Configuration()
+        let isLinkEnabled = PaymentSheet.isLinkEnabled(elementsSession: elementsSession, configuration: configuration)
+
+        XCTAssertTrue(isLinkEnabled, "Link should be enabled when passthrough mode is enabled, even if 'link' is not explicitly in payment method types")
+    }
+
+    func testIsLinkEnabled_linkDisplayAutomatic_linkPresent() {
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card"],
+            isLinkPassthroughModeEnabled: true
+        )
+        var configuration = PaymentSheet.Configuration()
+        configuration.link = .init(display: .automatic)
+        let isLinkEnabled = PaymentSheet.isLinkEnabled(elementsSession: elementsSession, configuration: configuration)
+
+        XCTAssertTrue(isLinkEnabled, "Link should be enabled when display is set to .automatic")
+    }
+
+    func testIsLinkEnabled_linkDisplayNever_linkNotPresent() {
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card"],
+            isLinkPassthroughModeEnabled: true
+        )
+        var configuration = PaymentSheet.Configuration()
+        configuration.link = .init(display: .never)
+        let isLinkEnabled = PaymentSheet.isLinkEnabled(elementsSession: elementsSession, configuration: configuration)
+
+        XCTAssertFalse(isLinkEnabled, "Link should be disabled when display is set to .never")
+    }
+
+    func testIsLinkEnabled_linkDisplayWalletButtonHidden_linkStillEnabled() {
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card"],
+            isLinkPassthroughModeEnabled: true
+        )
+        var configuration = PaymentSheet.Configuration()
+        configuration.link = .init(display: .walletButtonHidden)
+        let isLinkEnabled = PaymentSheet.isLinkEnabled(elementsSession: elementsSession, configuration: configuration)
+
+        XCTAssertTrue(isLinkEnabled, "Link should remain enabled when display is set to .walletButtonHidden")
+    }
+
+    func testShouldShowLinkButton_linkDisplayAutomatic_buttonShown() {
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card"],
+            isLinkPassthroughModeEnabled: true
+        )
+        var configuration = PaymentSheet.Configuration()
+        configuration.link = .init(display: .automatic)
+        let shouldShowLinkButton = PaymentSheet.shouldShowLinkButton(elementsSession: elementsSession, configuration: configuration)
+
+        XCTAssertTrue(shouldShowLinkButton, "Link button should be shown when display is set to .automatic")
+    }
+
+    func testShouldShowLinkButton_linkDisplayNever_buttonNotShown() {
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card"],
+            isLinkPassthroughModeEnabled: true
+        )
+        var configuration = PaymentSheet.Configuration()
+        configuration.link = .init(display: .never)
+        let shouldShowLinkButton = PaymentSheet.shouldShowLinkButton(elementsSession: elementsSession, configuration: configuration)
+
+        XCTAssertFalse(shouldShowLinkButton, "Link button should not be shown when display is set to .never")
+    }
+
+    func testShouldShowLinkButton_linkDisplayWalletButtonHidden_buttonNotShown() {
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card"],
+            isLinkPassthroughModeEnabled: true
+        )
+        var configuration = PaymentSheet.Configuration()
+        configuration.link = .init(display: .walletButtonHidden)
+
+        XCTAssertTrue(PaymentSheet.isLinkEnabled(elementsSession: elementsSession, configuration: configuration), "Link should remain enabled when display is set to .walletButtonHidden")
+        XCTAssertFalse(PaymentSheet.shouldShowLinkButton(elementsSession: elementsSession, configuration: configuration), "Link button should not be shown when display is set to .walletButtonHidden, even though Link remains enabled")
+    }
+
+    func testIsLinkEnabled_automaticTaxBilling_linkDisabled() {
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card", "link"],
+            isLinkPassthroughModeEnabled: true
+        )
+        elementsSession.disableLinkForAutomaticTaxBilling = true
+        let configuration = PaymentSheet.Configuration()
+
+        XCTAssertFalse(PaymentSheet.isLinkEnabled(elementsSession: elementsSession, configuration: configuration))
+        XCTAssertTrue(PaymentSheet.linkDisabledReasons(elementsSession: elementsSession, configuration: configuration).contains(.automaticTaxBillingAddress))
+    }
+
+    func testIsLinkEnabled_automaticTaxBillingFalse_linkEnabled() {
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card", "link"],
+            isLinkPassthroughModeEnabled: true
+        )
+        elementsSession.disableLinkForAutomaticTaxBilling = false
+        let configuration = PaymentSheet.Configuration()
+
+        XCTAssertTrue(PaymentSheet.isLinkEnabled(elementsSession: elementsSession, configuration: configuration))
+    }
+
+    func testIsLinkSignupEnabled_enabled_for_linkSignupOptInFeatureEnabled_if_general_signup_disabled() {
+        // Lookup happened during initialization and an email was provided
+        LinkAccountContext.shared.account = ._testValue(email: "john@doe.com", isRegistered: false)
+
+        let elementsSession = STPElementsSession._testValue(
+            linkSettings: ._testValue(
+                disableSignup: true,
+                flags: ["link_sign_up_opt_in_feature_enabled": true]
+            )
+        )
+        var configuration = PaymentSheet.Configuration()
+        // Set a test mode publishable key so that we don't check for attestation support
+        configuration.apiClient = STPAPIClient(publishableKey: "pk_test_123")
+        let isLinkSignupEnabled = PaymentSheet.isLinkSignupEnabled(elementsSession: elementsSession, configuration: configuration)
+
+        XCTAssertTrue(isLinkSignupEnabled, "Link inline signup should be enabled for linkSignupOptInFeatureEnabled even if general signup disabled")
+    }
+
+    func testIsLinkSignupEnabled_enabled_for_linkSignupOptInFeatureEnabled_if_email_provided() {
+        // Lookup happened during initialization and an email was provided
+        LinkAccountContext.shared.account = ._testValue(email: "john@doe.com", isRegistered: false)
+
+        let elementsSession = STPElementsSession._testValue(
+            linkSettings: ._testValue(flags: ["link_sign_up_opt_in_feature_enabled": true])
+        )
+        var configuration = PaymentSheet.Configuration()
+        // Set a test mode publishable key so that we don't check for attestation support
+        configuration.apiClient = STPAPIClient(publishableKey: "pk_test_123")
+        let isLinkSignupEnabled = PaymentSheet.isLinkSignupEnabled(elementsSession: elementsSession, configuration: configuration)
+
+        XCTAssertTrue(isLinkSignupEnabled, "Link inline signup should be enabled for linkSignupOptInFeatureEnabled if an email was provided")
+    }
+
+    func testIsLinkSignupEnabled_disabled_for_linkSignupOptInFeatureEnabled_if_no_email_provided() {
+        // Lookup happened during initialization and no email was provided
+        LinkAccountContext.shared.account = nil
+
+        let elementsSession = STPElementsSession._testValue(
+            linkSettings: ._testValue(
+                disableSignup: true,
+                flags: ["link_sign_up_opt_in_feature_enabled": true]
+            )
+        )
+        var configuration = PaymentSheet.Configuration()
+        // Set a test mode publishable key so that we don't check for attestation support
+        configuration.apiClient = STPAPIClient(publishableKey: "pk_test_123")
+        let isLinkSignupEnabled = PaymentSheet.isLinkSignupEnabled(elementsSession: elementsSession, configuration: configuration)
+        XCTAssertFalse(isLinkSignupEnabled, "Link inline signup should be disabled for linkSignupOptInFeatureEnabled if no email was provided")
+    }
+
+    func testShouldShowLink2FABeforePaymentSheet_suppressesForMerchantEmailCustomerSessionWithSavedPaymentMethods() {
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card", "link"],
+            customerSessionData: mobilePaymentElementCustomerSessionData
+        )
+
+        XCTAssertFalse(
+            elementsSession.shouldShowLink2FABeforePaymentSheet(
+                for: makeLinkAccountRequiringVerification(),
+                savedPaymentMethods: [STPPaymentMethod._testCard()]
+            )
+        )
+    }
+
+    func testShouldShowLink2FABeforePaymentSheet_doesNotSuppressWithoutSavedPaymentMethods() {
+        let elementsSession = STPElementsSession._testValue(
+            paymentMethodTypes: ["card", "link"],
+            customerSessionData: mobilePaymentElementCustomerSessionData
+        )
+
+        XCTAssertTrue(
+            elementsSession.shouldShowLink2FABeforePaymentSheet(
+                for: makeLinkAccountRequiringVerification(),
+                savedPaymentMethods: []
+            )
+        )
+    }
+}
+
+extension LinkSettings {
+    static func _testValue(
+        brand: LinkBrand = .link,
+        disableSignup: Bool = false,
+        flags: [String: Bool]? = nil,
+        linkSupportedPaymentMethodsOnboardingEnabled: [String] = ["CARD"],
+        linkPaymentMethodBankAccountDataConsent: String? = nil
+    ) -> LinkSettings {
+        return .init(
+            brand: brand,
+            fundingSources: [ParsedEnum(.card), ParsedEnum(.bankAccount)],
+            popupWebviewOption: nil,
+            passthroughModeEnabled: true,
+            disableSignup: disableSignup,
+            suppress2FAModal: false,
+            disableFlowControllerRUX: true,
+            useAttestationEndpoints: true,
+            linkMode: .passthrough,
+            linkFlags: flags,
+            linkConsumerIncentive: nil,
+            linkDefaultOptIn: nil,
+            linkEnableDisplayableDefaultValuesInECE: nil,
+            linkShowPreferDebitCardHint: nil,
+            attestationStateSyncEnabled: nil,
+            linkSupportedPaymentMethodsOnboardingEnabled: linkSupportedPaymentMethodsOnboardingEnabled,
+            linkPaymentMethodBankAccountDataConsent: linkPaymentMethodBankAccountDataConsent,
+            allResponseFields: [:]
+        )
+    }
+}
+
+private extension PaymentMethodAvailabilityTests {
+    var mobilePaymentElementCustomerSessionData: [String: Any] {
+        [
+            "mobile_payment_element": [
+                "enabled": true,
+                "features": [
+                    "payment_method_save": "enabled",
+                    "payment_method_remove": "enabled",
+                ],
+            ],
+            "customer_sheet": [
+                "enabled": false,
+            ],
+        ]
+    }
+
+    func makeLinkAccountRequiringVerification() -> PaymentSheetLinkAccount {
+        let consumerSession = ConsumerSession.make(
+            clientSecret: "client_secret",
+            emailAddress: "test@example.com",
+            redactedFormattedPhoneNumber: "+1********55",
+            unredactedPhoneNumber: nil,
+            phoneNumberCountry: nil,
+            verificationSessions: [],
+            supportedPaymentDetailsTypes: [ParsedEnum(.card)],
+            mobileFallbackWebviewParams: nil
+        )
+
+        return PaymentSheetLinkAccount(
+            email: consumerSession.emailAddress,
+            session: consumerSession,
+            publishableKey: "pk_123",
+            displayablePaymentDetails: nil,
+            useMobileEndpoints: true,
+            canSyncAttestationState: false
+        )
+    }
+}
