@@ -1,0 +1,52 @@
+//
+//  AddressSectionElementSnapshotTest.swift
+//  StripeUICoreTests
+//
+//  Created by Yuki Tokuhiro on 7/28/22.
+//  Copyright © 2022 Stripe, Inc. All rights reserved.
+//
+
+import iOSSnapshotTestCase
+import StripeCoreTestUtils
+@_spi(STP) @testable import StripeUICore
+
+class AddressSectionElementSnapshotTest: STPSnapshotTestCase {
+    let dummyAddressSpecProvider: AddressSpecProvider = {
+        let specProvider = AddressSpecProvider()
+        specProvider.addressSpecs = [
+            "US": AddressSpec(format: "ACSZP", require: "AZ", cityNameType: .post_town, stateNameType: .state, zip: "", zipNameType: .pin),
+        ]
+        return specProvider
+    }()
+
+    func test_billing_address_same_as_shipping() throws {
+        let sut = AddressSectionElement(
+            addressSpecProvider: dummyAddressSpecProvider,
+            defaults: .init(address: .init(city: "San Francisco", country: "US", line1: "510 Townsend St.", line2: nil, postalCode: "94102", state: "California")),
+            additionalFields: .init(
+                billingSameAsShippingCheckbox: .enabled(isOptional: false)
+            )
+        )
+        sut.view.autosizeHeight(width: 300)
+        STPSnapshotVerifyView(sut.view)
+    }
+
+    func testRightToLeftWithLeftToRightValues() {
+        let sut = AddressSectionElement(
+            addressSpecProvider: dummyAddressSpecProvider,
+            defaults: .init(address: .init(
+                city: "San Francisco",
+                country: "US",
+                line1: "510 Townsend St.",
+                line2: nil,
+                postalCode: "94102",
+                state: "California"
+            ))
+        )
+        sut.view.forceRightToLeftLayout()
+        sut.view.autosizeHeight(width: 300)
+
+        XCTAssertEqual(sut.view.effectiveUserInterfaceLayoutDirection, .rightToLeft)
+        STPSnapshotVerifyView(sut.view)
+    }
+}

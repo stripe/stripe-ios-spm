@@ -1,0 +1,361 @@
+"%1$@ ×%2$d" = "%1$@ ×%2$li";
+
+"%@ will no longer be saved to your wallet." = "%@ ei salvestata enam teie rahakotti.";
+
+"+ Add" = "+ lisa";
+
+"1 %1$@ = %2$@ %3$@ (includes %4$@%% conversion fee)." = "1 %1$@ = %2$@ %3$@ (sisaldab %4$@%% konverteerimistasu).";
+
+"1 %@ = %@ %@" = "1 %1$@ = %2$@ %3$@";
+
+"Accept" = "Nõustun";
+
+"Add US bank account" = "Lisa Ameerika Ühendriikide pangakonto";
+
+"Add a card" = "Kaardi lisamine";
+
+"Add a payment method" = "Lisa makseviis";
+
+"Add bank account" = "Lisa pangakonto";
+
+"Add card" = "Kaardi lisamine";
+
+"Add new card" = "Uue kaardi lisamine";
+
+"Add new payment method" = "Lisage uus makseviis";
+
+"Add your payment information" = "Lisage makseteave";
+
+"Approve payment" = "Kinnitage makse";
+
+"Back" = "Tagasi";
+
+"Bank" = "Pank";
+
+"Bank account" = "Pangakonto";
+
+"Bank account details cannot be changed." = "Pangakonto andmeid ei saa muuta.";
+
+"Buy Now, Pay Later with  <img/>" = "Osta kohe, maksa hiljem  <img/>";
+
+"Buy Now, Pay Later with Afterpay" = "Osta kohe, maksa hiljem Afterpayga";
+
+"Buy Now, Pay Later with Cash App Afterpay" = "Osta kohe, maksa hiljem Cash App Afterpay abil";
+
+"Buy Now, Pay Later with Clearpay" = "Osta kohe, maksa hiljem Clearpayga";
+
+"Buy now or pay later with Klarna" = "Ostke nüüd või makske hiljem Klarnaga";
+
+"By confirming your payment with NICEPAY, you allow %@ to charge this payment method for future payments in accordance with their terms." = "NICEPAY kaudu makse kinnitamisega lubate ettevõttel %@ debiteerida edaspidi makseid sellelt makseviisilt vastavalt nende tingimustele.";
+
+"By confirming your payment with PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "PayPaliga makset kinnitades lubate %@-l võtta teie PayPali kontolt tulevaste maksete eest tasu vastavalt nende tingimustele.";
+
+"By continuing to Amazon Pay, you allow %@ to charge your Amazon Pay account for future payments in accordance with their terms." = "Amazon Payga jätkates lubate %@ teie Amazon Pay kontot tulevaste maksete tegemiseks vastavalt nende tingimustele.";
+
+"By continuing to Klarna, you allow %@ to charge your Klarna account for future payments in accordance with their terms and Klarna's terms. You can change this at any time in your Klarna app or by reaching out to %@." = "Klarnaga jätkates, lubate ettevõttel %1$@ oma Klarna kontot vastavalt tema tingimustele ja vastavalt Klarna tingimustele tulevasteks makseteks debiteerida. Saate seda igal ajal oma Klarna rakenduses või ettevõtte %2$@ poole pöördudes muuta.";
+
+"By continuing to PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "PayPali jätkates lubate %@1-l võtta teie PayPali kontolt tulevaste maksete eest tasu vastavalt nende tingimustele.";
+
+"By continuing to Revolut Pay, you allow %@ to charge your Revolut Pay account for future payments in accordance with their terms." = "Makseviisiga Revolut Pay jätkates, lubate ettevõttel %@ oma Revolut Pay kontot tulevasteks makseteks vastavalt nende tingimustele debiteerida.";
+
+"By continuing you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Jätkates, nõustute <terms>tingimuste</terms> ja <privacy>privaatsuseeskirjadega</privacy>.";
+
+"By continuing, you agree to authorize payments pursuant to <terms>these terms</terms>." = "Jätkates nõustute maksete autoriseerimisega vastavalt nendele <terms>tingimustele</terms>.";
+
+"By continuing, you agree to save your information for future purchases with %1$@ and <link>%2$@</link> according to %2$@ <terms>terms</terms> and <privacy>privacy</privacy>." = "Jätkates nõustute, et teie andmed salvestatakse tulevaste ostude jaoks teenustes %1$@ ja <link>%2$@</link> vastavalt %2$@ <terms>tingimustele</terms> ja <privacy>privaatsuseeskirjadele</privacy>.";
+
+"By continuing, you agree to save your information for future purchases with %@." = "Jätkates nõustute salvestama oma teabe tulevaste ostude jaoks %@.";
+
+"By continuing, you authorize %@ to automatically debit your Satispay Balance on a recurring basis in accordance with your purchase or subscription plan." = "Jätkates annate loa, et %@ debiteerib regulaarselt teie Satispay Balance'i kontot vastavalt teie ostule või tellimusplaanile.";
+
+"By continuing, you authorize %@ to automatically debit your Twint Balance on a recurring basis in accordance with your purchase or subscription plan." = "Jätkates lubate %@ automaatselt oma Twint Balance'i debeteerida vastavalt ostu- või kordustellimusplaanile.";
+
+"By continuing, you authorize %@ to debit your Cash App account for this payment and future payments in accordance with %@'s terms, until this authorization is revoked. You can change this anytime in your Cash App Settings." = "Jätkamisel volitate %1$@ debiteerima teie Cash Appi kontot selle makse ja tulevaste maksete eest vastavalt ettevõtte %2$@ tingimustele, kuni see volitus tühistatakse. Saate seda igal ajal oma Cash rakenduse seadetes muuta.";
+
+"By joining %@, you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Liitudes %@, nõustute <terms>tingimuste</terms> ja <privacy>privaatsuseeskirjadega</privacy>.";
+
+"By providing phone number and email, you agree to create a %1$@ account subject to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Telefoninumbri ja e-posti aadressi andmisega nõustute looma %1$@ konto, mis sõltub %1$@ <terms>tingimustest</terms> ja <privacy>privaatsuseeskirjadest</privacy>.";
+
+"By providing your bank account details and confirming this payment, you agree to this Direct Debit Request and the <terms>Direct Debit Request service agreement</terms>, and authorise Stripe Payments Australia Pty Ltd ACN 160 180 343 Direct Debit User ID number 507156 (“Stripe”) to debit your account through the Bulk Electronic Clearing System (BECS) on behalf of %@ (the \"Merchant\") for any amounts separately communicated to you by the Merchant. You certify that you are either an account holder or an authorised signatory on the account listed above." = "Esitades oma pangakonto andmed ja kinnitades selle makse, nõustute käesoleva otsekorralduse taotluse ning <terms>otsekorralduse teenuse lepinguga</terms> ning annate Stripe Payments Australia Pty Ltd-le (ACN 160 180 343), otsekorralduse kasutaja ID-ga 507156 („Stripe“), volituse debiteerida teie kontot Bulk Electronic Clearing Systemi (BECS) kaudu %@ („Kaupleja“) nimel summade ulatuses, millest Kaupleja on teid eraldi teavitanud. Kinnitate, et olete kas nimetatud konto omanik või selle konto volitatud allkirjaõiguslik isik.";
+
+"By providing your card information, you allow %@ to charge your card for future payments in accordance with their terms." = "Kaarditeavet esitades, lubate ettevõttel %@ oma kaarti tulevasteks makseteks nende kehtestatud tingimustel debiteerida.";
+
+"By providing your email, you agree to create a %1$@ account and save your payment info to %1$@, according to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "E-posti aadressi andmisega nõustute looma %1$@ konto ja salvestama makseandmed %1$@ vastavalt %1$@ <terms>tingimustele</terms> ja <privacy>privaatsuseeskirjadele</privacy>.";
+
+"By providing your payment information and confirming this payment, you authorise (A) %@ and Stripe, our payment service provider, to send instructions to your bank to debit your account and (B) your bank to debit your account in accordance with those instructions. As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited. Your rights are explained in a statement that you can obtain from your bank. You agree to receive notifications for future debits up to 2 days before they occur." = "Makseteabe esitamise ja käesoleva makse kinnitamisega volitatate (A) ettevõtet %@ ja Stripe'i, meie makseteenuse osutajat, saatma teie panka juhiseid teie konto debiteerimiseks ning (B) oma panka nende juhiste alusel teie kontot debiteerima. Vastavalt teie õigustele, pangaga sõlmitud lepingule ja panga üldtingimustele on teil õigus saada pangalt tagasimakset. Tagasimakse taotlus tuleb esitada 8 nädala jooksul alates teie konto debiteerimise kuupäevast. Teie õigusi selgitatakse avalduses, mille saate oma pangast. Nõustute saama teavitusi tulevaste debiteerimiste kohta kaks päeva enne nende toimumist.";
+
+"By providing your phone number, you agree to create a %1$@ account and save your payment info to %1$@, according to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Sisestades oma telefoninumbri, nõustute looma %1$@ konto ja salvestama makseandmed %1$@ vastavalt %1$@ <terms>tingimustele</terms> ja <privacy>privaatsuseeskirjadele</privacy>.";
+
+"By saving your bank account for %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Salvestades oma pangakonto %@, nõustute maksete autoriseerimisega vastavalt nendele <terms>tingimustele</terms>.";
+
+"By saving your payment information, you allow %@ to charge you for future payments in accordance with their terms." = "Makseandmete salvestamisega lubate ettevõttel %@ teid tulevaste maksete eest vastavalt nende tingimustele debiteerida.";
+
+"By submitting your order to %@ and %@, you agree to save your information with %@ for future purchases, and agree to authorize payments pursuant to <terms>these terms</terms>." = "Esitades oma tellimuse %1$@ ja %2$@, nõustute salvestama oma andmed %3$@-ga tulevaste ostude jaoks ja nõustute autoriseerima makseid vastavalt <terms>nendele tingimustele</terms>.";
+
+"By submitting your order to %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Esitades oma tellimuse aadressile %@, nõustute autoriseerima makseid vastavalt <terms>nendele tingimustele</terms>.";
+
+"CPF/CPNJ" = "CPF/CPNJ";
+
+"Cancel and pay another way" = "Tühista ja maksa muul viisil";
+
+"Card details cannot be changed." = "Kaardi andmeid ei saa muuta.";
+
+"Card number. Supported cards include %@" = "Kaardi number. Toetatud kaardid hõlmavad %@";
+
+"Change" = "Muuda";
+
+"Choose a card brand" = "Vali kaardibränd";
+
+"Choose a payment method" = "Valige makseviis";
+
+"Close card scanner" = "Kaardiskanneri sulgemine";
+
+"Code sent" = "Kood saadetud";
+
+"Confirm" = "Kinnita";
+
+"Confirm payment details" = "Kinnitage makseandmed";
+
+"Confirm the Bizum payment in your mobile banking application within %@ to complete the purchase." = "Kinnitage Bizumi makse oma mobiilipanga rakenduses %@ jooksul, et ost lõpule viia.";
+
+"Confirm the payment in your MB WAY app within %@ to complete the purchase." = "Kinnitage makse oma MB WAY rakenduses %@ jooksul, et ost lõpule viia.";
+
+"Confirm the payment in your bank or payment app within %@ to complete the purchase." = "Ostu sooritamiseks kinnitage makse oma panga- või makserakenduses %@ jooksul.";
+
+"Confirm the payment in your bank's app within %@ to complete the purchase." = "Ostu sooritamiseks kinnitage makse oma pangarakenduses %@ jooksul.";
+
+"Confirm your CVC" = "Kinnita CVC";
+
+"Confirm your information" = "Kinnitage oma teave";
+
+"Contact information" = "Kontaktandmed";
+
+"Continue another way" = "Jätka muul viisil";
+
+"Create an account with %@ for faster checkout across the web" = "Loo konto %@-iga, et veebis kiiremini makse lõpule viia";
+
+"Debit or credit card" = "Deebet- või krediitkaart";
+
+"Declarations" = "Deklaratsioonid";
+
+"Default" = "Vaikimisi";
+
+"Default payment method" = "Vaikemakseviis";
+
+"Did you mean %@? %@." = "Kas te pidasite silmas %1$@? %2$@.";
+
+"Discard Changes" = "Loobu muudatustest";
+
+"Discard changes?" = "Loobuda muudatustest?";
+
+"Discount" = "Allahindlus";
+
+"EPS Bank" = "EPS pank";
+
+"Edit address" = "Muuda aadressi";
+
+"Enter address manually" = "Sisestage aadress käsitsi";
+
+"Exchange rate and fees of your bank may apply." = "Teie panga vahetuskurss ja tasud võivad kehtida.";
+
+"FPX Bank" = "FPX Bank";
+
+"Fast, secure checkout" = "Kiire ja turvaline kassa";
+
+"Get %@ back when you pay for the first time with your bank. <terms>See terms</terms>" = "Saate %@ tagasi, kui maksate esimest korda oma panga kaudu. <terms>Vaata tingimusi</terms>";
+
+"Get %@ back when you pay with your bank. <terms>See terms</terms>" = "Saate %@ tagasi, kui maksate oma panga kaudu. <terms>Vaata tingimusi</terms>";
+
+"Hide details" = "Peida üksikasjad";
+
+"I understand that Stripe will be collecting Direct Debits on behalf of %@ and confirm that I am the account holder and the only person required to authorise debits from this account." = "Mõistan, et Stripe kogub ettevõtte %@ nimel otsekorraldusi, ja kinnitan, et olen kontoomanik ja ainus isik, kes peab selle konto debiteerimist autoriseerima.";
+
+"IBAN" = "IBAN";
+
+"Keep Editing" = "Jätka muutmist";
+
+"Last 4 digits of SSN" = "SSN-i 4 viimast numbrit";
+
+"Manage SEPA debit" = "SEPA deebeti haldamine";
+
+"Manage US bank account" = "Ameerika Ühendriikide pangakonto haldamine";
+
+"Manage bank account" = "Pangakonto haldamine";
+
+"Manage card" = "Halda kaarti";
+
+"Manage cards" = "Kaartide haldamine";
+
+"Manage payment method" = "Makseviisi haldamine";
+
+"Manage payment methods" = "Halda makseviise";
+
+"Manage your payment methods" = "Makseviiside haldamine";
+
+"Name on card" = "Nimi kaardil";
+
+"Naver Pay Card" = "Naver Pay Card";
+
+"Naver Pay Money/Point" = "Naver Pay Money/Point";
+
+"New card" = "Uus kaart";
+
+"New payment method" = "Uus makseviis";
+
+"No %@ promo" = "%@ soodustus ei kehti";
+
+"Not you?" = "Kas see pole teie?";
+
+"Only card brand can be changed." = "Muuta saab ainult kaardi tootemarki.";
+
+"Open to see more information." = "Ava, et näha rohkem teavet.";
+
+"Or" = "Või";
+
+"Or pay using" = "Või kasuta makseviisi";
+
+"Or pay with a card" = "Või makske kaardiga";
+
+"Or use" = "Või kasuta";
+
+"Or use a card" = "Või kasuta kaarti";
+
+"Pay %@" = "Maksa %@";
+
+"Pay another way" = "Maksa muul viisil";
+
+"Pay faster at %@ and thousands of businesses." = "Makske kiiremini kaupleja %@ lehel ja tuhandetel teistel saitidel.";
+
+"Pay faster everywhere %@ is accepted." = "Makske kiiremini kõikjal, kus %@ on aktsepteeritud.";
+
+"Pay faster everywhere Link is accepted." = "Makske kiiremini kõikjal, kus Link on aktsepteeritud.";
+
+"Pay over time with %@" = "Maksa aja jooksul makseviisiga %@";
+
+"Pay over time with Affirm" = "Maksa Affirmi järelmaksuga";
+
+"Pay with %@" = "Maksa koos %@";
+
+"Pay with Link" = "Maksa Linkiga";
+
+"Pay with your bank account in just a few steps." = "Pangakontoga maksmine vaid mõne sammuga.";
+
+"Payment" = "Makse";
+
+"Payment failed" = "Makse ebaõnnestus";
+
+"Payment method details cannot be changed." = "Makseviisi andmeid ei saa muuta.";
+
+"Payment methods" = "Makseviisid";
+
+"Please choose a valid payment method." = "Palun valige kehtiv makseviis.";
+
+"Please go back and select another payment method" = "Minge tagasi ja valige mõni muu makseviis";
+
+"Point the camera at your card." = "Suunake kaamera oma kaardile.";
+
+"Przelewy24 Bank" = "Pank Przelewy24";
+
+"Remove %@" = "Eemalda %@";
+
+"Remove bank?" = "Kas eemaldada pank?";
+
+"Remove card?" = "Kas soovite kaardi eemaldada?";
+
+"Remove linked account" = "Eemalda lingitud konto";
+
+"Remove payment method" = "Makseviisi eemaldamine";
+
+"Remove payment method?" = "Kas eemaldada makseviis?";
+
+"SEPA debit details cannot be changed." = "SEPA deebeti andmeid ei saa muuta.";
+
+"Save" = "Salvesta";
+
+"Save a new payment method" = "Uue makseviisi salvestamine";
+
+"Save address" = "Salvesta aadress";
+
+"Save for future payments" = "Salvestage tulevasteks makseteks";
+
+"Save my info for faster checkout with %@" = "Salvesta minu info kiiremaks väljamakseks %@";
+
+"Save payment details to %@ for future purchases" = "Salvesta makseandmed %@ tulevaste ostude jaoks";
+
+"Save this account for future %@ payments" = "Salvesta see konto tulevaste %@ maksete jaoks";
+
+"Save your bank account in just a few steps." = "Salvestage oma pangakonto vaid mõne lihtsa sammuga.";
+
+"Save your info for secure 1-click checkout with %@" = "Salvesta oma info turvaliseks ühe kliki makse lõpuleviimiseks %@";
+
+"Saved" = "Salvestatud";
+
+"Select card" = "Vali kaart";
+
+"Select how you want to pay:" = "Valige, kuidas soovite maksta:";
+
+"Select payment method" = "Vali makseviis";
+
+"Select your payment method" = "Valige makseviis";
+
+"Set as default" = "Muuda vaikimisi makseviisiks";
+
+"Set as default payment method" = "Määra vaikimisi makseviisiks";
+
+"Set up" = "Seadista";
+
+"Shipping to %@ is not supported." = "Kohaletoimetamist %@ ei ole toetatud.";
+
+"Show details" = "Kuva üksikasjad";
+
+"Show menu" = "Kuva menüü";
+
+"Sign in or sign up" = "Logi sisse või registreeru";
+
+"Sign out of %@" = "Logi teenusest %@ välja";
+
+"Simple, secure one-click payments" = "Lihtsad turvalised maksed ühe hiireklõpsuga";
+
+"Something went wrong when linking your account.\nPlease try again later." = "Midagi läks valesti, kui oma konto sidusite.\nProovige hiljem uuesti.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you'll get an email with instructions to finish saving your bank account with %@." = "Stripe deponeerib teie pangakontole 0,01 dollarit 1–2 tööpäeva jooksul. Seejärel saate meili juhistega oma pangakonto %@ salvestamiseks.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you’ll get an email with instructions to complete payment to %@." = "Stripe deponeerib teie pangakontole 0,01 dollarit 1–2 tööpäeva jooksul. Seejärel saate meili juhistega makse sooritamiseks ettevõttele %@.";
+
+"Subtotal" = "Vahesumma";
+
+"Tap to close" = "Puudutage sulgemiseks";
+
+"Tap to expand" = "Puudutage laiendamiseks";
+
+"Tax" = "Maks";
+
+"The IBAN you entered is incomplete." = "Sisestatud IBAN on puudulik.";
+
+"The IBAN you entered is invalid, \"%@\" is not a supported country code." = "Sisestatud IBAN on kehtetu, „%@“ ei ole toetatud riigikood.";
+
+"The provided verification code has expired." = "Esitatud tuvastuskood on aegunud.";
+
+"The provided verification code is incorrect." = "Esitatud tuvastuskood on vale.";
+
+"This is your default" = "See on teie vaikimisi makseviis";
+
+"This payment method will be removed but will remain available for %@ subscriptions." = "See makseviis eemaldatakse, kuid jääb %@ kordustellimuste jaoks saadavale.";
+
+"Too many attempts. Please try again in a few minutes." = "Liiga palju katseid. Proovige paari minuti pärast uuesti.";
+
+"Unavailable for this purchase" = "Pole selle ostu puhul saadaval";
+
+"Update card" = "Uuenda kaarti";
+
+"Update payment method" = "Uuenda makseviisi";
+
+"Use billing address for shipping" = "Kasutage saatmiseks arveldusaadressi";
+
+"View more" = "Kuva rohkem";
+
+"Yes, update" = "Jah, uuenda";
+
+"Your IBAN should start with a two-letter country code." = "Teie IBAN peab algama kahetähelise riigikoodiga.";
+
+"Your address changes won't be saved." = "Teie aadressi muudatusi ei salvestata.";
