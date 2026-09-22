@@ -1,0 +1,195 @@
+//
+//  CryptoOnrampAnalyticsEvent.swift
+//  StripeCryptoOnramp
+//
+//  Created by Mat Schmid on 9/11/25.
+//
+
+import Foundation
+
+enum CryptoOnrampOperation: String {
+    case createSession = "configure"
+    case hasLinkAccount = "has_link_account"
+    case registerLinkUser = "register_link_user"
+    case updatePhoneNumber = "update_phone_number"
+    case authenticateUserWithAuthToken = "authenticate_user_with_auth_token"
+    case authorize = "authorize"
+    case attachKycInfo = "attach_kyc_info"
+    case retrieveMissingIdentifiers = "retrieve_missing_identifiers"
+    case submitIdentifiers = "submit_identifiers"
+    case presentUserAttestation = "present_user_attestation"
+    case presentTermsAndConditionsIfNeeded = "present_terms_and_conditions_if_needed"
+    case presentTermsOfServiceIfNeeded = "present_terms_of_service_if_needed"
+    case verifyKycInfo = "verify_kyc_info"
+    case verifyIdentity = "verify_identity"
+    case registerWalletAddress = "register_wallet_address"
+    case deleteWalletAddress = "delete_wallet_address"
+    case getWalletOwnershipChallenge = "get_wallet_ownership_challenge"
+    case submitWalletOwnershipSignature = "submit_wallet_ownership_signature"
+    case collectPaymentMethod = "collect_payment_method"
+    case createCryptoPaymentToken = "create_crypto_payment_token"
+    case performCheckout = "perform_checkout"
+    case logOut = "log_out"
+}
+
+enum CryptoOnrampAnalyticsEvent {
+    case sessionCreated
+    case linkAccountLookupCompleted(hasLinkAccount: Bool)
+    case linkRegistrationCompleted
+    case linkPhoneNumberUpdated
+    case linkUserAuthenticationWithTokenCompleted
+    case linkAuthorizationStarted
+    case linkAuthorizationCompleted(consented: Bool)
+    case identityVerificationStarted
+    case identityVerificationCompleted
+    case kycInfoSubmitted
+    case identifierRequirementsRetrieved
+    case identifiersSubmitted(completed: Bool)
+    case userAttestationStarted
+    case userAttestationCompleted
+    case termsAndConditionsStarted
+    case termsAndConditionsCompleted
+    case termsOfServiceStarted
+    case termsOfServiceCompleted
+    case kycInfoVerificationStarted
+    case kycInfoVerificationCompleted
+    case walletRegistered(network: String)
+    case walletDeleted
+    case walletOwnershipChallengeRetrieved(network: String)
+    case walletOwnershipVerified(network: String)
+    case collectPaymentMethodStarted(paymentMethodType: String)
+    case collectPaymentMethodCompleted(paymentMethodType: String)
+    case cryptoPaymentTokenCreated(paymentMethodType: String)
+    case checkoutStarted(onrampSessionId: String)
+    case checkoutCompleted(onrampSessionId: String, requiredAction: Bool)
+    case userLoggedOut
+    case errorOccurred(during: CryptoOnrampOperation, errorMessage: String, requestID: String? = nil)
+
+    var eventName: String {
+        switch self {
+        case .sessionCreated:
+            return "onramp.session_created"
+        case .linkAccountLookupCompleted:
+            return "onramp.link_account_lookup_completed"
+        case .linkRegistrationCompleted:
+            return "onramp.link_registration_completed"
+        case .linkPhoneNumberUpdated:
+            return "onramp.link_phone_number_updated"
+        case .linkUserAuthenticationWithTokenCompleted:
+            return "onramp.link_user_authentication_with_token_completed"
+        case .linkAuthorizationStarted:
+            return "onramp.link_authorization_started"
+        case .linkAuthorizationCompleted:
+            return "onramp.link_authorization_completed"
+        case .identityVerificationStarted:
+            return "onramp.identity_verification_started"
+        case .identityVerificationCompleted:
+            return "onramp.identity_verification_completed"
+        case .kycInfoSubmitted:
+            return "onramp.kyc_info_submitted"
+        case .identifierRequirementsRetrieved:
+            return "onramp.identifier_requirements_retrieved"
+        case .identifiersSubmitted:
+            return "onramp.identifiers_submitted"
+        case .userAttestationStarted:
+            return "onramp.user_attestation_started"
+        case .userAttestationCompleted:
+            return "onramp.user_attestation_completed"
+        case .termsAndConditionsStarted:
+            return "onramp.terms_and_conditions_started"
+        case .termsAndConditionsCompleted:
+            return "onramp.terms_and_conditions_completed"
+        case .termsOfServiceStarted:
+            return "onramp.terms_of_service_started"
+        case .termsOfServiceCompleted:
+            return "onramp.terms_of_service_completed"
+        case .kycInfoVerificationStarted:
+            return "onramp.kyc_info_verification_started"
+        case .kycInfoVerificationCompleted:
+            return "onramp.kyc_info_verification_completed"
+        case .walletRegistered:
+            return "onramp.wallet_registered"
+        case .walletDeleted:
+            return "onramp.wallet_deleted"
+        case .walletOwnershipChallengeRetrieved:
+            return "onramp.wallet_ownership_challenge_retrieved"
+        case .walletOwnershipVerified:
+            return "onramp.wallet_ownership_verified"
+        case .collectPaymentMethodStarted:
+            return "onramp.collect_payment_method_started"
+        case .collectPaymentMethodCompleted:
+            return "onramp.collect_payment_method_completed"
+        case .cryptoPaymentTokenCreated:
+            return "onramp.crypto_payment_token_created"
+        case .checkoutStarted:
+            return "onramp.checkout_started"
+        case .checkoutCompleted:
+            return "onramp.checkout_completed"
+        case .userLoggedOut:
+            return "onramp.link_logout"
+        case .errorOccurred:
+            return "onramp.error_occurred"
+        }
+    }
+
+    var parameters: [String: Any] {
+        switch self {
+        case .sessionCreated,
+             .linkRegistrationCompleted,
+             .linkPhoneNumberUpdated,
+             .linkUserAuthenticationWithTokenCompleted,
+             .linkAuthorizationStarted,
+             .identityVerificationStarted,
+             .identityVerificationCompleted,
+             .kycInfoSubmitted,
+             .userAttestationCompleted,
+             .termsAndConditionsStarted,
+             .termsAndConditionsCompleted,
+             .termsOfServiceStarted,
+             .termsOfServiceCompleted,
+             .identifierRequirementsRetrieved,
+             .userAttestationStarted,
+             .kycInfoVerificationStarted,
+             .kycInfoVerificationCompleted,
+             .walletDeleted,
+             .userLoggedOut:
+            return [:]
+        case let .identifiersSubmitted(completed):
+            return ["completed": completed]
+        case let .linkAccountLookupCompleted(hasLinkAccount):
+            return ["has_link_account": hasLinkAccount]
+        case let .linkAuthorizationCompleted(consented):
+            return ["consented": consented]
+        case let .walletRegistered(network):
+            return ["network": network]
+        case let .walletOwnershipChallengeRetrieved(network):
+            return ["network": network]
+        case let .walletOwnershipVerified(network):
+            return ["network": network]
+        case let .collectPaymentMethodStarted(paymentMethodType):
+            return ["payment_method_type": paymentMethodType]
+        case let .collectPaymentMethodCompleted(paymentMethodType):
+            return ["payment_method_type": paymentMethodType]
+        case let .cryptoPaymentTokenCreated(paymentMethodType):
+            return ["payment_method_type": paymentMethodType]
+        case let .checkoutStarted(onrampSessionId):
+            return ["onramp_session_id": onrampSessionId]
+        case let .checkoutCompleted(onrampSessionId, requiredAction):
+            return [
+                "onramp_session_id": onrampSessionId,
+                "required_action": requiredAction,
+            ]
+        case let .errorOccurred(operationName, errorMessage, requestID):
+            var parameters: [String: Any] = [
+                "operation_name": operationName.rawValue,
+                "error_message": errorMessage,
+            ]
+
+            if let requestID {
+                parameters["request_id"] = requestID
+            }
+
+            return parameters
+        }
+    }
+}
