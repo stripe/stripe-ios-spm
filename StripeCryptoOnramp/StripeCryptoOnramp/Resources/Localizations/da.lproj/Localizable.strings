@@ -1,0 +1,33 @@
+"Debit cards are most likely to be accepted." = "Debetkort vil højst sandsynligt blive accepteret.";
+
+"Document uploaded successfully" = "Dokumentet blev uploadet";
+
+"Please try again later." = "Prøv igen senere.";
+
+"Submitted for review" = "Indsendt til gennemgang";
+
+"Tell us about your source of funds" = "Fortæl os om kilden til dine midler";
+
+"This app couldn't be verified due to an attestation error. Please try again later or contact the developer if the issue persists." = "Denne app kunne ikke verificeres på grund af en attestationsfejl. Prøv igen senere, eller kontakt udvikleren, hvis problemet fortsætter.";
+
+"This app couldn't be verified. Contact the app developer for help." = "Denne app kunne ikke verificeres. Kontakt appudvikleren for at få hjælp.";
+
+"This wallet couldn't be found. Please choose or add a wallet and try again." = "Denne wallet kunne ikke findes. Vælg eller tilføj en wallet, og prøv igen.";
+
+"This wallet network isn't supported. Please choose a different network." = "Dette wallet-netværk understøttes ikke. Vælg et andet netværk.";
+
+"This wallet verification request expired. Please try again." = "Denne anmodning om verifikation af wallet er udløbet. Prøv igen.";
+
+"This wallet verification request is invalid. Please try again." = "Denne forespørgsel om verifikation af wallet er ugyldig. Prøv igen.";
+
+"Upload your proof of address" = "Upload dit dokument til bekræftelse af adresse";
+
+"We couldn't verify ownership of this wallet. Please try again." = "Vi kunne ikke verificere ejerskabet af denne wallet. Prøv igen.";
+
+"We may request proof of address for larger transactions." = "Vi anmoder muligvis om adressebevis ved større transaktioner.";
+
+"We may request source of funds for larger transactions." = "Vi anmoder muligvis om oplysninger om midlernes oprindelse ved større transaktioner.";
+
+"We’re reviewing your documents. We’ll let you know when verification is complete." = "Vi gennemgår i øjeblikket dine dokumenter. Vi giver dig besked, når verificeringen er fuldført.";
+
+"You can continue while we verify your document in the background." = "Du kan fortsætte, mens vi verificerer dit dokument i baggrunden.";

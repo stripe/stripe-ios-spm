@@ -1,0 +1,33 @@
+"Debit cards are most likely to be accepted." = "Kad debit paling berkemungkinan akan diterima.";
+
+"Document uploaded successfully" = "Dokumen berjaya dimuat naik";
+
+"Please try again later." = "Sila cuba lagi kemudian.";
+
+"Submitted for review" = "Diserahkan untuk semakan";
+
+"Tell us about your source of funds" = "Beritahu kami tentang sumber dana anda";
+
+"This app couldn't be verified due to an attestation error. Please try again later or contact the developer if the issue persists." = "Apl ini tidak dapat disahkan kerana ralat pengesahan. Sila cuba lagi kemudian atau hubungi pembangun jika isu berterusan.";
+
+"This app couldn't be verified. Contact the app developer for help." = "Aplikasi ini tidak dapat disahkan. Hubungi pembangun aplikasi untuk mendapatkan bantuan.";
+
+"This wallet couldn't be found. Please choose or add a wallet and try again." = "Dompet ini tidak dapat ditemukan. Sila pilih atau tambahkan dompet dan cuba lagi.";
+
+"This wallet network isn't supported. Please choose a different network." = "Rangkaian dompet ini tidak disokong. Sila pilih rangkaian yang berbeza.";
+
+"This wallet verification request expired. Please try again." = "Permintaan pengesahan dompet ini telah tamat tempoh. Sila cuba lagi.";
+
+"This wallet verification request is invalid. Please try again." = "Permintaan pengesahan dompet ini tidak sah. Sila cuba lagi.";
+
+"Upload your proof of address" = "Muat naik bukti alamat anda";
+
+"We couldn't verify ownership of this wallet. Please try again." = "Kami tidak dapat mengesahkan pemilikan dompet ini. Sila cuba lagi.";
+
+"We may request proof of address for larger transactions." = "Kami mungkin meminta bukti alamat untuk transaksi yang lebih besar.";
+
+"We may request source of funds for larger transactions." = "Kami mungkin meminta sumber dana untuk transaksi yang lebih besar.";
+
+"We’re reviewing your documents. We’ll let you know when verification is complete." = "Kami sedang menyemak dokumen anda. Kami akan memaklumkan anda apabila pengesahan selesai.";
+
+"You can continue while we verify your document in the background." = "Anda boleh teruskan sementara kami mengesahkan dokumen anda di latar belakang.";
