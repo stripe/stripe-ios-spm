@@ -1,0 +1,45 @@
+"An error occurred. Please try again." = "Si è verificato un errore. Riprova.";
+
+"Card brand was not updated. Please try again." = "Il circuito della carta non è stato aggiornato. Riprova.";
+
+"Close" = "Chiudi";
+
+"Confirm it's you" = "Verifica la tua identità";
+
+"Default payment method was not updated. Please try again." = "Il metodo di pagamento predefinito non è stato aggiornato. Riprova.";
+
+"Enter the code sent to %@." = "Inserisci il codice inviato a %@.";
+
+"Failed to connect" = "Connessione non riuscita";
+
+"Resend code" = "Invia nuovamente il codice";
+
+"Scan Card" = "Scansiona carta";
+
+"Scan card" = "Scansiona carta";
+
+"The IBAN you entered is invalid." = "L'IBAN inserito non è valido.";
+
+"There was an error processing your card -- try again in a few seconds" = "Si è verificato un errore durante l'elaborazione della carta. Riprova fra qualche secondo.";
+
+"There was an unexpected error -- try again in a few seconds" = "Si è verificato un errore imprevisto. Riprova fra qualche secondo.";
+
+"Try again" = "Riprova";
+
+"We use Stripe to verify your card details. Stripe may use and store your data according its privacy policy. <a href='https://support.stripe.com/questions/stripes-card-image-verification'><u>Learn more</u></a>" = "Utilizziamo Stripe per verificare i dati della carta. Come stabilito nella sua informativa sulla privacy, Stripe può utilizzare e conservare i tuoi dati. <a href='https://support.stripe.com/questions/stripes-card-image-verification'><u>Ulteriori informazioni</u></a>";
+
+"Your card has expired" = "La carta è scaduta";
+
+"Your card was declined" = "La carta è stata rifiutata";
+
+"Your card's expiration month is invalid" = "Il mese di scadenza della carta non è valido";
+
+"Your card's expiration year is invalid" = "L'anno di scadenza della carta non è valido";
+
+"Your card's number is invalid" = "Il numero della carta non è valido";
+
+"Your card's security code is invalid" = "Il codice di sicurezza della carta non è valido";
+
+"Your name is invalid." = "Nome non valido.";
+
+"Your payment method was declined." = "Il tuo metodo di pagamento è stato rifiutato.";
