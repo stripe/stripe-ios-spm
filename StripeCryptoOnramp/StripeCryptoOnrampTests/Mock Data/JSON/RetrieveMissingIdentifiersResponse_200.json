@@ -1,0 +1,19 @@
+{
+  "carf_tin_required": true,
+  "alternatives": [
+    {
+      "alternative_missing_identifiers": [
+        "mt_pp"
+      ],
+      "original_missing_identifiers": [
+        "mt_nic"
+      ]
+    }
+  ],
+  "identifiers": [
+    {
+      "regulation": "eu_mica",
+      "type": "mt_nic"
+    }
+  ]
+}
