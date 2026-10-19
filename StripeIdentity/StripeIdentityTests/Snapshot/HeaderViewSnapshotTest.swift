@@ -1,0 +1,152 @@
+//
+//  HeaderViewSnapshotTest.swift
+//  StripeIdentityTests
+//
+//  Created by Jaime Park on 1/26/22.
+//  Copyright © 2022 Stripe, Inc. All rights reserved.
+//
+
+import iOSSnapshotTestCase
+@_spi(STP) import StripeCore
+import StripeCoreTestUtils
+@_spi(STP) import StripeUICore
+import UIKit
+
+@testable import StripeIdentity
+
+class HeaderViewSnapshotTest: STPSnapshotTestCase {
+    typealias IconViewModel = HeaderIconView.ViewModel
+
+    let headerView = HeaderView()
+    let iconImage = SnapshotTestMockData.uiImage(image: .headerIcon)
+
+    let shortTitleText = "Short Title"
+    let longTitleText = "A Very Long Title. This Title is Sometimes a Question?"
+
+    let plainHeaderBackgroundColor: UIColor = .white
+    let bannerHeaderBackgroundColor: UIColor = .lightGray
+
+    func testPlainHeaderShortTitle() {
+        verifyView(
+            with: .init(
+                backgroundColor: plainHeaderBackgroundColor,
+                headerType: .plain,
+                titleText: shortTitleText
+            )
+        )
+    }
+
+    func testPlainHeaderLongTitle() {
+        verifyView(
+            with: .init(
+                backgroundColor: plainHeaderBackgroundColor,
+                headerType: .plain,
+                titleText: longTitleText
+            )
+        )
+    }
+
+    func testBannerHeaderShortTitle_NoIcons() {
+        verifyView(
+            with: .init(
+                backgroundColor: bannerHeaderBackgroundColor,
+                headerType: .banner(iconViewModel: nil),
+                titleText: shortTitleText
+            )
+        )
+    }
+
+    func testBannerHeaderLongTitle_NoIcons() {
+        verifyView(
+            with: .init(
+                backgroundColor: bannerHeaderBackgroundColor,
+                headerType: .banner(iconViewModel: nil),
+                titleText: longTitleText
+            )
+        )
+    }
+
+    func testBannerHeaderShortTitle_PlainIcon() {
+        let viewModel = IconViewModel(
+            iconType: .plain,
+            iconImage: iconImage,
+            iconImageContentMode: .scaleAspectFill
+        )
+        verifyView(
+            with: .init(
+                backgroundColor: bannerHeaderBackgroundColor,
+                headerType: .banner(iconViewModel: viewModel),
+                titleText: shortTitleText
+            )
+        )
+    }
+
+    func testBannerHeaderLongTitle_BrandIcon() {
+        let viewModel = IconViewModel(
+            iconType: .brand,
+            iconImage: iconImage,
+            iconImageContentMode: .scaleAspectFill
+        )
+        verifyView(
+            with: .init(
+                backgroundColor: bannerHeaderBackgroundColor,
+                headerType: .banner(iconViewModel: viewModel),
+                titleText: longTitleText
+            )
+        )
+    }
+
+    func testBannerHeaderWithSubtitle() {
+        let viewModel = IconViewModel(
+            iconType: .brand,
+            iconImage: iconImage,
+            iconImageContentMode: .scaleAspectFill
+        )
+        verifyView(
+            with: .init(
+                backgroundColor: bannerHeaderBackgroundColor,
+                headerType: .banner(iconViewModel: viewModel),
+                titleText: shortTitleText,
+                subtitleText: "Complete a one-time identity check to enable withdrawals."
+            )
+        )
+    }
+
+    func testHeaderReconfigure() {
+        let headerView = HeaderView()
+        let viewModel = IconViewModel(
+            iconType: .brand,
+            iconImage: iconImage,
+            iconImageContentMode: .scaleAspectFill
+        )
+
+        let firstConfigurationVersion: HeaderView.ViewModel = .init(
+            backgroundColor: .red,
+            headerType: .plain,
+            titleText: "First Configured Header Title",
+            subtitleText: "First Configured Header Subtitle"
+        )
+        let secondConfigurationVersion: HeaderView.ViewModel = .init(
+            backgroundColor: .blue,
+            headerType: .banner(iconViewModel: viewModel),
+            titleText: "Second Configured Header Title"
+        )
+
+        // Configure the header view multiple times to check if the view updates properly
+        headerView.configure(with: firstConfigurationVersion)
+        headerView.configure(with: secondConfigurationVersion)
+        verifyView(with: secondConfigurationVersion)
+    }
+}
+
+extension HeaderViewSnapshotTest {
+    fileprivate func verifyView(
+        with viewModel: HeaderView.ViewModel,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        headerView.configure(with: viewModel)
+        headerView.autosizeHeight(width: SnapshotTestMockData.mockDeviceWidth)
+        STPSnapshotVerifyView(headerView, file: file, line: line)
+    }
+}

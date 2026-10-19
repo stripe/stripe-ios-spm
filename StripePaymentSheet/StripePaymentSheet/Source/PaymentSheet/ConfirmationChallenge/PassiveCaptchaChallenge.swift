@@ -1,0 +1,245 @@
+//
+//  PassiveCaptchaChallenge.swift
+//  StripePayments
+//
+//  Created by Joyce Qin on 8/3/25.
+//
+
+import Foundation
+@_spi(STP) import StripeCore
+@_spi(STP) import StripePayments
+
+/// PassiveCaptcha, delivered in the `v1/elements/sessions` response.
+struct PassiveCaptchaData: Equatable, Hashable {
+
+    let siteKey: String
+    let rqdata: String?
+    let tokenTimeoutSeconds: TimeInterval
+    // The max_age of the token set on the backend is 1800 seconds, or 30 minutes. As a preventative measure, we expire the token a minute early so a user won't send an expired token
+    static let defaultTokenTimeoutSeconds: TimeInterval = 29 * 30
+
+    init(siteKey: String, rqdata: String?, tokenTimeoutSeconds: TimeInterval = defaultTokenTimeoutSeconds) {
+        self.siteKey = siteKey
+        self.rqdata = rqdata
+        self.tokenTimeoutSeconds = tokenTimeoutSeconds
+    }
+
+    /// Helper method to decode the `v1/elements/sessions` response's `passive_captcha` hash.
+    /// - Parameter response: The value of the `passive_captcha` key in the `v1/elements/sessions` response.
+    public static func decoded(
+        fromAPIResponse response: [AnyHashable: Any]?
+    ) -> PassiveCaptchaData? {
+        guard let response else {
+            return nil
+        }
+
+        guard let siteKey = response["site_key"] as? String
+        else {
+            return nil
+        }
+
+        // Optional
+        let rqdata = response["rqdata"] as? String
+        let tokenTimeoutSeconds = response["token_timeout_seconds"] as? TimeInterval ?? defaultTokenTimeoutSeconds
+        return PassiveCaptchaData(
+            siteKey: siteKey,
+            rqdata: rqdata,
+            tokenTimeoutSeconds: tokenTimeoutSeconds
+        )
+    }
+
+}
+
+actor PassiveCaptchaChallenge {
+    struct ConsumedToken {
+        let value: String
+        let wasReady: Bool
+    }
+
+    let passiveCaptchaData: PassiveCaptchaData
+    private let hcaptchaFactory: HCaptchaFactory
+    private var tokenTask: Task<String, Error>?
+    private var shouldStartInitialPreload = true
+    var isTokenReady: Bool { // used for the attach analytic to indicate whether it's blocking checkout
+        return tokenTask != nil && hasFetchedToken && !hasSessionExpired
+    }
+    private var hasFetchedToken: Bool = false
+    private var sessionExpirationDate: Date?
+    private var hasSessionExpired: Bool {
+        guard let sessionExpirationDate else { return false } // if we don't have a session expiration date, then we don't have a token yet
+        return Date() >= sessionExpirationDate
+    }
+
+    public init(passiveCaptchaData: PassiveCaptchaData) {
+        self.init(passiveCaptchaData: passiveCaptchaData, hcaptchaFactory: PassiveHCaptchaFactory())
+    }
+
+    init(passiveCaptchaData: PassiveCaptchaData, hcaptchaFactory: HCaptchaFactory) {
+        self.passiveCaptchaData = passiveCaptchaData
+        self.hcaptchaFactory = hcaptchaFactory
+        // Use [weak self] so this task does not prevent the actor from being deallocated.
+        // When the actor is deallocated, deinit cancels tokenTask.
+        Task { [weak self] in
+            await self?.preloadToken()
+        }
+    }
+
+    deinit {
+        // Cancel the in-flight token task so any lingering HCaptcha WebView is stopped
+        // and does not log analytics after this challenge is released.
+        tokenTask?.cancel()
+    }
+
+    func consumeToken() async throws -> ConsumedToken {
+        // Prevent the initialization task from starting a preload after an
+        // immediate consumer has already claimed its own token task.
+        shouldStartInitialPreload = false
+
+        if hasSessionExpired {
+            resetSession()
+        }
+
+        let wasReady = isTokenReady
+        let tokenTask = tokenTask ?? Self.makeTokenTask(
+            passiveCaptchaData: passiveCaptchaData,
+            hcaptchaFactory: hcaptchaFactory,
+            owner: self
+        )
+
+        // Tokens can only be used once. Remove this task from the cache before
+        // awaiting it so concurrent consumers cannot receive the same token.
+        resetSession()
+        defer { resetSession() }
+
+        let token = try await withTaskCancellationHandler {
+            try await tokenTask.value
+        } onCancel: {
+            tokenTask.cancel()
+        }
+        return ConsumedToken(value: token, wasReady: wasReady)
+    }
+
+    private func preloadToken() {
+        guard shouldStartInitialPreload else { return }
+        shouldStartInitialPreload = false
+
+        tokenTask = Self.makeTokenTask(
+            passiveCaptchaData: passiveCaptchaData,
+            hcaptchaFactory: hcaptchaFactory,
+            owner: self
+        )
+    }
+
+    private static func makeTokenTask(
+        passiveCaptchaData: PassiveCaptchaData,
+        hcaptchaFactory: HCaptchaFactory,
+        owner: PassiveCaptchaChallenge
+    ) -> Task<String, Error> {
+        Task<String, Error> { [siteKey = passiveCaptchaData.siteKey, rqdata = passiveCaptchaData.rqdata, hcaptchaFactory, weak owner] () -> String in
+            STPAnalyticsClient.sharedClient.logPassiveCaptchaInit(siteKey: siteKey)
+            let startTime = Date()
+            do {
+                let hcaptcha = try hcaptchaFactory.create(siteKey: siteKey, rqdata: rqdata)
+                STPAnalyticsClient.sharedClient.logPassiveCaptchaExecute(siteKey: siteKey)
+                let result = try await withTaskCancellationHandler {
+                    try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<String, Error>) in
+                        // Prevent Swift Task continuation misuse - the validate completion block can get called multiple times
+                        var nillableContinuation: CheckedContinuation<String, Error>? = continuation
+
+                        hcaptcha.validate { result in
+                            Task { @MainActor in // MainActor to prevent continuation from different threads
+                                do {
+                                    let token = try result.dematerialize()
+                                    await owner?.setSessionExpirationDate()
+                                    nillableContinuation?.resume(returning: token)
+                                    nillableContinuation = nil
+                                } catch {
+                                    nillableContinuation?.resume(throwing: error)
+                                    nillableContinuation = nil
+                                }
+                            }
+                        }
+                    }
+                } onCancel: {
+                    Task { @MainActor in
+                        hcaptcha.stop()
+                    }
+                }
+                // Check cancellation after continuation
+                try Task.checkCancellation()
+                // Mark as complete
+                await owner?.setValidationComplete()
+                let duration = Date().timeIntervalSince(startTime)
+                STPAnalyticsClient.sharedClient.logPassiveCaptchaSuccess(siteKey: siteKey, duration: duration)
+                return result
+            } catch {
+                try Task.checkCancellation()
+                let duration = Date().timeIntervalSince(startTime)
+                STPAnalyticsClient.sharedClient.logPassiveCaptchaError(error: error, siteKey: siteKey, duration: duration)
+                throw error
+            }
+        }
+    }
+
+    private func resetSession() {
+        self.tokenTask = nil
+        self.hasFetchedToken = false
+        self.sessionExpirationDate = nil
+    }
+
+    private func setSessionExpirationDate() {
+        self.sessionExpirationDate = Date().addingTimeInterval(passiveCaptchaData.tokenTimeoutSeconds)
+    }
+
+    private func setValidationComplete() {
+        hasFetchedToken = true
+    }
+
+}
+
+// Protocol for creating HCaptcha instances
+protocol HCaptchaFactory {
+    func create(siteKey: String, rqdata: String?) throws -> HCaptcha
+}
+
+struct PassiveHCaptchaFactory: HCaptchaFactory {
+    func create(siteKey: String, rqdata: String?) throws -> HCaptcha {
+        return try HCaptcha(apiKey: siteKey,
+                            passiveApiKey: true,
+                            rqdata: rqdata,
+                            host: "stripecdn.com")
+    }
+}
+
+// All duration analytics are in milliseconds
+extension STPAnalyticsClient {
+    func logPassiveCaptchaInit(siteKey: String) {
+        log(
+            analytic: GenericAnalytic(event: .passiveCaptchaInit, params: ["site_key": siteKey])
+        )
+    }
+
+    func logPassiveCaptchaExecute(siteKey: String) {
+        log(
+            analytic: GenericAnalytic(event: .passiveCaptchaExecute, params: ["site_key": siteKey])
+        )
+    }
+
+    func logPassiveCaptchaSuccess(siteKey: String, duration: TimeInterval) {
+        log(
+            analytic: GenericAnalytic(event: .passiveCaptchaSuccess, params: ["site_key": siteKey, "duration": duration * 1000])
+        )
+    }
+
+    func logPassiveCaptchaError(error: Error, siteKey: String, duration: TimeInterval) {
+        log(
+            analytic: ErrorAnalytic(event: .passiveCaptchaError, error: error, additionalNonPIIParams: ["site_key": siteKey, "duration": duration * 1000])
+        )
+    }
+
+    func logPassiveCaptchaAttach(siteKey: String, isReady: Bool, duration: TimeInterval) {
+        log(
+            analytic: GenericAnalytic(event: .passiveCaptchaAttach, params: ["site_key": siteKey, "is_ready": isReady, "duration": duration * 1000])
+        )
+    }
+}
