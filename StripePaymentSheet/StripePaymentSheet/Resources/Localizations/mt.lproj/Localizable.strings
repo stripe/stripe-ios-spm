@@ -1,0 +1,381 @@
+"%1$@ ×%2$d" = "%1$@ ×%2$li";
+
+"%@ will no longer be saved to your wallet." = "%@ mhux se jibqa' ssejvjat fil-kartiera tiegħek.";
+
+"+ Add" = "+ Żid";
+
+"1 %1$@ = %2$@ %3$@ (includes %4$@%% conversion fee)." = "1 %1$@ = %2$@ %3$@ (inkluż tariffa tal-konverżjoni %4$@%%).";
+
+"1 %@ = %@ %@" = "1 %1$@ = %2$@ %3$@";
+
+"Accept" = "Aċċetta";
+
+"Add US bank account" = "Żid kont tal-bank ibbażat ġewwa l-Istati Uniti tal-Amerka";
+
+"Add a card" = "Żid karta";
+
+"Add a payment method" = "Żid metodu tal-pagament";
+
+"Add bank account" = "Żid kont tal-bank";
+
+"Add card" = "Żid karta";
+
+"Add new card" = "Żid karta ġdida";
+
+"Add new payment method" = "Żid metodu tal-ħlas ġdid";
+
+"Add your payment information" = "Żid l-informazzjoni dwar il-pagament tiegħek";
+
+"Approve payment" = "Approva l-pagament";
+
+"Back" = "Lura";
+
+"Bank" = "Bank";
+
+"Bank account" = "Kont tal-bank";
+
+"Bank account details cannot be changed." = "Id-dettalji tal-kont tal-bank ma jistgħux jinbidlu.";
+
+"Buy Now, Pay Later with  <img/>" = "Ixtri Issa, Ħallas Wara ma’  <img/>";
+
+"Buy Now, Pay Later with Afterpay" = "Ixtri Issa, Ħallas Wara ma’ Afterpay";
+
+"Buy Now, Pay Later with Cash App Afterpay" = "Ixtri Issa, Ħallas Wara ma’ Cash App Afterpay";
+
+"Buy Now, Pay Later with Clearpay" = "Ixtri Issa, Ħallas Wara ma’ Clearpay";
+
+"Buy now or pay later with Klarna" = "Ixtri issa jew ħallas iktar tard bi Klarna";
+
+"By confirming your payment with GCash, you allow %@ to charge your GCash account for future payments in accordance with their terms." = "Meta tikkonferma l-ħlas tiegħek permezz ta' GCash, tkun qed tippermetti lil %@ jiġbor il-ħlas mill-kont ta' GCash tiegħek għal ħlasijiet fil-futur skont ir-regoli tagħhom.";
+
+"By confirming your payment with NICEPAY, you allow %@ to charge this payment method for future payments in accordance with their terms." = "Billi tikkonferma l-pagament tiegħek ma' NICEPAY, int qed tħalli lil %@ tiġbor il-ħlas minn dan il-metodu ta' pagament għal pagamenti futuri skont ir-regoli tagħhom.";
+
+"By confirming your payment with PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Meta tikkonferma l-pagament b'PayPal tkun qed tħalli lil %@ tiġbor il-flus mill-kont ta' PayPal tiegħek għall-pagamenti tal-ġejjieni skont ir-regoli tagħha.";
+
+"By confirming your payment with Touch 'n Go, you allow %@ to charge your Touch 'n Go account for future payments in accordance with their terms." = "Meta tikkonferma l-ħlas tiegħek permezz ta' Touch 'n Go, tkun qed tippermetti lil %@ jiġbor il-ħlas mill-kont ta' Touch 'n Go tiegħek għal ħlasijiet fil-futur skont it-termini tagħhom.";
+
+"By confirming your payment with TrueMoney, you allow %@ to charge your TrueMoney account for future payments in accordance with their terms." = "Meta tikkonferma l-ħlas tiegħek permezz ta' TrueMoney, tkun qed tippermetti lil %@ jiġbor il-ħlas mill-kont ta' TrueMoney tiegħek għal ħlasijiet fil-futur skont it-termini tagħhom.";
+
+"By confirming your payment, you agree that your transaction will be handled by Global Stack Services Limited as merchant of record and in accordance with their <terms>terms of use</terms>." = "Meta tikkonferma l-ħlas tiegħek, taqbel li t-tranżazzjoni tiegħek se tiġi ġestita minn Global Stack Services Limited bħala n-negozjant reġistrat u skont it-<terms>termini tal-użu</terms> tagħhom";
+
+"By confirming your payment, you agree that your transaction will be handled by Global Stack Services Limited as merchant of record and in accordance with their <terms>terms</terms>." = "Meta tikkonferma l-ħlas tiegħek, taqbel li t-tranżazzjoni tiegħek se tiġi ġestita minn Global Stack Services Limited bħala n-negozjant reġistrat u skont it-<terms>termini</terms> tagħhom.";
+
+"By continuing to Amazon Pay, you allow %@ to charge your Amazon Pay account for future payments in accordance with their terms." = "Meta tkompli għal fuq Amazon Pay, tkun qed tagħti permess lil %@ biex fil-ġejjieni tiġbor il-pagamenti mill-kont Amazon Pay tiegħek skont ir-regoli tagħha.";
+
+"By continuing to Klarna, you allow %@ to charge your Klarna account for future payments in accordance with their terms and Klarna's terms. You can change this at any time in your Klarna app or by reaching out to %@." = "Meta tkompli għal Klarna, tkun qed tagħti permess lil %1$@ biex fil-ġejjieni tiġbor il-pagamenti mill-kont Klarna tiegħek skont ir-regoli tagħha u ta' Klarna. Tista' tibdel dal-permess meta trid mill-app ta' Klarna tiegħek jew billi tikkuntattja lil %2$@.";
+
+"By continuing to PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Meta tkompli għal PayPal tkun qed tħalli lil %@ tiġbor il-flus mill-kont ta' PayPal tiegħek għall-pagamenti tal-ġejjieni skont ir-regoli tagħha.";
+
+"By continuing to Revolut Pay, you allow %@ to charge your Revolut Pay account for future payments in accordance with their terms." = "Meta tkompli għal Revolut Pay tkun qed tħalli lil %@ tiġbor il-flus mill-kont ta' Revolut Pay tiegħek għall-pagamenti tal-ġejjieni skont ir-regoli tagħha.";
+
+"By continuing you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Meta tkompli tkun qed taqbel mar-<terms>Regoli</terms> u l-<privacy>Politika tal-Privatezza</privacy>.";
+
+"By continuing, you agree to authorize payments pursuant to <terms>these terms</terms>." = "Meta tkompli tkun qed taqbel li tawtorizza l-pagamenti skont <terms>dar-regoli</terms>.";
+
+"By continuing, you agree to save your information for future purchases with %1$@ and <link>%2$@</link> according to %2$@ <terms>terms</terms> and <privacy>privacy</privacy>." = "Billi tkompli, qed taqbel li tissejvja l-informazzjoni tiegħek għal xirjiet futuri ma’ %1$@ u <link>%2$@</link> skont <terms>it-termini</terms> u <privacy>l-privatezza</privacy> ta’ %2$@.";
+
+"By continuing, you agree to save your information for future purchases with %@." = "Billi tkompli, taqbel li tissejvja l-informazzjoni tiegħek għal xiri futur ma' %@.";
+
+"By continuing, you authorize %@ to automatically debit your Satispay Balance on a recurring basis in accordance with your purchase or subscription plan." = "Billi tkompli, tawtorizza lil %@ biex awtomatikament tiddebita l-Bilanċ ta’ Satispay tiegħek fuq bażi rikorrenti skont il-pjan tax-xiri jew l-abbonament tiegħek.";
+
+"By continuing, you authorize %@ to automatically debit your Twint Balance on a recurring basis in accordance with your purchase or subscription plan." = "Billi tkompli, tawtorizza %@ biex awtomatikament tħallas il-Bilanċ tiegħek ta' Twint b'mod ripetut skont il-pjan tax-xiri jew l-abbonament tiegħek.";
+
+"By continuing, you authorize %@ to debit your Cash App account for this payment and future payments in accordance with %@'s terms, until this authorization is revoked. You can change this anytime in your Cash App Settings." = "Meta tkompli tkun qed tagħti permess lil %1$@ biex, sakemm dal-permess jitneħħa, tkun tista' tiġbor il-flus mill-kont Cash App tiegħek għal dal-pagament u għall-pagamenti tal-ġejjieni skont ir-regoli ta' %2$@. Tista' tibdel dil-ħaġa meta trid mill-Għażliet ta' Cash App.";
+
+"By joining %@, you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Billi tingħaqad ma’ %@, qed taqbel mat-<terms>Termini</terms> u <privacy>d-Dikjarazzjoni ta’ Privatezza</privacy>.";
+
+"By providing phone number and email, you agree to create a %1$@ account subject to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Billi tipprovdi numru telefoniku u email, qed taqbel li toħloq kont %1$@ suġġett għat-<terms>Termini</terms> u <privacy>d-Dikjarazzjoni ta’ Privatezza</privacy> %1$@.";
+
+"By providing your bank account details and confirming this payment, you agree to this Direct Debit Request and the <terms>Direct Debit Request service agreement</terms>, and authorise Stripe Payments Australia Pty Ltd ACN 160 180 343 Direct Debit User ID number 507156 (“Stripe”) to debit your account through the Bulk Electronic Clearing System (BECS) on behalf of %@ (the \"Merchant\") for any amounts separately communicated to you by the Merchant. You certify that you are either an account holder or an authorised signatory on the account listed above." = "Billi tipprovdi d-dettalji tal-kont bankarju tiegħek u tikkonferma dan il-ħlas, qed taqbel ma’ din it-Talba tad-Debitu Dirett u <terms>l-ftehim ta' servizz tat-Talba tad-Debitu Dirett</terms>, u tawtorizza lil Stripe Payments Australia Pty Ltd ACN 160 180 343 Direct Debit User ID numru 507156 (\"Stripe\") biex tiddebita l-kont tiegħek permezz tal-Bulk Electronic Clearing System (BECS) f'isem %@ (in-\"Negozjant\") għal kwalunkwe ammont ikko0munikat separatament lilek min-Negozjant. Qed tiċċertifika li int jew detentur ta’ kont jew firmatarju awtorizzat fuq il-kont imsemmi hawn fuq.";
+
+"By providing your card information, you allow %@ to charge your card for future payments in accordance with their terms." = "Meta tagħti l-informazzjoni tal-karta tiegħek, tkun qed tħalli lil %@ tiġbor il-pagamenti tal-ġejjieni mill-karta tiegħek skont ir-regoli tagħha.";
+
+"By providing your email, you agree to create a %1$@ account and save your payment info to %1$@, according to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Billi tipprovdi l-email tiegħek, qed taqbel li toħloq kont ta’ %1$@ u tissejvja l-informazzjoni tal-ħlas tiegħek għal %1$@, skont it-<terms>Termini</terms> u <privacy>d-Dikjarazzjoni ta’ Privatezza</privacy> ta’ %1$@.";
+
+"By providing your payment information and confirming this payment, you authorise (A) %@ and Stripe, our payment service provider, to send instructions to your bank to debit your account and (B) your bank to debit your account in accordance with those instructions. As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited. Your rights are explained in a statement that you can obtain from your bank. You agree to receive notifications for future debits up to 2 days before they occur." = "Meta tagħti l-informazzjoni tal-pagament tiegħek u tikkonferma dan il-pagament, tkun qed tawtorizza lil (A) %@ u lil Stripe, l-operatur tas-servizz tal-pagamenti tagħna, biex jibagħtu struzzjonijiet lill-bank tiegħek biex jieħu l-fondi mill-kont tiegħek u (B) lill-bank tiegħek biex jieħu l-fondi mill-kont tiegħek skont dawn l-istruzzjonijiet. Bħala parti mid-drittijiet tiegħek, inti għandek dritt għall-ħlas lura mill-bank tiegħek skont ir-regoli u l-kundizzjonijiet tal-ftehim tiegħek mal-bank tiegħek. Ħlas lura għandu jintalab fi żmien 8 ġimgħat, li jibdew jgħoddu mid-data li fiha l-fondi jittieħdu mill-kont tiegħek. Il-jeddijiet tiegħek imfissra fi stqarrija li tista' tikseb mingħand il-bank tiegħek. Int taqbel li, sa jumejn qabel, tikseb tagħrif kull darba li l-fondi jkunu se jittieħdu mill-kont tiegħek.";
+
+"By providing your phone number, you agree to create a %1$@ account and save your payment info to %1$@, according to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Billi tipprovdi n-numru telefoniku tiegħek, qed taqbel li toħloq kont ta’ %1$@ u tissejvja l-informazzjoni tal-ħlas tiegħek għal %1$@, skont it-<terms>Termini</terms> u <privacy>d-Dikjarazzjoni ta’ Privatezza</privacy> ta’ %1$@.";
+
+"By saving your bank account for %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Meta tissejvja l-kont tal-bank tiegħek għal %@ tkun qed taqbel li tawtorizza l-pagamenti skont <terms>dar-regoli</terms>.";
+
+"By saving your payment information, you allow %@ to charge you for future payments in accordance with their terms." = "Billi tissejvja l-informazzjoni tal-pagament tiegħek, qed tippermetti lil %@ jiġbru l-ħlas mingħandek għal pagamenti futuri skont it-termini tagħhom.";
+
+"By submitting your order to %@ and %@, you agree to save your information with %@ for future purchases, and agree to authorize payments pursuant to <terms>these terms</terms>." = "Billi tissottometti l-ordni tiegħek lil %1$@ u %2$@, inti taqbel li tissejvja l-informazzjoni tiegħek ma’ %3$@ għal xirjiet futuri, u taqbel li tawtorizza pagamenti skont <terms>dawn it-termini</terms>.";
+
+"By submitting your order to %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Billi tissottometti l-ordni tiegħek lil %@ inti taqbel li tawtorizza pagamenti skont <terms>dawn it-termini</terms>.";
+
+"CPF/CPNJ" = "CPF/CPNJ";
+
+"Cancel and pay another way" = "Ikkanċella u ħallas mod ieħor";
+
+"Card details cannot be changed." = "Id-dettalji tal-karta ma jistgħux jinbidlu.";
+
+"Card number. Supported cards include %@" = "Numru tal-kard. Il-kards appoġġjati jinkludu %@";
+
+"Change" = "Ibdel";
+
+"Choose a card brand" = "Agħżel marka tal-karta";
+
+"Choose a payment method" = "Agħżel metodu tal-ħlas";
+
+"Close card scanner" = "Agħlaq l-iskenner tal-karta";
+
+"Code sent" = "Il-kodiċi ntbagħat";
+
+"Complete the payment using Pix to finish the purchase." = "Lesti l-ħlas permezz ta' Pix biex tiffinalizza x-xiri.";
+
+"Confirm" = "Ikkonferma";
+
+"Confirm payment details" = "Ikkonferma d-dettalji tal-pagament";
+
+"Confirm the Bizum payment in your mobile banking application within %@ to complete the purchase." = "Ikkonferma l-pagament ta' Bizum fl-applikazzjoni tal-ibbankjar bil-mowbajl tiegħek fi żmien %@ biex tlesti x-xirja.";
+
+"Confirm the payment in your MB WAY app within %@ to complete the purchase." = "Ikkonferma l-pagament fl-app tiegħek ta' MB WAY fi żmien %@ biex tlesti x-xirja.";
+
+"Confirm the payment in your bank or payment app within %@ to complete the purchase." = "Biex tlesti x-xirja kkonferma l-pagament, fl-app tal-bank jew fl-app tal-pagamenti, fi żmien %@.";
+
+"Confirm the payment in your bank's app within %@ to complete the purchase." = "Ikkonferma l-pagament fl-app tal-bank fi żmien %@ biex tlesti x-xirja.";
+
+"Confirm your CVC" = "Ikkonferma l-kodiċi CVC tiegħek";
+
+"Confirm your information" = "Ikkonferma l-informazzjoni tiegħek";
+
+"Contact information" = "Id-dettalji tal-kuntatt";
+
+"Continue another way" = "Kompli mod ieħor";
+
+"Create an account with %@ for faster checkout across the web" = "Oħloq kont ma’ %@ għal checkout aktar malajr fuq il-web";
+
+"Debit or credit card" = "Karta tad-debitu jew tal-kreditu";
+
+"Declarations" = "Dikjarazzjonijiet";
+
+"Default" = "Standard";
+
+"Default payment method" = "Metodu tal-pagament standard";
+
+"Did you mean %@? %@." = "Ridt tfisser %1$@? %2$@.";
+
+"Discard Changes" = "Warrab il-Bidliet";
+
+"Discard changes?" = "Trid Twarrab il-Bidliet?";
+
+"Discount" = "Skont";
+
+"EPS Bank" = "EPS Bank";
+
+"Edit address" = "Editja l-indirizz";
+
+"Enter address manually" = "Ikteb l-indirizz int stess";
+
+"Exchange rate and fees of your bank may apply." = "Ir-rata tal-kambju u l-miżati tal-bank tiegħek jistgħu japplikaw.";
+
+"FPX Bank" = "FPX Bank";
+
+"Fast, secure checkout" = "Ħlas għax-xirja veloċi u sigur";
+
+"Get %@ back when you pay for the first time with your bank. <terms>See terms</terms>" = "Ikseb %@ lura meta tħallas bil-bank għall-ewwel darba. <terms>Aqra r-regoli</terms>";
+
+"Get %@ back when you pay with your bank. <terms>See terms</terms>" = "Ikseb %@ lura meta tħallas bil-bank. <terms>Aqra r-regoli</terms>";
+
+"Hide details" = "Aħbi d-dettalji";
+
+"I understand that Stripe will be collecting Direct Debits on behalf of %@ and confirm that I am the account holder and the only person required to authorise debits from this account." = "Jiena nifhem li Stripe se tkun qed tiġbor id-Debiti Diretti f'isem %@ u nikkonferma li jiena d-detentur tal-kont u l-unika persuna meħtieġa biex tawtorizza d-debiti minn dan il-kont.";
+
+"IBAN" = "IBAN";
+
+"Invoice payment for business buyers." = "Ħlas ta' Fattura għal xerrejja ta' negozji.";
+
+"Keep Editing" = "Kompli Editja";
+
+"Last 4 digits of SSN" = "L-aħħar 4 ċifri tal-SSN";
+
+"Manage SEPA debit" = "Ħu ħsieb id-debitu SEPA";
+
+"Manage US bank account" = "Ħu ħsieb il-kont tal-bank tal-Istati Uniti tal-Amerka";
+
+"Manage bank account" = "Ħu ħsieb il-kont tal-bank";
+
+"Manage card" = "Ħu ħsieb il-karta";
+
+"Manage cards" = "Ħu ħsieb il-karti";
+
+"Manage payment method" = "Ħu ħsieb il-metodu tal-pagament";
+
+"Manage payment methods" = "Ħu ħsieb il-metodi tal-pagament";
+
+"Manage your payment methods" = "Ħu ħsieb il-metodi tal-pagament tiegħek";
+
+"Name on card" = "L-isem fuq il-karta";
+
+"Naver Pay Card" = "Kard ta’ Naver Pay";
+
+"Naver Pay Money/Point" = "Naver Pay Money/Point";
+
+"New card" = "Karta ġdida";
+
+"New payment method" = "Metodu tal-pagament ġdid";
+
+"No %@ promo" = "L-ebda offerta %@";
+
+"Not you?" = "Mhux l-indirizz tal-email tiegħek?";
+
+"Only card brand can be changed." = "Tista' tibdel biss ix-xorta tal-karta.";
+
+"Open to see more information." = "Iftaħ biex tara aktar informazzjoni.";
+
+"Or" = "Jew";
+
+"Or pay using" = "Jew ħallas bil-";
+
+"Or pay with a card" = "Jew ħallas bil-karta";
+
+"Or use" = "Jew uża";
+
+"Or use a card" = "Jew uża karta";
+
+"Pay %@" = "Ħallas %@";
+
+"Pay another way" = "Ħallas mod ieħor";
+
+"Pay faster at %@ and thousands of businesses." = "Ħallas lil %@ u lil eluf ta' negozji oħra iktar malajr.";
+
+"Pay faster everywhere %@ is accepted." = "Ħallas aktar malajr kullimkien fejn %@ huwa aċċettat.";
+
+"Pay faster everywhere Link is accepted." = "Ħallas aktar malajr kullimkien fejn Link huwa aċċettat.";
+
+"Pay over time with %@" = "Ħallas bin-nifs grazzi għal %@";
+
+"Pay over time with Affirm" = "Ħallas bin-nifs b'Affirm";
+
+"Pay with %@" = "Ħallas ma’ %@";
+
+"Pay with Link" = "Ħallas b'Link";
+
+"Pay with your bank account in just a few steps." = "Ħallas bil-kont tal-bank tiegħek fi ftit passi.";
+
+"Payment" = "Pagament";
+
+"Payment failed" = "Il-pagament ma rnexxiex";
+
+"Payment method details cannot be changed." = "Id-dettalji tal-metodi tal-ħlas ma jistgħux jinbidlu.";
+
+"Payment methods" = "Metodi tal-pagament";
+
+"Please choose a valid payment method." = "Jekk jogħġbok agħżel metodu tal-pagament tajjeb.";
+
+"Please go back and select another payment method" = "Jekk jogħġbok mur lura u agħżel metodu tal-pagament ieħor";
+
+"Point the camera at your card." = "Ipponta l-kamera lejn il-karta tiegħek.";
+
+"Przelewy24 Bank" = "Bank permezz ta' Przelewy24";
+
+"Remove %@" = "Neħħi %@";
+
+"Remove bank?" = "Trid tneħħi l-bank?";
+
+"Remove card?" = "Tixtieq tneħħi l-karta?";
+
+"Remove linked account" = "Neħħi l-kont marbut";
+
+"Remove payment method" = "Neħħi l-metodu tal-pagament";
+
+"Remove payment method?" = "Trid tneħħi l-metodu tal-pagament?";
+
+"SEPA debit details cannot be changed." = "Id-dettalji tad-debitu SEPA ma jistgħux jinbidlu.";
+
+"Save" = "Erfa'";
+
+"Save a new payment method" = "Erfa' metodu tal-pagament ġdid";
+
+"Save address" = "Erfa' l-indirizz";
+
+"Save for future payments" = "Erfa' għall-pagamenti fil-ġejjieni";
+
+"Save my info for faster checkout with %@" = "Issejvja l-informazzjoni tiegħi għal checkout aktar malajr ma’ %@";
+
+"Save payment details to %@ for future purchases" = "Erfa' d-dettalji tal-pagamenti f'%@ għax-xirjiet tal-ġejjieni";
+
+"Save this account for future %@ payments" = "Erfa' dal-kont għall-pagament lil %@ tal-ġejjieni";
+
+"Save your bank account in just a few steps." = "Erfa' l-kont tal-bank tiegħek fi ftit passi.";
+
+"Save your info for secure 1-click checkout with %@" = "Issejvja l-informazzjoni tiegħek għal checkout sigur bi klikk wieħed ma’ %@";
+
+"Saved" = "Merfugħ";
+
+"Select card" = "Agħżel karta";
+
+"Select how you want to pay:" = "Agħżel kif trid tħallas:";
+
+"Select payment method" = "Agħżel metodu tal-pagament";
+
+"Select your payment method" = "Agħżel il-metodu tal-ħlas tiegħek";
+
+"Set as default" = "Qiegħed bħala standard";
+
+"Set as default payment method" = "Qiegħed bħala l-metodu tal-pagament standard";
+
+"Set up" = "Stabilixxi";
+
+"Shipping to %@ is not supported." = "Ma nistgħux nibagħtu l-affarijiet lejn: %@";
+
+"Show details" = "Uri d-dettalji";
+
+"Show menu" = "Uri l-menù";
+
+"Sign in or sign up" = "Idħol jew irreġistra";
+
+"Sign out of %@" = "Oħroġ minn %@";
+
+"Simple, secure one-click payments" = "Pagamenti sempliċi u siguri b'mossa waħda";
+
+"Something went wrong when linking your account.\nPlease try again later." = "Xi ħaġa marret ħażin meta kont qed tgħaqqad il-kont tiegħek.\nJekk jogħġbok erġa’ pprova aktar tard.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you'll get an email with instructions to finish saving your bank account with %@." = "Stripe se tiddepożita $0.01 fil-kont tiegħek fi żmien jum/jumejn tax-xogħol. Imbagħad se tirċievi email bl-istruzzjonijiet biex tlesti l-proċess li terfa' l-kont tiegħek ma' %@.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you’ll get an email with instructions to complete payment to %@." = "Stripe se tiddepożita $0.01 fil-kont tiegħek fi żmien jum/jumejn tax-xogħol. Imbagħad se tirċievi email bl-istruzzjonijiet biex tagħmel il-pagament lil %@.";
+
+"Subtotal" = "Subtotal";
+
+"Tap to close" = "Agħfas biex tagħlaq";
+
+"Tap to expand" = "Agħfas biex tkabbar";
+
+"Tax" = "Taxxa";
+
+"Terms and Conditions" = "Termini u kundizzjonijiet";
+
+"Terms of Service" = "Termini tas-Servizz";
+
+"The IBAN you entered is incomplete." = "L-IBAN li daħħalt mhux komplut.";
+
+"The IBAN you entered is invalid, \"%@\" is not a supported country code." = "L-IBAN li daħħalt huwa invalidu, \"%@\" mhuwiex kodiċi ta’ pajjiż appoġġjat.";
+
+"The provided verification code has expired." = "Il-kodiċi tal-verifika mogħti skada.";
+
+"The provided verification code is incorrect." = "Il-kodiċi tal-verifika mogħti mhuwiex tajjeb.";
+
+"This is an international purchase and excludes a 3.5% IOF fee. By proceeding, you acknowledge and accept <terms>Ebanx’s terms and conditions</terms>." = "Din hija xirja internazzjonali u teskludi tariffa IOF ta’ 3.5%. Billi tipproċedi, inti tirrikonoxxi u taċċetta t-<terms>termini u l-kundizzjonijiet ta’ Ebanx<terms>.";
+
+"This is your default" = "Dan il-metodu tal-pagament standard tiegħek";
+
+"This payment method will be removed but will remain available for %@ subscriptions." = "Dan il-metodu ta' pagament se jitneħħa iżda se jibqa' disponibbli għal abbonamenti ta' %@.";
+
+"Too many attempts. Please try again in a few minutes." = "Ippruvajt wisq drabi. Jekk jogħġbok erġa' pprova wara ftit minuti.";
+
+"Unavailable for this purchase" = "Mhux disponibbli għal dix-xirja";
+
+"Update card" = "Aġġorna l-karta";
+
+"Update payment method" = "Ibdel il-metodu tal-pagament";
+
+"Use billing address for shipping" = "Uża l-indirizz tal-ħlas għall-kunsinna";
+
+"View more" = "Uri iktar";
+
+"Yes, update" = "Iva, aġġorna";
+
+"Your IBAN should start with a two-letter country code." = "L-IBAN tiegħek għandu jibda b'kodiċi tal-pajjiż magħmul minn żewġ ittri.";
+
+"Your address changes won't be saved." = "Il-bidliet fl-indirizz tiegħek mhux se jiġu ssejvjati.";
