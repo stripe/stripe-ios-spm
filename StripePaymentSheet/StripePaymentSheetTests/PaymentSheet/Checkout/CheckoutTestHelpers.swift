@@ -1,0 +1,609 @@
+//
+//  CheckoutTestHelpers.swift
+//  StripePaymentSheetTests
+//
+//  Created by Nick Porter on 3/5/26.
+//  Copyright © 2026 Stripe, Inc. All rights reserved.
+//
+
+import Combine
+import OHHTTPStubs
+import OHHTTPStubsSwift
+import PassKit
+@testable @_spi(InternalOnlyAPI) import StripeCore
+@testable @_spi(InternalOnlyAPI) import StripeCoreTestUtils
+@testable @_spi(InternalOnlyAPI) import StripePayments
+@testable @_spi(InternalOnlyAPI) import StripePaymentSheet
+import UIKit
+import XCTest
+
+extension CheckoutClientAPIResponse {
+    /// Convenience for fixtures that contain no client-local session state.
+    func makePublicSession(
+        clientSecret: String? = nil,
+        expressCheckoutConfiguration: ExpressCheckoutElement.Configuration? = nil
+    ) -> CheckoutElementsController.Session {
+        let configuration = expressCheckoutConfiguration.map { expressConfiguration in
+            var configuration = CheckoutElementsController.Configuration(
+                clientSecret: "\(sessionId)_secret_abc",
+                returnURL: "stripe-ios-test://checkout-return"
+            )
+            configuration.expressCheckoutElement = expressConfiguration
+            return configuration
+        }
+        return CheckoutElementsController.Session(
+            apiResponse: self,
+            clientSecret: clientSecret ?? "\(sessionId)_secret_abc",
+            localState: .empty,
+            configuration: configuration
+        )
+    }
+}
+
+extension ExpressCheckoutElementUtilities {
+    static func availablePaymentMethodsWithoutCheckoutRequirements(
+        for elementsSession: STPElementsSession,
+        configuration: ExpressCheckoutElement.Configuration
+    ) -> [ExpressCheckoutElement.PaymentMethod] {
+        availablePaymentMethods(
+            for: elementsSession,
+            configuration: configuration,
+            usesWebLink: false,
+            requiresShippingAddress: false,
+            billingDetailsCollectionRequired: false
+        )
+    }
+
+    static func linkDisabledReasonsWithoutCheckoutRequirements(
+        for elementsSession: STPElementsSession,
+        configuration: ExpressCheckoutElement.Configuration
+    ) -> [LinkDisabledReason] {
+        linkDisabledReasons(
+            for: elementsSession,
+            configuration: configuration,
+            usesWebLink: false,
+            requiresShippingAddress: false,
+            billingDetailsCollectionRequired: false
+        )
+    }
+}
+
+extension CheckoutClientAPIResponse {
+    static func decode(
+        fromAPIResponse response: [AnyHashable: Any]
+    ) throws -> CheckoutClientAPIResponse {
+        let data = try JSONSerialization.data(withJSONObject: response)
+        return try StripeJSONDecoder().decode(CheckoutClientAPIResponse.self, from: data)
+    }
+
+}
+
+// MARK: - Emission Recorder
+
+@MainActor
+class CheckoutEmissionRecorder {
+    var sessions: [CheckoutElementsController.Session] = []
+    var loading: [Bool] = []
+    private var subscriptions = Set<AnyCancellable>()
+
+    init(_ checkout: CheckoutElementsController) {
+        checkout.$session.dropFirst().sink { [weak self] in self?.sessions.append($0) }
+            .store(in: &subscriptions)
+        checkout.$isUpdating.dropFirst().sink { [weak self] in self?.loading.append($0) }
+            .store(in: &subscriptions)
+    }
+}
+
+// MARK: - Request Recording
+
+enum CheckoutSessionRequestKind: Equatable {
+    case initSession
+    case updateSession
+}
+
+struct CheckoutSessionRequest {
+    let kind: CheckoutSessionRequestKind
+    let params: [String: String]
+}
+
+final class CheckoutSessionRequestRecorder: @unchecked Sendable {
+    private let lock = NSLock()
+    private var _requests: [CheckoutSessionRequest] = []
+
+    var requests: [CheckoutSessionRequest] {
+        lock.lock()
+        defer { lock.unlock() }
+        return _requests
+    }
+
+    func append(_ request: CheckoutSessionRequest) {
+        lock.lock()
+        defer { lock.unlock() }
+        _requests.append(request)
+    }
+
+    func removeAll() {
+        lock.lock()
+        defer { lock.unlock() }
+        _requests.removeAll()
+    }
+}
+
+// MARK: - Shared Helpers
+
+enum CheckoutTestHelpers {
+
+    @MainActor
+    static func expressCheckoutButtons(in view: UIView) -> [UIControl] {
+        if let button = view as? UIControl {
+            return [button]
+        }
+        return view.subviews.flatMap { expressCheckoutButtons(in: $0) }
+    }
+
+    // MARK: - Base JSON building blocks
+
+    static let minimalCheckoutClientConfigurationJSON: [String: Any] = [
+        "ordered_payment_method_types_and_wallets": ["card"],
+        "elements_session_id": "es_test",
+        "merchant_info": [
+            "country": "US"
+        ],
+    ]
+
+    static func makeOneTimePriceCheckoutItems(
+        currency: String = "usd",
+        unitAmount: Int = 1000
+    ) -> [[String: Any]] {
+        return [
+            [
+                "key": "checkout_item_test",
+                "type": "one_time_price",
+                "one_time_price": [
+                    "items": [
+                        [
+                            "inner_item_key": "checkout_item_inner_test",
+                            "quantity": 1,
+                            "unit_amount": unitAmount,
+                            "unit_amount_decimal": String(unitAmount),
+                            "amount_details": [
+                                "subtotal": unitAmount,
+                                "total": unitAmount,
+                                "tax_amounts": [],
+                                "tax_inclusive": 0,
+                                "tax_exclusive": 0,
+                            ],
+                            "price": [
+                                "id": "price_test",
+                                "currency": currency,
+                                "unit_amount": unitAmount,
+                                "product": [
+                                    "name": "Test product",
+                                    "images": [],
+                                ],
+                            ],
+                        ],
+                    ],
+                    "subtotal": unitAmount,
+                    "total": unitAmount,
+                ],
+            ],
+        ]
+    }
+
+    static let baseSessionJSON: [String: Any] = [
+        "id": "cs_test",
+        "ui_mode": "mobile_elements",
+        "livemode": false,
+        "status": "open",
+        "payment_status": "unpaid",
+        "presentment_currency": "usd",
+        "integration_currency": "usd",
+        "items": makeOneTimePriceCheckoutItems(),
+        "merchant_info": ["country": "US"],
+        "elements_session_id": "es_test",
+        "ordered_payment_method_types_and_wallets": ["card"],
+    ]
+
+    /// Creates a `CheckoutClientAPIResponse` from `baseSessionJSON` with top-level key overrides.
+    /// To test field *absence*, mutate `baseSessionJSON` directly instead.
+    static func makeSession(_ overrides: [String: Any] = [:]) -> CheckoutClientAPIResponse {
+        let json = makeSessionJSON(overrides)
+        return try! CheckoutClientAPIResponse.decode(fromAPIResponse: json)
+    }
+
+    static func makeSessionWithWalletTypes(
+        _ walletTypes: [String],
+        applePayPreference: String? = nil,
+        linkUseAttestation: Bool? = nil,
+        automaticTaxAddressSource: String? = nil,
+        customerEmail: String? = nil
+    ) -> CheckoutClientAPIResponse {
+        var session: [String: Any] = [
+            "ordered_payment_method_types_and_wallets": walletTypes,
+        ]
+        if let applePayPreference {
+            session["apple_pay_preference"] = applePayPreference
+        }
+        if let linkUseAttestation {
+            session["link_settings"] = [
+                "link_funding_sources": ["CARD"],
+                "link_mobile_use_attestation_endpoints": linkUseAttestation,
+            ]
+        }
+        if let automaticTaxAddressSource {
+            session["automatic_tax"] = [
+                "enabled": true,
+                "status": "ready",
+                "address_source": automaticTaxAddressSource,
+            ]
+        }
+        if let customerEmail {
+            session["customer_email"] = customerEmail
+        }
+        return makeSession(session)
+    }
+
+    static func makeSessionJSON(_ overrides: [String: Any] = [:]) -> [String: Any] {
+        baseSessionJSON.merging(overrides) { _, new in new }
+    }
+
+    // MARK: - Checkout-flow helpers
+
+    /// Builds a `CheckoutElementsController.Configuration`, replacing its `apiClient` with one that uses test stubs.
+    ///
+    /// - Parameters:
+    ///   - apiResponse: The Checkout Session response returned by the stubbed `/init` request.
+    ///   - configuration: An optional base configuration for test-specific settings.
+    ///   - paymentElementConfiguration: The Payment Element configuration to use when the base configuration omits it.
+    ///   - stubAllOutgoingRequests: Whether to stub every outgoing API request made by the client, or only the initialization request.
+    @MainActor
+    static func makeConfiguration(
+        apiResponse: CheckoutClientAPIResponse = makeOpenSession(),
+        configuration: CheckoutElementsController.Configuration? = nil,
+        paymentElementConfiguration: PaymentElement.Configuration? = .init(),
+        expressCheckoutElementConfiguration: ExpressCheckoutElement.Configuration? = .init { _ in },
+        stubAllOutgoingRequests: Bool = true
+    ) -> CheckoutElementsController.Configuration {
+        // Use the production Checkout initializer with a test-controlled API client.
+        let clientSecret = configuration?.clientSecret ?? "\(apiResponse.sessionId)_secret_abc"
+        var resolvedConfiguration =
+            configuration
+            ?? CheckoutElementsController.Configuration(
+                clientSecret: clientSecret,
+                returnURL: "stripe-ios-test://checkout-return"
+            )
+        if resolvedConfiguration.paymentElement == nil {
+            resolvedConfiguration.paymentElement = paymentElementConfiguration
+        }
+        if resolvedConfiguration.expressCheckoutElement == nil {
+            resolvedConfiguration.expressCheckoutElement = expressCheckoutElementConfiguration
+        }
+        resolvedConfiguration.apiClient = makeStubbedAPIClient(
+            apiResponse: apiResponse,
+            clientSecret: clientSecret,
+            stubAllOutgoingRequests: stubAllOutgoingRequests
+        )
+        return resolvedConfiguration
+    }
+
+    /// Builds a stubbed Checkout configuration that enables Currency Selector Element.
+    @MainActor
+    static func makeCurrencySelectorConfiguration(
+        apiResponse: CheckoutClientAPIResponse = makeOpenSession(),
+        configuration: CheckoutElementsController.Configuration? = nil
+    ) -> CheckoutElementsController.Configuration {
+        let clientSecret = configuration?.clientSecret ?? "\(apiResponse.sessionId)_secret_abc"
+        var resolvedConfiguration =
+            configuration
+            ?? CheckoutElementsController.Configuration(
+                clientSecret: clientSecret,
+                returnURL: "stripe-ios-test://checkout-return"
+            )
+        if resolvedConfiguration.currencySelectorElement == nil {
+            resolvedConfiguration.currencySelectorElement = .init()
+        }
+        return makeConfiguration(apiResponse: apiResponse, configuration: resolvedConfiguration)
+    }
+
+    @MainActor
+    static func makeStubbedAPIClient(
+        apiResponse: CheckoutClientAPIResponse = makeOpenSession(),
+        clientSecret: String? = nil,
+        stubAllOutgoingRequests: Bool = true
+    ) -> STPAPIClient {
+        let resolvedClientSecret = clientSecret ?? "\(apiResponse.sessionId)_secret_abc"
+        let sessionId = CheckoutElementsController.extractSessionId(from: resolvedClientSecret)
+        let apiClient = APIStubbedTestCase.stubbedAPIClient()
+        apiClient.publishableKey = "pk_test_123"
+
+        // Keep tests offline except for explicitly stubbed Checkout init work.
+        if stubAllOutgoingRequests {
+            APIStubbedTestCase.stubAllOutgoingRequests()
+        }
+        StubbedBackend.stubLookup()
+        stub(condition: { request in
+            let url = request.url?.absoluteString ?? ""
+            return url.contains("/v3/fingerprinted/img/payment-methods")
+                || url.contains("/ocs-mobile/assets/flags/")
+        }) { _ in
+            HTTPStubsResponse(data: Data(), statusCode: 404, headers: nil)
+        }
+        stub(condition: { request in
+            request.httpMethod == "POST"
+                && request.url?.path == "/v1/checkout_client/\(sessionId)/init"
+        }) { _ in
+            // Feed CheckoutElementsController(configuration:) the session fixture this test requested.
+            var responseJSON = jsonObject(apiResponse.allResponseFields) as? [String: Any] ?? [:]
+            responseJSON["id"] = responseJSON["id"] ?? sessionId
+            let data = try! JSONSerialization.data(
+                withJSONObject: (responseJSON),
+                options: []
+            )
+            return HTTPStubsResponse(data: data, statusCode: 200, headers: nil)
+        }
+        // Init can trigger a session update (e.g. billing address tax sync); just echo the session back.
+        stub(condition: { request in
+            request.httpMethod == "POST"
+                && request.url?.path == "/v1/checkout_client/\(sessionId)/update"
+        }) { _ in
+            var responseJSON = jsonObject(apiResponse.allResponseFields) as? [String: Any] ?? [:]
+            responseJSON["id"] = responseJSON["id"] ?? sessionId
+            let data = try! JSONSerialization.data(
+                withJSONObject: (responseJSON),
+                options: []
+            )
+            return HTTPStubsResponse(data: data, statusCode: 200, headers: nil)
+        }
+        return apiClient
+    }
+
+    /// Stubs Checkout Session `/init` and update requests, recording each request's decoded form params in order.
+    ///
+    /// Use this when a test needs to verify Checkout initialization, follow-up session updates, or both:
+    ///
+    /// ```swift
+    /// let recorder = CheckoutSessionRequestRecorder()
+    /// CheckoutTestHelpers.stubCheckoutSessionRequests(
+    ///     sessionId: "cs_test_123",
+    ///     requestRecorder: recorder,
+    ///     sessionJSON: { CheckoutTestHelpers.openSessionJSON }
+    /// )
+    ///
+    /// _ = try await CheckoutElementsController(configuration: configuration)
+    /// XCTAssertEqual(recorder.requests.map(\.kind), [.initSession, .updateSession])
+    /// XCTAssertEqual(recorder.requests[1].params["tax_region[country]"], "US")
+    /// ```
+    static func stubCheckoutSessionRequests(
+        sessionId: String,
+        requestRecorder: CheckoutSessionRequestRecorder,
+        sessionJSON: @escaping () -> [AnyHashable: Any],
+        initStatusCode: Int32 = 200,
+        updateStatusCode: @escaping (_ requestNumber: Int) -> Int32 = { _ in 200 }
+    ) {
+        stub { request in
+            request.url?.path == "/v1/checkout_client/\(sessionId)/init"
+        } response: { request in
+            requestRecorder.append(
+                .init(
+                    kind: .initSession,
+                    params: RequestBodyTestHelpers.formEncodedBodyParams(from: request)
+                )
+            )
+            return HTTPStubsResponse(
+                jsonObject: (jsonObject(sessionJSON()) as? [String: Any] ?? [:]),
+                statusCode: initStatusCode,
+                headers: nil
+            )
+        }
+
+        stub { request in
+            request.url?.path == "/v1/checkout_client/\(sessionId)/update"
+        } response: { request in
+            requestRecorder.append(
+                .init(
+                    kind: .updateSession,
+                    params: RequestBodyTestHelpers.formEncodedBodyParams(from: request)
+                )
+            )
+            let updateRequestNumber = requestRecorder.requests.filter { $0.kind == .updateSession }.count
+            return HTTPStubsResponse(
+                jsonObject: (jsonObject(sessionJSON()) as? [String: Any] ?? [:]),
+                statusCode: updateStatusCode(updateRequestNumber),
+                headers: nil
+            )
+        }
+    }
+
+    /// Presents the shared Checkout Client test session using the CheckoutClient init field names.
+    static let openSessionJSON: [AnyHashable: Any] = baseSessionJSON.merging(["id": "cs_test_123"]) { _, new in new }
+
+    static func makeOpenSession(customerEmail: String? = nil, billingAddressCollection: String? = nil) -> CheckoutClientAPIResponse {
+        var json = openSessionJSON
+        json["customer_email"] = customerEmail
+        json["billing_address_collection"] = billingAddressCollection
+        return try! CheckoutClientAPIResponse.decode(fromAPIResponse: json)
+    }
+
+    static func makeClosedSession() -> CheckoutClientAPIResponse {
+        var json = openSessionJSON
+        json["status"] = "complete"
+        json["payment_status"] = "paid"
+        return try! CheckoutClientAPIResponse.decode(fromAPIResponse: json)
+    }
+
+    static func makeOpenSession(allowedCountries: [String]) -> CheckoutClientAPIResponse {
+        var json = openSessionJSON
+        json["shipping_address_collection"] = ["allowed_countries": allowedCountries]
+        return try! CheckoutClientAPIResponse.decode(fromAPIResponse: json)
+    }
+
+    static func makeAdaptivePricingSession(
+        currency: String = "usd",
+        integrationAmount: Int = 1200,
+        localAmount: Int = 1000
+    ) -> CheckoutClientAPIResponse {
+        var json: [AnyHashable: Any] = openSessionJSON
+        json["presentment_currency"] = currency
+        json["items"] = makeOneTimePriceCheckoutItems(
+            currency: currency,
+            unitAmount: integrationAmount
+        )
+        let localCurrencyOption: [AnyHashable: Any] = [
+            "currency": "gbp",
+            "amount": localAmount,
+            "disclosure": [
+                "caption": "1 GBP = 1.2871 USD (includes 4% conversion fee).",
+                "details": "This string will come from the translation layer in the future",
+            ],
+        ]
+        json["adaptive_pricing_info"] = [
+            "integration_currency_option": ["currency": "usd", "amount": integrationAmount],
+            "local_currency_options": [localCurrencyOption],
+        ]
+
+        return try! CheckoutClientAPIResponse.decode(fromAPIResponse: json)
+    }
+
+    private static func jsonObject(_ value: Any) -> Any {
+        switch value {
+        case let dictionary as [AnyHashable: Any]:
+            return Dictionary(uniqueKeysWithValues: dictionary.map { key, value in
+                (String(describing: key), jsonObject(value))
+            })
+        case let dictionary as [String: Any]:
+            return Dictionary(uniqueKeysWithValues: dictionary.map { key, value in
+                (key, jsonObject(value))
+            })
+        case let array as [Any]:
+            return array.map(jsonObject)
+        default:
+            return value
+        }
+    }
+}
+
+// MARK: - Apple Pay test doubles
+
+class MockPKPaymentAuthorizationController: PKPaymentAuthorizationController {
+    var presentationSucceeds = true
+
+    override func present(completion: (@Sendable (Bool) -> Void)? = nil) {
+        completion?(presentationSucceeds)
+    }
+
+    override func dismiss(completion: (() -> Void)? = nil) {
+        completion?()
+    }
+}
+
+@MainActor
+class MockCheckoutSessionWalletUpdater: CheckoutSessionWalletUpdater {
+    private(set) var currentTaxRegion: CheckoutElementsController.Address?
+    private(set) var updateCallCount = 0
+    private(set) var lastAddress: CheckoutElementsController.Address?
+    private(set) var lastCanUpdateWhileSheetPresented: Bool?
+    private let sessionToReturn: CheckoutElementsController.Session?
+    private let errorToThrow: Error?
+    private let suspendsFirstUpdate: Bool
+    private var continuation: CheckedContinuation<CheckoutElementsController.Session, Error>?
+    private var didSuspend = false
+
+    var isWaiting: Bool {
+        continuation != nil
+    }
+
+    init(
+        sessionToReturn: CheckoutElementsController.Session? = nil,
+        errorToThrow: Error? = nil,
+        currentTaxRegion: CheckoutElementsController.Address? = nil,
+        suspendsFirstUpdate: Bool = false
+    ) {
+        self.sessionToReturn = sessionToReturn
+        self.errorToThrow = errorToThrow
+        self.currentTaxRegion = currentTaxRegion
+        self.suspendsFirstUpdate = suspendsFirstUpdate
+    }
+
+    func updateTaxRegionWithoutEnqueueing(
+        address: CheckoutElementsController.Address?,
+        canUpdateWhileSheetPresented: Bool,
+        confirmationSource: CheckoutElementsController.ConfirmingElement
+    ) async throws -> CheckoutElementsController.Session {
+        updateCallCount += 1
+        lastAddress = address
+        lastCanUpdateWhileSheetPresented = canUpdateWhileSheetPresented
+        if let errorToThrow {
+            throw errorToThrow
+        }
+        guard let sessionToReturn else {
+            throw CheckoutError.unknown(debugDescription: "MockCheckoutSessionWalletUpdater has no session configured")
+        }
+        let session: CheckoutElementsController.Session
+        if suspendsFirstUpdate && !didSuspend {
+            didSuspend = true
+            session = try await withCheckedThrowingContinuation { continuation in
+                self.continuation = continuation
+            }
+        } else {
+            session = sessionToReturn
+        }
+        currentTaxRegion = address
+        return session
+    }
+
+    func resume() {
+        guard let sessionToReturn else {
+            continuation?.resume(throwing: CheckoutError.unknown(debugDescription: "MockCheckoutSessionWalletUpdater has no session configured"))
+            continuation = nil
+            return
+        }
+        continuation?.resume(returning: sessionToReturn)
+        continuation = nil
+    }
+}
+
+extension CheckoutElementsController.ApplePayConfirmationParameters {
+    static func makeMock(
+        apiClient: STPAPIClient,
+        returnURL: String = "stripe-ios-test://checkout-return",
+        merchantDisplayName: String = "Test Merchant",
+        applePayConfiguration: CheckoutApplePayConfiguration = PaymentElement.Configuration.ApplePayConfiguration(merchantId: "merchant.com.test"),
+        shippingAddressRequired: Bool = false,
+        defaultBillingDetails: CheckoutElementsController.Configuration.Defaults.BillingDetails? = nil,
+        presentationWindow: UIWindow? = nil,
+        confirmationHandler: @escaping CheckoutElementsController.ApplePayConfirmationParameters.ConfirmationHandler = { _ in
+            .failed(CheckoutError.unknown(debugDescription: "Unexpected Apple Pay confirmation in test."))
+        },
+        attribution: CheckoutAttributionContext = .init(confirmingElement: .paymentElement, configuredElements: [.paymentElement])
+    ) -> CheckoutElementsController.ApplePayConfirmationParameters {
+        CheckoutElementsController.ApplePayConfirmationParameters(
+            applePayConfiguration: applePayConfiguration,
+            apiClient: apiClient,
+            returnURL: returnURL,
+            merchantDisplayName: merchantDisplayName,
+            shippingAddressRequired: shippingAddressRequired,
+            defaultBillingDetails: defaultBillingDetails,
+            presentationWindow: presentationWindow,
+            confirmationHandler: confirmationHandler,
+            attribution: attribution
+        )
+    }
+}
+
+// MARK: - CheckoutClientAPIResponse decorator helpers
+
+extension CheckoutClientAPIResponse {
+    func withCustomer(id: String = "cus_123") -> CheckoutClientAPIResponse {
+        withOverrides(["customer": ["id": id]])
+    }
+
+    func withSessionId(_ id: String) -> CheckoutClientAPIResponse {
+        withOverrides(["id": id])
+    }
+
+    private func withOverrides(_ overrides: [String: Any]) -> CheckoutClientAPIResponse {
+        let json = allResponseFields.merging(overrides) { _, new in new }
+        return try! CheckoutClientAPIResponse.decode(fromAPIResponse: json)
+    }
+}

@@ -1,0 +1,190 @@
+//
+//  SelfieWarmup.swift
+//  StripeIdentity
+//
+//  Created by Chen Cen on 8/15/23.
+//
+
+@_spi(InternalOnlyAPI) import StripeCore
+@_spi(InternalOnlyAPI) import StripeUICore
+import UIKit
+
+class SelfieWarmupView: UIView {
+    enum Layout: Equatable {
+        case standard
+        case biometricConsent
+    }
+
+    struct Styling {
+        static let horizontalInset: CGFloat = 16
+        static let heroHeight: CGFloat = 176
+        static let biometricConsentHeroHeight: CGFloat = 144
+        static let iconSize: CGFloat = 144
+        static let cardCornerRadius: CGFloat = 32
+        static let cardInsets: NSDirectionalEdgeInsets = .init(
+            top: 32,
+            leading: 24,
+            bottom: 40,
+            trailing: 24
+        )
+        static let biometricConsentCardInsets: NSDirectionalEdgeInsets = .init(
+            top: 32,
+            leading: 24,
+            bottom: 0,
+            trailing: 24
+        )
+        static let warmupTitleSpacing: CGFloat = 12
+    }
+
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        return stackView
+    }()
+    private let heroView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        return view
+    }()
+
+    private let cardWrapperView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        return view
+    }()
+
+    private let cardTopBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        return view
+    }()
+
+    private let cardView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        view.layer.cornerRadius = Styling.cardCornerRadius
+        view.layer.cornerCurve = .continuous
+        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        view.clipsToBounds = true
+        return view
+    }()
+
+    private let cardStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        return stackView
+    }()
+
+    private let selfieWarmupIconImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = Image.iconSelfieWarmup.makeImage(template: true)
+        imageView.tintColor = IdentityUI.iconColor
+        return imageView
+    }()
+
+    private let selfieWarmupTitleLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = IdentityUI.titleFont
+        label.accessibilityTraits = [.header]
+        label.adjustsFontForContentSizeCategory = true
+        return label
+    }()
+
+    private let selfieWarmupBodyLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.font = IdentityUI.instructionsFont
+        label.adjustsFontForContentSizeCategory = true
+        return label
+    }()
+
+    init(layout: Layout = .standard) {
+        super.init(frame: .zero)
+        configure(for: layout)
+        installViews(for: layout)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+extension SelfieWarmupView {
+    fileprivate func configure(for layout: Layout) {
+        switch layout {
+        case .standard:
+            selfieWarmupIconImageView.tintColor = IdentityUI.iconColor
+            selfieWarmupTitleLabel.font = IdentityUI.titleFont
+            selfieWarmupTitleLabel.text = String.Localized.selfieWarmupTitle
+            selfieWarmupBodyLabel.text = String.Localized.selfieWarmupBody
+        case .biometricConsent:
+            selfieWarmupIconImageView.tintColor = IdentityUI.darkIconColor
+            selfieWarmupTitleLabel.font = IdentityUI.titleFont
+            selfieWarmupTitleLabel.text = String.Localized.selfieWarmupConsentTitle
+            selfieWarmupBodyLabel.text = String.Localized.selfieWarmupConsentBody
+        }
+    }
+
+    fileprivate func installViews(for layout: Layout) {
+        backgroundColor = .systemBackground
+        addAndPinSubview(stackView)
+
+        switch layout {
+        case .standard:
+            stackView.addArrangedSubview(heroView)
+            stackView.addArrangedSubview(cardWrapperView)
+        case .biometricConsent:
+            stackView.addArrangedSubview(cardWrapperView)
+            stackView.addArrangedSubview(heroView)
+        }
+
+        heroView.addSubview(selfieWarmupIconImageView)
+        cardWrapperView.addSubview(cardTopBackgroundView)
+        cardWrapperView.addSubview(cardView)
+        let cardInsets = layout == .biometricConsent
+            ? Styling.biometricConsentCardInsets
+            : Styling.cardInsets
+        cardView.addAndPinSubview(cardStackView, insets: cardInsets)
+
+        cardStackView.addArrangedSubview(selfieWarmupTitleLabel)
+        cardStackView.addArrangedSubview(selfieWarmupBodyLabel)
+        cardStackView.setCustomSpacing(Styling.warmupTitleSpacing, after: selfieWarmupTitleLabel)
+
+        selfieWarmupIconImageView.translatesAutoresizingMaskIntoConstraints = false
+        cardTopBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        cardView.translatesAutoresizingMaskIntoConstraints = false
+
+        let heroHeight = layout == .biometricConsent
+            ? Styling.biometricConsentHeroHeight
+            : Styling.heroHeight
+        NSLayoutConstraint.activate([
+            heroView.heightAnchor.constraint(equalToConstant: heroHeight),
+            selfieWarmupIconImageView.centerXAnchor.constraint(equalTo: heroView.centerXAnchor),
+            selfieWarmupIconImageView.centerYAnchor.constraint(equalTo: heroView.centerYAnchor),
+            selfieWarmupIconImageView.widthAnchor.constraint(equalToConstant: Styling.iconSize),
+            selfieWarmupIconImageView.heightAnchor.constraint(equalToConstant: Styling.iconSize),
+            cardTopBackgroundView.topAnchor.constraint(equalTo: cardWrapperView.topAnchor),
+            cardTopBackgroundView.leadingAnchor.constraint(equalTo: cardWrapperView.leadingAnchor),
+            cardTopBackgroundView.trailingAnchor.constraint(equalTo: cardWrapperView.trailingAnchor),
+            cardTopBackgroundView.heightAnchor.constraint(equalToConstant: Styling.cardCornerRadius),
+            cardView.topAnchor.constraint(equalTo: cardWrapperView.topAnchor),
+            cardView.leadingAnchor.constraint(
+                equalTo: cardWrapperView.leadingAnchor,
+                constant: Styling.horizontalInset
+            ),
+            cardView.trailingAnchor.constraint(
+                equalTo: cardWrapperView.trailingAnchor,
+                constant: -Styling.horizontalInset
+            ),
+            cardView.bottomAnchor.constraint(equalTo: cardWrapperView.bottomAnchor),
+        ])
+    }
+}

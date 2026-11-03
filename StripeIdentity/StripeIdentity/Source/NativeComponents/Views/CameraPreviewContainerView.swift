@@ -1,0 +1,148 @@
+//
+//  CameraPreviewContainerView.swift
+//  StripeIdentity
+//
+//  Created by Mel Ludowise on 4/26/22.
+//  Copyright © 2022 Stripe, Inc. All rights reserved.
+//
+
+import Foundation
+@_spi(InternalOnlyAPI) import StripeUICore
+import UIKit
+
+final class CameraPreviewContainerView: UIView {
+    struct Styling {
+        static let backgroundColor = IdentityUI.containerColor
+
+        static let standardShadows = [
+            ShadowConfiguration(
+                shadowColor: .black,
+                shadowOffset: CGSize(width: 0, height: 1),
+                shadowOpacity: 0.12,
+                shadowRadius: 1
+            ),
+            ShadowConfiguration(
+                shadowColor: UIColor(red: 0.235, green: 0.259, blue: 0.341, alpha: 1),
+                shadowOffset: CGSize(width: 0, height: 2),
+                shadowOpacity: 0.08,
+                shadowRadius: 5
+            ),
+        ]
+
+        static let viewfinderShadows = [
+            ShadowConfiguration(
+                shadowColor: .black,
+                shadowOffset: CGSize(width: 0, height: 4.5),
+                shadowOpacity: 0.12,
+                shadowRadius: 13.5
+            ),
+            ShadowConfiguration(
+                shadowColor: UIColor(red: 0x30 / 255, green: 0x31 / 255, blue: 0x3D / 255, alpha: 1),
+                shadowOffset: CGSize(width: 0, height: 13.5),
+                shadowOpacity: 0.08,
+                shadowRadius: 31.5
+            ),
+        ]
+    }
+
+    // MARK: Corner Radius
+
+    enum CornerRadius: CGFloat {
+        case medium = 12
+        case large = 16
+        case viewfinder = 20
+    }
+
+    enum ShadowStyle {
+        case standard
+        case viewfinder
+
+        var shadows: [ShadowConfiguration] {
+            switch self {
+            case .standard:
+                return Styling.standardShadows
+            case .viewfinder:
+                return Styling.viewfinderShadows
+            }
+        }
+    }
+
+    var cornerRadius: CornerRadius {
+        didSet {
+            contentView.layer.cornerRadius = cornerRadius.rawValue
+            updateShadowBounds()
+        }
+    }
+
+    // MARK: Views
+
+    /// Container for image and camera preview
+    private(set) lazy var contentView: UIView = {
+        let view = UIView()
+        view.backgroundColor = Styling.backgroundColor
+        view.layer.cornerRadius = cornerRadius.rawValue
+        view.clipsToBounds = true
+        return view
+    }()
+
+    // MARK: Custom Layers
+
+    /// Shadows for this view
+    private let shadowLayers: [CALayer]
+
+    // MARK: - Init
+
+    init(
+        cornerRadius: CornerRadius = .large,
+        shadowStyle: ShadowStyle = .standard
+    ) {
+        self.cornerRadius = cornerRadius
+        shadowLayers = shadowStyle.shadows.map { config in
+            let layer = CALayer()
+            config.applyTo(layer: layer)
+            return layer
+        }
+        super.init(frame: .zero)
+        addAndPinSubview(contentView)
+        installShadowLayers()
+    }
+
+    required init(
+        coder: NSCoder
+    ) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: UIView
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateShadowBounds()
+    }
+
+    override func addSubview(_ view: UIView) {
+        assert(
+            view === contentView,
+            "Do not add subviews directly to CameraPreviewContainerView. Instead, add them to its contentView."
+        )
+        super.addSubview(view)
+    }
+}
+
+// MARK: - Helpers
+
+extension CameraPreviewContainerView {
+    fileprivate func installShadowLayers() {
+        shadowLayers.forEach { layer.addSublayer($0) }
+    }
+
+    fileprivate func updateShadowBounds() {
+        shadowLayers.forEach { layer in
+            layer.shadowPath =
+                UIBezierPath(
+                    roundedRect: bounds,
+                    cornerRadius: cornerRadius.rawValue
+                ).cgPath
+        }
+    }
+}

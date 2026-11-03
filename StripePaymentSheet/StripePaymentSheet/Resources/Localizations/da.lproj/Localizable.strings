@@ -1,0 +1,401 @@
+"%1$@ ×%2$d" = "%1$@ ×%2$li";
+
+"%@ will no longer be saved to your wallet." = "%@ gemmes ikke længere i din wallet.";
+
+"+ Add" = "+ Tilføj";
+
+"Accept" = "Acceptér";
+
+"Add US bank account" = "Tilføj amerikansk bankkonto";
+
+"Add a card" = "Tilføj et kort";
+
+"Add a payment method" = "Tilføj en betalingsmetode";
+
+"Add bank account" = "Tilføj bankkonto";
+
+"Add card" = "Tilføj kort";
+
+"Add new card" = "Tilføj nyt kort";
+
+"Add new payment method" = "Tilføj ny betalingsmetode";
+
+"Add your payment information" = "Tilføj dine betalingsoplysninger";
+
+"Approve payment" = "Godkend betaling";
+
+"Back" = "Tilbage";
+
+"Bank" = "Bank";
+
+"Bank account" = "Bankkonto";
+
+"Bank account details cannot be changed." = "Bankkontooplysninger kan ikke ændres.";
+
+"Before we can send a code to your email, we need to verify additional information about you. Please enter your phone number ending in ••%@." = "Før vi kan sende en kode til din e-mail, er vi nødt til at verificere yderligere oplysninger om dig. Indtast dit telefonnummer, der slutter på ••%@.";
+
+"Before we can send a code to your email, we need to verify additional information about you. Please enter your phone number." = "Før vi kan sende en kode til din e-mail, er vi nødt til at verificere yderligere oplysninger om dig. Indtast dit telefonnummer.";
+
+"Buy Now, Pay Later with  <img/>" = "Køb nu, betal senere med <img/>";
+
+"Buy Now, Pay Later with Afterpay" = "Køb nu, betal senere med Afterpay";
+
+"Buy Now, Pay Later with Cash App Afterpay" = "Køb nu, betal senere med Cash App Afterpay";
+
+"Buy Now, Pay Later with Clearpay" = "Køb nu, betal senere med Clearpay";
+
+"Buy now or pay later with Klarna" = "Køb nu eller betal senere med Klarna";
+
+"By confirming your payment with GCash, you allow %@ to charge your GCash account for future payments in accordance with their terms." = "Ved at bekræfte din betaling med GCash giver du tilladelse til, at %@ debiterer din GCash-konto for fremtidige betalinger i overensstemmelse med deres vilkår.";
+
+"By confirming your payment with NICEPAY, you allow %@ to charge this payment method for future payments in accordance with their terms." = "Ved at bekræfte din betaling med NICEPAY tillader du, at %@ debiterer denne betalingsmetode for fremtidige betalinger i overensstemmelse med deres vilkår.";
+
+"By confirming your payment with PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Ved at bekræfte din betaling med PayPal, tillader du %@ at debitere din PayPal-konto for fremtidige betalinger i overensstemmelse med deres vilkår.";
+
+"By confirming your payment with Touch 'n Go, you allow %@ to charge your Touch 'n Go account for future payments in accordance with their terms." = "Ved at bekræfte din betaling med Touch 'n Go giver du tilladelse til, at %@ debiterer din Touch 'n Go-konto for fremtidige betalinger i overensstemmelse med deres vilkår.";
+
+"By confirming your payment with TrueMoney, you allow %@ to charge your TrueMoney account for future payments in accordance with their terms." = "Ved at bekræfte din betaling med TrueMoney giver du tilladelse til, at %@ debiterer din TrueMoney-konto for fremtidige betalinger i overensstemmelse med deres vilkår.";
+
+"By confirming your payment, you agree that your transaction will be handled by Global Stack Services Limited as merchant of record and in accordance with their <terms>terms of use</terms>." = "Ved at bekræfte din betaling accepterer du, at din transaktion vil blive håndteret af Global Stack Services Limited som den registrerede handlende og i overensstemmelse med deres <terms>brugsvilkår</terms>.";
+
+"By confirming your payment, you agree that your transaction will be handled by Global Stack Services Limited as merchant of record and in accordance with their <terms>terms</terms>." = "Ved at bekræfte din betaling accepterer du, at din transaktion vil blive håndteret af Global Stack Services Limited som den registrerede handlende og i overensstemmelse med deres <terms>vilkår</terms>.";
+
+"By continuing to Amazon Pay, you allow %@ to charge your Amazon Pay account for future payments in accordance with their terms." = "Ved at fortsætte til Amazon Pay, tillader du %@ at debitere din Revolut Pay-konto for fremtidige betalinger i overensstemmelse med deres vilkår.";
+
+"By continuing to Klarna, you allow %@ to charge your Klarna account for future payments in accordance with their terms and Klarna's terms. You can change this at any time in your Klarna app or by reaching out to %@." = "Når du fortsætter til Klarna, giver du %1$@ tilladelse til at debitere din Klarna-konto for fremtidige betalinger i overensstemmelse med deres vilkår og Klarnas vilkår. Du kan til enhver tid ændre dette i din Klarna-app eller ved at kontakte %2$@.";
+
+"By continuing to PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Ved at fortsætte til PayPal tillader du %@ at debitere din PayPal-konto for fremtidige betalinger i overensstemmelse med deres vilkår.";
+
+"By continuing to Revolut Pay, you allow %@ to charge your Revolut Pay account for future payments in accordance with their terms." = "Ved at fortsætte til Revolut Pay tillader du %@ at debitere din Revolut Pay-konto for fremtidige betalinger i overensstemmelse med deres vilkår.";
+
+"By continuing you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Ved at tilmelde dig Link accepterer du <terms>vilkårene</terms> og <privacy>privatlivspolitikken</privacy>.";
+
+"By continuing, you agree to authorize payments pursuant to <terms>these terms</terms>." = "Ved at fortsætte accepterer du at godkende betalinger i henhold til <terms>disse vilkår</terms>.";
+
+"By continuing, you agree to save your information for future purchases with %1$@ and <link>%2$@</link> according to %2$@ <terms>terms</terms> and <privacy>privacy</privacy>." = "Ved at fortsætte accepterer du at gemme dine oplysninger til fremtidige køb med %1$@ og <link>%2$@</link> i henhold til <terms>vilkårene</terms> og <privacy>privatlivspolitikken</privacy> for %2$@.";
+
+"By continuing, you agree to save your information for future purchases with %@." = "Ved at fortsætte accepterer du at gemme dine oplysninger til senere køb med %@.";
+
+"By continuing, you authorize %@ to automatically debit your Satispay Balance on a recurring basis in accordance with your purchase or subscription plan." = "Ved at fortsætte giver du %@ tilladelse til automatisk at debitere din Satispay-saldo på tilbagevendende basis i overensstemmelse med din købs- eller abonnementsplan.";
+
+"By continuing, you authorize %@ to automatically debit your Twint Balance on a recurring basis in accordance with your purchase or subscription plan." = "Ved at fortsætte giver du %@ tilladelse til automatisk at debitere din Twint-saldo på tilbagevendende basis i overensstemmelse med din købs- eller abonnementsplan.";
+
+"By continuing, you authorize %@ to debit your Cash App account for this payment and future payments in accordance with %@'s terms, until this authorization is revoked. You can change this anytime in your Cash App Settings." = "Ved at fortsætte giver du %1$@ tilladelse til at debitere din Cash App-konto for denne betaling og fremtidige betalinger i overensstemmelse med %2$@s vilkår, indtil denne tilladelse tilbagekaldes. Du kan til enhver tid ændre dette i dine Cash App-indstillinger.";
+
+"By joining %@, you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Ved at tilmelde dig %@ accepterer du <terms>vilkårene</terms> og <privacy>privatlivspolitikken</privacy>.";
+
+"By providing phone number and email, you agree to create a %1$@ account subject to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Ved at angive telefonnummer og e-mail accepterer du at oprette en %1$@-konto, som er underlagt <terms>vilkårene</terms> og <privacy>privatlivspolitikken</privacy> for %1$@.";
+
+"By providing your bank account details and confirming this payment, you agree to this Direct Debit Request and the <terms>Direct Debit Request service agreement</terms>, and authorise Stripe Payments Australia Pty Ltd ACN 160 180 343 Direct Debit User ID number 507156 (“Stripe”) to debit your account through the Bulk Electronic Clearing System (BECS) on behalf of %@ (the \"Merchant\") for any amounts separately communicated to you by the Merchant. You certify that you are either an account holder or an authorised signatory on the account listed above." = "Ved at angive dine bankkontooplysninger og bekræfte denne betaling accepterer du denne anmodning om direkte debitering og den <terms>direkte debiteringsaftale</terms> og giver Stripe Payments Australia Pty Ltd ACN 160 180 343 Direct Debit-bruger-id-nummer 507156 (“Stripe”) tilladelse til at debitere din konto via Bulk Electronic Clearing System (BECS) på vegne af %@ (den “handlende”) for alle beløb, der separat er blevet meddelt dig af den handlende. Du bekræfter, at du enten er en kontoindehaver eller en autoriseret underskriver på ovenstående konto.";
+
+"By providing your card information, you allow %@ to charge your card for future payments in accordance with their terms." = "Ved at angive dine kortoplysninger tillader du %@ at opkræve dit kort for denne betaling i overensstemmelse med dennes vilkår.";
+
+"By providing your email, you agree to create a %1$@ account and save your payment info to %1$@, according to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Ved at angive din e-mail accepterer du at oprette en %1$@-konto og gemme dine betalingsoplysninger på %1$@ i henhold til <terms>vilkårene</terms> og <privacy>privatlivspolitikken</privacy> for %1$@.";
+
+"By providing your payment information and confirming this payment, you authorise (A) %@ and Stripe, our payment service provider, to send instructions to your bank to debit your account and (B) your bank to debit your account in accordance with those instructions. As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited. Your rights are explained in a statement that you can obtain from your bank. You agree to receive notifications for future debits up to 2 days before they occur." = "Ved at give dine betalingsoplysninger og bekræfte denne betaling giver du (A) %@ og Stripe, vores betalingstjenesteudbyder, tilladelse til at sende instruktioner til din bank om at debitere din konto og (B) din bank til at debitere din konto i overensstemmelse med disse instruktioner. Som en del af dine rettigheder har du ret til en refusion fra din bank under vilkårene og betingelserne i din aftale med din bank. Der skal kræves refusion inden for 8 uger fra den dato, hvor din konto blev debiteret. Dine rettigheder forklares i en erklæring, som du kan få fra din bank. Du accepterer at modtage underretninger om fremtidig debitering op til to dage før de opstår.";
+
+"By providing your phone number, you agree to create a %1$@ account and save your payment info to %1$@, according to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Ved at angive dit telefonnummer accepterer du at oprette en %1$@-konto og gemme dine betalingsoplysninger på %1$@ i henhold til <terms>vilkårene</terms> og <privacy>privatlivspolitikken</privacy> for %1$@.";
+
+"By saving your bank account for %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Ved at gemme din bankkonto for %@ accepterer du at godkende betalinger i henhold til <terms>disse vilkår</terms>.";
+
+"By saving your payment information, you allow %@ to charge you for future payments in accordance with their terms." = "Ved at gemme dine betalingsoplysninger giver du %@ tilladelse til at debitere dig for fremtidige betalinger i overensstemmelse med deres vilkår.";
+
+"By submitting your order to %@ and %@, you agree to save your information with %@ for future purchases, and agree to authorize payments pursuant to <terms>these terms</terms>." = "Ved at indsende din ordre til %1$@ og %2$@ accepterer du, at dine oplysninger gemmes hos %3$@ til senere køb, og accepterer, at betalinger godkendes i henhold til <terms>disse vilkår</terms>.";
+
+"By submitting your order to %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Ved at indsende din ordre til %@ accepterer du at autorisere betalinger i henhold til <terms>disse vilkår</terms>.";
+
+"CPF/CPNJ" = "CPF/CPNJ";
+
+"Cancel and pay another way" = "Annuller, og betal på en anden måde";
+
+"Card details cannot be changed." = "Kortoplysninger kan ikke ændres.";
+
+"Card number. Supported cards include %@" = "Kortnummer. Understøttede kort omfatter %@";
+
+"Change" = "Skift";
+
+"Choose a card brand" = "Vælg et kortbrand";
+
+"Choose a payment method" = "Vælg en betalingsmetode";
+
+"Close card scanner" = "Luk kortscanner";
+
+"Complete the payment using Pix to finish the purchase." = "Gennemfør betalingen med Pix for at afslutte købet.";
+
+"Confirm" = "Bekræft";
+
+"Confirm payment details" = "Bekræft betalingsoplysninger";
+
+"Confirm the Bizum payment in your mobile banking application within %@ to complete the purchase." = "Bekræft Bizum-betalingen i din mobilbank-app inden for %@ for at fuldføre købet.";
+
+"Confirm the payment in your MB WAY app within %@ to complete the purchase." = "Bekræft betalingen i din MB WAY-app inden for %@ for at fuldføre købet.";
+
+"Confirm the payment in your bank or payment app within %@ to complete the purchase." = "Bekræft betalingen i din bank- eller betalingsapp indenfor %@ for at gennemføre købet.";
+
+"Confirm the payment in your bank's app within %@ to complete the purchase." = "Bekræft betalingen i din banks app  indenfor %@ for at gennemføre købet.";
+
+"Confirm your CVC" = "Bekræft dit CVC";
+
+"Confirm your information" = "Bekræft dine oplysninger";
+
+"Contact information" = "Kontaktoplysninger";
+
+"Continue another way" = "Fortsæt på en anden måde";
+
+"Create an account with %@ for faster checkout across the web" = "Opret en konto med %@, så du kan betale hurtigere på internettet";
+
+"Debit or credit card" = "Debet- eller kreditkort";
+
+"Declarations" = "Erklæringer";
+
+"Default" = "Standard";
+
+"Default payment method" = "Standardbetalingsmetode";
+
+"Did you mean %@? %@." = "Mente du %1$@? %2$@.";
+
+"Discard Changes" = "Kassér ændringer";
+
+"Discard changes?" = "Kassér ændringer?";
+
+"Discount" = "Rabat";
+
+"EPS Bank" = "EPS Bank";
+
+"Edit address" = "Rediger adresse";
+
+"Email code" = "E-mailkode";
+
+"Enter address manually" = "Indtast adresse manuelt";
+
+"Enter the phone number on your Link account." = "Indtast telefonnummeret på din Link-konto.";
+
+"Exchange rate and fees of your bank may apply." = "Din banks vekselkurs og gebyrer kan være gældende.";
+
+"FPX Bank" = "FPX Bank";
+
+"Fast, secure checkout" = "Hurtig og sikker betaling";
+
+"Get %@ back when you pay for the first time with your bank. <terms>See terms</terms>" = "Få %@ tilbage, første gang du betaler med din bank. <terms>Se vilkår</terms>";
+
+"Get %@ back when you pay with your bank. <terms>See terms</terms>" = "Få %@ tilbage, når du betaler med din bank. <terms>Se vilkår</terms>";
+
+"Hide details" = "Skjul oplysninger";
+
+"I understand that Stripe will be collecting Direct Debits on behalf of %@ and confirm that I am the account holder and the only person required to authorise debits from this account." = "Jeg er indforstået med, at Stripe vil opkræve direkte debiteringer på vegne af %@ og bekræfter, at jeg er kontoindehaveren og den eneste person, der skal godkende debiteringer fra denne konto.";
+
+"IBAN" = "IBAN";
+
+"Invoice payment for business buyers." = "Fakturabetaling for erhvervskøbere.";
+
+"Keep Editing" = "Fortsæt med at redigere";
+
+"Last 4 digits of SSN" = "Sidste 4 cifre af SSN";
+
+"Log in to another account" = "Log ind på en anden konto";
+
+"Manage SEPA debit" = "Administrer SEPA-debet";
+
+"Manage US bank account" = "Administrer amerikansk bankkonto";
+
+"Manage bank account" = "Administrer bankkonto";
+
+"Manage card" = "Administrer kort";
+
+"Manage cards" = "Administrer kort";
+
+"Manage payment method" = "Administrer betalingsmetode";
+
+"Manage payment methods" = "Administrer betalingsmetoder";
+
+"Manage your payment methods" = "Administrer dine betalingsmetoder";
+
+"More options" = "Flere muligheder";
+
+"Name on card" = "Kortholderens navn";
+
+"Naver Pay Card" = "Naver Pay-kort";
+
+"Naver Pay Money/Point" = "Naver Pay Money/Point";
+
+"New card" = "Nyt kort";
+
+"New payment method" = "Ny betalingsmetode";
+
+"No %@ promo" = "Ingen %@-kampagne";
+
+"None of the payment methods in your %@ account work with this business." = "Ingen af betalingsmetoderne på din %@-konto fungerer med denne virksomhed.";
+
+"Not you?" = "Ikke dig?";
+
+"Only card brand can be changed." = "Kun kortbrand kan ændres.";
+
+"Open to see more information." = "Åbn for at se flere oplysninger.";
+
+"Or" = "Eller";
+
+"Or pay using" = "Eller betal med";
+
+"Or pay with a card" = "Eller betal med et kort";
+
+"Or use" = "Eller brug";
+
+"Or use a card" = "Eller brug et kort";
+
+"Pay %@" = "Betal %@";
+
+"Pay another way" = "Betal på en anden måde";
+
+"Pay faster at %@ and thousands of businesses." = "Betal hurtigere hos %@ og tusinder af virksomheder.";
+
+"Pay faster everywhere %@ is accepted." = "Betal hurtigere alle steder, hvor %@ accepteres.";
+
+"Pay faster everywhere Link is accepted." = "Betal hurtigere alle steder, hvor Link accepteres.";
+
+"Pay over time with %@" = "Betal over tid med %@";
+
+"Pay over time with Affirm" = "Betal over tid med Affirm";
+
+"Pay with %@" = "Betal med %@";
+
+"Pay with Link" = "Betal med Link";
+
+"Pay with your bank account in just a few steps." = "Betal med din bankkonto i blot få trin.";
+
+"Payment" = "Betaling";
+
+"Payment failed" = "Betalingen mislykkedes";
+
+"Payment method details cannot be changed." = "Oplysninger om betalingsmetode kan ikke ændres.";
+
+"Payment methods" = "Betalingsmetoder";
+
+"Please choose a valid payment method." = "Vælg en gyldig betalingsmetode.";
+
+"Please go back and select another payment method" = "Gå tilbage, og vælg en anden betalingsmetode";
+
+"Point the camera at your card." = "Ret kameraet mod dit kort.";
+
+"Przelewy24 Bank" = "Przelewy24 Bank";
+
+"Remove %@" = "Fjern %@";
+
+"Remove bank?" = "Vil du fjerne banken?";
+
+"Remove card?" = "Vil du fjerne kortet?";
+
+"Remove linked account" = "Fjern linket konto";
+
+"Remove payment method" = "Fjern betalingsmetode";
+
+"Remove payment method?" = "Fjern betalingsmetode?";
+
+"Resend code in %d seconds" = "Send kode igen om %li sekunder";
+
+"SEPA debit details cannot be changed." = "SEPA-debetdetaljer kan ikke ændres.";
+
+"Save" = "Gem";
+
+"Save a new payment method" = "Gem en ny betalingsmetode";
+
+"Save address" = "Gem adresse";
+
+"Save for future payments" = "Gem til fremtidige betalinger";
+
+"Save my info for faster checkout with %@" = "Gem mine oplysninger, så jeg kan betale hurtigere med %@";
+
+"Save payment details to %@ for future purchases" = "Gem betalingsoplysninger for %@ til senere køb";
+
+"Save this account for future %@ payments" = "Gem denne konto til fremtidige %@-betalinger";
+
+"Save your bank account in just a few steps." = "Gem din bankkonto med blot nogle få trin.";
+
+"Save your info for secure 1-click checkout with %@" = "Gem dine oplysninger, så du kan foretage sikker betaling med bare ét klik med %@";
+
+"Saved" = "Gemt";
+
+"Select card" = "Vælg kort";
+
+"Select how you want to pay:" = "Vælg, hvordan du vil betale:";
+
+"Select payment method" = "Vælg betalingsmetode";
+
+"Select your payment method" = "Vælg din betalingsmetode";
+
+"Set as default" = "Brug som standard";
+
+"Set as default payment method" = "Angiv som standardbetalingsmetode";
+
+"Set up" = "Opsætning";
+
+"Shipping to %@ is not supported." = "Forsewndelse til %@ understøttes ikke.";
+
+"Show details" = "Vis oplysninger";
+
+"Show menu" = "Vis menu";
+
+"Sign in or sign up" = "Log ind eller tilmeld dig";
+
+"Sign out of %@" = "Log ud af %@";
+
+"Simple, secure one-click payments" = "Enkle og trygge betalinger med ét klik";
+
+"Something went wrong when linking your account.\nPlease try again later." = "Noget gik galt, da vi tilknyttede din konto.\nPrøv igen senere.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you'll get an email with instructions to finish saving your bank account with %@." = "Stripe vil sætte 0,01 USD ind på din konto i løbet af 1-2 hverdage. Derefter modtager du en e-mail med instruktioner til at fuldføre lagring af din bankkonto hos %@.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you’ll get an email with instructions to complete payment to %@." = "Stripe vil sætte 0,01 USD ind på din konto i løbet af 1-2 hverdage. Derefter modtager du en e-mail med instruktioner til at fuldføre betalingen til %@.";
+
+"Subtotal" = "Subtotal";
+
+"Tap to close" = "Tryk for at lukke";
+
+"Tap to expand" = "Tryk for at udvide";
+
+"Tax" = "Moms";
+
+"Terms and Conditions" = "Vilkår";
+
+"Terms of Service" = "Tjenestevilkår";
+
+"The IBAN you entered is incomplete." = "Det indtastede IBAN-nummer er ufuldstændigt.";
+
+"The IBAN you entered is invalid, \"%@\" is not a supported country code." = "Den indtastede IBAN er ugyldig. \"%@\" er ikke en understøttet landekode.";
+
+"The provided verification code has expired." = "Den angivne verifikationskode er udløbet.";
+
+"The provided verification code is incorrect." = "Den angivne verifikationskode er forkert.";
+
+"This is an international purchase and excludes a 3.5% IOF fee. By proceeding, you acknowledge and accept <terms>Ebanx’s terms and conditions</terms>." = "Dette er et internationalt køb og ekskluderer et IOF-gebyr på 3,5 %. Ved at fortsætte accepterer du <terms>Ebanx’ vilkår<terms>.";
+
+"This is your default" = "Dette er din standard";
+
+"This payment method will be removed but will remain available for %@ subscriptions." = "Denne betalingsmetode vil blive fjernet, men vil fortsat være tilgængelig for %@-abonnementer.";
+
+"This phone number doesn't match your Link account. Please try again." = "Dette telefonnummer stemmer ikke overens med din Link-konto. Prøv igen.";
+
+"Too many attempts. Please try again in a few minutes." = "For mange forsøg. Prøv igen om et par minutter.";
+
+"Unavailable for this purchase" = "Ikke tilgængelig for dette køb";
+
+"Update card" = "Opdater kort";
+
+"Update payment method" = "Opdater betalingsmetode";
+
+"Use billing address for shipping" = "Brug faktureringsadresse til forsendelse";
+
+"Verify your phone number" = "Verificer dit telefonnummer";
+
+"Verifying your account…" = "Verificerer din konto …";
+
+"View more" = "Vis mere";
+
+"We couldn't verify your account. Please close this window and try again." = "Vi kunne ikke verificere din konto. Luk dette vindue, og prøv igen.";
+
+"Yes, update" = "Ja, opdater";
+
+"You can't pay with %@ here" = "Du kan ikke betale med %@ her";
+
+"Your IBAN should start with a two-letter country code." = "Dit IBAN-nummer skal starte med en landekode på to bogstaver.";
+
+"Your address changes won't be saved." = "Dine adresseændringer bliver ikke gemt.";

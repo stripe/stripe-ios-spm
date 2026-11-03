@@ -1,0 +1,102 @@
+//
+//  SepaMandateViewController.swift
+//  StripePaymentSheet
+//
+//  Created by Yuki Tokuhiro on 9/6/23.
+//
+
+@_spi(InternalOnlyAPI) import StripeCore
+@_spi(InternalOnlyAPI) import StripePayments
+@_spi(InternalOnlyAPI) import StripeUICore
+import UIKit
+
+class SepaMandateViewController: UIViewController, BottomSheetContentViewController {
+    let requiresFullScreen: Bool = false
+
+    lazy var navigationBar: SheetNavigationBar = {
+        let navBar = SheetNavigationBar(appearance: configuration.appearance)
+        navBar.delegate = self
+        return navBar
+    }()
+    private lazy var sepaMandateView: SimpleMandateTextView = {
+        let mandateText = String(format: String.Localized.sepa_mandate_text, configuration.merchantDisplayName)
+        let view = SimpleMandateTextView(mandateText: mandateText, theme: configuration.appearance.asElementsTheme)
+        return view
+    }()
+
+    private lazy var confirmButton: ConfirmButton = {
+        let button = ConfirmButton(
+            callToAction: .customWithLock(title: String.Localized.continue),
+            appearance: configuration.appearance,
+            didTap: { [weak self] in
+                self?.completion(true)
+            }
+        )
+        return button
+    }()
+    private lazy var headerLabel: UILabel = {
+        let label = PaymentSheetUI.makeHeaderLabel(appearance: configuration.appearance)
+        label.text = STPPaymentMethodType.SEPADebit.displayName
+        return label
+    }()
+
+    let configuration: PaymentElementConfiguration
+    let completion: (Bool) -> Void
+
+    /// - Parameter completion: Called with `true` after the customer accepts the mandate by tapping the "continue" button, or called with `false` after the customer dismisses the view (either by tapping out or swiping down). Does not dismiss the view controller.
+    required init(configuration: PaymentElementConfiguration, completion: @escaping (Bool) -> Void) {
+        self.configuration = configuration
+        self.completion = completion
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    /// Presents the mandate and calls completion after the sheet has been dismissed.
+    static func present(
+        from presentingViewController: UIViewController,
+        configuration: PaymentElementConfiguration,
+        nativeSheetPresentation: SheetImplementationResolver?,
+        checkoutSessionID: String? = nil,
+        completion: @escaping (Bool) -> Void
+    ) {
+        let mandate = SepaMandateViewController(configuration: configuration) { didAcceptMandate in
+            presentingViewController.dismiss(animated: true) {
+                completion(didAcceptMandate)
+            }
+        }
+        let bottomSheet = PaymentSheet.FlowController.makePaymentSheetContainerViewController(
+            mandate,
+            configuration: configuration,
+            nativeSheetPresentation: nativeSheetPresentation,
+            checkoutSessionID: checkoutSessionID
+        )
+        presentingViewController.presentAsSheet(bottomSheet)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = configuration.appearance.colors.background
+        let stackView = UIStackView(arrangedSubviews: [headerLabel, sepaMandateView, confirmButton])
+        stackView.axis = .vertical
+        stackView.spacing = PaymentSheetUI.defaultPadding
+
+        view.addAndPinSubviewToSafeArea(stackView, insets: configuration.appearance.formInsets)
+    }
+
+    func didTapOrSwipeToDismiss() {
+        self.completion(false)
+    }
+}
+
+extension SepaMandateViewController: SheetNavigationBarDelegate {
+    func sheetNavigationBarDidClose(_ sheetNavigationBar: SheetNavigationBar) {
+        self.completion(false)
+    }
+
+    func sheetNavigationBarDidBack(_ sheetNavigationBar: SheetNavigationBar) {
+        self.completion(false)
+    }
+}

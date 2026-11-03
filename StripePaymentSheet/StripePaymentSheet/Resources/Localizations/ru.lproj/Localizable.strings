@@ -1,0 +1,401 @@
+"%1$@ ×%2$d" = "%1$@ ×%2$li";
+
+"%@ will no longer be saved to your wallet." = "%@ более не хранится в вашем кошельке.";
+
+"+ Add" = "+ Добавить";
+
+"Accept" = "Принять";
+
+"Add US bank account" = "Добавить банковский счет в США";
+
+"Add a card" = "Добавьте карту";
+
+"Add a payment method" = "Добавьте способ оплаты";
+
+"Add bank account" = "Добавить банковский счет";
+
+"Add card" = "Добавить карту";
+
+"Add new card" = "Добавить новую карту";
+
+"Add new payment method" = "Добавить новый метод оплаты";
+
+"Add your payment information" = "Укажите платежные данные";
+
+"Approve payment" = "Подтвердить платеж";
+
+"Back" = "Назад";
+
+"Bank" = "Банк";
+
+"Bank account" = "Банковский счет";
+
+"Bank account details cannot be changed." = "Реквизиты банковского счета нельзя изменить.";
+
+"Before we can send a code to your email, we need to verify additional information about you. Please enter your phone number ending in ••%@." = "Перед отправкой кода на вашу эл. почту нам нужно проверить дополнительную информацию. Введите свой номер телефона, заканчивающийся на ••%@.";
+
+"Before we can send a code to your email, we need to verify additional information about you. Please enter your phone number." = "Перед отправкой кода на вашу эл. почту нам нужно проверить дополнительную информацию. Введите свой номер телефона.";
+
+"Buy Now, Pay Later with  <img/>" = "Покупка в рассрочку с помощью <img/>";
+
+"Buy Now, Pay Later with Afterpay" = "Покупка в рассрочку с помощью Afterpay";
+
+"Buy Now, Pay Later with Cash App Afterpay" = "Покупка в рассрочку с помощью Cash App Afterpay";
+
+"Buy Now, Pay Later with Clearpay" = "Покупка в рассрочку с помощью Clearpay";
+
+"Buy now or pay later with Klarna" = "Купите сейчас или оплатите позже через систему Klarna";
+
+"By confirming your payment with GCash, you allow %@ to charge your GCash account for future payments in accordance with their terms." = "Подтверждая платеж через GCash, вы разрешаете компании %@ списывать с вашего счета GCash суммы будущих платежей согласно ее условиям.";
+
+"By confirming your payment with NICEPAY, you allow %@ to charge this payment method for future payments in accordance with their terms." = "Подтверждая платеж через NICEPAY, вы тем самым разрешаете %@ списывать средства с этого способа оплаты для будущих платежей согласно условиям компании.";
+
+"By confirming your payment with PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Подтверждая платеж через PayPal, вы тем самым разрешаете компании %@ списывать с вашего счета PayPal суммы будущих платежей согласно условиям.";
+
+"By confirming your payment with Touch 'n Go, you allow %@ to charge your Touch 'n Go account for future payments in accordance with their terms." = "Подтверждая платеж через Touch 'n Go, вы разрешаете компании %@ списывать с вашего счета Touch 'n Go суммы будущих платежей согласно ее условиям.";
+
+"By confirming your payment with TrueMoney, you allow %@ to charge your TrueMoney account for future payments in accordance with their terms." = "Подтверждая платеж через TrueMoney, вы разрешаете компании %@ списывать с вашего счета TrueMoney суммы будущих платежей согласно ее условиям.";
+
+"By confirming your payment, you agree that your transaction will be handled by Global Stack Services Limited as merchant of record and in accordance with their <terms>terms of use</terms>." = "Подтверждая платеж, вы соглашаетесь с тем, что ваша транзакция будет обработана компанией Global Stack Services Limited в роли зарегистрированного продавца согласно ее <terms>условиям использования</terms>.";
+
+"By confirming your payment, you agree that your transaction will be handled by Global Stack Services Limited as merchant of record and in accordance with their <terms>terms</terms>." = "Подтверждая платеж, вы соглашаетесь с тем, что ваша транзакция будет обработана компанией Global Stack Services Limited в роли зарегистрированного продавца согласно ее <terms>условиям</terms>.";
+
+"By continuing to Amazon Pay, you allow %@ to charge your Amazon Pay account for future payments in accordance with their terms." = "Перейдя к Amazon Pay, вы тем самым разрешаете компании %@ списывать с вашего счета в Amazon Pay суммы будущих платежей согласно условиям компании.";
+
+"By continuing to Klarna, you allow %@ to charge your Klarna account for future payments in accordance with their terms and Klarna's terms. You can change this at any time in your Klarna app or by reaching out to %@." = "Перейдя к Klarna, вы тем самым разрешаете компании %1$@ списывать с вашего счета в Klarna суммы будущих платежей согласно условиям компании и Klarna. Это разрешение можно отозвать в любой момент в вашем приложении Klarna или связавшись с %2$@.";
+
+"By continuing to PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Подтверждая платеж через PayPal, вы тем самым разрешаете компании %@ списывать с вашего счета PayPal суммы будущих платежей согласно условиям.";
+
+"By continuing to Revolut Pay, you allow %@ to charge your Revolut Pay account for future payments in accordance with their terms." = "Подтверждая платеж через Revolut Pay, вы тем самым разрешаете компании %@ списывать с вашего счета Revolut Pay суммы будущих платежей согласно условиям.";
+
+"By continuing you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Продолжая, вы тем самым принимаете соответствующие <terms>Условия</terms> и <privacy>политику конфиденциальности</privacy>.";
+
+"By continuing, you agree to authorize payments pursuant to <terms>these terms</terms>." = "Продолжая, вы соглашаетесь авторизовать платежи в соответствии с <terms>этими условиями</terms>.";
+
+"By continuing, you agree to save your information for future purchases with %1$@ and <link>%2$@</link> according to %2$@ <terms>terms</terms> and <privacy>privacy</privacy>." = "Продолжая, вы соглашаетесь сохранить свои данные для будущих покупок с помощью %1$@ и <link>%2$@</link> согласно <terms>Условиям</terms> и <privacy>Политике конфиденциальности</privacy> %2$@.";
+
+"By continuing, you agree to save your information for future purchases with %@." = "Продолжая, вы соглашаетесь сохранить вашу информацию для будущих покупок через %@.";
+
+"By continuing, you authorize %@ to automatically debit your Satispay Balance on a recurring basis in accordance with your purchase or subscription plan." = "Продолжая, вы разрешаете %@ автоматически списывать средства с баланса Satispay на регулярной основе в соответствии с вашим планом покупки или подписки.";
+
+"By continuing, you authorize %@ to automatically debit your Twint Balance on a recurring basis in accordance with your purchase or subscription plan." = "Продолжая использование, вы тем самым разрешаете %@ периодически списывать с вашего счета Twint суммы согласно вашему плану покупок или подписок.";
+
+"By continuing, you authorize %@ to debit your Cash App account for this payment and future payments in accordance with %@'s terms, until this authorization is revoked. You can change this anytime in your Cash App Settings." = "Продолжая, вы уполномочиваете компанию %1$@ списывать с вашего счета Cash App суммы в соответствии с этим, а также будущими платежами согласно условиям компании %2$@, пока это разрешение не будет отозвано. Отозвать разрешение можно в любой момент в настройках приложения Cash App.";
+
+"By joining %@, you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Присоединяясь к %@, вы принимаете <terms>Условия</terms> и <privacy>Политику конфиденциальности</privacy>.";
+
+"By providing phone number and email, you agree to create a %1$@ account subject to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Предоставляя номер телефона и электронный адрес, вы соглашаетесь создать учетную запись %1$@, на которую распространяются <terms>Условия</terms> и <privacy>Политика конфиденциальности</privacy> %1$@.";
+
+"By providing your bank account details and confirming this payment, you agree to this Direct Debit Request and the <terms>Direct Debit Request service agreement</terms>, and authorise Stripe Payments Australia Pty Ltd ACN 160 180 343 Direct Debit User ID number 507156 (“Stripe”) to debit your account through the Bulk Electronic Clearing System (BECS) on behalf of %@ (the \"Merchant\") for any amounts separately communicated to you by the Merchant. You certify that you are either an account holder or an authorised signatory on the account listed above." = "Предоставляя реквизиты вашего банковского счета и подтверждая этот платеж, вы принимаете этот запрос на прямое дебетование и <terms>сервисное соглашение о запросе прямого списания</terms>, а также разрешаете компании Stripe Payments Australia Pty Ltd ACN 160 180 343 с идентификационным номером пользователя системы прямого дебетования 507156 (далее — «Stripe») списывать средства с вашего счета через систему массовых электронных платежей (Bulk Electronic Clearing System, BECS) от имени %@ (далее — «Торговец») на любые суммы в соответствии с условиями вашего соглашения с Торговцем. Вы подтверждаете, что являетесь либо владельцем счета, либо уполномоченным лицом с правом подписи в отношении указанного выше счета.";
+
+"By providing your card information, you allow %@ to charge your card for future payments in accordance with their terms." = "Указывая реквизиты карты, вы разрешаете компании %@ списывать средства с карты в рамках будущих платежей в соответствии с условиями компании.";
+
+"By providing your email, you agree to create a %1$@ account and save your payment info to %1$@, according to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Указывая адрес электронной почты, вы соглашаетесь создать учетную запись %1$@ и сохранить свои платежные реквизиты в %1$@ согласно <terms>Условиям</terms> и <privacy>Политике конфиденциальности</privacy> %1$@.";
+
+"By providing your payment information and confirming this payment, you authorise (A) %@ and Stripe, our payment service provider, to send instructions to your bank to debit your account and (B) your bank to debit your account in accordance with those instructions. As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited. Your rights are explained in a statement that you can obtain from your bank. You agree to receive notifications for future debits up to 2 days before they occur." = "Указав свои платежные данные и подтвердив платеж, вы уполномочиваете (A) %@ и Stripe, нашего поставщика платежных услуг, на отправку вашему банку инструкций на списание средств с вашего счета и (B) ваш банк на списание средств с вашего счета согласно данным инструкциям. Вы имеете право на возврат средств от вашего банка согласно положениям и условиям Вашего соглашения с банком. Подать заявку на возврат средств следует в течение 8 недель с даты списания средств с вашего счета. Ваши права объясняются в выписке, которую вы можете получить в своем банке. Вы даете согласие на получение уведомлений о будущих дебетованиях в срок до 2 дней до их поступления.";
+
+"By providing your phone number, you agree to create a %1$@ account and save your payment info to %1$@, according to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Предоставляя свой номер телефона, вы соглашаетесь создать учетную запись %1$@ и сохранить свои платежные реквизиты в %1$@ согласно <terms>Условиям</terms> и <privacy>Политике конфиденциальности</privacy> %1$@.";
+
+"By saving your bank account for %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Сохраняя реквизиты своего банковского счета у %@, вы соглашаетесь авторизовать платежи в соответствии с <terms>этими условиями</terms>.";
+
+"By saving your payment information, you allow %@ to charge you for future payments in accordance with their terms." = "Сохраняя платежные данные, вы разрешаете %@ списывать с вас средства за будущие платежи в соответствии с их условиями.";
+
+"By submitting your order to %@ and %@, you agree to save your information with %@ for future purchases, and agree to authorize payments pursuant to <terms>these terms</terms>." = "Отправляя заказ на %1$@ и %2$@, вы соглашаетесь сохранить вашу информацию в %3$@ для будущих покупок, а также соглашаетесь разрешить платежи в соответствии с <terms>этими условиями</terms>.";
+
+"By submitting your order to %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Отправляя заказ в %@, вы соглашаетесь разрешить платежи в соответствии с <terms>этими условиями</terms>.";
+
+"CPF/CPNJ" = "CPF/CPNJ";
+
+"Cancel and pay another way" = "Отменить платеж и оплатить другим способом";
+
+"Card details cannot be changed." = "Реквизиты карты нельзя изменить.";
+
+"Card number. Supported cards include %@" = "Номер карты. В число поддерживаемых карт входят %@";
+
+"Change" = "Изменить";
+
+"Choose a card brand" = "Выберите бренд карты";
+
+"Choose a payment method" = "Выберите метод оплаты";
+
+"Close card scanner" = "Закрыть сканер карт";
+
+"Complete the payment using Pix to finish the purchase." = "Оплатите покупку с помощью Pix, чтобы завершить оформление.";
+
+"Confirm" = "Подтвердить";
+
+"Confirm payment details" = "Подтвердить реквизиты платежа";
+
+"Confirm the Bizum payment in your mobile banking application within %@ to complete the purchase." = "Чтобы завершить покупку, подтвердите оплату через Bizum в мобильном банковском приложении в течение %@.";
+
+"Confirm the payment in your MB WAY app within %@ to complete the purchase." = "Чтобы завершить покупку, подтвердите оплату в приложении MB WAY в течение %@.";
+
+"Confirm the payment in your bank or payment app within %@ to complete the purchase." = "Чтобы завершить оформление покупки, подтвердите платеж в своем банковском или платежном приложении в течение %@.";
+
+"Confirm the payment in your bank's app within %@ to complete the purchase." = "Подтвердите платеж в вашем банковском приложении в течение %@ для оформления покупки.";
+
+"Confirm your CVC" = "Подтвердить код CVV карты";
+
+"Confirm your information" = "Подтвердите свою информацию";
+
+"Contact information" = "Контактные данные";
+
+"Continue another way" = "Продолжить другим способом";
+
+"Create an account with %@ for faster checkout across the web" = "Создание учетной записи в %@ для ускоренного оформления заказов в интернете";
+
+"Debit or credit card" = "Дебетовая или кредитная карта";
+
+"Declarations" = "Заявления";
+
+"Default" = "По умолчанию";
+
+"Default payment method" = "Способ оплаты по умолчанию";
+
+"Did you mean %@? %@." = "Вы имели в виду %1$@? %2$@.";
+
+"Discard Changes" = "Отменить изменения";
+
+"Discard changes?" = "Отменить изменения?";
+
+"Discount" = "Скидка";
+
+"EPS Bank" = "Банк EPS";
+
+"Edit address" = "Изменить адрес";
+
+"Email code" = "Код, отправленный на эл. почту";
+
+"Enter address manually" = "Введите адрес вручную";
+
+"Enter the phone number on your Link account." = "Введите номер телефона, указанный в вашей учетной записи Link.";
+
+"Exchange rate and fees of your bank may apply." = "Могут применяться обменный курс и комиссии вашего банка.";
+
+"FPX Bank" = "Банк FPX";
+
+"Fast, secure checkout" = "Быстрое и безопасное оформление заказа";
+
+"Get %@ back when you pay for the first time with your bank. <terms>See terms</terms>" = "Получите возврат в сумме %@, когда впервые оплатите заказ с банковского счета. <terms>См. условия</terms>";
+
+"Get %@ back when you pay with your bank. <terms>See terms</terms>" = "Получите возврат в сумме %@ при оплате с банковского счета. <terms>См. условия</terms>";
+
+"Hide details" = "Скрыть подробности";
+
+"I understand that Stripe will be collecting Direct Debits on behalf of %@ and confirm that I am the account holder and the only person required to authorise debits from this account." = "Я понимаю, что Stripe будет принимать прямые дебетования от имени %@, и подтверждаю, что являюсь владельцем счета и единственным лицом, согласие которого требуется для проведения дебетований с этого счета.";
+
+"IBAN" = "IBAN";
+
+"Invoice payment for business buyers." = "Оплата по счету для корпоративных покупателей.";
+
+"Keep Editing" = "Продолжить изменение";
+
+"Last 4 digits of SSN" = "Последние 4 цифры SSN";
+
+"Log in to another account" = "Войдите в другой счет";
+
+"Manage SEPA debit" = "Управление дебетованием SEPA";
+
+"Manage US bank account" = "Управление банковским счетом в США";
+
+"Manage bank account" = "Управление банковским счетом";
+
+"Manage card" = "Управление картой";
+
+"Manage cards" = "Управление картами";
+
+"Manage payment method" = "Управление способом оплаты";
+
+"Manage payment methods" = "Управление способами оплаты";
+
+"Manage your payment methods" = "Управление способами оплаты";
+
+"More options" = "Другие варианты";
+
+"Name on card" = "Имя и фамилия, указанные на карте";
+
+"Naver Pay Card" = "Карта Naver Pay";
+
+"Naver Pay Money/Point" = "Средства/баллы Naver Pay";
+
+"New card" = "Новая карта";
+
+"New payment method" = "Новый способ оплаты";
+
+"No %@ promo" = "Нет промоакции %@";
+
+"None of the payment methods in your %@ account work with this business." = "Ни один из способов оплаты в вашем счете %@ не поддерживается этой компанией.";
+
+"Not you?" = "Это не вы?";
+
+"Only card brand can be changed." = "Изменить можно только бренд карты.";
+
+"Open to see more information." = "Откройте, чтобы увидеть дополнительную информацию.";
+
+"Or" = "Или";
+
+"Or pay using" = "Или оплатить с помощью";
+
+"Or pay with a card" = "Или оплатить картой";
+
+"Or use" = "Или используйте";
+
+"Or use a card" = "Или используйте карту";
+
+"Pay %@" = "Оплатить %@";
+
+"Pay another way" = "Оплатить другим способом";
+
+"Pay faster at %@ and thousands of businesses." = "Ускоренная оплата продавцу %@ и тысячам других предприятий.";
+
+"Pay faster everywhere %@ is accepted." = "Платите быстрее везде, где принимают %@.";
+
+"Pay faster everywhere Link is accepted." = "Платите быстрее везде, где принимают Link.";
+
+"Pay over time with %@" = "Оплатить в рассрочку с помощью %@";
+
+"Pay over time with Affirm" = "Оплатить в рассрочку через систему Affirm";
+
+"Pay with %@" = "Оплатить с помощью %@";
+
+"Pay with Link" = "Оплатить с помощью Link";
+
+"Pay with your bank account in just a few steps." = "Платите с использованием своего банковского счета в несколько простых действий.";
+
+"Payment" = "Платеж";
+
+"Payment failed" = "Выполнить платеж не удалось";
+
+"Payment method details cannot be changed." = "Реквизиты способа оплаты невозможно изменить.";
+
+"Payment methods" = "Способы оплаты";
+
+"Please choose a valid payment method." = "Выберите действительный способ оплаты.";
+
+"Please go back and select another payment method" = "Вернитесь назад и выберите другой способ оплаты";
+
+"Point the camera at your card." = "Направьте камеру телефона на карту.";
+
+"Przelewy24 Bank" = "Przelewy24 Bank";
+
+"Remove %@" = "Удалить %@";
+
+"Remove bank?" = "Удалить банк?";
+
+"Remove card?" = "Удалить карту?";
+
+"Remove linked account" = "Удалить привязанный счет";
+
+"Remove payment method" = "Удалить способ оплаты";
+
+"Remove payment method?" = "Удалить способ оплаты?";
+
+"Resend code in %d seconds" = "Отправить код повторно через %li с.";
+
+"SEPA debit details cannot be changed." = "Реквизиты платежа дебетованием SEPA нельзя изменить.";
+
+"Save" = "Сохранить";
+
+"Save a new payment method" = "Сохраните новый способ оплаты";
+
+"Save address" = "Сохранить адрес";
+
+"Save for future payments" = "Сохранить данные для будущих платежей";
+
+"Save my info for faster checkout with %@" = "Сохранить данные для ускоренной процедуры выписки с помощью %@";
+
+"Save payment details to %@ for future purchases" = "Сохранить реквизиты платежа в адрес %@ для будущих покупок";
+
+"Save this account for future %@ payments" = "Сохранить этот счет для будущих платежей %@";
+
+"Save your bank account in just a few steps." = "Сохраните реквизиты своего банковского счета всего за несколько шагов.";
+
+"Save your info for secure 1-click checkout with %@" = "Сохраните свои данные для безопасного оформления покупок одним щелчком с помощью %@";
+
+"Saved" = "Сохранено";
+
+"Select card" = "Выберите карту";
+
+"Select how you want to pay:" = "Выберите способ оплаты:";
+
+"Select payment method" = "Выберите способ оплаты";
+
+"Select your payment method" = "Выберите способ оплаты";
+
+"Set as default" = "Назначить способом по умолчанию";
+
+"Set as default payment method" = "Назначить способом оплаты по умолчанию";
+
+"Set up" = "Настроить";
+
+"Shipping to %@ is not supported." = "Доставка в страну «%@» не поддерживается.";
+
+"Show details" = "Показать подробности";
+
+"Show menu" = "Показать меню";
+
+"Sign in or sign up" = "Войти или зарегистрироваться";
+
+"Sign out of %@" = "Выйти из %@";
+
+"Simple, secure one-click payments" = "Защищенные безопасные платежи одним нажатием";
+
+"Something went wrong when linking your account.\nPlease try again later." = "Во время привязки счета произошла ошибка.\nПовторите попытку позже.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you'll get an email with instructions to finish saving your bank account with %@." = "Через 1-2 рабочих дня Stripe зачислит вам на счет сумму $0,01. После этого вы получите электронное письмо с инструкциями, которые помогут вам закончить сохранение реквизитов своего банковского счета у %@.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you’ll get an email with instructions to complete payment to %@." = "Через 1-2 рабочих дня Stripe положит вам на счет сумму $0,01. После этого вы получите электронное письмо с инструкциями по завершению платежа в адрес %@.";
+
+"Subtotal" = "Сумма без учета дополнительных сборов";
+
+"Tap to close" = "Коснитесь, чтобы закрыть";
+
+"Tap to expand" = "Коснитесь, чтобы развернуть";
+
+"Tax" = "Налог";
+
+"Terms and Conditions" = "Условия и положения";
+
+"Terms of Service" = "Условия обслуживания";
+
+"The IBAN you entered is incomplete." = "Введенный код IBAN неполон.";
+
+"The IBAN you entered is invalid, \"%@\" is not a supported country code." = "Введенный вами номер IBAN недействителен, «%@» не является поддерживаемым кодом страны.";
+
+"The provided verification code has expired." = "Указанный код подтверждения уже недействителен.";
+
+"The provided verification code is incorrect." = "Указанный код подтверждения недействителен.";
+
+"This is an international purchase and excludes a 3.5% IOF fee. By proceeding, you acknowledge and accept <terms>Ebanx’s terms and conditions</terms>." = "Это международная покупка, которая не облагается сбором IOF в размере 3,5 %. Продолжая, вы подтверждаете и принимаете <terms>условия и положения Ebanx</terms>.";
+
+"This is your default" = "Это ваше значение по умолчанию";
+
+"This payment method will be removed but will remain available for %@ subscriptions." = "Этот способ оплаты будет удален, но останется доступным для подписок (%@).";
+
+"This phone number doesn't match your Link account. Please try again." = "Этот номер телефона не соответствует вашей учетной записи Link. Повторите попытку.";
+
+"Too many attempts. Please try again in a few minutes." = "Превышено разрешенное число попыток. Попробуйте еще раз через несколько минут.";
+
+"Unavailable for this purchase" = "Не предусмотрено для этой покупки";
+
+"Update card" = "Обновить реквизиты карты";
+
+"Update payment method" = "Обновить способ оплаты";
+
+"Use billing address for shipping" = "Использовать для доставки адрес для выставления счетов";
+
+"Verify your phone number" = "Подтвердите свой номер телефона";
+
+"Verifying your account…" = "Проверка аккаунта…";
+
+"View more" = "Показать ещё";
+
+"We couldn't verify your account. Please close this window and try again." = "Не удалось проверить аккаунт. Закройте это окно и повторите попытку.";
+
+"Yes, update" = "Да, обновить";
+
+"You can't pay with %@ here" = "Оплата через %@ здесь недоступна";
+
+"Your IBAN should start with a two-letter country code." = "Код IBAN должен начинаться с двухбуквенного кода страны.";
+
+"Your address changes won't be saved." = "Изменения адреса не будут сохранены.";

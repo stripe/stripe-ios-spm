@@ -1,0 +1,187 @@
+//
+//  FinancialConnectionsSessionTests.swift
+//  StripeFinancialConnectionsTests
+//
+//  Created by Vardges Avetisyan on 4/29/22.
+//
+
+import Foundation
+@_spi(InternalOnlyAPI) @testable import StripeCore
+import StripeCoreTestUtils
+@testable import StripeFinancialConnections
+import UIKit
+import XCTest
+
+enum FinancialConnectionsSessionMock: String, MockData {
+    typealias ResponseType = StripeAPI.FinancialConnectionsSession
+    var bundle: Bundle { return Bundle(for: ClassForBundle.self) }
+
+    case bothAccountsAndLinkedAccountsPresent = "FinancialConnectionsSession_both_accounts_la"
+    case onlyAccountsPresent = "FinancialConnectionsSession_only_accounts"
+    case bothAccountsAndLinkedAccountsMissing = "FinancialConnectionsSession_only_both_missing"
+    case onlyLinkedAccountsPresent = "FinancialConnectionsSession_only_la"
+}
+
+enum FinancialConnectionsSynchronizeMock: String, MockData {
+    typealias ResponseType = FinancialConnectionsSynchronize
+    var bundle: Bundle { return Bundle(for: ClassForBundle.self) }
+
+    case synchronize = "FinancialConnectionsSynchronize"
+}
+
+// Dummy class to determine this bundle
+private class ClassForBundle {}
+
+final class FinancialConnectionsSessionTests: XCTestCase {
+
+    func testBothAccountsAndLinkedAccountsPresentFavorsAccounts() {
+        guard let session = try? FinancialConnectionsSessionMock.bothAccountsAndLinkedAccountsPresent.make() else {
+            return XCTFail("Could not load FinancialConnectionsSession")
+        }
+        XCTAssertEqual(session.accounts.data.count, 5)
+    }
+
+    func testOnlyAccountsPresentParsesCorrectly() {
+        guard let session = try? FinancialConnectionsSessionMock.onlyAccountsPresent.make() else {
+            return XCTFail("Could not load FinancialConnectionsSession")
+        }
+        XCTAssertEqual(session.accounts.data.count, 5)
+    }
+
+    func testOnlyLinkedAccountsPresentParsesCorrectly() {
+        guard let session = try? FinancialConnectionsSessionMock.onlyLinkedAccountsPresent.make() else {
+            return XCTFail("Could not load FinancialConnectionsSession")
+        }
+        XCTAssertEqual(session.accounts.data.count, 5)
+    }
+
+    func testBothAccountsAndLinkedAccountsMissingFailsToParse() {
+        XCTAssertThrowsError(try FinancialConnectionsSessionMock.bothAccountsAndLinkedAccountsMissing.make())
+    }
+
+    func testSynchronizeWithoutBrandPreservesExistingStripeBranding() throws {
+        let synchronize = try FinancialConnectionsSynchronizeMock.synchronize.make()
+
+        XCTAssertNil(synchronize.manifest.linkBrand)
+        XCTAssertEqual(synchronize.manifest.theme, .light)
+        XCTAssertEqual(synchronize.manifest.appearance.logo, .stripe_logo)
+        XCTAssertTrue(
+            synchronize.manifest.appearance.colors.primary.isEqual(FinancialConnectionsAppearance.Colors.stripe.primary)
+        )
+    }
+
+    func testSynchronizeParsesUnknownBrandAsUnparsable() throws {
+        let synchronize = try makeSynchronize(brandValue: "random_brand")
+
+        XCTAssertEqual(synchronize.manifest.linkBrand, .unparsable)
+        XCTAssertEqual(synchronize.manifest.appearance.logo, .stripe_logo)
+    }
+
+    func testPaymentAccountResourceDecodesGeneratedPaymentDetailIDs() throws {
+        // Given
+        let response =
+            """
+            {
+              "id": "fcsess_123",
+              "generated_payment_detail_ids": ["csmrpd_123"],
+              "networking_successful": true,
+              "next_pane": "success"
+            }
+            """
+
+        // When
+        let resource: FinancialConnectionsPaymentAccountResource = try StripeJSONDecoder.decode(
+            jsonData: Data(response.utf8)
+        )
+
+        // Then
+        XCTAssertEqual(resource.generatedPaymentDetailIds, ["csmrpd_123"])
+    }
+
+    func testLinkThemeWithoutBrandPreservesExistingLinkBranding() {
+        let manifest = makeManifest(theme: .linkLight)
+
+        XCTAssertNil(manifest.linkBrand)
+        XCTAssertEqual(manifest.appearance.logo, .link_logo)
+        XCTAssertTrue(manifest.appearance.colors.primary.isEqual(FinancialConnectionsAppearance.Colors.link.primary))
+    }
+
+    private func makeSynchronize(brandValue: String?) throws -> FinancialConnectionsSynchronize {
+        var payload = try JSONSerialization.jsonObject(with: FinancialConnectionsSynchronizeMock.synchronize.data()) as? [String: Any]
+        var manifest = payload?["manifest"] as? [String: Any]
+
+        manifest?["link_brand"] = brandValue
+        payload?["manifest"] = manifest
+
+        let data = try JSONSerialization.data(withJSONObject: payload ?? [:])
+        return try decode(data: data)
+    }
+
+    private func decode(data: Data) throws -> FinancialConnectionsSynchronize {
+        let response = HTTPURLResponse(
+            url: URL(string: "https://api.stripe.com/v1/financial_connections/sessions/synchronize")!,
+            statusCode: 200,
+            httpVersion: nil,
+            headerFields: ["request-id": "req_123"]
+        )
+        let result: Result<FinancialConnectionsSynchronize, Error> = STPAPIClient.decodeResponse(
+            data: data,
+            error: nil,
+            response: response
+        )
+        switch result {
+        case .success(let synchronize):
+            return synchronize
+        case .failure(let error):
+            throw error
+        }
+    }
+
+    private func makeManifest(
+        theme: FinancialConnectionsSessionManifest.Theme,
+        linkBrand: LinkBrand? = nil
+    ) -> FinancialConnectionsSessionManifest {
+        FinancialConnectionsSessionManifest(
+            accountholderCustomerEmailAddress: nil,
+            accountholderIsLinkConsumer: nil,
+            accountholderPhoneNumber: nil,
+            accountholderToken: nil,
+            accountDisconnectionMethod: nil,
+            activeAuthSession: nil,
+            activeInstitution: nil,
+            allowManualEntry: false,
+            appVerificationEnabled: nil,
+            assignmentEventId: nil,
+            linkBrand: linkBrand,
+            businessName: nil,
+            cancelUrl: nil,
+            consentAcquiredAt: nil,
+            consentRequired: false,
+            customManualEntryHandling: false,
+            disableLinkMoreAccounts: false,
+            displayText: nil,
+            experimentAssignments: nil,
+            features: nil,
+            hostedAuthUrl: nil,
+            id: "fcsess_123",
+            initialInstitution: nil,
+            instantVerificationDisabled: false,
+            institutionSearchDisabled: false,
+            isEndUserFacing: nil,
+            isLinkWithStripe: nil,
+            isNetworkingUserFlow: nil,
+            isStripeDirect: nil,
+            livemode: false,
+            manualEntryMode: .automatic,
+            manualEntryUsesMicrodeposits: false,
+            nextPane: .consent,
+            paymentMethodType: nil,
+            permissions: [],
+            product: "external_api",
+            singleAccount: false,
+            skipSuccessPane: nil,
+            successUrl: nil,
+            theme: theme
+        )
+    }
+}

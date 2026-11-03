@@ -1,0 +1,103 @@
+//
+//  PayWithLinkViewController-BaseViewController.swift
+//  StripePaymentSheet
+//
+//  Created by Ramon Torres on 11/2/21.
+//  Copyright © 2021 Stripe, Inc. All rights reserved.
+//
+
+import UIKit
+
+extension PayWithLinkViewController {
+
+    /// For internal SDK use only
+    @objc(STP_Internal_PayWithLinkBaseViewController)
+    class BaseViewController: UIViewController, BottomSheetContentViewController {
+        weak var coordinator: PayWithLinkCoordinating?
+
+        let context: Context
+        let navigationTitle: String?
+
+        var preferredContentMargins: NSDirectionalEdgeInsets {
+            LinkUI.contentMargins
+        }
+
+        private(set) lazy var contentView = UIView()
+
+        /// The sheet's bottom safe area, for padding content above the home indicator.
+        /// Our own safe area only covers the part of the view that overlaps the home indicator, so it shrinks
+        /// whenever the content moves away from the sheet's bottom edge (for example, while a native sheet
+        /// stretches during an upward swipe). Padding with it changes the content's height, which resizes the sheet mid-gesture.
+        var sheetBottomSafeAreaInset: CGFloat {
+            parent?.view.safeAreaInsets.bottom ?? view.safeAreaInsets.bottom
+        }
+
+        init(context: Context, navigationTitle: String? = nil) {
+            self.context = context
+            self.navigationTitle = navigationTitle
+            super.init(nibName: nil, bundle: nil)
+        }
+
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            view.backgroundColor = .linkSurfacePrimary
+
+            contentView.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(contentView)
+
+            NSLayoutConstraint.activate([
+                contentView.topAnchor.constraint(equalTo: view.topAnchor),
+                contentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                contentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                contentView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            ])
+        }
+
+        override func present(
+            _ viewControllerToPresent: UIViewController,
+            animated flag: Bool,
+            completion: (() -> Void)? = nil
+        ) {
+            // Any view controller presented by this controller should also be customized.
+            context.configuration.style.configure(viewControllerToPresent)
+            super.present(viewControllerToPresent, animated: flag, completion: completion)
+        }
+
+        var requiresFullScreen: Bool { false }
+
+        lazy var navigationBar: SheetNavigationBar = {
+            let navBar = LinkSheetNavigationBar(
+                appearance: LinkUI.appearance,
+                brand: context.linkBrand,
+                shouldLogPaymentSheetAnalyticsOnDismissal: false
+            )
+            navBar.title = navigationTitle
+            return navBar
+        }()
+
+        /// Enables or disables input on this screen, including tap or swipe dismissal of the sheet,
+        /// while it performs an operation such as confirmation.
+        func setUserInteractionEnabled(_ enabled: Bool) {
+            // Lock only this screen rather than the whole sheet container: the container is also the
+            // payment handler's authentication context, so screens it pushes during confirmation
+            // (e.g. 3DS challenges) must stay interactive. This screen stays locked after they're dismissed.
+            view.isUserInteractionEnabled = enabled
+            // The navigation bar lives outside `view` in both sheet containers.
+            navigationBar.isUserInteractionEnabled = enabled
+            context.isDismissible = enabled
+        }
+
+        func didTapOrSwipeToDismiss() {
+            guard context.isDismissible else { return }
+            if context.shouldFinishOnClose {
+                coordinator?.finish(withResult: .canceled, deferredIntentConfirmationType: nil)
+            } else {
+                coordinator?.cancel(shouldReturnToPaymentSheet: false)
+            }
+        }
+    }
+}

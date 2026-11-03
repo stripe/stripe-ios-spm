@@ -1,0 +1,653 @@
+//
+//  VerificationSheetFlowControllerTest.swift
+//  StripeIdentityTests
+//
+//  Created by Mel Ludowise on 11/3/21.
+//  Copyright © 2021 Stripe, Inc. All rights reserved.
+//
+
+@_spi(InternalOnlyAPI) import StripeCore
+import StripeCoreTestUtils
+@_spi(InternalOnlyAPI) import StripeUICore
+import UIKit
+import Vision
+import XCTest
+
+// swift-format-ignore
+@_spi(InternalOnlyAPI) @testable import StripeIdentity
+
+private let mockError = NSError(domain: "", code: 0, userInfo: nil)
+
+final class VerificationSheetFlowControllerTest: XCTestCase {
+
+    let mockCollectedFields: [Set<StripeAPI.VerificationPageFieldType>] = [
+        [.biometricConsent], [.idDocumentFront, .idDocumentBack],
+    ]
+
+    let flowController = VerificationSheetFlowController(
+        configuration: .init(brandLogo: UIImage())
+    )
+    var mockMLModelLoader: IdentityMLModelLoaderMock!
+    var mockSheetController: VerificationSheetControllerMock!
+
+    override func setUp() {
+        super.setUp()
+
+        mockMLModelLoader = .init()
+
+        mockSheetController = VerificationSheetControllerMock(
+            flowController: flowController,
+            mlModelLoader: mockMLModelLoader
+        )
+    }
+
+    func testInitialStateIsLoading() {
+        XCTAssertEqual(flowController.navigationController.viewControllers.count, 1)
+        XCTAssertIs(
+            flowController.navigationController.viewControllers.first as Any,
+            LoadingViewController.self
+        )
+    }
+
+    func testDarkBrandColorUsesWhitePrimaryButtonText() throws {
+        let brandColor = UIColor(red: 0.05, green: 0.12, blue: 0.20, alpha: 1)
+        let flowController = VerificationSheetFlowController(
+            configuration: .init(brandLogo: UIImage(), brandColor: brandColor)
+        )
+
+        let (backgroundColor, textColor, height) = try customColors(flowController.primaryButtonStyle)
+        XCTAssertEqual(backgroundColor, brandColor)
+        XCTAssertEqual(textColor.resolvedColor(with: UITraitCollection(userInterfaceStyle: .light)), .white)
+        XCTAssertNil(height)
+    }
+
+    func testLightBrandColorUsesBlackPrimaryButtonText() throws {
+        let brandColor = UIColor(red: 1, green: 0.85, blue: 0, alpha: 1)
+        let configuration = IdentityVerificationSheet.Configuration(brandLogo: UIImage(), brandColor: brandColor)
+
+        let (backgroundColor, textColor, _) = try customColors(configuration.resolvedPrimaryButtonStyle)
+        XCTAssertEqual(backgroundColor, brandColor)
+        XCTAssertEqual(textColor.resolvedColor(with: UITraitCollection(userInterfaceStyle: .light)), .black)
+    }
+
+    func testBrandColorTakesPrecedenceOverPrimaryButtonStyle() throws {
+        let brandColor = UIColor(red: 1, green: 0.85, blue: 0, alpha: 1)
+        var configuration = IdentityVerificationSheet.Configuration(brandLogo: UIImage(), brandColor: brandColor)
+        configuration.primaryButtonStyle = .custom(backgroundColor: .red, textColor: .green, height: 52)
+
+        let (backgroundColor, textColor, height) = try customColors(configuration.resolvedPrimaryButtonStyle)
+        XCTAssertEqual(backgroundColor, brandColor)
+        XCTAssertEqual(textColor.resolvedColor(with: UITraitCollection(userInterfaceStyle: .light)), .black)
+        XCTAssertEqual(height, 52)
+    }
+
+    func testNilBrandColorKeepsPrimaryButtonStyle() throws {
+        var configuration = IdentityVerificationSheet.Configuration(brandLogo: UIImage())
+        guard case .default = configuration.resolvedPrimaryButtonStyle else {
+            return XCTFail("Expected the default primary button style")
+        }
+
+        configuration.primaryButtonStyle = .custom(backgroundColor: .red, textColor: .green, height: nil)
+        let (backgroundColor, textColor, _) = try customColors(configuration.resolvedPrimaryButtonStyle)
+        XCTAssertEqual(backgroundColor, .red)
+        XCTAssertEqual(textColor, .green)
+    }
+
+    func testDynamicBrandColorPicksTextColorForEachAppearance() throws {
+        let dynamicBrandColor = UIColor { traitCollection in
+            return traitCollection.userInterfaceStyle == .dark
+                ? UIColor(red: 0.05, green: 0.12, blue: 0.20, alpha: 1)
+                : UIColor(red: 1, green: 0.85, blue: 0, alpha: 1)
+        }
+        let configuration = IdentityVerificationSheet.Configuration(brandLogo: UIImage(), brandColor: dynamicBrandColor)
+
+        let (_, textColor, _) = try customColors(configuration.resolvedPrimaryButtonStyle)
+        XCTAssertEqual(textColor.resolvedColor(with: UITraitCollection(userInterfaceStyle: .light)), .black)
+        XCTAssertEqual(textColor.resolvedColor(with: UITraitCollection(userInterfaceStyle: .dark)), .white)
+    }
+
+    private func customColors(
+        _ style: IdentityVerificationSheet.Configuration.PrimaryButtonStyle
+    ) throws -> (UIColor, UIColor, CGFloat?) {
+        guard case let .custom(backgroundColor, textColor, height) = style else {
+            XCTFail("Expected a custom primary button style")
+            throw mockError
+        }
+        return (backgroundColor, textColor, height)
+    }
+
+    // Tests the navigation stack between screen transitions
+    func testTransitionToNextScreen() throws {
+        let mockVerificationPage = try VerificationPageMock.response200.make()
+        let mockNextViewController1 = UIViewController(nibName: nil, bundle: nil)
+        let mockNextViewController2 = UIViewController(nibName: nil, bundle: nil)
+        let mockSuccessViewController = SuccessViewController(
+            successContent: mockVerificationPage.success,
+            sheetController: mockSheetController
+        )
+
+        let exp1 = expectation(description: "1st transition")
+        let exp2 = expectation(description: "2nd transition")
+        let exp3 = expectation(description: "3rd transition")
+
+        // Verify first transition replaces loading screen with next view controller
+        flowController.transition(
+            to: mockNextViewController1,
+            shouldAnimate: false,
+            completion: { exp1.fulfill() }
+        )
+        XCTAssertEqual(
+            flowController.navigationController.viewControllers,
+            [mockNextViewController1]
+        )
+
+        // Verify following transition pushes view controller
+        flowController.transition(
+            to: mockNextViewController2,
+            shouldAnimate: false,
+            completion: { exp2.fulfill() }
+        )
+        XCTAssertEqual(
+            flowController.navigationController.viewControllers,
+            [mockNextViewController1, mockNextViewController2]
+        )
+
+        // Verify transitioning to success screen replaces navigation stack
+        flowController.transition(
+            to: mockSuccessViewController,
+            shouldAnimate: false,
+            completion: { exp3.fulfill() }
+        )
+        XCTAssertEqual(
+            flowController.navigationController.viewControllers,
+            [mockSuccessViewController]
+        )
+
+        wait(for: [exp1, exp2, exp3], timeout: 1)
+    }
+
+    func testNextViewControllerError() throws {
+        // API error on data save
+        let staticAPIErrExp = expectation(description: "Static API error")
+        flowController.nextViewController(
+            skipTestMode: false,
+            staticContentResult: .failure(mockError),
+            updateDataResult: nil,
+            sheetController: mockSheetController,
+            completion: { nextVC in
+                XCTAssertIs(nextVC, ErrorViewController.self)
+                XCTAssertEqual((nextVC as? ErrorViewController)?.model, .error(mockError))
+                staticAPIErrExp.fulfill()
+            }
+        )
+
+        // API error on data save
+        let updateAPIErrExp = expectation(description: "Update API error")
+        flowController.nextViewController(
+            skipTestMode: false,
+            staticContentResult: .success(try VerificationPageMock.response200.make()),
+            updateDataResult: .failure(mockError),
+            sheetController: mockSheetController,
+            completion: { nextVC in
+                XCTAssertIs(nextVC, ErrorViewController.self)
+                XCTAssertEqual((nextVC as? ErrorViewController)?.model, .error(mockError))
+                updateAPIErrExp.fulfill()
+            }
+        )
+
+        // requiredDataErrors
+        let reqDataErrExp = expectation(description: "requiredDataErrors")
+        flowController.nextViewController(
+            skipTestMode: false,
+            staticContentResult: .success(try VerificationPageMock.response200.make()),
+            updateDataResult: .success(try VerificationPageDataMock.response200.make()),
+            sheetController: mockSheetController,
+            completion: { nextVC in
+                XCTAssertIs(nextVC, ErrorViewController.self)
+                guard case .inputError = (nextVC as? ErrorViewController)?.model else {
+                    return XCTFail("Expected input error")
+                }
+                reqDataErrExp.fulfill()
+            }
+        )
+
+        wait(for: [staticAPIErrExp, updateAPIErrExp, reqDataErrExp], timeout: 1)
+    }
+
+    func testNoMoreMissingFieldsReturnSuccessViewController() throws {
+        let exp = expectation(description: "No more missing fields")
+        flowController.nextViewController(
+            skipTestMode: false,
+            staticContentResult: .success(try VerificationPageMock.response200.make()),
+            updateDataResult: .success(try VerificationPageDataMock.noErrors.make()),
+            sheetController: mockSheetController,
+            completion: { nextVC in
+                XCTAssertIs(nextVC, SuccessViewController.self)
+                exp.fulfill()
+            }
+        )
+        wait(for: [exp], timeout: 1)
+    }
+
+    // Requires document photo without type - should return DocumentWarmupViewController
+    func testMissingDocFrontNoType() throws {
+        // Given the document models have not loaded
+        var nextViewController: UIViewController?
+
+        // When the document front is required without a selected document type
+        try self.nextViewController(
+            missingRequirements: [.idDocumentFront],
+            completion: { nextViewController = $0 }
+        )
+
+        // Then routing completes synchronously without waiting for the models
+        XCTAssertIs(try XCTUnwrap(nextViewController), DocumentWarmupViewController.self)
+    }
+
+    func testNoSelfieConfigError() throws {
+        let exp = expectation(description: "testNoSelfieConfigError")
+
+        let nextVC = flowController.makeSelfieCaptureViewController(
+            faceScannerResult: .failure(IdentityMLModelLoaderError.mlModelNeverLoaded),
+            staticContent: try VerificationPageMock.noSelfie.make(),
+            sheetController: mockSheetController
+        )
+        XCTAssertIs(nextVC, ErrorViewController.self)
+        XCTAssertEqual(
+            (nextVC as? ErrorViewController)?.model,
+            .error(VerificationSheetFlowControllerError.missingSelfieConfig)
+        )
+        exp.fulfill()
+        wait(for: [exp], timeout: 1)
+    }
+
+    func testMLModelsNeverLoadedError() throws {
+        let exp = expectation(description: "testMLModelsNeverLoadedError")
+
+        let nextVC = flowController.makeSelfieCaptureViewController(
+            faceScannerResult: .failure(IdentityMLModelLoaderError.mlModelNeverLoaded),
+            staticContent: try VerificationPageMock.response200.make(),
+            sheetController: mockSheetController
+        )
+        XCTAssertIs(nextVC, ErrorViewController.self)
+        XCTAssertEqual(
+            (nextVC as? ErrorViewController)?.model,
+            .error(
+                VerificationSheetFlowControllerError.unknown(
+                    IdentityMLModelLoaderError.mlModelNeverLoaded
+                )
+            )
+        )
+        exp.fulfill()
+        wait(for: [exp], timeout: 1)
+    }
+
+    func testTestMode() throws {
+        let exp = expectation(description: "testTestMode")
+        try nextViewController(
+            missingRequirements: [.face],
+            staticContentResult: .success(try VerificationPageMock.response200TestMode.make()),
+            completion: { nextVC in
+                XCTAssertIs(nextVC, DebugViewController.self)
+                exp.fulfill()
+            }
+        )
+        wait(for: [exp], timeout: 1)
+    }
+
+    func testTestModeConfiguresImageUploaders() throws {
+        // Given test mode static content
+        let staticContent = try VerificationPageMock.response200TestMode.make()
+
+        // When document and selfie uploaders are created
+        let uploaders = try makeImageUploaders(staticContent: staticContent)
+
+        // Then both uploaders replace captured images with test mode placeholders
+        XCTAssertTrue(uploaders.document.isTestMode)
+        XCTAssertTrue(uploaders.selfie.isTestMode)
+    }
+
+    func testLiveModeDisablesTestModeImageUploaders() throws {
+        // Given live mode static content
+        let staticContent = try VerificationPageMock.response200.make()
+
+        // When document and selfie uploaders are created
+        let uploaders = try makeImageUploaders(staticContent: staticContent)
+
+        // Then neither uploader replaces captured images with test mode placeholders
+        XCTAssertFalse(uploaders.document.isTestMode)
+        XCTAssertFalse(uploaders.selfie.isTestMode)
+    }
+
+    func testNextViewControllerSuccess() throws {
+        let exp = expectation(description: "testNextViewControllerSuccess")
+        try nextViewController(
+            missingRequirements: [],
+            isSubmitted: true,
+            completion: { nextVC in
+                XCTAssertIs(nextVC, SuccessViewController.self)
+                exp.fulfill()
+            }
+        )
+        wait(for: [exp], timeout: 1)
+    }
+
+    func testNextViewControllerBiometricConsent() throws {
+        let exp = expectation(description: "testNextViewControllerBiometricConsent")
+        try nextViewController(
+            missingRequirements: [.biometricConsent],
+            completion: { nextVC in
+                XCTAssertIs(nextVC, BiometricConsentViewController.self)
+                exp.fulfill()
+            }
+        )
+        wait(for: [exp], timeout: 1)
+    }
+
+    // When verification type is document and requires Address, both .biometricConsent, .address will be missing
+    // should navigate to BiometricConsent
+    func testNextViewControllerBiometricConsentWithMissingAddress() throws {
+        let exp = expectation(description: "testNextViewControllerBiometricConsent")
+        try nextViewController(
+            missingRequirements: [.biometricConsent, .address],
+            completion: { nextVC in
+                XCTAssertIs(nextVC, BiometricConsentViewController.self)
+                exp.fulfill()
+            }
+        )
+        wait(for: [exp], timeout: 1)
+    }
+
+    // When verification type is document and requires Address, both .biometricConsent, .idNumber will be missing
+    // should navigate to BiometricConsent
+    func testNextViewControllerBiometricConsentWithMissingIdNumber() throws {
+        let exp = expectation(description: "testNextViewControllerBiometricConsent")
+        try nextViewController(
+            missingRequirements: [.biometricConsent, .idNumber],
+            completion: { nextVC in
+                XCTAssertIs(nextVC, BiometricConsentViewController.self)
+                exp.fulfill()
+            }
+        )
+        wait(for: [exp], timeout: 1)
+    }
+
+    func testNextViewControllerIndividualFields() throws {
+        // When verification type is document and address/idNumber is requested,
+        // after user submitted consent and document, missing should only remain .address or .idNumber.
+        // should navigate to IndividualController
+        try verifyIndividualViewController([.address])
+        try verifyIndividualViewController([.idNumber])
+    }
+
+    func testNextViewControllerIndividualWelcome() throws {
+        // When verification type is not document, .name or .dob will be missing,
+        // should navigate to IndividualWelcomeViewController
+        try verifyIndividualWelcomeViewController([.name, .dob, .idNumber])
+        try verifyIndividualWelcomeViewController([.name, .dob, .address])
+    }
+
+    func verifyIndividualViewController(_ missingRequirements: Set<StripeAPI.VerificationPageFieldType>) throws {
+        let exp = expectation(description: "testNextViewControllerIndividual")
+        try nextViewController(
+            missingRequirements: missingRequirements,
+            completion: { nextVC in
+                XCTAssertIs(nextVC, IndividualViewController.self)
+                exp.fulfill()
+            }
+        )
+        wait(for: [exp], timeout: 1)
+    }
+
+    func verifyIndividualWelcomeViewController(_ missingRequirements: Set<StripeAPI.VerificationPageFieldType>) throws {
+        let exp = expectation(description: "testNextViewControllerIndividualWelcome")
+        try nextViewController(
+            missingRequirements: missingRequirements,
+            completion: { nextVC in
+                XCTAssertIs(nextVC, IndividualWelcomeViewController.self)
+                exp.fulfill()
+            }
+        )
+        wait(for: [exp], timeout: 1)
+    }
+
+    func testNextViewControllerDocumentWarmup() throws {
+        // Given the document models have not loaded
+        var frontViewController: UIViewController?
+        var backViewController: UIViewController?
+
+        // When either side of the document is required
+        try nextViewController(
+            missingRequirements: [.idDocumentFront],
+            completion: { frontViewController = $0 }
+        )
+
+        try nextViewController(
+            missingRequirements: [.idDocumentBack],
+            completion: { backViewController = $0 }
+        )
+
+        // Then both routes complete synchronously without waiting for the models
+        XCTAssertIs(try XCTUnwrap(frontViewController), DocumentWarmupViewController.self)
+        XCTAssertIs(try XCTUnwrap(backViewController), DocumentWarmupViewController.self)
+    }
+
+    func testNextViewControllerSelfie() throws {
+        // Given the face models have not loaded
+        var nextViewController: UIViewController?
+
+        // When a selfie is required
+        try self.nextViewController(
+            missingRequirements: [.face],
+            completion: { nextViewController = $0 }
+        )
+
+        // Then routing completes synchronously without waiting for the models
+        XCTAssertIs(try XCTUnwrap(nextViewController), SelfieWarmupViewController.self)
+    }
+
+    func testNextViewControllerBiometricConsentPrecedesSelfie() throws {
+        let exp = expectation(
+            description: "testNextViewControllerBiometricConsentPrecedesSelfie"
+        )
+        try nextViewController(
+            missingRequirements: [.biometricConsent, .face],
+            completion: { nextVC in
+                XCTAssertIs(nextVC, BiometricConsentViewController.self)
+                exp.fulfill()
+            }
+        )
+
+        wait(for: [exp], timeout: 1)
+    }
+
+    func testDelegateChain() {
+        let mockNavigationController = IdentityFlowNavigationController(
+            rootViewController: UIViewController(nibName: nil, bundle: nil)
+        )
+        let mockDelegate = MockDelegate()
+        flowController.delegate = mockDelegate
+        flowController.identityFlowNavigationControllerDidDismiss(mockNavigationController)
+        XCTAssertTrue(mockDelegate.didDismissCalled)
+    }
+
+    func testCanPopToScreen() {
+        let mockViewController = MockIdentityDataCollectingViewController(
+            fields: Set(StripeAPI.VerificationPageFieldType.allCases).subtracting([
+                .idDocumentFront, .idDocumentBack,
+            ])
+        )
+        flowController.navigationController.setViewControllers(
+            [mockViewController],
+            animated: false
+        )
+
+        XCTAssertTrue(flowController.canPopToScreen(withField: .biometricConsent))
+        XCTAssertFalse(flowController.canPopToScreen(withField: .idDocumentFront))
+        XCTAssertFalse(flowController.canPopToScreen(withField: .idDocumentBack))
+    }
+
+    func testPopToFirstScreen() {
+        let viewControllers = popToScreen(
+            mockCollectedFields: mockCollectedFields,
+            popToField: .biometricConsent,
+            shouldResetViewController: false
+        )
+        XCTAssertEqual(viewControllers.map { $0.collectedFields }, [[.biometricConsent]])
+        XCTAssertEqual(viewControllers.first?.didReset, false)
+    }
+
+    func testPopToMiddleScreenAndReset() {
+        let viewControllers = popToScreen(
+            mockCollectedFields: mockCollectedFields,
+            popToField: .idDocumentFront,
+            shouldResetViewController: true
+        )
+        XCTAssertEqual(
+            viewControllers.map { $0.collectedFields },
+            [[.biometricConsent], [.idDocumentFront, .idDocumentBack]]
+        )
+        XCTAssertEqual(viewControllers.last?.didReset, true)
+    }
+
+    func testPopToLastScreenAndReset() {
+        let viewControllers = popToScreen(
+            mockCollectedFields: mockCollectedFields,
+            popToField: .idDocumentBack,
+            shouldResetViewController: true
+        )
+        XCTAssertEqual(viewControllers.map { $0.collectedFields }, mockCollectedFields)
+        XCTAssertEqual(viewControllers.last?.didReset, true)
+    }
+}
+
+private extension VerificationSheetFlowControllerTest {
+    func makeImageUploaders(
+        staticContent: StripeAPI.VerificationPage
+    ) throws -> (document: DocumentUploader, selfie: SelfieUploader) {
+        let documentUploader = flowController.makeDocumentUploader(
+            staticContent: staticContent,
+            sheetController: mockSheetController
+        )
+        let selfieViewController = try XCTUnwrap(
+            flowController.makeSelfieCaptureViewController(
+                faceScannerResult: .success(AnyFaceScanner(FaceScannerMock())),
+                staticContent: staticContent,
+                sheetController: mockSheetController
+            ) as? SelfieCaptureViewController
+        )
+        let selfieUploader = try XCTUnwrap(selfieViewController.selfieUploader as? SelfieUploader)
+        return (documentUploader, selfieUploader)
+    }
+
+    func nextViewController(
+        missingRequirements: Set<StripeAPI.VerificationPageFieldType>,
+        staticContentResult: Result<StripeAPI.VerificationPage, Error> = .success(
+            try! VerificationPageMock.response200.make()
+        ),
+        isSubmitted: Bool = false,
+        completion: @escaping (UIViewController) -> Void
+    ) throws {
+        let mockViewController = MockIdentityDataCollectingViewController(
+            fields: Set()
+        )
+        flowController.navigationController.setViewControllers(
+            [mockViewController],
+            animated: false
+        )
+
+        let dataResponse =
+            isSubmitted
+            ? try VerificationPageDataMock.submitted.make()
+            : try VerificationPageDataMock.noErrorsWithMissings(with: missingRequirements)
+
+        flowController.nextViewController(
+            skipTestMode: false,
+            staticContentResult: staticContentResult,
+            updateDataResult: .success(dataResponse),
+            sheetController: mockSheetController,
+            completion: completion
+        )
+    }
+
+    func popToScreen(
+        mockCollectedFields: [Set<StripeAPI.VerificationPageFieldType>],
+        popToField: StripeAPI.VerificationPageFieldType,
+        shouldResetViewController: Bool,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) -> [MockIdentityDataCollectingViewController] {
+        // Mock a VC for each collected field
+        let viewControllers = mockCollectedFields.map { fields in
+            return MockIdentityDataCollectingViewController(fields: fields)
+        }
+        flowController.navigationController.setViewControllers(viewControllers, animated: false)
+
+        flowController.popToScreen(
+            withField: popToField,
+            shouldResetViewController: shouldResetViewController,
+            animated: false
+        )
+
+        return flowController.navigationController.viewControllers.compactMap {
+            $0 as? MockIdentityDataCollectingViewController
+        }
+    }
+}
+
+extension ErrorViewController.Model: Equatable {
+    public static func == (lhs: ErrorViewController.Model, rhs: ErrorViewController.Model) -> Bool {
+        switch (lhs, rhs) {
+        case (.error(let lError), .error(let rError)):
+            let lNSError = lError as NSError
+            let rNSError = rError as NSError
+            return lNSError.code == rNSError.code
+                && lNSError.domain == rNSError.domain
+                && (lNSError.userInfo as NSDictionary).isEqual(to: rNSError.userInfo)
+        case (.inputError(let lError), .inputError(let rError)):
+            return lError == rError
+        default:
+            return false
+        }
+    }
+}
+
+private class MockDelegate: VerificationSheetFlowControllerDelegate {
+    private(set) var didDismissCalled = false
+
+    func verificationSheetFlowControllerDidDismissNativeView(
+        _ flowController: VerificationSheetFlowControllerProtocol
+    ) {
+        didDismissCalled = true
+    }
+
+    func verificationSheetFlowControllerDidDismissWebView(
+        _ flowController: VerificationSheetFlowControllerProtocol
+    ) {
+        didDismissCalled = true
+    }
+}
+
+private class MockIdentityDataCollectingViewController: UIViewController, IdentityDataCollecting {
+
+    let collectedFields: Set<StripeAPI.VerificationPageFieldType>
+
+    private(set) var didReset = false
+
+    init(
+        fields: Set<StripeAPI.VerificationPageFieldType>
+    ) {
+        self.collectedFields = fields
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(
+        coder: NSCoder
+    ) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func reset() {
+        didReset = true
+    }
+}

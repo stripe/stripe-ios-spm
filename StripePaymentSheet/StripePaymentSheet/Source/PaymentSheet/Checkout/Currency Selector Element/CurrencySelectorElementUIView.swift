@@ -1,0 +1,233 @@
+//
+//  CurrencySelectorElementUIView.swift
+//  StripePaymentSheet
+//
+//  Created by Nick Porter on 4/6/26.
+//
+
+@_spi(InternalOnlyAPI) import StripeCore
+@_spi(InternalOnlyAPI) import StripePayments
+@_spi(InternalOnlyAPI) import StripeUICore
+import UIKit
+
+/// A UIKit view that displays an Adaptive Pricing currency selector.
+@_spi(InternalOnlyAPI)
+@_spi(ReactNativeSDK)
+@MainActor
+public final class CurrencySelectorElementUIView: UIView {
+
+    /// Updates interaction and disabled styling while retaining UIKit's native state as the source of truth.
+    func setEnabled(_ enabled: Bool) {
+        isUserInteractionEnabled = enabled
+        selectorView?.setEnabled(enabled)
+    }
+
+    private let needsUpdateSuperviewHeight: () -> Void
+    var didUpdateContentHeight: () -> Void = {}
+
+    private weak var currencySelectionDelegate: CurrencySelectorElementCheckoutDelegate?
+    private let appearance: CurrencySelectorElement.Appearance
+    private let checkoutSessionId: String
+    private let flagImageManager = AdaptivePricingFlagImageManager()
+    private var selectorView: TwoOptionSelectorView?
+    private var sessionCurrency: String
+    private let containerStackView = UIStackView()
+    private lazy var errorLabel: UILabel = {
+        let label = ElementsUI.makeErrorLabel(
+            font: appearance.scaledFont(for: appearance.font, style: .caption1),
+            textColor: appearance.danger
+        )
+        label.setHiddenIfNecessary(true)
+        return label
+    }()
+
+    init?(
+        session: CheckoutElementsController.Session,
+        delegate: CurrencySelectorElementCheckoutDelegate,
+        appearance: CurrencySelectorElement.Appearance,
+        needsUpdateSuperviewHeight: @escaping () -> Void
+    ) async {
+        guard let (_, exchangeRateMeta, rawCurrency) = CurrencySelectorUtilities.adaptivePricingData(from: session) else {
+            return nil
+        }
+        self.currencySelectionDelegate = delegate
+        self.appearance = appearance
+        self.checkoutSessionId = session.id
+        self.needsUpdateSuperviewHeight = needsUpdateSuperviewHeight
+        let currency = CurrencySelectorUtilities.CurrencyCode(rawCurrency)
+        self.sessionCurrency = currency.apiValue
+        super.init(frame: .zero)
+
+        await flagImageManager.prefetchFlagImages(for: session)
+        setupContainerStackView()
+        buildSelectorView(session: session, exchangeRateMeta: exchangeRateMeta, currency: currency)
+        updateCaption(currency: currency, exchangeRateMeta: exchangeRateMeta)
+    }
+
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override public var intrinsicContentSize: CGSize {
+        return containerStackView.systemLayoutSizeFitting(
+            CGSize(width: bounds.width, height: UIView.layoutFittingCompressedSize.height),
+            withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .fittingSizeLevel
+        )
+    }
+
+    private func setupContainerStackView() {
+        containerStackView.axis = .vertical
+        containerStackView.spacing = 6
+        containerStackView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(containerStackView)
+        NSLayoutConstraint.activate([
+            containerStackView.topAnchor.constraint(equalTo: topAnchor),
+            containerStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            containerStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            containerStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
+        ])
+        containerStackView.addArrangedSubview(errorLabel)
+    }
+
+    func update(with session: CheckoutElementsController.Session) {
+        guard let (_, exchangeRateMeta, rawCurrency) =
+                CurrencySelectorUtilities.adaptivePricingData(from: session)
+        else {
+            assertionFailure("Adaptive Pricing data unexpectedly became unavailable")
+            return
+        }
+
+        let currency = CurrencySelectorUtilities.CurrencyCode(rawCurrency)
+        clearError()
+        updateSelectorItems(session: session, exchangeRateMeta: exchangeRateMeta)
+        sessionCurrency = currency.apiValue
+        selectorView?.select(currency.apiValue)
+        updateCaption(currency: currency, exchangeRateMeta: exchangeRateMeta)
+    }
+
+    private func resolveLabelContent() -> CurrencySelectorElement.Appearance.LabelContent {
+        guard case .automatic = appearance.labelContent else {
+            return appearance.labelContent
+        }
+        return .amount
+    }
+
+    private func buildSelectorItems(
+        session: CheckoutElementsController.Session,
+        exchangeRateMeta: CheckoutElementsController.Session.ExchangeRateMeta
+    ) -> (left: TwoOptionSelectorItem, right: TwoOptionSelectorItem) {
+        let resolvedLabelContent = resolveLabelContent()
+        let flagFont = appearance.scaledFont(for: appearance.font, style: .footnote)
+        return CurrencySelectorUtilities.buildSelectorItems(
+            exchangeRateMeta: exchangeRateMeta,
+            localizedPricesMetas: session.localizedPricesMetas,
+            labelContent: resolvedLabelContent,
+            flagPrefixProvider: { [weak flagImageManager] currency in
+                flagImageManager?.flagIcon(for: currency, font: flagFont) ?? NSAttributedString()
+            }
+        )
+    }
+
+    private func updateSelectorItems(
+        session: CheckoutElementsController.Session,
+        exchangeRateMeta: CheckoutElementsController.Session.ExchangeRateMeta
+    ) {
+        let (left, right) = buildSelectorItems(session: session, exchangeRateMeta: exchangeRateMeta)
+        selectorView?.updateItems(left: left, right: right)
+    }
+
+    private func buildSelectorView(
+        session: CheckoutElementsController.Session,
+        exchangeRateMeta: CheckoutElementsController.Session.ExchangeRateMeta,
+        currency: CurrencySelectorUtilities.CurrencyCode
+    ) {
+        let (left, right) = buildSelectorItems(session: session, exchangeRateMeta: exchangeRateMeta)
+
+        let newSelector = TwoOptionSelectorView(
+            leftItem: left,
+            rightItem: right,
+            selectedItemId: currency.apiValue,
+            appearance: appearance,
+            needsUpdateSuperviewHeight: { [weak self] in
+                self?.contentHeightDidChange()
+            }
+        )
+        newSelector.delegate = self
+        newSelector.translatesAutoresizingMaskIntoConstraints = false
+        containerStackView.insertArrangedSubview(newSelector, at: 0)
+
+        selectorView = newSelector
+        newSelector.setEnabled(isUserInteractionEnabled)
+        invalidateContentSize()
+    }
+
+    private func updateCaption(
+        currency: CurrencySelectorUtilities.CurrencyCode,
+        exchangeRateMeta: CheckoutElementsController.Session.ExchangeRateMeta
+    ) {
+        let caption = CurrencySelectorUtilities.caption(
+            forSelectedCurrency: currency.apiValue,
+            exchangeRateMeta: exchangeRateMeta
+        )
+        let detailText = CurrencySelectorUtilities.detailText(exchangeRateMeta: exchangeRateMeta)
+        selectorView?.updateCaption(caption, detailText: detailText)
+        invalidateContentSize()
+    }
+
+    func showError(_ message: String) {
+        errorLabel.text = message
+        errorLabel.setHiddenIfNecessary(false)
+        invalidateContentSize()
+    }
+
+    func clearError() {
+        guard errorLabel.text != nil else { return }
+        errorLabel.text = nil
+        errorLabel.setHiddenIfNecessary(true)
+        invalidateContentSize()
+    }
+
+    private func contentHeightDidChange() {
+        invalidateContentSize()
+        needsUpdateSuperviewHeight()
+    }
+
+    private func invalidateContentSize() {
+        invalidateIntrinsicContentSize()
+        didUpdateContentHeight()
+    }
+}
+
+extension CurrencySelectorElementUIView: TwoOptionSelectorViewDelegate {
+    func twoOptionSelectorView(_: TwoOptionSelectorView, didSelectItemWithId id: String) {
+        selectorView?.setEnabled(false)
+
+        Task { [weak self] in
+            guard let self, let currencySelectionDelegate else { return }
+            do {
+                try await currencySelectionDelegate.selectCurrency(id)
+                STPAnalyticsClient.sharedClient.log(
+                    analytic: PaymentSheetAnalytic(
+                        event: .adaptivePricingCurrencyToggled,
+                        additionalParams: ["checkout_session_id": checkoutSessionId]
+                    )
+                )
+            } catch {
+                selectorView?.select(sessionCurrency)
+
+                STPAnalyticsClient.sharedClient.log(
+                    analytic: PaymentSheetAnalytic(
+                        event: .adaptivePricingCurrencyToggledFailed,
+                        additionalParams: error.serializeForV1Analytics().merging(
+                            ["checkout_session_id": checkoutSessionId]
+                        ) { _, checkoutSessionId in checkoutSessionId }
+                    )
+                )
+                showError(error.localizedDescription)
+            }
+            selectorView?.setEnabled(isUserInteractionEnabled)
+        }
+    }
+}
