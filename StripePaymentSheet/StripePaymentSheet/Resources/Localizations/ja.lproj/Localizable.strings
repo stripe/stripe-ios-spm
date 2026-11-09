@@ -1,0 +1,399 @@
+"%1$@ ×%2$d" = "%1$@ × %2$li";
+
+"%@ will no longer be saved to your wallet." = "%@ はウォレットに保存されなくなります。";
+
+"+ Add" = "+ 追加";
+
+"Accept" = "同意する";
+
+"Add US bank account" = "アメリカの銀行口座を追加";
+
+"Add a card" = "カードを追加";
+
+"Add a payment method" = "決済手段を追加";
+
+"Add bank account" = "銀行口座を追加する";
+
+"Add new card" = "新しいカードを追加";
+
+"Add new payment method" = "新たな支払い方法を追加";
+
+"Add your payment information" = "支払い情報を追加";
+
+"Approve payment" = "支払いを承認する";
+
+"Back" = "戻る";
+
+"Bank" = "銀行";
+
+"Bank account" = "銀行口座";
+
+"Bank account details cannot be changed." = "銀行口座の詳細は変更できません。";
+
+"Before we can send a code to your email, we need to verify additional information about you. Please enter your phone number ending in ••%@." = "メールアドレスにコードを送信する前に、お客様に関する追加情報の確認が必要です。末尾が ••%@ の電話番号を入力してください。";
+
+"Before we can send a code to your email, we need to verify additional information about you. Please enter your phone number." = "メールアドレスにコードを送信する前に、お客様に関する追加情報の確認が必要です。電話番号を入力してください。";
+
+"Buy Now, Pay Later with  <img/>" = "<img/> で後払い";
+
+"Buy Now, Pay Later with Afterpay" = "Afterpay で後払い";
+
+"Buy Now, Pay Later with Cash App Afterpay" = "Cash App Afterpay で後払い";
+
+"Buy Now, Pay Later with Clearpay" = "Clearpay で後払い";
+
+"Buy now or pay later with Klarna" = "Klarna で後払い";
+
+"By confirming your payment with GCash, you allow %@ to charge your GCash account for future payments in accordance with their terms." = "GCash による支払いを確定すると、%@ が規約に従って今後の支払いをお客様の GCash アカウントに請求することを許可することになります。";
+
+"By confirming your payment with NICEPAY, you allow %@ to charge this payment method for future payments in accordance with their terms." = "NICEPAY による支払いを確定すると、%@ が規約に従って今後の支払いをこの決済手段に請求することを許可することになります。";
+
+"By confirming your payment with PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "PayPal による支払いを確定すると、%@ が規約に従って今後の支払いをお客様の PayPal アカウントに請求することを許可することになります。";
+
+"By confirming your payment with Touch 'n Go, you allow %@ to charge your Touch 'n Go account for future payments in accordance with their terms." = "Touch 'n Go による支払いを確定すると、%@ が規約に従って今後の支払いをお客様の Touch 'n Go アカウントに請求することを許可することになります。";
+
+"By confirming your payment with TrueMoney, you allow %@ to charge your TrueMoney account for future payments in accordance with their terms." = "TrueMoney による支払いを確定すると、%@ が規約に従って今後の支払いをお客様の TrueMoney アカウントに請求することを許可することになります。";
+
+"By confirming your payment, you agree that your transaction will be handled by Global Stack Services Limited as merchant of record and in accordance with their <terms>terms of use</terms>." = "取引がマーチャントオブレコードである Global Stack Services Limited によって、その<terms>利用規約</terms>に従って処理されることに同意した上で、支払いを確定します。";
+
+"By confirming your payment, you agree that your transaction will be handled by Global Stack Services Limited as merchant of record and in accordance with their <terms>terms</terms>." = "取引がマーチャントオブレコードである Global Stack Services Limited によって、その<terms>規約</terms>に従って処理されることに同意した上で、支払いを確定します。";
+
+"By continuing to Amazon Pay, you allow %@ to charge your Amazon Pay account for future payments in accordance with their terms." = "Amazon Pay への処理を続行すると、%@ が規約に従って今後の支払いをお客様の Amazon Pay アカウントに請求することを許可することになります。";
+
+"By continuing to Klarna, you allow %@ to charge your Klarna account for future payments in accordance with their terms and Klarna's terms. You can change this at any time in your Klarna app or by reaching out to %@." = "Klarna への処理を続行すると、%1$@ が自社の規約と Klarna の規約に従って今後の支払いをお客様の Klarna アカウントに請求することを許可することになります。この設定はいつでも変更できます。Klarna アプリから変更するか、%2$@ までお問い合わせください。";
+
+"By continuing to PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "PayPal を継続すると、%@ が規約に従って今後の支払いをお客様の PayPal アカウントに請求することを許可することになります。";
+
+"By continuing to Revolut Pay, you allow %@ to charge your Revolut Pay account for future payments in accordance with their terms." = "Revolut Pay への処理を続行すると、%@ が規約に従って今後の支払いをお客様の Revolut Pay アカウントに請求することを許可することになります。";
+
+"By continuing you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "続行すると、<terms>規約</terms>と<privacy>プライバシーポリシー</privacy>に同意したことになります。";
+
+"By continuing, you agree to authorize payments pursuant to <terms>these terms</terms>." = "続行すると、<terms>これらの規約</terms>に従って支払いをオーソリすることに同意したものとみなされます。";
+
+"By continuing, you agree to save your information for future purchases with %1$@ and <link>%2$@</link> according to %2$@ <terms>terms</terms> and <privacy>privacy</privacy>." = "続行すると、%2$@ の<terms>規約</terms>および<privacy>プライバシー</privacy>に従い、今後 %1$@ と <link>%2$@</link> で購入できるよう、お客様の情報が保存されることに同意したものとみなされます。";
+
+"By continuing, you agree to save your information for future purchases with %@." = "続行することで、あなたは、%@ での今後の購入のために情報を保存することに同意したことになります。";
+
+"By continuing, you authorize %@ to automatically debit your Satispay Balance on a recurring basis in accordance with your purchase or subscription plan." = "続行すると、%@ が購入またはサブスクリプションプランに従って、定期的に Satispay Balance から自動的に引き落とすことを許可します。";
+
+"By continuing, you authorize %@ to automatically debit your Twint Balance on a recurring basis in accordance with your purchase or subscription plan." = "継続することで、お客様は %@ に対し、購入プランまたはサブスクリプションプランに従って、Twint Balance から定期的に自動引き落としを行うことをオーソリします。";
+
+"By continuing, you authorize %@ to debit your Cash App account for this payment and future payments in accordance with %@'s terms, until this authorization is revoked. You can change this anytime in your Cash App Settings." = "続行すると、%2$@ の利用規約に従って、この許可が取り消されない限り、お客様は今回の支払いおよび今後の支払いを、Cash App のアカウントから引き落とすことを %1$@ に許可したものとみなされます。これは、Cash App の設定でいつでも変更することができます。";
+
+"By joining %@, you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "%@ に参加すると、<terms>規約</terms>と<privacy>プライバシーポリシー</privacy>に同意したものとみなされます。";
+
+"By providing phone number and email, you agree to create a %1$@ account subject to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "電話番号とメールアドレスを提供するには、%1$@ の <terms>規約</terms> と <privacy>プライバシーポリシー</privacy> に同意した上で、%1$@ アカウントを作成します。";
+
+"By providing your bank account details and confirming this payment, you agree to this Direct Debit Request and the <terms>Direct Debit Request service agreement</terms>, and authorise Stripe Payments Australia Pty Ltd ACN 160 180 343 Direct Debit User ID number 507156 (“Stripe”) to debit your account through the Bulk Electronic Clearing System (BECS) on behalf of %@ (the \"Merchant\") for any amounts separately communicated to you by the Merchant. You certify that you are either an account holder or an authorised signatory on the account listed above." = "本口座振替依頼および<terms>ダイレクトデビットリクエスト利用規約</terms>に同意し、本支払いを確認することにより、お客様は銀行口座情報を提供し、Stripe Payments Australia Pty Ltd (ACN 160 180 343、ダイレクトデビットユーザーID：507156) (以下「Stripe」) が、%@ (以下「加盟店」) に代わり、加盟店から別途通知される金額について、Bulk Electronic Clearing System (BECS) を通じてお客様の口座から引き落としを行うことを承認するものとします。また、お客様は、上記口座の口座名義人であるか、または当該口座の正式な署名権限者であることを証明するものとします。";
+
+"By providing your card information, you allow %@ to charge your card for future payments in accordance with their terms." = "カード情報を提供すると、%@ がその規約に従って今後の支払いをお客様のカードに請求することを許可することになります。";
+
+"By providing your email, you agree to create a %1$@ account and save your payment info to %1$@, according to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "メールアドレスを入力すると、%1$@ の<terms>規約</terms>と<privacy>プライバシーポリシー</privacy>に基づき、%1$@ アカウントを作成し、決済情報を %1$@ に保存することに同意したものとみなされます。";
+
+"By providing your payment information and confirming this payment, you authorise (A) %@ and Stripe, our payment service provider, to send instructions to your bank to debit your account and (B) your bank to debit your account in accordance with those instructions. As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited. Your rights are explained in a statement that you can obtain from your bank. You agree to receive notifications for future debits up to 2 days before they occur." = "支払い情報を提供し、この支払いを確定することで、お客様は (A) %@ および決済サービスプロバイダーである Stripe がお客様の銀行に口座引き落としの指図を送り、(B) 銀行がこの指図に従ってお客様の口座から引き落としを行うことを承認することになります。お客様の権利の一部として、銀行との契約条件に基づき、お客様は銀行からの返金を受ける権利を有します。返金は口座の引き落とし日から 8 週間以内に請求する必要があります。お客様の権利は、銀行から得られる明細書内で説明されています。お客様は今後の引き落としに関する通知を引き落としの実行日の 2 日前までに受け取ることに同意するものとします。";
+
+"By providing your phone number, you agree to create a %1$@ account and save your payment info to %1$@, according to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "電話番号を提供するには、%1$@ の<terms>規約</terms>と<privacy>プライバシーポリシー</privacy>に同意した上で、%1$@ アカウントを作成し、決済情報を %1$@ に保存してください。";
+
+"By saving your bank account for %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "%@ の銀行口座を保存すると、<terms>これらの規約</terms>に従って支払いをオーソリすることに同意したものと見なされます。";
+
+"By saving your payment information, you allow %@ to charge you for future payments in accordance with their terms." = "決済情報を保存することにより、お客様は %@ が利用規約に従い今後の決済について請求することを許可することになります";
+
+"By submitting your order to %@ and %@, you agree to save your information with %@ for future purchases, and agree to authorize payments pursuant to <terms>these terms</terms>." = "ご注文を %1$@ および %2$@ に送信することにより、お客様は今後の購入のためにお客様の情報を %3$@ に保存することに同意し、<terms>本規約</terms>に従って支払いをオーソリすることに同意したものとみなされます。";
+
+"By submitting your order to %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "%@ に注文を送信することにより、<terms>これらの規約</terms> に従って決済を承認することに同意したものとみなされます。";
+
+"CPF/CPNJ" = "CPF/CPNJ";
+
+"Cancel and pay another way" = "キャンセルして別の方法で支払う";
+
+"Card details cannot be changed." = "カードの詳細は変更できません。";
+
+"Card number. Supported cards include %@" = "カード番号。対応カードは %@ です";
+
+"Change" = "変更する";
+
+"Choose a card brand" = "カードブランドを選択";
+
+"Choose a payment method" = "支払い方法を選択";
+
+"Close card scanner" = "カードスキャナを閉じる";
+
+"Complete the payment using Pix to finish the purchase." = "Pix を使用して支払い、購入を完了してください。";
+
+"Confirm" = "確定する";
+
+"Confirm payment details" = "支払い情報を確定する";
+
+"Confirm the Bizum payment in your mobile banking application within %@ to complete the purchase." = "購入を完了するには、%@ 以内にモバイルバンキングアプリで Bizum 決済を確認してください。";
+
+"Confirm the payment in your MB WAY app within %@ to complete the purchase." = "購入を完了するには、%@ 以内に MB WAY アプリで決済を確認してください。";
+
+"Confirm the payment in your bank or payment app within %@ to complete the purchase." = "%@ 内で銀行または決済アプリで支払いを確定して、購入を完了します。";
+
+"Confirm the payment in your bank's app within %@ to complete the purchase." = "購入を完了するには、%@ 以内に銀行のアプリで支払いを確定してください。";
+
+"Confirm your CVC" = "セキュリティコードを確定";
+
+"Confirm your information" = "情報を確認する";
+
+"Contact information" = "連絡先情報";
+
+"Continue another way" = "別の方法で続行";
+
+"Create an account with %@ for faster checkout across the web" = "%@ でアカウントを作成すると、ウェブ上でよりスムーズに決済できるようになります";
+
+"Debit or credit card" = "デビットカードまたはクレジットカード";
+
+"Declarations" = "表明事項";
+
+"Default" = "デフォルト";
+
+"Default payment method" = "デフォルトの決済手段";
+
+"Did you mean %@? %@." = "%1$@ のことですか？ %2$@。";
+
+"Discard Changes" = "変更を破棄";
+
+"Discard changes?" = "変更を破棄しますか？";
+
+"Discount" = "割引";
+
+"EPS Bank" = "EPS 銀行";
+
+"Edit address" = "住所を編集";
+
+"Email code" = "メールコード";
+
+"Enter address manually" = "住所を手動で入力";
+
+"Enter the phone number on your Link account." = "Link アカウントの電話番号を入力してください。";
+
+"Exchange rate and fees of your bank may apply." = "お客様の銀行の為替レートや手数料が適用される場合があります。";
+
+"FPX Bank" = "FPX 銀行";
+
+"Fast, secure checkout" = "迅速で安全な決済";
+
+"Get %@ back when you pay for the first time with your bank. <terms>See terms</terms>" = "ご利用の銀行での初回支払い時に %@ を受け取れます。<terms>規約を表示</terms>";
+
+"Get %@ back when you pay with your bank. <terms>See terms</terms>" = "ご利用の銀行での支払い時に %@ を受け取れます。<terms>規約を表示</terms>";
+
+"Hide details" = "詳細を非表示";
+
+"I understand that Stripe will be collecting Direct Debits on behalf of %@ and confirm that I am the account holder and the only person required to authorise debits from this account." = "私は、Stripe が %@ の代理として口座引き落としによる回収を行うことを理解しています。また、私が当該口座を保有しており、この口座からの引き落としを承認すべき唯一の人間であることを認めます。";
+
+"IBAN" = "IBAN";
+
+"Invoice payment for business buyers." = "法人の購入者向けの請求書払い。";
+
+"Keep Editing" = "編集を続ける";
+
+"Last 4 digits of SSN" = "SSN の末尾 4 桁";
+
+"Log in to another account" = "別のアカウントにログイン";
+
+"Manage SEPA debit" = "SEPA デビットの管理";
+
+"Manage US bank account" = "アメリカの銀行口座の管理";
+
+"Manage bank account" = "銀行口座の管理";
+
+"Manage card" = "カードの管理";
+
+"Manage cards" = "カードを管理する";
+
+"Manage payment method" = "支払い方法の管理";
+
+"Manage payment methods" = "決済手段を管理する";
+
+"Manage your payment methods" = "決済手段を管理する";
+
+"More options" = "その他のオプション";
+
+"Name on card" = "カード名義人";
+
+"Naver Pay Card" = "Naver Pay カード";
+
+"Naver Pay Money/Point" = "Naver Pay マネー / ポイント";
+
+"New card" = "新しいカード";
+
+"New payment method" = "新しい決済手段";
+
+"No %@ promo" = "%@ のプロモーションはありません";
+
+"None of the payment methods in your %@ account work with this business." = "%@ アカウントの決済手段は、このビジネスではご利用いただけません。";
+
+"Not you?" = "ご本人ではありませんか？";
+
+"Only card brand can be changed." = "カードブランドのみ変更できます。";
+
+"Open to see more information." = "詳細情報を表示するにはこちらを開いてください。";
+
+"Or" = "または";
+
+"Or pay using" = "または別の方法で支払う";
+
+"Or pay with a card" = "または、カードで支払う";
+
+"Or use" = "または次を使用:";
+
+"Or use a card" = "またはカードを使用";
+
+"Pay %@" = "%@ を支払う";
+
+"Pay another way" = "別の方法で支払う";
+
+"Pay faster at %@ and thousands of businesses." = "%@ やその他多数のサイトで、すばやく支払うことができます。";
+
+"Pay faster everywhere %@ is accepted." = "%@ に対応しているすべての場所で、より迅速に支払う。";
+
+"Pay faster everywhere Link is accepted." = "Link に対応している店舗でスピーディーに支払うことができます。";
+
+"Pay over time with %@" = "%@ で時間をかけて支払う";
+
+"Pay over time with Affirm" = "Affirm で分割払い";
+
+"Pay with %@" = "%@ で支払う";
+
+"Pay with Link" = "Link で支払う";
+
+"Pay with your bank account in just a few steps." = "銀行口座を使用して簡単に支払えます。";
+
+"Payment" = "決済";
+
+"Payment failed" = "支払いに失敗しました";
+
+"Payment method details cannot be changed." = "決済手段の詳細は変更できません。";
+
+"Payment methods" = "決済手段";
+
+"Please choose a valid payment method." = "有効な支払い方法を選択してください。";
+
+"Please go back and select another payment method" = "前に戻って別の決済手段を選択してください";
+
+"Point the camera at your card." = "カメラをカードに向けてください。";
+
+"Przelewy24 Bank" = "Przelewy24 銀行";
+
+"Remove %@" = "%@ を削除";
+
+"Remove bank?" = "銀行情報を削除しますか？";
+
+"Remove card?" = "カードを削除しますか？";
+
+"Remove linked account" = "関連付けられた口座を削除";
+
+"Remove payment method" = "決済手段の削除";
+
+"Remove payment method?" = "決済手段を削除しますか？";
+
+"Resend code in %d seconds" = "%li 秒後にコードを再送";
+
+"SEPA debit details cannot be changed." = "SEPA デビットの詳細は変更できません。";
+
+"Save" = "保存";
+
+"Save a new payment method" = "新しい決済手段を保存する";
+
+"Save address" = "住所を保存する";
+
+"Save for future payments" = "今後の支払いのために保存する";
+
+"Save my info for faster checkout with %@" = "%@ でより迅速に決済できるよう情報を保存";
+
+"Save payment details to %@ for future purchases" = "今後の購入のために %@ に決済情報を保存する";
+
+"Save this account for future %@ payments" = "今後の %@ の支払いのためにこの口座を保存する";
+
+"Save your bank account in just a few steps." = "銀行口座の保存はわずか数ステップで完了します。";
+
+"Save your info for secure 1-click checkout with %@" = "%@ を使用して安全なワンクリック決済の情報を保存する";
+
+"Saved" = "保存済み";
+
+"Select card" = "カードを選択する";
+
+"Select how you want to pay:" = "支払い方法を選択してください:";
+
+"Select payment method" = "決済手段を選択する";
+
+"Select your payment method" = "支払い方法を選択してください";
+
+"Set as default" = "デフォルトとして設定";
+
+"Set as default payment method" = "デフォルトの決済手段として設定する";
+
+"Set up" = "設定";
+
+"Shipping to %@ is not supported." = "%@ への配送には対応していません。";
+
+"Show details" = "詳細を表示";
+
+"Show menu" = "メニューを表示";
+
+"Sign in or sign up" = "サインインまたは登録";
+
+"Sign out of %@" = "%@ からサインアウト";
+
+"Simple, secure one-click payments" = "シンプルで安全なワンクリック決済";
+
+"Something went wrong when linking your account.\nPlease try again later." = "アカウントをリンクする際に問題が発生しました。\n後で再度お試しください。";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you'll get an email with instructions to finish saving your bank account with %@." = "Stripe は 1 ～ 2 営業日後に口座に $0.01 を入金します。その後、%@ で銀行口座の保存を完了させるための手順が記載されたメールが送信されます。";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you’ll get an email with instructions to complete payment to %@." = "1 ～ 2 営業日以内に Stripe は口座に $0.01 を入金します。その後、%@ への支払いを完了するための手順が記載されたメールが送信されます。";
+
+"Subtotal" = "小計";
+
+"Tap to close" = "タップして閉じます";
+
+"Tap to expand" = "タップして展開します";
+
+"Tax" = "税金";
+
+"Terms and Conditions" = "利用規約";
+
+"Terms of Service" = "利用規約";
+
+"The IBAN you entered is incomplete." = "入力した IBAN に不備があります。";
+
+"The IBAN you entered is invalid, \"%@\" is not a supported country code." = "入力した IBAN が無効です。「%@」はサポートされている国コードではありません。";
+
+"The provided verification code has expired." = "入力された確認コードは期限が切れています。";
+
+"The provided verification code is incorrect." = "入力された確認コードは正しくありません。";
+
+"This is an international purchase and excludes a 3.5% IOF fee. By proceeding, you acknowledge and accept <terms>Ebanx’s terms and conditions</terms>." = "これは海外購入であり、3.5% の IOF 手数料は含まれません。続行することにより、<terms>Ebanx の利用規約</terms>を承認し、同意したとみなされます。";
+
+"This is your default" = "これはデフォルトです";
+
+"This payment method will be removed but will remain available for %@ subscriptions." = "この決済手段は削除されますが、%@ のサブスクリプションでは引き続き使用できます。";
+
+"This phone number doesn't match your Link account. Please try again." = "この電話番号は Link アカウントと一致しません。もう一度お試しください。";
+
+"Too many attempts. Please try again in a few minutes." = "試行回数が多すぎます。数分後に再度お試しください。";
+
+"Unavailable for this purchase" = "この購入には利用できません";
+
+"Update card" = "カードを更新";
+
+"Update payment method" = "決済手段の更新";
+
+"Use billing address for shipping" = "請求先住所を配送先として使用";
+
+"Verify your phone number" = "電話番号を確認";
+
+"Verifying your account…" = "アカウントを確認中…";
+
+"View more" = "さらに表示";
+
+"We couldn't verify your account. Please close this window and try again." = "アカウントを確認できませんでした。このウィンドウを閉じて、もう一度お試しください。";
+
+"Yes, update" = "はい、更新します";
+
+"You can't pay with %@ here" = "ここでは %@ でお支払いいただけません";
+
+"Your IBAN should start with a two-letter country code." = "IBANコードの先頭には 2 文字の国コードを入力してください。";
+
+"Your address changes won't be saved." = "住所の変更内容は保存されません。";

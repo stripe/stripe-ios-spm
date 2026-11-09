@@ -1,0 +1,33 @@
+//
+//  PaymentSheetFormFactory+AfterpayClearpay.swift
+//  StripePaymentSheet
+//
+
+import Foundation
+@_spi(InternalOnlyAPI) import StripeCore
+@_spi(InternalOnlyAPI) import StripeUICore
+
+extension PaymentSheetFormFactory {
+
+    func makeAfterpayClearpay() -> PaymentMethodElement {
+        let header = makeAfterpayClearpayHeader()
+        let contactInfoSection = makeContactInformationSection(
+            nameRequiredByPaymentMethod: true,
+            emailRequiredByPaymentMethod: true,
+            phoneRequiredByPaymentMethod: false
+        )
+        let billingDetails = makeBillingAddressSectionIfNecessary(requiredByPaymentMethod: false)
+        return FormElement(autoSectioningElements: [header, contactInfoSection, billingDetails].compactMap { $0 }, theme: theme)
+    }
+
+    func makeAfterpayClearpayHeader() -> SubtitleElement {
+        let legacyAffirmHeader = SubtitleElement(
+            view: AfterpayPriceBreakdownView(
+                currency: currency,
+                appearance: configuration.appearance
+            ),
+            isHorizontalMode: paymentMethodOrientation == .horizontal
+        )
+        return makeBNPLHeader(fallback: legacyAffirmHeader)
+    }
+}

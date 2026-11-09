@@ -1,0 +1,233 @@
+"Accepted forms of ID include" = "Les formes d'identificació acceptades inclouen";
+
+"Allow" = "Permet";
+
+"Alternatively, you may manually upload a photo of your identity document." = "També podeu pujar manualment una foto del document d'identitat.";
+
+"App Settings" = "Configuració de l'aplicació";
+
+"Auto" = "Automàtic";
+
+"Back %@ photo successfully uploaded" = "La foto de la cara posterior de %@ s'ha carregat correctament";
+
+"Back identity document photo successfully uploaded" = "La foto de la cara posterior del document d'identitat s'ha carregat correctament";
+
+"Back of %@" = "Cara posterior de %@";
+
+"Back of ID not detected" = "No s'ha detectat el revers del document d'identitat";
+
+"Back of driver's license or government-issued photo ID" = "Revers del carnet de conduir o del document d'identitat amb foto emès pel govern";
+
+"Back of identity document" = "Dors del document d'identitat";
+
+"Camera permission" = "Permís de càmera";
+
+"Camera unavailable" = "Càmera no disponible";
+
+"Captured front" = "S'ha capturat la part davantera";
+
+"Captured left" = "S'ha capturat la part esquerra";
+
+"Captured right" = "S'ha capturat la part dreta";
+
+"Capturing…" = "S'està capturant la imatge...";
+
+"Center ID in view" = "Centreu el document d'identitat a la imatge";
+
+"Choose File" = "Selecciona fitxer";
+
+"Consent" = "Consentiment";
+
+"Could not capture image" = "No s'ha pogut capturar la imatge";
+
+"Date of birth does not look valid" = "La data de naixement no és vàlida";
+
+"Decline" = "Rebutja";
+
+"Details not visible" = "Els detalls no es veuen bé";
+
+"Flip your %@ over to the other side" = "Gira el %@";
+
+"Flip your driver's license or government-issued photo ID over to the other side" = "Gireu el carnet de conduir o el document d'identitat amb foto emès pel govern cap a l'altre costat";
+
+"Flip your identity card over to the other side" = "Gireu el document d'identitat perquè se'n vegi l'altra cara";
+
+"Follow the instructions to take selfies to compare against the image on your photo ID." = "Seguiu les instruccions per fer-vos una autofoto per comparar-la amb la imatge del vostre document d'identitat amb foto.";
+
+"Front %@ photo successfully uploaded" = "La foto de la cara frontal de %@ s'ha carregat correctament";
+
+"Front identity document photo successfully uploaded" = "La foto de la cara frontal del document d'identitat s'ha carregat correctament";
+
+"Front of %@" = "Cara frontal de %@";
+
+"Front of ID not detected" = "No s'ha detectat l'anvers del document d'identitat";
+
+"Front of driver's license or government-issued photo ID" = "Anvers del carnet de conduir o del document d'identitat amb foto emès pel govern";
+
+"Front of driver's license or passport" = "Anvers del carnet de conduir o del passaport";
+
+"Front of driver's license, passport, or government-issued photo ID" = "Anvers del carnet de conduir, del passaport o del document d'identitat amb foto emès pel govern";
+
+"Front of identity document" = "Anvers del document d'identitat";
+
+"Front of passport or government-issued photo ID" = "Anvers del passaport o del document d'identitat amb foto emès pel govern";
+
+"Get ready to scan your photo ID" = "Prepareu-vos per escanejar la vostra identificació amb foto";
+
+"Get ready to take a selfie" = "Prepareu-vos per fer-vos l'autofoto";
+
+"Go Back" = "Enrere";
+
+"Great! Checking your images...." = "Genial! S'estan comprovant les imatges...";
+
+"Help us improve verifications" = "Ajudeu-nos a millorar les verificacions";
+
+"Hold still, scanning" = "S'està escanejant; espereu";
+
+"Hold still..." = "Quedeu-vos quiet...";
+
+"I'm ready" = "Estic a punt";
+
+"ID Number" = "Número d'identificació";
+
+"Image is blurry. Hold your phone steady and try again." = "La imatge és borrosa. Mantingueu el telèfon ferm i torneu-ho a provar.";
+
+"Image taken" = "Imatge capturada";
+
+"Individual CPF" = "CPF particular";
+
+"Invalid document" = "Document no vàlid";
+
+"Keep ID level" = "Col·loca bé el document d'identitat";
+
+"Last 4 of Social Security number" = "Últims 4 números de la Seguretat Social";
+
+"Make sure you're in a well lit space." = "Assegureu-vos que esteu en un espai ben il·luminat.";
+
+"Manual" = "Manual";
+
+"Move closer" = "Apropa'l";
+
+"Move farther" = "Allunya'l";
+
+"Move to a darker area" = "Mou-lo a un espai més fosc";
+
+"Move to a well-lit area" = "Mou-te a un espai ben il·luminat";
+
+"NRIC or FIN" = "NRIC o FIN";
+
+"No document detected" = "No s'ha detectat cap document";
+
+"Personal ID number" = "Número d'identificació personal";
+
+"Personal Information" = "Dades personals";
+
+"Phone Number" = "Número de telèfon";
+
+"Phone Verification" = "Verificació del telèfon";
+
+"Photo Library" = "Biblioteca de fotos";
+
+"Place your face within the frame" = "Col·loqueu la cara dins del marc";
+
+"Please upload images of the front and back of your %@" = "Si us plau, penja la foto de la cara frontal i de la cara posterior del teu %@";
+
+"Please upload images of the front and back of your identity document" = "Carregueu la foto de la cara frontal i de la cara posterior del vostre document d'identitat";
+
+"Position your %@ in the center of the frame" = "Col·loca el %@ al centre del marc";
+
+"Position your driver's license or government-issued photo ID in the center of the frame" = "Col·loqueu el carnet de conduir o el document d'identitat amb foto emès pel govern al centre del marc";
+
+"Position your driver's license or passport in the center of the frame" = "Col·loqueu el carnet de conduir o el passaport al centre del marc";
+
+"Position your driver's license, passport, or government-issued photo ID in the center of the frame" = "Col·loqueu el carnet de conduir, el passaport o el document d'identitat amb foto emès pel govern al centre del marc";
+
+"Position your face in the center of the frame." = "Col·loqueu la cara al centre del marc.";
+
+"Position your identity document in the center of the frame" = "Col·loqueu el vostre document d'identitat al centre del marc";
+
+"Position your passport or government-issued photo ID in the center of the frame" = "Col·loqueu el passaport o el document d'identitat amb foto emès pel govern al centre del marc";
+
+"Retake Photos" = "Torna a fer les fotos";
+
+"Scan" = "Escaneig";
+
+"Scanned" = "S'ha escanejat correctament";
+
+"Select" = "Selecciona";
+
+"Select a location to upload the back of your identity document from" = "Seleccioneu una ubicació des d'on carregar el revers del document d'identitat";
+
+"Select a location to upload the front of your identity document from" = "Seleccioneu una ubicació des d'on carregar l'anvers del document d'identitat";
+
+"Select back %@ photo" = "Selecciona la foto de la cara posterior de %@";
+
+"Select back identity document photo" = "Selecciona la foto de la cara posterior del document d'identitat";
+
+"Select front %@ photo" = "Selecciona la foto de la cara frontal de %@";
+
+"Select front identity document photo" = "Selecciona la foto de la cara frontal del document d'identitat";
+
+"Selfie" = "Autofoto";
+
+"Selfie captures are complete" = "S'han completat les autofotos";
+
+"Take Photo" = "Fes foto";
+
+"The images of your identity document have not been saved. Do you want to leave?" = "No s'han desat les imatges del document d'identitat. Voleu sortir?";
+
+"There was an error accessing the camera." = "Hi ha hagut un error en accedir a la càmera.";
+
+"Try Again" = "Torna-ho a intentar";
+
+"Try reduce glare and make ID visible" = "Intenteu reduir l'enlluernament i feu que l'ID sigui visible.";
+
+"Turn head left" = "Gireu el cap a l'esquerra";
+
+"Turn head right" = "Gireu el cap a la dreta";
+
+"Turn your head left." = "Gireu el cap a l'esquerra.";
+
+"Turn your head right." = "Gireu el cap a la dreta.";
+
+"Unable to establish a connection." = "No s'ha pogut establir la connexió.";
+
+"Unsaved changes" = "Canvis no desats";
+
+"Upload" = "Carrega";
+
+"Upload a Photo" = "Carrega una foto";
+
+"Upload your %@" = "Puja el teu %@";
+
+"Upload your photo ID" = "Carregueu la vostra ID amb foto";
+
+"Uploading back %@ photo" = "S'està carregant la foto de la cara posterior de %@";
+
+"Uploading back identity document photo" = "S'està carregant la foto de la cara posterior del document d'identitat";
+
+"Uploading front %@ photo" = "S'està carregant la foto de la cara frontal de %@";
+
+"Uploading front identity document photo" = "S'està carregant la foto de la cara frontal del document d'identitat";
+
+"Verify with a selfie" = "Verifiqueu amb una autofoto";
+
+"Verify your identity" = "Verifica la teva identitat";
+
+"We could not capture a high-quality image." = "No hem pogut capturar una imatge d'alta qualitat.";
+
+"We need permission to use your camera. Please allow camera access in app settings." = "Necessitem permís per utilitzar la càmera. Permeteu l'accés a la càmera a la configuració de l'aplicació.";
+
+"Welcome" = "Hola";
+
+"With your permission, Stripe may use your images to improve fraud detection. Declining doesn't affect your verification." = "Amb el vostre permís, Stripe pot utilitzar les vostres imatges per millorar la detecció de frau. Rebutjar-ho no afecta la vostra verificació.";
+
+"You can either try again or upload an image from your device." = "Podeu tornar-ho a provar o carregar una imatge des del vostre dispositiu.";
+
+"Your selfie images have not been saved. Do you want to leave?" = "No s'han desat les autofotos. Voleu sortir?";
+
+"driver's license" = "permís de conduir";
+
+"government-issued photo ID" = "identificació governamental amb foto";
+
+"passport" = "passaport";

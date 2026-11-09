@@ -1,0 +1,73 @@
+//
+//  Intent+Link.swift
+//  StripePaymentSheet
+//
+//  Created by Ramon Torres on 11/3/21.
+//  Copyright © 2021 Stripe, Inc. All rights reserved.
+//
+
+@_spi(InternalOnlyAPI) import StripePayments
+
+extension STPElementsSession {
+    var supportsLink: Bool {
+        // Either Link is an allowed Payment Method in the elements/sessions response, or passthrough mode (Link as a Card PM) is allowed
+        orderedPaymentMethodTypes.contains(.link) || linkPassthroughModeEnabled
+    }
+
+    var linkPassthroughModeEnabled: Bool {
+        linkSettings?.passthroughModeEnabled ?? false
+    }
+
+    var linkCardBrandFilteringEnabled: Bool {
+        linkPassthroughModeEnabled
+    }
+
+    var supportsLinkCard: Bool {
+        supportsLink && (linkFundingSources?.contains(.card) ?? false) || linkPassthroughModeEnabled
+    }
+
+    var linkFundingSources: Set<ParsedEnum<LinkSettings.FundingSource>>? {
+        linkSettings?.fundingSources
+    }
+
+    var disableLinkSignup: Bool {
+        linkSettings?.disableSignup ?? false
+    }
+
+    var linkPopupWebviewOption: LinkSettings.PopupWebviewOption {
+        linkSettings?.popupWebviewOption ?? .shared
+    }
+
+    func shouldShowLink2FABeforePaymentSheet(
+        for linkAccount: PaymentSheetLinkAccount,
+        savedPaymentMethods: [STPPaymentMethod]
+    ) -> Bool {
+        self.supportsLink &&
+        linkAccount.sessionState == .requiresVerification &&
+        linkAccount.currentSession?.hasStartedOTPVerification != true &&
+        linkAccount.useMobileEndpoints &&
+        self.linkSettings?.suppress2FAModal != true &&
+        linkAccount.currentSession?.mobileFallbackWebviewParams?.webviewRequirementType != .required &&
+        savedPaymentMethods.isEmpty // prefer MPE checkout when SPMs are present 
+    }
+
+    var linkFlags: [String: Bool] {
+        linkSettings?.linkFlags ?? [:]
+    }
+
+    var linkMFAAuthFlowEnabled: Bool {
+        linkSettings?.mfaAuthFlowEnabled ?? false
+    }
+
+    var linkSupportedVerificationTypes: [SupportedVerificationType] {
+        SupportedVerificationType.nativeCapabilities(mfaAuthFlowEnabled: linkMFAAuthFlowEnabled)
+    }
+
+    var shouldShowPreferDebitCardHint: Bool {
+        linkSettings?.linkShowPreferDebitCardHint ?? false
+    }
+
+    var linkPaymentMethodBankAccountDataConsent: String? {
+        linkSettings?.linkPaymentMethodBankAccountDataConsent
+    }
+}

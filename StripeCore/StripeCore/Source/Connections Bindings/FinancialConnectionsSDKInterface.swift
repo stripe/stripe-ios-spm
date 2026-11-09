@@ -1,0 +1,27 @@
+//
+//  ConnectionsSDKInterface.swift
+//  StripeCore
+//
+//  Created by Vardges Avetisyan on 2/24/22.
+//  Copyright © 2022 Stripe, Inc. All rights reserved.
+//
+
+import UIKit
+
+@_spi(InternalOnlyAPI) public protocol FinancialConnectionsSDKInterface {
+    init()
+    func presentFinancialConnectionsSheet(
+        apiClient: STPAPIClient,
+        clientSecret: String,
+        returnURL: String?,
+        existingConsumer: FinancialConnectionsConsumer?,
+        hasRequestedDataPermissions: Bool,
+        style: FinancialConnectionsStyle,
+        elementsSessionContext: ElementsSessionContext?,
+        preCollectedConsent: FinancialConnectionsPreCollectedConsent?,
+        linkBrand: LinkBrand?,
+        onEvent: ((FinancialConnectionsEvent) -> Void)?,
+        from presentingViewController: UIViewController,
+        completion: @escaping (FinancialConnectionsSDKResult) -> Void
+    )
+}

@@ -1,0 +1,136 @@
+//
+//  LinkBrand.swift
+//  StripeCore
+//
+//  Created by Sophia Horng on 4/24/26.
+//
+
+import Foundation
+
+@_spi(InternalOnlyAPI) @frozen public enum LinkBrand: String, SafeEnumCodable, Equatable {
+    case link = "link"
+    case onelink = "onelink"
+    case unparsable
+
+    /// Brand names are proper nouns, so keep the source-of-truth user-facing value here.
+    @_spi(InternalOnlyAPI) public var displayName: String {
+        switch self {
+        case .link, .unparsable:
+            return "Link"
+        case .onelink:
+            return "Onelink"
+        }
+    }
+
+    @_spi(InternalOnlyAPI) public var accessibilityDisplayName: String {
+        switch self {
+        case .link, .unparsable:
+            return "Link"
+        case .onelink:
+            return "One-link"
+        }
+    }
+
+    @_spi(InternalOnlyAPI) public func accessibilityText(from text: String) -> String {
+        guard self == .onelink else {
+            return text
+        }
+        return text
+            .replacingOccurrences(of: displayName, with: accessibilityDisplayName)
+            .replacingOccurrences(of: displayName.lowercased(), with: accessibilityDisplayName)
+    }
+
+    @_spi(InternalOnlyAPI) public var websiteURL: URL {
+        switch self {
+        case .link, .unparsable:
+            return URL(string: "https://link.com")!
+        case .onelink:
+            return URL(string: "https://onelink.com")!
+        }
+    }
+
+    @_spi(InternalOnlyAPI) public var termsURL: URL {
+        switch self {
+        case .link, .unparsable:
+            return URL(string: "https://link.co/terms")!
+        case .onelink:
+            return URL(string: "https://onelink.com/terms")!
+        }
+    }
+
+    @_spi(InternalOnlyAPI) public var privacyURL: URL {
+        switch self {
+        case .link, .unparsable:
+            return URL(string: "https://link.co/privacy")!
+        case .onelink:
+            return URL(string: "https://onelink.com/privacy")!
+        }
+    }
+
+    @_spi(InternalOnlyAPI) public var achAuthorizationURL: URL {
+        switch self {
+        case .link, .unparsable:
+            return URL(string: "https://link.com/terms/ach-authorization")!
+        case .onelink:
+            return URL(string: "https://onelink.com/terms/ach-authorization")!
+        }
+    }
+
+    @_spi(InternalOnlyAPI) public var promotionTermsURL: URL {
+        switch self {
+        case .link, .unparsable:
+            return URL(string: "https://link.com/promotion-terms")!
+        case .onelink:
+            return URL(string: "https://onelink.com/promotion-terms")!
+        }
+    }
+
+    @_spi(InternalOnlyAPI) public var supportContactURL: URL {
+        switch self {
+        case .link, .unparsable:
+            return URL(string: "https://support.link.co/contact/email?skipVerification=true")!
+        case .onelink:
+            return URL(string: "https://support.onelink.com/contact/email?skipVerification=true")!
+        }
+    }
+
+    @_spi(InternalOnlyAPI) public func brandAwareLegalSupportURL(for url: URL) -> URL {
+        guard self == .onelink, var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            return url
+        }
+
+        let host = components.host?.lowercased()
+        switch host {
+        case "link.co", "www.link.co":
+            switch components.path {
+            case "/terms":
+                return termsURL
+            case "/privacy":
+                return privacyURL
+            default:
+                return url
+            }
+        case "link.com", "www.link.com":
+            switch components.path {
+            case "", "/":
+                return websiteURL
+            case "/terms":
+                return URL(string: "https://onelink.com/terms")!
+            case "/privacy":
+                return privacyURL
+            case "/terms/ach-authorization":
+                return achAuthorizationURL
+            case "/promotion-terms":
+                return promotionTermsURL
+            default:
+                return url
+            }
+        case "support.link.co", "www.support.link.co":
+            components.scheme = "https"
+            components.host = "support.onelink.com"
+            return components.url ?? url
+        default:
+            return url
+        }
+    }
+}

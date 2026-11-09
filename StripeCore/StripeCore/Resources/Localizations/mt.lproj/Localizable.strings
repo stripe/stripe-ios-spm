@@ -1,0 +1,75 @@
+"A debugger is attached to the App." = "Hemm debugger imqabbad mal-App.";
+
+"An emulator is being used to run the App." = "Qed jintuża emulator biex titħaddem l-App.";
+
+"An error occurred. Please try again." = "Seħħ żball. Jekk jogħġbok erġa' pprova.";
+
+"Cancel" = "Ikkanċella";
+
+"Card brand was not updated. Please try again." = "Id-ditta tal-karti ma nbidlitx. Jekk jogħġbok erġa' pprova.";
+
+"Close" = "Agħlaq";
+
+"Collapsed" = "Ikkollassat";
+
+"Confirm it's you" = "Ikkonferma li int min qed tgħid li int";
+
+"Default payment method was not updated. Please try again." = "Il-metodu tal-pagament standard ma nbidilx. Jekk jogħġbok erġa' pprova.";
+
+"Enter the code sent to %@." = "Daħħal il-kodiċi mibgħut lil %@.";
+
+"Expanded" = "Estiż";
+
+"Failed to connect" = "Ma rnexxilux jikkonnettja";
+
+"Loading" = "Qed jillowdja";
+
+"No" = "Le";
+
+"Resend code" = "Erġa’ ibgħat il-kodiċi";
+
+"Scan Card" = "Skennja l-Karta";
+
+"Scan card" = "Skennja l-karta";
+
+"Secure checkout" = "Checkout sigur";
+
+"Selected" = "Magħżul";
+
+"The IBAN you entered is invalid." = "L-IBAN li daħħalt mhux tajjeb.";
+
+"The OS or the OS Version is not supported." = "L-OS jew il-Verżjoni tal-OS mhix appoġġjata.";
+
+"The device is jailbroken." = "L-apparat huwa jailbroken.";
+
+"The integrity of the SDK has been tampered." = "L-integrità tal-SDK ġiet imbagħbsa.";
+
+"There was an error processing your card -- try again in a few seconds" = "Seħħ żball aħna u nipproċessaw il-karta tiegħek -- erġa' pprova wara ftit sekondi";
+
+"There was an unexpected error -- try again in a few seconds" = "Kien hemm żball mhux mistenni -- erġa' pprova wara ftit sekondi";
+
+"Timeout" = "Timeout";
+
+"Try again" = "Erġa' pprova";
+
+"Unselected" = "Mhux magħżul";
+
+"We use Stripe to verify your card details. Stripe may use and store your data according its privacy policy. <a href='https://support.stripe.com/questions/stripes-card-image-verification'><u>Learn more</u></a>" = "Aħna naħdmu ma' Stripe biex nivverifikaw id-dettalji tal-karta tiegħek. Stripe tista' tuża u taħżen id-dejta tiegħek skont il-politika tal-privatezza tagħha. <a href='https://support.stripe.com/questions/stripes-card-image-verification'><u>Sir af iktar</u></a>";
+
+"Yes" = "Iva";
+
+"Your card has expired" = "Il-karta tiegħek skadiet";
+
+"Your card was declined" = "Il-karta tiegħek m'għaddietx";
+
+"Your card's expiration month is invalid" = "Ix-xahar tal-iskadenza tal-karta tiegħek mhux tajjeb";
+
+"Your card's expiration year is invalid" = "Is-sena tal-iskadenza tal-karta tiegħek mhix tajba";
+
+"Your card's number is invalid" = "In-numru tal-karta tiegħek mhux tajjeb";
+
+"Your card's security code is invalid" = "Il-kodiċi tas-sigurtà tal-karta tiegħek mhux tajjeb";
+
+"Your name is invalid." = "L-isem li daħħalt mhux tajjeb.";
+
+"Your payment method was declined." = "Il-metodu tal-pagament tiegħek m'għaddiex.";

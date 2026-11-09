@@ -1,0 +1,724 @@
+//
+//  PaymentSheetLinkAccountTests.swift
+//  StripeiOS Tests
+//
+//  Created by Ramon Torres on 3/11/22.
+//  Copyright © 2022 Stripe, Inc. All rights reserved.
+//
+
+import XCTest
+
+import OHHTTPStubs
+import OHHTTPStubsSwift
+@testable@_spi(InternalOnlyAPI) import StripeCore
+@testable@_spi(InternalOnlyAPI) import StripeCoreTestUtils
+@testable@_spi(InternalOnlyAPI) import StripePayments
+@testable@_spi(InternalOnlyAPI) import StripePaymentSheet
+@testable@_spi(InternalOnlyAPI) import StripePaymentsTestUtils
+@testable@_spi(InternalOnlyAPI) import StripePaymentsUI
+
+final class PaymentSheetLinkAccountTests: APIStubbedTestCase {
+    override func tearDown() {
+        PaymentSheetLinkAccount.forcedConsumerLinkBrandForTesting = nil
+        super.tearDown()
+    }
+
+    func testMakePaymentMethodParams() {
+        let sut = makeSUT()
+
+        let paymentDetails = makePaymentDetailsStub()
+        let result = sut.makePaymentMethodParams(from: paymentDetails, cvc: nil, billingPhoneNumber: nil, allowRedisplay: nil)
+
+        XCTAssertEqual(result?.type, .link)
+        XCTAssertEqual(result?.link?.paymentDetailsID, "1")
+        XCTAssertEqual(
+            result?.link?.credentials as? [String: String],
+            [
+                "consumer_session_client_secret": "client_secret"
+            ]
+        )
+        XCTAssertNil(result?.link?.additionalAPIParameters["card"])
+    }
+
+    func testMakePaymentMethodParams_withCVC() {
+        let sut = makeSUT()
+
+        let paymentDetails = makePaymentDetailsStub()
+        let result = sut.makePaymentMethodParams(from: paymentDetails, cvc: "1234", billingPhoneNumber: nil, allowRedisplay: nil)
+
+        XCTAssertEqual(
+            result?.link?.additionalAPIParameters["card"] as? [String: String],
+            [
+                "cvc": "1234"
+            ]
+        )
+    }
+
+    func testMakePaymentMethodParams_withAllowRedisplay() {
+        let sut = makeSUT()
+
+        let paymentDetails = makePaymentDetailsStub()
+        let result = sut.makePaymentMethodParams(from: paymentDetails, cvc: "1234", billingPhoneNumber: nil, allowRedisplay: .always)
+
+        XCTAssertEqual(result?.allowRedisplay, .always)
+    }
+
+    @MainActor
+    func testRefreshesWhenNeeded() {
+        let sut = makeSUT()
+        let listedPaymentDetailsExp = expectation(description: "Lists payment details")
+        let refreshExp = expectation(description: "Refreshes when needed")
+        // Set up a stub to return a 401 with the wrong key, otherwise return an empty PM list
+        stub { urlRequest in
+            return urlRequest.url?.absoluteString.contains("consumers/payment_details/list") ?? false
+        } response: { urlRequest in
+            // Check to make sure we've passed the correct secret key
+            let body = String(data: urlRequest.httpBodyOrBodyStream ?? Data(), encoding: .utf8) ?? ""
+            if !body.contains("unexpired_key") {
+                // If it isn't the unexpired key, force a refresh by sending the correct error:
+                let errorResponse = [
+                    "error":
+                        [
+                            "message": "Fake invalid consumer session error.",
+                            "code": "consumer_session_credentials_invalid",
+                            "type": "invalid_request_error",
+                        ],
+                ]
+                return HTTPStubsResponse(jsonObject: errorResponse, statusCode: 401, headers: nil)
+            }
+
+            // If we did succeed, send an empty payment details list (which will be treated as a successful response).
+            let paymentDetailsEmptyList = ["redacted_payment_details": []]
+            return HTTPStubsResponse(jsonObject: paymentDetailsEmptyList, statusCode: 200, headers: nil)
+        }
+
+        sut.paymentSheetLinkAccountDelegate = PaymentSheetLinkAccountDelegateStub(expectation: refreshExp)
+        // List the payment details. This will fail, refresh the token, then succeed.
+        sut.listPaymentDetails(supportedTypes: [ParsedEnum(.card), ParsedEnum(.bankAccount)]) { result in
+            switch result {
+            case .success:
+                listedPaymentDetailsExp.fulfill()
+            case .failure:
+                XCTFail("Should not have failed")
+            }
+        }
+        waitForExpectations(timeout: 5)
+    }
+
+    func testAuthCredentialRecoveryWithoutLookupDoesNotRefreshCurrentSession() {
+        // Given an account with a current session but no way to repeat its lookup.
+        let sut = makeSUT()
+        var refreshRequests = 0
+        stub(condition: isPath("/v1/consumers/sessions/refresh")) { _ in
+            refreshRequests += 1
+            return HTTPStubsResponse(jsonObject: [:], statusCode: 200, headers: nil)
+        }
+
+        // When credential recovery is requested.
+        let completed = expectation(description: "Credential recovery completed")
+        sut.refreshAuthSession(recoverCredentials: true) { result in
+            // Then it fails instead of attempting to refresh and reuse the same credential.
+            if case .success = result {
+                XCTFail("Credential recovery should require a new lookup")
+            }
+            completed.fulfill()
+        }
+
+        wait(for: [completed], timeout: 1)
+        XCTAssertEqual(refreshRequests, 0)
+    }
+
+    func testAuthCredentialRecoveryUsesLookupInsteadOfRefresh() {
+        // Given an account that can repeat the lookup to obtain a new session credential.
+        let sut = makeSUT()
+        let replacementSession = makeVerifiedSession()
+        var refreshRequests = 0
+        stub(condition: isPath("/v1/consumers/sessions/refresh")) { _ in
+            refreshRequests += 1
+            return HTTPStubsResponse(jsonObject: [:], statusCode: 200, headers: nil)
+        }
+        sut.authSessionLookup = { completion in
+            completion(.success(.init(consumerSession: replacementSession)))
+        }
+
+        // When credential recovery is requested.
+        let completed = expectation(description: "Credential recovery completed")
+        sut.refreshAuthSession(recoverCredentials: true) { result in
+            // Then the replacement session comes from lookup without calling refresh.
+            switch result {
+            case .success(let response):
+                XCTAssertTrue(response.consumerSession === replacementSession)
+            case .failure(let error):
+                XCTFail("Unexpected error: \(error)")
+            }
+            completed.fulfill()
+        }
+
+        wait(for: [completed], timeout: 1)
+        XCTAssertEqual(refreshRequests, 0)
+    }
+
+    func testApplyAuthResponseRetainsLinkSessionKeyWhenResponseOmitsIt() {
+        // Given an account whose current session has a Link session key.
+        let sut = makeSUT()
+        sut.currentSession?.linkSessionKey = "lsk_123"
+
+        // When an auth response replaces the session without a Link session key.
+        sut.applyAuthResponse(.init(consumerSession: makeVerifiedSession()))
+
+        // Then the new session keeps the previous key.
+        XCTAssertEqual(sut.linkSessionKey, "lsk_123")
+
+        // ...and a key returned by a later response takes precedence.
+        let sessionWithKey = makeVerifiedSession()
+        sessionWithKey.linkSessionKey = "lsk_456"
+        sut.applyAuthResponse(.init(consumerSession: sessionWithKey))
+        XCTAssertEqual(sut.linkSessionKey, "lsk_456")
+    }
+
+    func testStartVerificationResolvesByTypeEvenWhenLookupHasFactorIDs() {
+        for (type, factorType) in [(SupportedVerificationType.sms, ConsumerSession.VerificationFactor.FactorType.sms), (.email, .email)] {
+            // Given an account whose lookup response includes an opaque factor ID.
+            let session = ConsumerSession.make(
+                clientSecret: "client_secret",
+                emailAddress: "user@example.com",
+                redactedFormattedPhoneNumber: "(***) *** **55",
+                unredactedPhoneNumber: "(555) 555-5555",
+                phoneNumberCountry: "US",
+                verificationSessions: [],
+                supportedPaymentDetailsTypes: [],
+                mobileFallbackWebviewParams: nil,
+                availableVerificationFactors: [
+                    .init(type: factorType, providesFurtherVerification: true, temporarilyDisabled: false, id: "lookup_factor_id"),
+                ]
+            )
+            let account = PaymentSheetLinkAccount(
+                email: session.emailAddress,
+                session: session,
+                publishableKey: "pk_test_consumer",
+                displayablePaymentDetails: nil,
+                apiClient: STPAPIClient(publishableKey: STPTestingDefaultPublishableKey),
+                useMobileEndpoints: true,
+                canSyncAttestationState: false
+            )
+            XCTAssertEqual(account.currentSession?.availableVerificationFactors?.first?.id, "lookup_factor_id")
+
+            // When starting the initial OTP challenge through the account transport.
+            let completed = expectation(description: "\(type.rawValue) verification started")
+            stub(condition: isPath("/v1/consumers/sessions/start_verification")) { request in
+                // Then the request selects the factor by type without forwarding the lookup ID.
+                let params = RequestBodyTestHelpers.formEncodedBodyParams(from: request)
+                XCTAssertEqual(params["type"], type.rawValue)
+                XCTAssertNil(params["verification_factor_id"])
+                XCTAssertNil(params["is_resend_sms_code"])
+                return HTTPStubsResponse(
+                    jsonObject: [
+                        "consumer_session": [
+                            "client_secret": "client_secret",
+                            "email_address": "user@example.com",
+                            "redacted_formatted_phone_number": "(***) *** **55",
+                            "current_authentication_level": "1FA",
+                            "minimum_authentication_level": "1FA",
+                            "verification_sessions": [["type": type.rawValue, "state": "STARTED"]],
+                        ],
+                        "verification_session_id": "verification_123",
+                    ],
+                    statusCode: 200,
+                    headers: ["Content-Type": "application/json"]
+                )
+            }
+            account.startAuthVerification(type: type, phoneNumber: nil, isResending: false) { result in
+                if case .failure(let error) = result { XCTFail("Unexpected error: \(error)") }
+                completed.fulfill()
+            }
+            wait(for: [completed], timeout: 5)
+            HTTPStubs.removeAllStubs()
+        }
+    }
+
+    func testRecordConnectionsConsentAcquired_sendsExpectedConsentJSON() async throws {
+        let sut = makeSUT()
+        let consentText = "Rocket Deliveries can access account and ownership details, balances, and transactions."
+
+        var capturedFormFields: [String: String] = [:]
+        stub { urlRequest in
+            return urlRequest.url?.absoluteString.contains("consumers/connections_consent_acquired") ?? false
+        } response: { urlRequest in
+            let body = String(data: urlRequest.httpBodyOrBodyStream ?? Data(), encoding: .utf8) ?? ""
+            capturedFormFields = Self.decodeFormFields(from: body)
+            return HTTPStubsResponse(jsonObject: [String: Any](), statusCode: 200, headers: nil)
+        }
+
+        _ = try await sut.recordConnectionsConsentAcquired(localizedConsentText: consentText)
+
+        let consentJSONString = try XCTUnwrap(capturedFormFields["consent"])
+        let consentJSON = try XCTUnwrap(
+            JSONSerialization.jsonObject(with: Data(consentJSONString.utf8)) as? [String: Any]
+        )
+        XCTAssertEqual(consentJSON as? [String: String], ["localizedConsent": consentText])
+        XCTAssertNil(consentJSON["consentMessageTemplate"])
+
+        XCTAssertEqual(capturedFormFields["credentials[consumer_session_client_secret]"], "client_secret")
+        XCTAssertEqual(capturedFormFields["request_surface"], "ios_payment_element")
+    }
+
+    func testCreateLinkAccountSessionOmitsMerchantTokenWithoutPermissions() {
+        let apiClient = APIStubbedTestCase.stubbedAPIClient()
+        var capturedFormFields: [String: String] = [:]
+        stub { request in
+            request.url?.absoluteString.contains("consumers/link_account_sessions") ?? false
+        } response: { request in
+            let body = String(data: request.httpBodyOrBodyStream ?? Data(), encoding: .utf8) ?? ""
+            capturedFormFields = Self.decodeFormFields(from: body)
+            return HTTPStubsResponse(
+                jsonObject: [
+                    "id": "fcsess_123",
+                    "livemode": false,
+                    "client_secret": "fcsess_123_secret_456",
+                    "permissions": [],
+                ],
+                statusCode: 200,
+                headers: nil
+            )
+        }
+        let expectation = expectation(description: "Creates Link Account Session")
+
+        apiClient.createLinkAccountSession(
+            for: "consumer_session_secret",
+            permissions: [],
+            merchantToken: "acct_123"
+        ) { result in
+            XCTAssertNotNil(try? result.get())
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1)
+        XCTAssertNil(capturedFormFields["merchant_token"])
+    }
+
+    func testCreateLinkAccountSessionIncludesMerchantTokenWithPermissions() {
+        let apiClient = APIStubbedTestCase.stubbedAPIClient()
+        var capturedFormFields: [String: String] = [:]
+        stub { request in
+            request.url?.absoluteString.contains("consumers/link_account_sessions") ?? false
+        } response: { request in
+            let body = String(data: request.httpBodyOrBodyStream ?? Data(), encoding: .utf8) ?? ""
+            capturedFormFields = Self.decodeFormFields(from: body)
+            return HTTPStubsResponse(
+                jsonObject: [
+                    "id": "fcsess_123",
+                    "livemode": false,
+                    "client_secret": "fcsess_123_secret_456",
+                    "permissions": ["balances"],
+                ],
+                statusCode: 200,
+                headers: nil
+            )
+        }
+        let expectation = expectation(description: "Creates Link Account Session")
+
+        apiClient.createLinkAccountSession(
+            for: "consumer_session_secret",
+            permissions: ["balances"],
+            merchantToken: "acct_123"
+        ) { result in
+            XCTAssertNotNil(try? result.get())
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 1)
+        XCTAssertEqual(capturedFormFields["merchant_token"], "acct_123")
+    }
+
+    /// Decodes an `application/x-www-form-urlencoded` request body into a flat `[key: value]` map, keeping
+    /// bracketed keys (e.g. `credentials[consumer_session_client_secret]`) as-is rather than nesting them.
+    private static func decodeFormFields(from body: String) -> [String: String] {
+        var fields: [String: String] = [:]
+        for pair in body.split(separator: "&") {
+            let parts = pair.split(separator: "=", maxSplits: 1)
+            guard parts.count == 2 else { continue }
+            let key = String(parts[0]).removingPercentEncoding ?? String(parts[0])
+            let value = String(parts[1]).replacingOccurrences(of: "+", with: " ").removingPercentEncoding ?? String(parts[1])
+            fields[key] = value
+        }
+        return fields
+    }
+
+    @MainActor
+    func testRecordConnectionsConsentAcquired_retriesOnAuthError() async throws {
+        let sut = makeSUT()
+        let refreshExp = expectation(description: "Refreshes when needed")
+
+        stub { urlRequest in
+            return urlRequest.url?.absoluteString.contains("consumers/connections_consent_acquired") ?? false
+        } response: { urlRequest in
+            let body = String(data: urlRequest.httpBodyOrBodyStream ?? Data(), encoding: .utf8) ?? ""
+            if !body.contains("unexpired_key") {
+                let errorResponse = [
+                    "error":
+                        [
+                            "message": "Fake invalid consumer session error.",
+                            "code": "consumer_session_credentials_invalid",
+                            "type": "invalid_request_error",
+                        ],
+                ]
+                return HTTPStubsResponse(jsonObject: errorResponse, statusCode: 401, headers: nil)
+            }
+
+            return HTTPStubsResponse(jsonObject: [String: Any](), statusCode: 200, headers: nil)
+        }
+
+        sut.paymentSheetLinkAccountDelegate = PaymentSheetLinkAccountDelegateStub(expectation: refreshExp)
+
+        _ = try await sut.recordConnectionsConsentAcquired(localizedConsentText: "consent text")
+        waitForExpectations(timeout: 5)
+    }
+
+    func testMeetsMinimumAuthenticationLevel_meets() {
+        let session = ConsumerSession.make(
+            clientSecret: "secret",
+            emailAddress: "user@example.com",
+            redactedFormattedPhoneNumber: "(***) *** **55",
+            unredactedPhoneNumber: nil,
+            phoneNumberCountry: nil,
+            verificationSessions: [],
+            supportedPaymentDetailsTypes: [ParsedEnum(.card)],
+            mobileFallbackWebviewParams: nil,
+            currentAuthenticationLevel: .oneFactorAuth,
+            minimumAuthenticationLevel: .oneFactorAuth
+        )
+        XCTAssertTrue(session.meetsMinimumAuthenticationLevel)
+    }
+
+    func testMeetsMinimumAuthenticationLevel_doesNotMeet() {
+        let session = ConsumerSession.make(
+            clientSecret: "secret",
+            emailAddress: "user@example.com",
+            redactedFormattedPhoneNumber: "(***) *** **55",
+            unredactedPhoneNumber: nil,
+            phoneNumberCountry: nil,
+            verificationSessions: [],
+            supportedPaymentDetailsTypes: [ParsedEnum(.card)],
+            mobileFallbackWebviewParams: nil,
+            currentAuthenticationLevel: .notAuthenticated,
+            minimumAuthenticationLevel: .oneFactorAuth
+        )
+        XCTAssertFalse(session.meetsMinimumAuthenticationLevel)
+    }
+
+    func testNoRefreshWhenNotRequested() {
+        let sut = makeSUT()
+        let listedPaymentDetailsExp = expectation(description: "Lists payment details")
+
+        // Set up a stub to return a 401 with the wrong key, otherwise return an empty PM list
+        stub { urlRequest in
+            return urlRequest.url?.absoluteString.contains("consumers/payment_details/list") ?? false
+        } response: { urlRequest in
+            // Check to make sure we've passed the correct secret key
+            let body = String(data: urlRequest.httpBodyOrBodyStream ?? Data(), encoding: .utf8) ?? ""
+            if !body.contains("unexpired_key") {
+                // If it isn't the unexpired key, force a refresh by sending the correct error:
+                let errorResponse = [
+                    "error":
+                        [
+                            "message": "Fake invalid consumer session error.",
+                            "code": "consumer_session_credentials_invalid",
+                            "type": "invalid_request_error",
+                        ],
+                ]
+                return HTTPStubsResponse(jsonObject: errorResponse, statusCode: 401, headers: nil)
+            }
+
+            // If we did succeed, send an empty payment details list (which will be treated as a successful response).
+            let paymentDetailsEmptyList = ["redacted_payment_details": []]
+            return HTTPStubsResponse(jsonObject: paymentDetailsEmptyList, statusCode: 200, headers: nil)
+        }
+
+        // List the payment details. This will fail, refresh the token, then succeed.
+        sut.listPaymentDetails(
+            supportedTypes: [ParsedEnum(.card), ParsedEnum(.bankAccount)],
+            shouldRetryOnAuthError: false
+        ) { result in
+            switch result {
+            case .success:
+                XCTFail("Should not have succeeded")
+            case .failure:
+                listedPaymentDetailsExp.fulfill()
+            }
+        }
+        waitForExpectations(timeout: 5)
+    }
+
+    func testLinkBrand_usesVerifiedSessionBrand() {
+        let session = makeVerifiedSession()
+        session.linkBrand = .onelink
+
+        let sut = PaymentSheetLinkAccount(
+            email: "user@example.com",
+            session: session,
+            publishableKey: nil,
+            displayablePaymentDetails: nil,
+            apiClient: STPAPIClient(publishableKey: STPTestingDefaultPublishableKey),
+            useMobileEndpoints: false,
+            canSyncAttestationState: false
+        )
+
+        XCTAssertEqual(sut.linkBrand, .onelink)
+    }
+
+    func testLinkBrand_forceOnelinkConsumerOnlyAppliesAfterVerifiedConsumerSessionExists() {
+        PaymentSheetLinkAccount.forcedConsumerLinkBrandForTesting = .onelink
+
+        let signedOutAccount = PaymentSheetLinkAccount(
+            email: "user@example.com",
+            session: nil,
+            publishableKey: nil,
+            displayablePaymentDetails: nil,
+            apiClient: STPAPIClient(publishableKey: STPTestingDefaultPublishableKey),
+            useMobileEndpoints: false,
+            canSyncAttestationState: false
+        )
+
+        XCTAssertNil(signedOutAccount.linkBrand)
+
+        let unverifiedSession = LinkStubs.consumerSession()
+        unverifiedSession.linkBrand = .link
+        let unverifiedAccount = PaymentSheetLinkAccount(
+            email: "user@example.com",
+            session: unverifiedSession,
+            publishableKey: nil,
+            displayablePaymentDetails: nil,
+            apiClient: STPAPIClient(publishableKey: STPTestingDefaultPublishableKey),
+            useMobileEndpoints: false,
+            canSyncAttestationState: false
+        )
+
+        XCTAssertNil(unverifiedAccount.linkBrand)
+
+        let verifiedSession = makeVerifiedSession()
+        verifiedSession.linkBrand = .link
+        let verifiedAccount = PaymentSheetLinkAccount(
+            email: "user@example.com",
+            session: verifiedSession,
+            publishableKey: nil,
+            displayablePaymentDetails: nil,
+            apiClient: STPAPIClient(publishableKey: STPTestingDefaultPublishableKey),
+            useMobileEndpoints: false,
+            canSyncAttestationState: false
+        )
+
+        XCTAssertEqual(verifiedAccount.linkBrand, .onelink)
+    }
+}
+
+class PaymentSheetLinkAccountDelegateStub: PaymentSheetLinkAccountDelegate {
+    let expectation: XCTestExpectation
+
+    init(expectation: XCTestExpectation) {
+        self.expectation = expectation
+    }
+
+    func refreshLinkSession(completion: @escaping (Result<ConsumerSession, Error>) -> Void) {
+        // Return a fake session with a "good" key
+        let stubSession = ConsumerSession.make(
+            clientSecret: "unexpired_key",
+            emailAddress: "user@example.com",
+            redactedFormattedPhoneNumber: "(***) *** **55",
+            unredactedPhoneNumber: "(555) 555-5555",
+            phoneNumberCountry: "US",
+            verificationSessions: [],
+            supportedPaymentDetailsTypes: [ParsedEnum(.card), ParsedEnum(.bankAccount)],
+            mobileFallbackWebviewParams: nil
+        )
+        completion(.success(stubSession))
+        expectation.fulfill()
+    }
+}
+
+extension PaymentSheetLinkAccountTests {
+    func makeVerifiedSession() -> ConsumerSession {
+        return ConsumerSession.make(
+            clientSecret: "client_secret",
+            emailAddress: "user@example.com",
+            redactedFormattedPhoneNumber: "(***) *** **55",
+            unredactedPhoneNumber: "(555) 555-5555",
+            phoneNumberCountry: "US",
+            verificationSessions: [.init(type: .sms, state: .verified)],
+            supportedPaymentDetailsTypes: [ParsedEnum(.card), ParsedEnum(.bankAccount)],
+            mobileFallbackWebviewParams: nil,
+            currentAuthenticationLevel: .twoFactorAuth,
+            minimumAuthenticationLevel: .oneFactorAuth
+        )
+    }
+
+    func makePaymentDetailsStub() -> ConsumerPaymentDetails {
+        return ConsumerPaymentDetails(
+            stripeID: "1",
+            details: .card(card: .init(
+                expiryYear: 30,
+                expiryMonth: 10,
+                brand: "visa",
+                networks: ["visa"],
+                last4: "1234",
+                funding: .credit,
+                checks: nil
+            )),
+            billingAddress: nil,
+            billingEmailAddress: nil,
+            nickname: nil,
+            isDefault: false
+        )
+    }
+
+    func makeSUT() -> PaymentSheetLinkAccount {
+        return PaymentSheetLinkAccount(
+            email: "user@example.com",
+            session: LinkStubs.consumerSession(),
+            publishableKey: nil,
+            displayablePaymentDetails: nil,
+            apiClient: STPAPIClient(publishableKey: STPTestingDefaultPublishableKey),
+            useMobileEndpoints: false,
+            canSyncAttestationState: false
+        )
+    }
+
+}
+
+// MARK: - FundingSource.detailsType mapping tests
+
+final class FundingSourceDetailsTypeMappingTests: XCTestCase {
+
+    func test_card_mapsToCardDetailsType() {
+        let fundingSource = ParsedEnum(LinkSettings.FundingSource.card)
+        XCTAssertEqual(fundingSource.detailsType, ParsedEnum(.card))
+        XCTAssertEqual(fundingSource.detailsType.value, .card)
+    }
+
+    func test_bankAccount_mapsToBankAccountDetailsType() {
+        let fundingSource = ParsedEnum(LinkSettings.FundingSource.bankAccount)
+        XCTAssertEqual(fundingSource.detailsType, ParsedEnum(.bankAccount))
+        XCTAssertEqual(fundingSource.detailsType.value, .bankAccount)
+    }
+
+    func test_genericType_transfersRawValue() {
+        let fundingSource = ParsedEnum<LinkSettings.FundingSource>(rawValue: "PIX")
+        let detailsType = fundingSource.detailsType
+        XCTAssertNil(detailsType.value, "Generic funding source should produce an unparsed details type")
+        XCTAssertEqual(detailsType.rawValue, "PIX", "Raw value should be preserved for generic types")
+    }
+
+    func test_genericType_appearsInIntersectionWhenConsumerSessionAlsoAdvertisesIt() {
+        // If both the funding sources and the consumer session advertise a generic type,
+        // it should survive the intersection even though neither side can parse it.
+        let fundingSourceDetailsTypes: Set<ParsedEnum<ConsumerPaymentDetails.DetailsType>> = [
+            ParsedEnum(rawValue: "PIX"),
+            ParsedEnum(.card),
+        ]
+        let sessionTypes: Set<ParsedEnum<ConsumerPaymentDetails.DetailsType>> = [
+            ParsedEnum(rawValue: "PIX"),
+        ]
+        let supported = fundingSourceDetailsTypes.intersection(sessionTypes)
+        XCTAssertEqual(supported.count, 1)
+        XCTAssertEqual(supported.first?.rawValue, "PIX")
+        XCTAssertNil(supported.first?.value)
+    }
+
+    func test_genericType_isExcludedFromIntersectionWhenSessionDoesNotAdvertiseIt() {
+        let fundingSourceDetailsTypes: Set<ParsedEnum<ConsumerPaymentDetails.DetailsType>> = [
+            ParsedEnum(rawValue: "PIX"),
+            ParsedEnum(.card),
+        ]
+        let sessionTypes: Set<ParsedEnum<ConsumerPaymentDetails.DetailsType>> = [
+            ParsedEnum(.card),
+        ]
+        let supported = fundingSourceDetailsTypes.intersection(sessionTypes)
+        XCTAssertEqual(supported.count, 1)
+        XCTAssertEqual(supported.first?.value, .card)
+    }
+}
+
+// MARK: - supportedPaymentMethodTypes tests
+
+final class SupportedPaymentMethodTypesTests: XCTestCase {
+
+    func test_supportedPaymentMethodTypes_returnsEmptyWhenSessionFundingSourcesEmpty() throws {
+        // Given a consumer session that supports cards, but the session-level funding sources list is empty
+        let consumerSession = ConsumerSession.make(
+            clientSecret: "client_secret",
+            emailAddress: "user@example.com",
+            redactedFormattedPhoneNumber: "(***) *** **55",
+            unredactedPhoneNumber: nil,
+            phoneNumberCountry: nil,
+            verificationSessions: [],
+            supportedPaymentDetailsTypes: [ParsedEnum(.card)],
+            mobileFallbackWebviewParams: nil
+        )
+        let linkAccount = PaymentSheetLinkAccount(
+            email: "user@example.com",
+            session: consumerSession,
+            publishableKey: nil,
+            displayablePaymentDetails: nil,
+            useMobileEndpoints: false,
+            canSyncAttestationState: false
+        )
+
+        let (_, elementsSession) = try PayWithLinkTestHelpers.makePaymentIntentAndElementsSession(linkFundingSources: [])
+        let result = linkAccount.supportedPaymentMethodTypes(for: elementsSession)
+
+        XCTAssertTrue(result.isEmpty, "Should return empty array when session has no funding sources")
+    }
+
+    func test_supportedPaymentMethodTypes_returnsEmptyWhenIntersectionIsEmpty() throws {
+        // Given a session that allows only bank accounts, but the consumer only supports cards
+        let consumerSession = ConsumerSession.make(
+            clientSecret: "client_secret",
+            emailAddress: "user@example.com",
+            redactedFormattedPhoneNumber: "(***) *** **55",
+            unredactedPhoneNumber: nil,
+            phoneNumberCountry: nil,
+            verificationSessions: [],
+            supportedPaymentDetailsTypes: [ParsedEnum(.card)],
+            mobileFallbackWebviewParams: nil
+        )
+        let linkAccount = PaymentSheetLinkAccount(
+            email: "user@example.com",
+            session: consumerSession,
+            publishableKey: nil,
+            displayablePaymentDetails: nil,
+            useMobileEndpoints: false,
+            canSyncAttestationState: false
+        )
+
+        let (_, elementsSession) = try PayWithLinkTestHelpers.makePaymentIntentAndElementsSession(linkFundingSources: ["BANK_ACCOUNT"])
+        let result = linkAccount.supportedPaymentMethodTypes(for: elementsSession)
+
+        XCTAssertTrue(result.isEmpty, "Should return empty array when intersection of session and consumer funding sources is empty")
+    }
+
+    func test_supportedPaymentMethodTypes_returnsCardWhenBothSidesHaveCard() throws {
+        // Given a session and consumer that both support cards
+        let consumerSession = ConsumerSession.make(
+            clientSecret: "client_secret",
+            emailAddress: "user@example.com",
+            redactedFormattedPhoneNumber: "(***) *** **55",
+            unredactedPhoneNumber: nil,
+            phoneNumberCountry: nil,
+            verificationSessions: [],
+            supportedPaymentDetailsTypes: [ParsedEnum(.card)],
+            mobileFallbackWebviewParams: nil
+        )
+        let linkAccount = PaymentSheetLinkAccount(
+            email: "user@example.com",
+            session: consumerSession,
+            publishableKey: nil,
+            displayablePaymentDetails: nil,
+            useMobileEndpoints: false,
+            canSyncAttestationState: false
+        )
+
+        let (_, elementsSession) = try PayWithLinkTestHelpers.makePaymentIntentAndElementsSession(linkFundingSources: ["CARD"])
+        let result = linkAccount.supportedPaymentMethodTypes(for: elementsSession)
+
+        XCTAssertEqual(result, [.card])
+    }
+}

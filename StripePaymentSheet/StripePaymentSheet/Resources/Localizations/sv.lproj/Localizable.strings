@@ -1,0 +1,399 @@
+"%1$@ ×%2$d" = "%1$@ ×%2$li";
+
+"%@ will no longer be saved to your wallet." = "%@ kommer inte längre att sparas i din plånbok.";
+
+"+ Add" = "+ Lägg till";
+
+"Accept" = "Godkänn";
+
+"Add US bank account" = "Lägg till amerikanskt bankkonto";
+
+"Add a card" = "Lägg till ett kort";
+
+"Add a payment method" = "Lägg till en betalningsmetod";
+
+"Add bank account" = "Lägg till bankkonto";
+
+"Add new card" = "Lägg till nytt kort";
+
+"Add new payment method" = "Lägg till ny betalningsmetod";
+
+"Add your payment information" = "Lägg till betalningsinformation";
+
+"Approve payment" = "Godkänn betalning";
+
+"Back" = "Tillbaka";
+
+"Bank" = "Bank";
+
+"Bank account" = "Bankkonto";
+
+"Bank account details cannot be changed." = "Bankkontouppgifter kan inte ändras.";
+
+"Before we can send a code to your email, we need to verify additional information about you. Please enter your phone number ending in ••%@." = "Innan vi kan skicka en kod till din e-postadress måste vi verifiera ytterligare uppgifter om dig. Ange ditt telefonnummer som slutar med ••%@.";
+
+"Before we can send a code to your email, we need to verify additional information about you. Please enter your phone number." = "Innan vi kan skicka en kod till din e-postadress måste vi verifiera ytterligare uppgifter om dig. Ange ditt telefonnummer.";
+
+"Buy Now, Pay Later with  <img/>" = "Köp nu, betala senare med <img/>";
+
+"Buy Now, Pay Later with Afterpay" = "Köp nu, betala senare med Afterpay";
+
+"Buy Now, Pay Later with Cash App Afterpay" = "Köp nu, betala senare med Cash App Afterpay";
+
+"Buy Now, Pay Later with Clearpay" = "Köp nu, betala senare med Clearpay";
+
+"Buy now or pay later with Klarna" = "Köp nu eller betala senare med Klarna";
+
+"By confirming your payment with GCash, you allow %@ to charge your GCash account for future payments in accordance with their terms." = "Genom att bekräfta betalningen med GCash tillåter du att %@ debiterar ditt GCash-konto för framtida betalningar i enlighet med deras villkor.";
+
+"By confirming your payment with NICEPAY, you allow %@ to charge this payment method for future payments in accordance with their terms." = "Genom att bekräfta betalningen med NICEPAY tillåter du %@ att debitera den här betalningsmetoden vid framtida betalningar i enlighet med deras villkor.";
+
+"By confirming your payment with PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Genom att bekräfta betalningen med PayPal tillåter du att %@ debiterar ditt PayPal-konto för framtida betalningar i enlighet med deras villkor.";
+
+"By confirming your payment with Touch 'n Go, you allow %@ to charge your Touch 'n Go account for future payments in accordance with their terms." = "Genom att bekräfta betalningen med Touch 'n Go tillåter du att %@ debiterar ditt Touch 'n Go-konto för framtida betalningar i enlighet med deras villkor.";
+
+"By confirming your payment with TrueMoney, you allow %@ to charge your TrueMoney account for future payments in accordance with their terms." = "Genom att bekräfta betalningen med TrueMoney tillåter du %@ att debitera ditt TrueMoney-konto för framtida betalningar i enlighet med deras villkor.";
+
+"By confirming your payment, you agree that your transaction will be handled by Global Stack Services Limited as merchant of record and in accordance with their <terms>terms of use</terms>." = "Genom att bekräfta din betalning godkänner du att din transaktion kommer att behandlas av Global Stack Services Limited som ansvarig säljare och i enlighet med deras <terms>villkor</terms>.";
+
+"By confirming your payment, you agree that your transaction will be handled by Global Stack Services Limited as merchant of record and in accordance with their <terms>terms</terms>." = "Genom att bekräfta din betalning godkänner du att din transaktion kommer att behandlas av Global Stack Services Limited som ansvarig säljare och i enlighet med deras <terms>villkor</terms>.";
+
+"By continuing to Amazon Pay, you allow %@ to charge your Amazon Pay account for future payments in accordance with their terms." = "Genom att fortsätta till Amazon Pay tillåter du att %@ debiterar ditt Amazon Pay-konto för framtida betalningar i enlighet med deras villkor.";
+
+"By continuing to Klarna, you allow %@ to charge your Klarna account for future payments in accordance with their terms and Klarna's terms. You can change this at any time in your Klarna app or by reaching out to %@." = "Genom att fortsätta till Klarna tillåter du %1$@ att debitera ditt Klarna-konto för framtida betalningar i enlighet med deras och Klarnas villkor. Du kan när som helst ändra detta i din Klarna-app eller genom att kontakta %2$@.";
+
+"By continuing to PayPal, you allow %@ to charge your PayPal account for future payments in accordance with their terms." = "Genom att fortsätta till PayPal tillåter du att %@ debiterar ditt PayPal-konto för framtida betalningar i enlighet med deras villkor.";
+
+"By continuing to Revolut Pay, you allow %@ to charge your Revolut Pay account for future payments in accordance with their terms." = "Genom att fortsätta till Revolut Pay tillåter du att %@ debiterar ditt Revolut Pay-konto för framtida betalningar i enlighet med deras villkor.";
+
+"By continuing you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Genom att fortsätta godkänner du <terms>villkoren</terms> och <privacy>integritetspolicyn</privacy>.";
+
+"By continuing, you agree to authorize payments pursuant to <terms>these terms</terms>." = "Genom att fortsätta samtycker du till att godkänna betalningar i enlighet med dessa <terms>villkor</terms>.";
+
+"By continuing, you agree to save your information for future purchases with %1$@ and <link>%2$@</link> according to %2$@ <terms>terms</terms> and <privacy>privacy</privacy>." = "Genom att fortsätta samtycker du till att spara dina uppgifter för framtida köp med %1$@ och <link>%2$@</link> enligt <terms>villkoren</terms> och <privacy>integritetspolicyn</privacy> för %2$@.";
+
+"By continuing, you agree to save your information for future purchases with %@." = "Genom att fortsätta godkänner du att dina uppgifter sparas för framtida köp hos %@.";
+
+"By continuing, you authorize %@ to automatically debit your Satispay Balance on a recurring basis in accordance with your purchase or subscription plan." = "Genom att fortsätta godkänner du att %@ automatiskt debiterar ditt Satispay-saldo på återkommande basis i enlighet med din köp- eller prenumerationsplan.";
+
+"By continuing, you authorize %@ to automatically debit your Twint Balance on a recurring basis in accordance with your purchase or subscription plan." = "Genom att fortsätta ger du %@ rätt att automatiskt debitera ditt Twint-saldo på återkommande basis i enlighet med ditt köp eller din prenumerationsplan.";
+
+"By continuing, you authorize %@ to debit your Cash App account for this payment and future payments in accordance with %@'s terms, until this authorization is revoked. You can change this anytime in your Cash App Settings." = "Genom att fortsätta godkänner du att %1$@ debiterar ditt Cash App-konto för den här betalningen och framtida betalningar i enlighet med %2$@s villkor, tills detta godkännande återkallas. Du kan när som helst ändra detta i dina Cash App-inställningar.";
+
+"By joining %@, you agree to the <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Genom att gå med i %@ godkänner du <terms>villkoren</terms> och <privacy>integritetspolicyn</privacy>.";
+
+"By providing phone number and email, you agree to create a %1$@ account subject to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Genom att ange telefonnummer och e-post samtycker du till att skapa ett %1$@-konto som omfattas av <terms>villkoren</terms> och <privacy>integritetspolicyn</privacy> för %1$@.";
+
+"By providing your bank account details and confirming this payment, you agree to this Direct Debit Request and the <terms>Direct Debit Request service agreement</terms>, and authorise Stripe Payments Australia Pty Ltd ACN 160 180 343 Direct Debit User ID number 507156 (“Stripe”) to debit your account through the Bulk Electronic Clearing System (BECS) on behalf of %@ (the \"Merchant\") for any amounts separately communicated to you by the Merchant. You certify that you are either an account holder or an authorised signatory on the account listed above." = "Genom att tillhandahålla dina bankkontouppgifter och bekräfta denna betalning, samtycker du till denna begäran om autogiro och <terms>serviceavtalet för begäran om autogiro</terms>, och godkänner att Stripe Payments Australia Pty Ltd ACN 160 180 343 Användar-id för autogiro 507156 (“Stripe”) debiterar ditt konto via Bulk Electronic Clearing System (BECS) på uppdrag av %@ (\"Handlaren\") för eventuella belopp som separat meddelats till dig av Handlaren. Du intygar att du antingen är kontoinnehavare eller auktoriserad undertecknare på det konto som anges ovan.";
+
+"By providing your card information, you allow %@ to charge your card for future payments in accordance with their terms." = "Genom att tillhandahålla kortinformationen ger du %@ tillåtelse att debitera ditt kort för framtida betalningar enligt deras villkor.";
+
+"By providing your email, you agree to create a %1$@ account and save your payment info to %1$@, according to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Genom att tillhandahålla din e-post samtycker du till att skapa ett konto för %1$@ och spara din betalningsinformation till %1$@, enligt <terms>villkoren</terms> och <privacy>integritetspolicyn</privacy> för %1$@.";
+
+"By providing your payment information and confirming this payment, you authorise (A) %@ and Stripe, our payment service provider, to send instructions to your bank to debit your account and (B) your bank to debit your account in accordance with those instructions. As part of your rights, you are entitled to a refund from your bank under the terms and conditions of your agreement with your bank. A refund must be claimed within 8 weeks starting from the date on which your account was debited. Your rights are explained in a statement that you can obtain from your bank. You agree to receive notifications for future debits up to 2 days before they occur." = "Genom att tillhandahålla din betalningsinformation och bekräfta denna betalning godkänner du (A) %@ och Stripe, vår betaltjänstleverantör, att skicka instruktioner till din bank att debitera ditt konto och (B) din bank att debitera ditt konto i enlighet med dessa instruktioner. Som en del av dina rättigheter har du rätt till återbetalning från din bank enligt villkoren för ditt avtal med din bank. Återbetalning måste krävas inom åtta veckor från det datum då ditt konto debiterades. Dina rättigheter förklaras i ett meddelande som du kan få från din bank. Du godkänner att få aviseringar för framtida debiteringar upp till två dagar innan de inträffar.";
+
+"By providing your phone number, you agree to create a %1$@ account and save your payment info to %1$@, according to the %1$@ <terms>Terms</terms> and <privacy>Privacy Policy</privacy>." = "Genom att ange ditt telefonnummer samtycker du till att skapa ett konto för %1$@ och spara din betalningsinformation till %1$@, enligt <terms>villkoren</terms> och <privacy>integritetspolicyn</privacy> för %1$@.";
+
+"By saving your bank account for %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Genom att spara ditt bankkonto för %@ samtycker du till att godkänna betalningar i enlighet med <terms>dessa villkor</terms>.";
+
+"By saving your payment information, you allow %@ to charge you for future payments in accordance with their terms." = "Genom att spara din betalningsinformation ger du %@ tillåtelse att debitera dig för framtida betalningar enligt deras villkor.";
+
+"By submitting your order to %@ and %@, you agree to save your information with %@ for future purchases, and agree to authorize payments pursuant to <terms>these terms</terms>." = "Genom att skicka din beställning till %1$@ och %2$@ samtycker du till att spara din information hos %3$@ för framtida köp och godkänner auktorisering av betalningar i enlighet med <terms>dessa villkor</terms>.";
+
+"By submitting your order to %@ you agree to authorize payments pursuant to <terms>these terms</terms>." = "Genom att skicka din beställning till %@ samtycker du till att godkänna betalningar i enlighet med <terms>dessa villkor</terms>.";
+
+"CPF/CPNJ" = "CPF/CPNJ";
+
+"Cancel and pay another way" = "Avbryt och betala på ett annat sätt";
+
+"Card details cannot be changed." = "Kortuppgifter kan inte ändras.";
+
+"Card number. Supported cards include %@" = "Kortnummer. Kort som stöds inkluderar %@";
+
+"Change" = "Ändra";
+
+"Choose a card brand" = "Välj ett kortmärke";
+
+"Choose a payment method" = "Välj en betalmetod";
+
+"Close card scanner" = "Stäng kortskanner";
+
+"Complete the payment using Pix to finish the purchase." = "Slutför betalningen med Pix för att avsluta köpet.";
+
+"Confirm" = "Bekräfta";
+
+"Confirm payment details" = "Bekräfta betalningsuppgifter";
+
+"Confirm the Bizum payment in your mobile banking application within %@ to complete the purchase." = "Bekräfta Bizum-betalningen i din mobila bankapp inom %@ för att slutföra köpet.";
+
+"Confirm the payment in your MB WAY app within %@ to complete the purchase." = "Bekräfta betalningen i din MB WAY-app inom %@ för att slutföra köpet.";
+
+"Confirm the payment in your bank or payment app within %@ to complete the purchase." = "Bekräfta betalningen i din bankapp eller betalningsapp inom %@ för att slutföra köpet.";
+
+"Confirm the payment in your bank's app within %@ to complete the purchase." = "Bekräfta betalningen i din banks app inom %@ för att slutföra köpet.";
+
+"Confirm your CVC" = "Bekräfta din CVC-kod";
+
+"Confirm your information" = "Bekräfta informationen";
+
+"Contact information" = "Kontaktinformation";
+
+"Continue another way" = "Fortsätt på ett annat sätt";
+
+"Create an account with %@ for faster checkout across the web" = "Skapa ett konto hos %@ för snabbare betalningar i kassan på nätet";
+
+"Debit or credit card" = "Bank- eller kreditkort";
+
+"Declarations" = "Deklarationer";
+
+"Default" = "Standard";
+
+"Default payment method" = "Standardmetod för betalning";
+
+"Did you mean %@? %@." = "Menade du %1$@? %2$@.";
+
+"Discard Changes" = "Kassera ändringar";
+
+"Discard changes?" = "Kasta ändringar?";
+
+"Discount" = "Rabatt";
+
+"EPS Bank" = "EPS Bank";
+
+"Edit address" = "Redigera adress";
+
+"Email code" = "E-postkod";
+
+"Enter address manually" = "Ange adress manuellt";
+
+"Enter the phone number on your Link account." = "Ange telefonnumret för ditt Link-konto.";
+
+"Exchange rate and fees of your bank may apply." = "Växlings- och bankavgifter kan tillkomma.";
+
+"FPX Bank" = "FPX Bank";
+
+"Fast, secure checkout" = "Snabb och säker kassabetalning";
+
+"Get %@ back when you pay for the first time with your bank. <terms>See terms</terms>" = "Få %@ tillbaka när du betalar för första gången med din bank. <terms>Se villkor</terms>";
+
+"Get %@ back when you pay with your bank. <terms>See terms</terms>" = "Få %@ tillbaka när du betalar med din bank. <terms>Se villkor</terms>";
+
+"Hide details" = "Dölj information";
+
+"I understand that Stripe will be collecting Direct Debits on behalf of %@ and confirm that I am the account holder and the only person required to authorise debits from this account." = "Jag är införstådd med att Stripe samlar in autogireringar på uppdrag av %@ och bekräftar att jag är kontoinnehavaren och den enda person som krävs för att godkänna debiteringar från detta konto.";
+
+"IBAN" = "IBAN";
+
+"Invoice payment for business buyers." = "Fakturabetalning för företagsköpare.";
+
+"Keep Editing" = "Fortsätt redigera";
+
+"Last 4 digits of SSN" = "Sista 4 siffrorna i SSN";
+
+"Log in to another account" = "Logga in på ett annat konto";
+
+"Manage SEPA debit" = "Hantera SEPA-debitering";
+
+"Manage US bank account" = "Hantera amerikanskt bankkonto";
+
+"Manage bank account" = "Hantera bankkonto";
+
+"Manage card" = "Hantera kort";
+
+"Manage cards" = "Hantera kort";
+
+"Manage payment method" = "Hantera betalningsmetod";
+
+"Manage payment methods" = "Hantera betalningsmetoder";
+
+"Manage your payment methods" = "Hantera dina betalningsmetoder";
+
+"More options" = "Fler alternativ";
+
+"Name on card" = "Namn på kortet";
+
+"Naver Pay Card" = "Naver Pay-kort";
+
+"Naver Pay Money/Point" = "Naver Pay-pengar/poäng";
+
+"New card" = "Nytt kort";
+
+"New payment method" = "Ny betalningsmetod";
+
+"No %@ promo" = "Ingen %@-kampanj";
+
+"None of the payment methods in your %@ account work with this business." = "Ingen av betalningsmetoderna på ditt %@-konto fungerar med det här företaget.";
+
+"Not you?" = "Inte du?";
+
+"Only card brand can be changed." = "Endast kortmärke kan ändras.";
+
+"Open to see more information." = "Öppna för att se mer information.";
+
+"Or" = "Eller";
+
+"Or pay using" = "Eller betala genom att använda";
+
+"Or pay with a card" = "Eller betala med ett kort";
+
+"Or use" = "Eller använd";
+
+"Or use a card" = "Eller använd ett kort";
+
+"Pay %@" = "Betala %@";
+
+"Pay another way" = "Betala på ett annat sätt";
+
+"Pay faster at %@ and thousands of businesses." = "Betala snabbare hos %@ och tusentals andra företag.";
+
+"Pay faster everywhere %@ is accepted." = "Betala snabbare överallt där %@ accepteras.";
+
+"Pay faster everywhere Link is accepted." = "Betala snabbare överallt där Link accepteras.";
+
+"Pay over time with %@" = "Sprid ut betalningarna med %@";
+
+"Pay over time with Affirm" = "Sprid ut betalningarna med Affirm";
+
+"Pay with %@" = "Betala med %@";
+
+"Pay with Link" = "Betala med Link";
+
+"Pay with your bank account in just a few steps." = "Betala med ditt bankkonto på några få steg.";
+
+"Payment" = "Betalning";
+
+"Payment failed" = "Betalningen misslyckades";
+
+"Payment method details cannot be changed." = "Uppgifter om betalningsmetod kan inte ändras.";
+
+"Payment methods" = "Betalningsmetoder";
+
+"Please choose a valid payment method." = "Välj en giltig betalningsmetod.";
+
+"Please go back and select another payment method" = "Gå tillbaka och välj en annan betalningsmetod";
+
+"Point the camera at your card." = "Rikta kameran mot ditt kort.";
+
+"Przelewy24 Bank" = "Przelewy24 Bank";
+
+"Remove %@" = "Ta bort %@";
+
+"Remove bank?" = "Ta bort bank?";
+
+"Remove card?" = "Ta bort kort?";
+
+"Remove linked account" = "Ta bort länkat konto";
+
+"Remove payment method" = "Ta bort betalningsmetod";
+
+"Remove payment method?" = "Ta bort betalningsmetod?";
+
+"Resend code in %d seconds" = "Skicka kod igen om %li sekunder";
+
+"SEPA debit details cannot be changed." = "Uppgifter för SEPA-debitering kan inte ändras.";
+
+"Save" = "Spara";
+
+"Save a new payment method" = "Spara en ny betalningsmetod";
+
+"Save address" = "Spara adress";
+
+"Save for future payments" = "Spara för framtida betalningar";
+
+"Save my info for faster checkout with %@" = "Spara mina uppgifter för snabbare betalningar i kassan med %@";
+
+"Save payment details to %@ for future purchases" = "Spara betalningsuppgifter hos %@ för framtida köp";
+
+"Save this account for future %@ payments" = "Spara detta konto för framtida betalningar hos %@";
+
+"Save your bank account in just a few steps." = "Spara ditt bankkonto med några få steg.";
+
+"Save your info for secure 1-click checkout with %@" = "Spara dina uppgifter för säker betalning med ett klick med %@";
+
+"Saved" = "Sparad";
+
+"Select card" = "Välj kort";
+
+"Select how you want to pay:" = "Välj hur du vill betala:";
+
+"Select payment method" = "Välj betalningsmetod";
+
+"Select your payment method" = "Välj din betalningsmetod";
+
+"Set as default" = "Ställ in som standard";
+
+"Set as default payment method" = "Ställ in som standardbetalningsmetod";
+
+"Set up" = "Konfigurera";
+
+"Shipping to %@ is not supported." = "Leverans till %@ stöds inte.";
+
+"Show details" = "Visa information";
+
+"Show menu" = "Visa meny";
+
+"Sign in or sign up" = "Logga in eller registrera dig";
+
+"Sign out of %@" = "Logga ut från %@";
+
+"Simple, secure one-click payments" = "Enkla och säkra betalningar med ett klick";
+
+"Something went wrong when linking your account.\nPlease try again later." = "Något gick fel när ditt konto skulle länkas.\nFörsök igen senare.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you'll get an email with instructions to finish saving your bank account with %@." = "Stripe kommer att sätta in 0,01 USD på ditt konto om 1–2 arbetsdagar. Därefter får du ett e-postmeddelande med instruktioner om hur du slutför sparandet av ditt bankkonto hos %@.";
+
+"Stripe will deposit $0.01 to your account in 1-2 business days. Then you’ll get an email with instructions to complete payment to %@." = "Stripe sätter in 0,01 USD på ditt konto inom 1–2 arbetsdagar. Sedan får du ett e-postmeddelande med instruktioner för att slutföra betalningen till %@.";
+
+"Subtotal" = "Delsumma";
+
+"Tap to close" = "Klicka för att stänga";
+
+"Tap to expand" = "Klicka för att utvidga";
+
+"Tax" = "Skatt";
+
+"Terms and Conditions" = "Villkor";
+
+"Terms of Service" = "Tjänstevillkor";
+
+"The IBAN you entered is incomplete." = "Angivet IBAN är ofullständigt.";
+
+"The IBAN you entered is invalid, \"%@\" is not a supported country code." = "Angivet IBAN är ogiltigt, \"%@\" är inte en giltig landskod.";
+
+"The provided verification code has expired." = "Den angivna verifieringskoden har förfallit.";
+
+"The provided verification code is incorrect." = "Den angivna verifieringskoden är felaktig.";
+
+"This is an international purchase and excludes a 3.5% IOF fee. By proceeding, you acknowledge and accept <terms>Ebanx’s terms and conditions</terms>." = "Detta är ett internationellt köp och exkluderar en IOF-avgift på 3,5 %. Genom att fortsätta bekräftar och godkänner du <terms>Ebanx villkor</terms>.";
+
+"This is your default" = "Detta är din standardbetalningsmetod";
+
+"This payment method will be removed but will remain available for %@ subscriptions." = "Den här betalningsmetoden kommer att tas bort, men förblir tillgänglig för %@ abonnemang.";
+
+"This phone number doesn't match your Link account. Please try again." = "Det här telefonnumret matchar inte ditt Link-konto. Försök igen.";
+
+"Too many attempts. Please try again in a few minutes." = "För många försök. Försök igen om några minuter.";
+
+"Unavailable for this purchase" = "Otillgängligt för detta köp";
+
+"Update card" = "Uppdatera kort";
+
+"Update payment method" = "Uppdatera betalningsmetod";
+
+"Use billing address for shipping" = "Använd faktureringsadress för leverans";
+
+"Verify your phone number" = "Verifiera ditt telefonnummer";
+
+"Verifying your account…" = "Verifierar ditt konto …";
+
+"View more" = "Visa mer";
+
+"We couldn't verify your account. Please close this window and try again." = "Vi kunde inte verifiera ditt konto. Stäng det här fönstret och försök igen.";
+
+"Yes, update" = "Ja, uppdatera";
+
+"You can't pay with %@ here" = "Du kan inte betala med %@ här";
+
+"Your IBAN should start with a two-letter country code." = "Ditt IBAN ska börja med en landskod (två bokstäver).";
+
+"Your address changes won't be saved." = "Dina adressändringar kommer inte att sparas.";

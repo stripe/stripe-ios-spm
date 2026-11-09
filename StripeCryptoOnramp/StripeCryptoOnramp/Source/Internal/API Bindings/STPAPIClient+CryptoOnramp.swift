@@ -1,0 +1,550 @@
+//
+//  STPAPIClient+CryptoOnramp.swift
+//  StripeCryptoOnramp
+//
+//  Created by Michael Liberatore on 7/17/25.
+//
+
+import Foundation
+@_spi(InternalOnlyAPI) import StripeCore
+@_spi(InternalOnlyAPI) import StripePaymentSheet
+
+// Please do not attempt to modify the Stripe SDK or call private APIs directly.
+// See the Stripe Services Agreement (https://stripe.com/legal/ssa) for more details.
+extension STPAPIClient {
+
+    /// Errors that can occur that are specific to usage of crypto endpoints.
+    @_spi(CryptoOnrampAlpha)
+    public enum CryptoOnrampAPIError: LocalizedError {
+
+        /// No consumer session client secret was found to be associated with the active link account session.
+        case missingConsumerSessionClientSecret
+
+        /// No Link session key was found for the active Link account session.
+        case missingLinkSessionKey
+
+        /// The request requires a session with a verified link account, but the account was found to not be verified.
+        case linkAccountNotVerified
+
+        @_spi(CryptoOnrampAlpha)
+        public var errorDescription: String? {
+            switch self {
+            case .missingConsumerSessionClientSecret:
+                return "No consumer session client secret was found to be associated with the active link account session."
+            case .missingLinkSessionKey:
+                return "No Link session key was found for the active Link account session."
+            case .linkAccountNotVerified:
+                return "The request requires a session with a verified link account, but the account was found to not be verified."
+            }
+        }
+    }
+
+    /// Creates a crypto customer on the backend, upon granting the partner-merchant permission to facilitate crypto onramp transactions upon a customer’s behalf.
+    /// - Parameter linkAccountInfo: Information associated with the link account including the client secret and whether the account has been verified.
+    /// Throws if `linkAccountSessionState` is not verified, a client secret doesn’t exist, or if an API error occurs.
+    func createCryptoCustomer(with linkAccountInfo: PaymentSheetLinkAccountInfoProtocol) async throws -> CustomerResponse {
+        guard let consumerSessionClientSecret = linkAccountInfo.consumerSessionClientSecret else {
+            throw CryptoOnrampAPIError.missingConsumerSessionClientSecret
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/customers"
+        let requestObject = EmptyRequestWithCredentials(consumerSessionClientSecret: consumerSessionClientSecret)
+        return try await post(resource: endpoint, object: requestObject)
+    }
+
+    /// Retrieves the authenticated customer's outstanding additional KYC requirements.
+    /// - Parameter linkAccountInfo: Information associated with the Link account, including its client secret and verification state.
+    /// - Returns: The customer's additional KYC requirements.
+    /// Throws if the Link account is not verified, its client secret is unavailable, or an API error occurs.
+    func retrieveKYCRequirements(linkAccountInfo: PaymentSheetLinkAccountInfoProtocol) async throws -> RetrieveKYCRequirementsResponse {
+        guard let consumerSessionClientSecret = linkAccountInfo.consumerSessionClientSecret else {
+            throw CryptoOnrampAPIError.missingConsumerSessionClientSecret
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/kyc_requirements"
+        return try await get(
+            resource: endpoint,
+            additionalHeaders: [CryptoOnrampAPI.consumerAuthTokenHeader: consumerSessionClientSecret]
+        )
+    }
+
+    /// Submits documents and questionnaire answers for the specified KYC requirements.
+    /// - Parameters:
+    ///   - request: The fulfillment payloads keyed by requirement name.
+    ///   - linkAccountInfo: Information associated with the Link account, including its session key and verification state.
+    /// - Returns: An empty response after the submission is accepted.
+    /// - Throws: An error if the Link account is not verified, its session key is missing or empty, or an API error occurs.
+    @discardableResult
+    func fulfillKYCRequirements(
+        _ request: FulfillKYCRequirementsRequest,
+        linkAccountInfo: PaymentSheetLinkAccountInfoProtocol
+    ) async throws -> EmptyResponse {
+        guard let linkSessionKey = linkAccountInfo.linkSessionKey, !linkSessionKey.isEmpty else {
+            throw CryptoOnrampAPIError.missingLinkSessionKey
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/fulfill_kyc_requirements"
+        return try await post(resource: endpoint, object: request, ephemeralKeySecret: linkSessionKey)
+    }
+
+    /// Attaches the specific KYC info to the current Link user on the backend.
+    /// - Parameters:
+    ///   - info: The collected customer information.
+    ///   - linkAccountInfo: Information associated with the link account including the client secret and whether the account has been verified.
+    /// - Returns: A response object containing the user’s identifier.
+    /// Throws if `linkAccountSessionState` is not verified, a client secret doesn’t exist, or if an API error occurs.
+    @discardableResult
+    func collectKycInfo(info: KycInfo, linkAccountInfo: PaymentSheetLinkAccountInfoProtocol) async throws -> KYCDataCollectionResponse {
+        guard let consumerSessionClientSecret = linkAccountInfo.consumerSessionClientSecret else {
+            throw CryptoOnrampAPIError.missingConsumerSessionClientSecret
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/kyc_data_collection"
+        let requestObject = KYCDataCollectionRequest(
+            credentials: Credentials(consumerSessionClientSecret: consumerSessionClientSecret),
+            kycInfo: info
+        )
+
+        return try await post(resource: endpoint, object: requestObject)
+    }
+
+    /// Updates the KYC info for the current Link user on the backend.
+    /// - Parameters:
+    ///   - info: The collected customer information.
+    ///   - linkAccountInfo: Information associated with the link account including the client secret and whether the account has been verified.
+    /// - Returns: An empty response
+    /// Throws if `linkAccountSessionState` is not verified, a client secret doesn’t exist, or if an API error occurs.
+    @discardableResult
+    func refreshKycInfo(info: KYCRefreshInfo, linkAccountInfo: PaymentSheetLinkAccountInfoProtocol) async throws -> EmptyResponse {
+        guard let consumerSessionClientSecret = linkAccountInfo.consumerSessionClientSecret else {
+            throw CryptoOnrampAPIError.missingConsumerSessionClientSecret
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/refresh_consumer_person"
+        let requestObject = KYCRefreshRequest(
+            credentials: Credentials(consumerSessionClientSecret: consumerSessionClientSecret),
+            kycInfo: info
+        )
+
+        return try await post(resource: endpoint, object: requestObject)
+    }
+
+    /// Retrieves existing KYC info for the current Link user.
+    /// - Parameters:
+    ///   - linkAccountInfo: Information associated with the link account including the client secret and whether the account has been verified.
+    /// - Returns: An instance of `RetrieveKYCInfoResponse` containing the information stored for the user.
+    /// Throws if the `linkAccountSessionState` is not verified, a client secret doesn’t exist, or if an API error occurs.
+    func retrieveKycInfo(linkAccountInfo: PaymentSheetLinkAccountInfoProtocol) async throws -> RetrieveKYCInfoResponse {
+        guard let consumerSessionClientSecret = linkAccountInfo.consumerSessionClientSecret else {
+            throw CryptoOnrampAPIError.missingConsumerSessionClientSecret
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/kyc_data_retrieve"
+        let requestObject = EmptyRequestWithCredentials(consumerSessionClientSecret: consumerSessionClientSecret)
+        return try await post(resource: endpoint, object: requestObject)
+    }
+
+    /// Retrieves compliance identifiers still required for MiCA and whether CRS/CARF tax identification numbers are still required.
+    /// - Parameters:
+    ///   - linkAccountInfo: Information associated with the link account including the client secret and whether the account has been verified.
+    /// - Returns: An instance of `ComplianceIdentifierRequirements` containing missing MiCA identifier requirements and CRS/CARF TIN status.
+    /// Throws if the `linkAccountSessionState` is not verified, a client secret doesn’t exist, or if an API error occurs.
+    func retrieveMissingIdentifiers(linkAccountInfo: PaymentSheetLinkAccountInfoProtocol) async throws -> ComplianceIdentifierRequirements {
+        guard let consumerSessionClientSecret = linkAccountInfo.consumerSessionClientSecret else {
+            throw CryptoOnrampAPIError.missingConsumerSessionClientSecret
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/identifier_requirements"
+        return try await get(
+            resource: endpoint,
+            additionalHeaders: [CryptoOnrampAPI.consumerAuthTokenHeader: consumerSessionClientSecret]
+        )
+    }
+
+    /// Submits compliance identifiers for MiCA and CRS/CARF compliance.
+    /// - Parameters:
+    ///   - identifiers: Compliance identifiers collected for MiCA and CRS/CARF compliance.
+    ///   - linkAccountInfo: Information associated with the link account including the client secret and whether the account has been verified.
+    /// - Returns: An instance of `SubmitIdentifiersResult` describing whether identifier collection is complete.
+    /// Throws if the `linkAccountSessionState` is not verified, a client secret doesn’t exist, or if an API error occurs.
+    @discardableResult
+    func submitIdentifiers(
+        identifiers: [ComplianceIdentifier],
+        linkAccountInfo: PaymentSheetLinkAccountInfoProtocol
+    ) async throws -> SubmitIdentifiersResult {
+        guard let consumerSessionClientSecret = linkAccountInfo.consumerSessionClientSecret else {
+            throw CryptoOnrampAPIError.missingConsumerSessionClientSecret
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/eu_identifiers"
+        let requestObject = SubmitIdentifiersRequest(
+            credentials: Credentials(consumerSessionClientSecret: consumerSessionClientSecret),
+            identifiers: identifiers
+        )
+
+        return try await post(resource: endpoint, object: requestObject)
+    }
+
+    /// Retrieves the user attestation HTML for the current Link user.
+    /// - Parameters:
+    ///   - linkAccountInfo: Information associated with the link account including the client secret and whether the account has been verified.
+    /// - Returns: An instance of `UserAttestation` containing the attestation HTML and version.
+    /// Throws if the `linkAccountSessionState` is not verified, a client secret doesn’t exist, or if an API error occurs.
+    func retrieveUserAttestation(linkAccountInfo: PaymentSheetLinkAccountInfoProtocol) async throws -> UserAttestation {
+        guard let consumerSessionClientSecret = linkAccountInfo.consumerSessionClientSecret else {
+            throw CryptoOnrampAPIError.missingConsumerSessionClientSecret
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/crs_carf_declaration"
+        return try await get(
+            resource: endpoint,
+            additionalHeaders: [CryptoOnrampAPI.consumerAuthTokenHeader: consumerSessionClientSecret]
+        )
+    }
+
+    /// Confirms the current Link user accepted the user attestation.
+    /// - Parameters:
+    ///   - linkAccountInfo: Information associated with the link account including the client secret and whether the account has been verified.
+    /// - Returns: An empty response.
+    /// Throws if the `linkAccountSessionState` is not verified, a client secret doesn’t exist, or if an API error occurs.
+    @discardableResult
+    func confirmUserAttestation(linkAccountInfo: PaymentSheetLinkAccountInfoProtocol) async throws -> EmptyResponse {
+        guard let consumerSessionClientSecret = linkAccountInfo.consumerSessionClientSecret else {
+            throw CryptoOnrampAPIError.missingConsumerSessionClientSecret
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/crs_carf_declaration"
+        let requestObject = EmptyRequestWithCredentials(consumerSessionClientSecret: consumerSessionClientSecret)
+        return try await post(resource: endpoint, object: requestObject)
+    }
+
+    /// Retrieves the current partner declaration state for the current Link user.
+    /// - Parameters:
+    ///   - declarationType: The type of declaration to retrieve.
+    ///   - linkAccountInfo: Information associated with the Link account including the client secret and whether the account has been verified.
+    /// - Returns: The current partner declaration state.
+    /// Throws if the `linkAccountSessionState` is not verified, a client secret doesn’t exist, or if an API error occurs.
+    func retrievePartnerTerms(declarationType: PartnerDeclarationType, linkAccountInfo: PaymentSheetLinkAccountInfoProtocol) async throws -> PartnerTerms {
+        guard let consumerSessionClientSecret = linkAccountInfo.consumerSessionClientSecret else {
+            throw CryptoOnrampAPIError.missingConsumerSessionClientSecret
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/partner_terms"
+        let request = RetrievePartnerTermsRequest(declarationType: declarationType)
+        return try await get(
+            resource: endpoint,
+            parameters: try request.encodeJSONDictionary(),
+            additionalHeaders: [CryptoOnrampAPI.consumerAuthTokenHeader: consumerSessionClientSecret]
+        )
+    }
+
+    /// Confirms the current Link user accepted a partner declaration.
+    /// - Parameters:
+    ///   - declarationId: The unique identifier of the declaration accepted by the customer.
+    ///   - linkAccountInfo: Information associated with the Link account including the client secret and whether the account has been verified.
+    /// - Returns: An empty response.
+    /// Throws if the `linkAccountSessionState` is not verified, a client secret doesn’t exist, or if an API error occurs.
+    @discardableResult
+    func confirmPartnerTerms(declarationId: String, linkAccountInfo: PaymentSheetLinkAccountInfoProtocol) async throws -> EmptyResponse {
+        guard let consumerSessionClientSecret = linkAccountInfo.consumerSessionClientSecret else {
+            throw CryptoOnrampAPIError.missingConsumerSessionClientSecret
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/partner_terms"
+        let requestObject = ConfirmPartnerTermsRequest(
+            declarationId: declarationId
+        )
+        return try await post(
+            resource: endpoint,
+            object: requestObject,
+            additionalHeaders: [CryptoOnrampAPI.consumerAuthTokenHeader: consumerSessionClientSecret]
+        )
+    }
+
+    /// Begins an identity verification session, providing the necessary data used to initialize the Identity SDK.
+    /// - Parameter linkAccountInfo: Information associated with the link account including the client secret and whether the account has been verified.
+    /// - Returns: API response that includes information used to initialize the Identity SDK.
+    func startIdentityVerification(linkAccountInfo: PaymentSheetLinkAccountInfoProtocol) async throws -> StartIdentityVerificationResponse {
+        guard let consumerSessionClientSecret = linkAccountInfo.consumerSessionClientSecret else {
+            throw CryptoOnrampAPIError.missingConsumerSessionClientSecret
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/start_identity_verification"
+        let requestObject = StartIdentityVerificationRequest(
+            consumerSessionClientSecret: consumerSessionClientSecret
+        )
+
+        return try await post(resource: endpoint, object: requestObject)
+    }
+
+    /// Registers the given crypto wallet address to the current Link account.
+    /// - Parameters:
+    ///   - linkAccountInfo: Information associated with the link account including the client secret and whether the account has been verified.
+    ///   - walletAddress: The crypto wallet address to register.
+    ///   - network: The crypto network for the wallet address.
+    @discardableResult
+    func collectWalletAddress(
+        walletAddress: String,
+        network: CryptoNetwork,
+        linkAccountInfo: PaymentSheetLinkAccountInfoProtocol
+    ) async throws -> RegisterWalletResponse {
+        guard let consumerSessionClientSecret = linkAccountInfo.consumerSessionClientSecret else {
+            throw CryptoOnrampAPIError.missingConsumerSessionClientSecret
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/wallet"
+        let requestObject = RegisterWalletRequest(
+            walletAddress: walletAddress,
+            network: network,
+            consumerSessionClientSecret: consumerSessionClientSecret
+        )
+
+        return try await post(resource: endpoint, object: requestObject)
+    }
+
+    /// Deletes the given crypto wallet from the current Link account.
+    /// - Parameters:
+    ///   - walletId: The ID of the crypto wallet to delete.
+    ///   - linkAccountInfo: Information associated with the link account including the client secret and whether the account has been verified.
+    /// - Returns: An empty response.
+    /// Throws if `linkAccountSessionState` is not verified, a client secret doesn’t exist, or if an API error occurs.
+    @discardableResult
+    func deleteWalletAddress(
+        walletId: String,
+        linkAccountInfo: PaymentSheetLinkAccountInfoProtocol
+    ) async throws -> EmptyResponse {
+        guard let consumerSessionClientSecret = linkAccountInfo.consumerSessionClientSecret else {
+            throw CryptoOnrampAPIError.missingConsumerSessionClientSecret
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/wallet"
+        let requestObject = DeleteWalletRequest(
+            walletId: walletId,
+            consumerSessionClientSecret: consumerSessionClientSecret
+        )
+        return try await delete(resource: endpoint, object: requestObject)
+    }
+
+    /// Creates a short-lived server-issued challenge for a registered wallet.
+    /// - Parameters:
+    ///   - walletAddress: The registered wallet address to verify.
+    ///   - network: The crypto network for the wallet address.
+    ///   - linkAccountInfo: Information associated with the link account including the client secret and whether the account has been verified.
+    /// - Returns: A server-issued wallet ownership challenge.
+    func getWalletOwnershipChallenge(
+        walletAddress: String,
+        network: CryptoNetwork,
+        linkAccountInfo: PaymentSheetLinkAccountInfoProtocol
+    ) async throws -> WalletOwnershipChallenge {
+        guard let consumerSessionClientSecret = linkAccountInfo.consumerSessionClientSecret else {
+            throw CryptoOnrampAPIError.missingConsumerSessionClientSecret
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/wallet_ownership_challenge"
+        let requestObject = WalletOwnershipChallengeRequest(
+            walletAddress: walletAddress,
+            network: network,
+            consumerSessionClientSecret: consumerSessionClientSecret
+        )
+
+        return try await post(resource: endpoint, object: requestObject)
+    }
+
+    /// Verifies a signature over a previously issued wallet ownership challenge.
+    /// - Parameters:
+    ///   - challengeId: Opaque identifier returned by `getWalletOwnershipChallenge`.
+    ///   - signature: Signature produced by the merchant's wallet stack over the exact challenge message.
+    ///   - linkAccountInfo: Information associated with the link account including the client secret and whether the account has been verified.
+    /// - Returns: The updated consumer wallet.
+    func submitWalletOwnershipSignature(
+        challengeId: String,
+        signature: String,
+        linkAccountInfo: PaymentSheetLinkAccountInfoProtocol
+    ) async throws -> CryptoConsumerWallet {
+        guard let consumerSessionClientSecret = linkAccountInfo.consumerSessionClientSecret else {
+            throw CryptoOnrampAPIError.missingConsumerSessionClientSecret
+        }
+
+        try validateSessionState(using: linkAccountInfo)
+
+        let endpoint = "crypto/internal/wallet_ownership_verification"
+        let requestObject = WalletOwnershipSignatureRequest(
+            challengeId: challengeId,
+            signature: signature,
+            consumerSessionClientSecret: consumerSessionClientSecret
+        )
+
+        return try await post(resource: endpoint, object: requestObject)
+    }
+
+    /// Retrieves an onramp session.
+    /// - Parameters:
+    ///   - sessionId: The onramp session identifier.
+    ///   - sessionClientSecret: The onramp session client secret.
+    /// - Returns: The onramp session details.
+    func getOnrampSession(
+        sessionId: String,
+        sessionClientSecret: String
+    ) async throws -> OnrampSessionResponse {
+        let endpoint = "crypto/internal/onramp_session"
+        let parameters = ["crypto_onramp_session": sessionId, "client_secret": sessionClientSecret]
+        return try await get(resource: endpoint, parameters: parameters)
+    }
+
+    /// Creates a crypto payment token from a given payment method and consumer.
+    /// - Parameters:
+    ///   - paymentMethodId: The originating payment method ID.
+    ///   - cryptoCustomerId: The crypto customer ID.
+    ///   - countryHint: An optional two-letter country code (ISO 3166-1 alpha-2) used to help select a merchant of
+    ///   record when the customer does not yet have an established KYC region.
+    /// - Returns: The created crypto payment token.
+    /// Throws if an API error occurs.
+    func createPaymentToken(
+        for paymentMethodId: String,
+        cryptoCustomerId: String,
+        countryHint: String? = nil
+    ) async throws -> CreatePaymentTokenResponse {
+        let endpoint = "crypto/internal/payment_token"
+        let requestObject = CreatePaymentTokenRequest(
+            paymentMethod: paymentMethodId,
+            cryptoCustomerId: cryptoCustomerId,
+            countryHint: countryHint
+        )
+        return try await post(resource: endpoint, object: requestObject)
+    }
+
+    /// Retrieves platform settings for the crypto onramp service.
+    /// - Parameters:
+    ///   - cryptoCustomerId: The ID for the crypto customer, if one is available. When `nil`, platform settings are
+    ///   resolved using the publishable key alone, which allows resolving a platform API client before authentication.
+    ///   - countryHint: An optional two-letter country code (ISO 3166-1 alpha-2) used to help select a merchant of
+    ///   record when the customer does not yet have an established KYC region.
+    /// - Returns: Platform settings including the publishable key.
+    /// Throws if an API error occurs.
+    func getPlatformSettings(
+        cryptoCustomerId: String?,
+        countryHint: String? = nil
+    ) async throws -> PlatformSettingsResponse {
+        let endpoint = "crypto/internal/platform_settings"
+
+        var parameters: [String: Any] = [
+            "ui_mode": "headless",
+        ]
+
+        if let cryptoCustomerId {
+            parameters["crypto_customer_id"] = cryptoCustomerId
+        }
+
+        if let countryHint {
+            parameters["country_hint"] = countryHint
+        }
+
+        return try await get(resource: endpoint, parameters: parameters)
+    }
+
+    private func validateSessionState(using linkAccountInfo: PaymentSheetLinkAccountInfoProtocol) throws {
+        guard case .verified = linkAccountInfo.sessionState else {
+            throw CryptoOnrampAPIError.linkAccountNotVerified
+        }
+    }
+}
+
+private extension STPAPIClient {
+
+    /// Helper method to wrap the closure-based post method for Swift concurrency.
+    func post<T: Decodable>(
+        resource: String,
+        object: Encodable,
+        ephemeralKeySecret: String? = nil,
+        additionalHeaders: [String: String] = [:]
+    ) async throws -> T {
+        return try await withCheckedThrowingContinuation { continuation in
+            post(
+                resource: resource,
+                object: object,
+                ephemeralKeySecret: ephemeralKeySecret,
+                apiVersionOverride: CryptoOnrampAPI.stripeAPIVersion,
+                additionalHeaders: additionalHeaders
+            ) { (result: Result<T, Error>) in
+                continuation.resume(with: result)
+            }
+        }
+    }
+
+    /// Helper method to wrap the closure-based delete method for Swift concurrency.
+    func delete<T: Decodable>(
+        resource: String,
+        object: Encodable,
+        additionalHeaders: [String: String] = [:]
+    ) async throws -> T {
+        let parameters = try object.encodeJSONDictionary()
+        return try await withCheckedThrowingContinuation { continuation in
+            delete(
+                resource: resource,
+                parameters: parameters,
+                apiVersionOverride: CryptoOnrampAPI.stripeAPIVersion,
+                additionalHeaders: additionalHeaders
+            ) { (result: Result<T, Error>) in
+                continuation.resume(with: result)
+            }
+        }
+    }
+
+    /// Helper method to wrap the closure-based get method for Swift concurrency.
+    func get<T: Decodable>(
+        resource: String,
+        parameters: [String: Any] = [:],
+        additionalHeaders: [String: String] = [:]
+    ) async throws -> T {
+        return try await withCheckedThrowingContinuation { continuation in
+            get(
+                resource: resource,
+                parameters: parameters,
+                apiVersionOverride: CryptoOnrampAPI.stripeAPIVersion,
+                additionalHeaders: additionalHeaders
+            ) { (result: Result<T, Error>) in
+                continuation.resume(with: result)
+            }
+        }
+    }
+}
+
+private enum CryptoOnrampAPI {
+    static let consumerAuthTokenHeader = "Stripe-Consumer-Auth-Token"
+
+    // Use a preview API version for networks and parameters behind preview API features.
+    // Bump this when new onramp features require a newer API version.
+    static let stripeAPIVersion = "2026-03-25.preview"
+}

@@ -1,0 +1,140 @@
+//
+//  FaceScanner.swift
+//  StripeIdentity
+//
+//  Created by Mel Ludowise on 5/10/22.
+//  Copyright © 2022 Stripe, Inc. All rights reserved.
+//
+
+import CoreVideo
+@_spi(InternalOnlyAPI) import StripeCameraCore
+@_spi(InternalOnlyAPI) import StripeCore
+import Vision
+
+typealias AnyFaceScanner = AnyImageScanner<FaceScannerOutput>
+
+final class FaceScanner {
+    private enum MotionBlurGate {
+        static let minIOU: Float = 0.94
+        static let minDuration: Double = 0.1
+    }
+
+    private let faceDetector: FaceDetector?
+    private let faceGeometryDetector: FaceGeometryDetector?
+    private let configuration: Configuration
+    private let motionBlurDetector: MotionBlurDetector
+
+    init(
+        faceDetector: FaceDetector,
+        configuration: Configuration
+    ) {
+        self.faceDetector = faceDetector
+        self.faceGeometryDetector = nil
+        self.configuration = configuration
+        self.motionBlurDetector = MotionBlurDetector(
+            minIOU: MotionBlurGate.minIOU,
+            minTime: MotionBlurGate.minDuration
+        )
+    }
+
+    convenience init(
+        faceDetectorModel: VNCoreMLModel,
+        configuration: Configuration
+    ) {
+        self.init(
+            faceDetector: .init(
+                model: faceDetectorModel,
+                configuration: .init(
+                    minScore: configuration.faceDetectorMinScore,
+                    minIOU: configuration.faceDetectorMinIOU
+                )
+            ),
+            configuration: configuration
+        )
+    }
+
+    init(
+        faceGeometryDetector: FaceGeometryDetector,
+        configuration: Configuration
+    ) {
+        self.faceDetector = nil
+        self.faceGeometryDetector = faceGeometryDetector
+        self.configuration = configuration
+        self.motionBlurDetector = MotionBlurDetector(
+            minIOU: MotionBlurGate.minIOU,
+            minTime: MotionBlurGate.minDuration
+        )
+    }
+}
+
+extension FaceScanner: ImageScanner {
+    typealias Output = FaceScannerOutput
+
+    var mlModelMetricsTrackers: [MLDetectorMetricsTrackerProtocol] {
+        return [faceDetector].compactMap { $0?.metricsTracker }
+    }
+
+    func scanImage(
+        pixelBuffer: CVPixelBuffer,
+        sampleBuffer: CMSampleBuffer,
+        cameraProperties: CameraSession.DeviceProperties?
+    ) -> StripeCore.Future<FaceScannerOutput> {
+        do {
+            let faceDetectorOutput: FaceDetectorOutput
+            let facePose: FacePose?
+            let faceLandmarkResult: String?
+            if let faceGeometryDetector {
+                let faceGeometry = try faceGeometryDetector.detectFace(pixelBuffer: pixelBuffer)
+                faceDetectorOutput = faceGeometry?.faceDetectorOutput ?? .init(predictions: [])
+                facePose = faceGeometry?.facePose
+                faceLandmarkResult = faceGeometry?.faceLandmarkResult
+            } else if let faceDetector {
+                faceDetectorOutput = try faceDetector.scanImage(pixelBuffer: pixelBuffer)
+                facePose = nil
+                faceLandmarkResult = nil
+            } else {
+                faceDetectorOutput = .init(predictions: [])
+                facePose = nil
+                faceLandmarkResult = nil
+            }
+            return Promise(
+                value: .init(
+                    faceDetectorOutput: faceDetectorOutput,
+                    cameraProperties: cameraProperties,
+                    configuration: configuration,
+                    motionBlurResult: motionBlurResult(
+                        faceDetectorOutput: faceDetectorOutput
+                    ),
+                    facePose: facePose,
+                    faceLandmarkResult: faceLandmarkResult
+                )
+            )
+        } catch {
+            return Promise(error: error)
+        }
+
+    }
+
+    func reset() {
+        motionBlurDetector.reset()
+        faceDetector?.metricsTracker?.reset()
+        faceGeometryDetector?.reset()
+    }
+}
+
+extension FaceScanner {
+    fileprivate func motionBlurResult(
+        faceDetectorOutput: FaceDetectorOutput
+    ) -> MotionBlurDetector.Output? {
+        guard
+            faceDetectorOutput.predictions.count == 1,
+            let faceRect = faceDetectorOutput.predictions.first?.rect
+        else {
+            return nil
+        }
+        let motionBlurOutput = motionBlurDetector.determineMotionBlur(
+            documentBounds: faceRect
+        )
+        return motionBlurOutput
+    }
+}

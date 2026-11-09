@@ -1,0 +1,767 @@
+//
+//  STPPaymentHandlerTests.swift
+//  StripeiOS Tests
+//
+//  Created by Cameron Sabol on 3/8/21.
+//  Copyright © 2021 Stripe, Inc. All rights reserved.
+//
+
+import Foundation
+import OHHTTPStubs
+import OHHTTPStubsSwift
+import SafariServices
+import StripeCoreTestUtils
+import XCTest
+
+@testable@_spi(InternalOnlyAPI) import Stripe
+@testable@_spi(InternalOnlyAPI) import Stripe3DS2
+@testable@_spi(InternalOnlyAPI) import StripeCore
+@testable@_spi(InternalOnlyAPI) import StripePayments
+@testable@_spi(InternalOnlyAPI) import StripePaymentSheet
+@testable import StripePaymentsTestUtils
+@testable@_spi(InternalOnlyAPI) import StripePaymentsUI
+
+class STPPaymentHandlerStubbedTests: STPNetworkStubbingTestCase {
+    @MainActor
+    func testAfterpayConfirmationTokenRedirectCompletesOnce() async {
+        // Given FlowController's server-confirmed Afterpay intent and a confirmation token
+        stub(condition: isPath("/v1/confirmation_tokens")) { _ in
+            HTTPStubsResponse(jsonObject: [
+                "id": "ctoken_test",
+                "created": 1_652_736_692,
+                "livemode": false,
+            ], statusCode: 200, headers: nil)
+        }
+        let initialIntent = STPFixtures.paymentIntent(
+            paymentMethodTypes: ["afterpay_clearpay"],
+            status: .requiresAction,
+            paymentMethod: ["id": "pm_test", "type": "afterpay_clearpay", "created": 1_652_736_692]
+        )
+        let paymentIntent = STPPaymentIntent.decodedObject(fromAPIResponse: initialIntent.allResponseFields.merging([
+            "next_action": [
+                "type": "redirect_to_url",
+                "redirect_to_url": ["url": "https://example.com", "return_url": "test://stripe-redirect"],
+            ],
+        ]) { _, new in new })!
+        let elementsSession = STPElementsSession.decodedObject(fromAPIResponse: [
+            "payment_method_preference": ["ordered_payment_method_types": ["afterpay_clearpay"], "country_code": "US"],
+            "session_id": "test",
+            "config_id": "test",
+        ])!
+        let confirmHandler: PaymentSheet.IntentConfiguration.ConfirmationTokenConfirmHandler = { token in
+            XCTAssertEqual(token.stripeId, "ctoken_test")
+            return paymentIntent.clientSecret
+        }
+        let intentConfig = PaymentSheet.IntentConfiguration(
+            mode: .payment(amount: 2345, currency: "usd"),
+            confirmationTokenConfirmHandler: confirmHandler
+        )
+
+        for responseStatus: STPPaymentIntentStatus in [.requiresAction, .requiresPaymentMethod] {
+            let responseIntent = STPPaymentIntent.decodedObject(fromAPIResponse: paymentIntent.allResponseFields.merging([
+                "status": STPPaymentIntentStatus.string(from: responseStatus),
+            ]) { _, new in new })!
+            let apiClient = STPAPIClientPollingMock(publishableKey: STPTestingDefaultPublishableKey)
+            var requests: [STPPaymentIntentCompletionBlock] = []
+            apiClient.retrievePaymentIntentHandler = { _, _, completion in
+                apiClient.retrievePaymentIntentHandler = { _, _, completion in
+                    requests.append(completion)
+                }
+                completion(paymentIntent, nil)
+            }
+            let paymentHandler = STPPaymentHandler(apiClient: apiClient)
+            var configuration = PaymentSheet.Configuration()
+            configuration.apiClient = apiClient
+            configuration.returnURL = "test://stripe-redirect"
+            var didRedirect = false
+            paymentHandler._redirectShim = { _, _, _ in
+                didRedirect = true
+                DispatchQueue.main.async {
+                    // When return, dismissal, and foreground callbacks overlap before any response arrives
+                    XCTAssertTrue(paymentHandler.handleURLCallback(URL(string: "test://stripe-redirect")!))
+                    paymentHandler.safariViewControllerDidFinish(SFSafariViewController(url: URL(string: "https://example.com")!))
+                    paymentHandler._handleWillForegroundNotification()
+                    XCTAssertEqual(requests.count, 3)
+                    for request in requests {
+                        request(responseIntent, nil)
+                    }
+                }
+            }
+            let (result, confirmationType) = await PaymentSheet.handleDeferredIntentConfirmation_confirmationToken(
+                confirmType: .new(
+                    params: STPPaymentMethodParams(afterpayClearpay: .init(), billingDetails: nil, metadata: nil),
+                    paymentOptions: .init(),
+                    paymentMethod: nil,
+                    saveForFutureUseCheckboxState: .hidden
+                ),
+                configuration: configuration,
+                intentConfig: intentConfig,
+                authenticationContext: self,
+                paymentHandler: paymentHandler,
+                isFlowController: true,
+                elementsSession: elementsSession,
+                confirmHandler: confirmHandler
+            )
+
+            // Then the real confirmation-token continuation resumes once, preserving cancellation or failure
+            XCTAssertTrue(didRedirect)
+            XCTAssertEqual(confirmationType, .server)
+            if responseStatus == .requiresAction {
+                guard case .canceled = result else {
+                    XCTFail("Expected cancellation, got \(result)")
+                    return
+                }
+            } else {
+                guard case .failed(let error) = result else {
+                    XCTFail("Expected failure, got \(result)")
+                    return
+                }
+                XCTAssertEqual((error as NSError).code, STPPaymentHandlerErrorCode.paymentErrorCode.rawValue)
+            }
+            XCTAssertNil(paymentHandler.currentAction)
+            XCTAssertFalse(paymentHandler.isHandlingAction)
+            paymentHandler._redirectShim = nil
+            apiClient.retrievePaymentIntentHandler = nil
+        }
+    }
+
+    @MainActor
+    func testSetupIntentRedirectCancellationResumesContinuationOnce() async {
+        // Given a card redirect with two intent requests that have not completed
+        let apiClient = STPAPIClientPollingMock()
+        var requests: [STPSetupIntentCompletionBlock] = []
+        apiClient.retrieveSetupIntentHandler = { _, _, completion in
+            requests.append(completion)
+        }
+        let paymentHandler = STPPaymentHandler(apiClient: apiClient)
+        let initialIntent = STPFixtures.setupIntent(
+            paymentMethodTypes: ["card"],
+            status: .requiresAction,
+            paymentMethod: ["id": "pm_test", "type": "card", "created": 1_652_736_692]
+        )
+        let setupIntent = STPSetupIntent.decodedObject(fromAPIResponse: initialIntent.allResponseFields.merging([
+            "next_action": [
+                "type": "redirect_to_url",
+                "redirect_to_url": ["url": "https://example.com", "return_url": "test://stripe-redirect"],
+            ],
+        ]) { _, new in new })!
+        var completionCount = 0
+        let status: STPPaymentHandlerActionStatus = await withCheckedContinuation { continuation in
+            paymentHandler.currentAction = STPPaymentHandlerSetupIntentActionParams(
+                apiClient: apiClient,
+                authenticationContext: self,
+                threeDSCustomizationSettings: .init(),
+                setupIntent: setupIntent,
+                returnURL: "test://stripe-redirect"
+            ) { status, intent, error in
+                completionCount += 1
+                XCTAssertTrue(intent === setupIntent)
+                XCTAssertNil(error)
+                paymentHandler.currentAction = nil
+                continuation.resume(returning: status)
+            }
+
+            // When the return URL and Safari dismissal arrive before either request finishes
+            XCTAssertTrue(paymentHandler.handleURLCallback(URL(string: "test://stripe-redirect")!))
+            paymentHandler.safariViewControllerDidFinish(SFSafariViewController(url: URL(string: "https://example.com")!))
+            XCTAssertEqual(requests.count, 2)
+            for request in requests {
+                request(setupIntent, nil)
+            }
+        }
+
+        // Then cancellation resumes the continuation exactly once without crashing
+        XCTAssertEqual(status, .canceled)
+        XCTAssertEqual(completionCount, 1)
+    }
+
+    @MainActor
+    func testPaymentIntentCompletionIgnoresRepeatedAndReentrantCalls() {
+        for expectedStatus: STPPaymentHandlerActionStatus in [.succeeded, .failed, .canceled] {
+            // Given an action whose completion attempts to complete the same action again
+            let intent = STPFixtures.paymentIntent(paymentMethodTypes: ["card"])
+            let expectedError = expectedStatus == .failed ? NSError(domain: "test", code: 1) : nil
+            var action: STPPaymentHandlerPaymentIntentActionParams!
+            var completionCount = 0
+            action = STPPaymentHandlerPaymentIntentActionParams(
+                apiClient: STPAPIClientPollingMock(),
+                authenticationContext: self,
+                threeDSCustomizationSettings: .init(),
+                paymentIntent: intent,
+                returnURL: nil
+            ) { status, completedIntent, error in
+                completionCount += 1
+                XCTAssertEqual(status, expectedStatus)
+                XCTAssertTrue(completedIntent === intent)
+                XCTAssertEqual(error, expectedError)
+                // Bound the reentrant call so a regression fails without overflowing the stack.
+                if completionCount == 1 {
+                    action.complete(with: .failed, error: nil)
+                }
+            }
+
+            // When the action completes and another callback arrives afterward
+            action.complete(with: expectedStatus, error: expectedError)
+            action.complete(with: .canceled, error: nil)
+
+            // Then only the first result is delivered
+            XCTAssertEqual(completionCount, 1)
+        }
+    }
+
+    @MainActor
+    func testSetupIntentCompletionIgnoresRepeatedAndReentrantCalls() {
+        for expectedStatus: STPPaymentHandlerActionStatus in [.succeeded, .failed, .canceled] {
+            // Given an action whose completion attempts to complete the same action again
+            let intent = STPFixtures.setupIntent(paymentMethodTypes: ["card"])
+            let expectedError = expectedStatus == .failed ? NSError(domain: "test", code: 1) : nil
+            var action: STPPaymentHandlerSetupIntentActionParams!
+            var completionCount = 0
+            action = STPPaymentHandlerSetupIntentActionParams(
+                apiClient: STPAPIClientPollingMock(),
+                authenticationContext: self,
+                threeDSCustomizationSettings: .init(),
+                setupIntent: intent,
+                returnURL: nil
+            ) { status, completedIntent, error in
+                completionCount += 1
+                XCTAssertEqual(status, expectedStatus)
+                XCTAssertTrue(completedIntent === intent)
+                XCTAssertEqual(error, expectedError)
+                // Bound the reentrant call so a regression fails without overflowing the stack.
+                if completionCount == 1 {
+                    action.complete(with: .failed, error: nil)
+                }
+            }
+
+            // When the action completes and another callback arrives afterward
+            action.complete(with: expectedStatus, error: expectedError)
+            action.complete(with: .canceled, error: nil)
+
+            // Then only the first result is delivered
+            XCTAssertEqual(completionCount, 1)
+        }
+    }
+
+    func testPaymentIntentCardErrorUsesServerMessage() {
+        // Given a PaymentIntent that failed after authentication with a specific decline message
+        let paymentIntent = STPPaymentIntent.decodedObject(fromAPIResponse: [
+            "id": "pi_123",
+            "client_secret": "pi_123_secret_123",
+            "amount": 2345,
+            "currency": "usd",
+            "status": "requires_payment_method",
+            "livemode": false,
+            "created": 1_652_736_692.0,
+            "payment_method_types": ["card"],
+            "last_payment_error": [
+                "code": "card_declined",
+                "decline_code": "insufficient_funds",
+                "message": "Your card has insufficient funds.",
+                "type": "card_error",
+            ],
+        ])!
+        let apiClient = STPAPIClientPollingMock()
+        let paymentHandler = STPPaymentHandler(apiClient: apiClient)
+        let completion = expectation(description: "PaymentIntent completed")
+        let action = STPPaymentHandlerPaymentIntentActionParams(
+            apiClient: apiClient,
+            authenticationContext: self,
+            threeDSCustomizationSettings: STPThreeDSCustomizationSettings(),
+            paymentIntent: paymentIntent,
+            returnURL: nil
+        ) { status, _, error in
+            // Then the specific server message is returned instead of the generic error-code message
+            XCTAssertEqual(status, .failed)
+            XCTAssertEqual(error?.localizedDescription, "Your card has insufficient funds.")
+            completion.fulfill()
+        }
+
+        // When the post-authentication PaymentIntent status is handled
+        XCTAssertFalse(paymentHandler._handlePaymentIntentStatus(forAction: action))
+        wait(for: [completion], timeout: 1)
+    }
+
+    func testSetupIntentCardErrorUsesServerMessage() {
+        // Given a SetupIntent that failed after authentication with a specific card error message
+        let setupIntent = STPSetupIntent.decodedObject(fromAPIResponse: [
+            "id": "seti_123",
+            "client_secret": "seti_123_secret_123",
+            "status": "requires_payment_method",
+            "livemode": false,
+            "created": 1_652_736_692.0,
+            "payment_method_types": ["card"],
+            "last_setup_error": [
+                "code": "card_declined",
+                "decline_code": "insufficient_funds",
+                "message": "Your card has insufficient funds.",
+                "type": "card_error",
+            ],
+        ])!
+        let apiClient = STPAPIClientPollingMock()
+        let paymentHandler = STPPaymentHandler(apiClient: apiClient)
+        let completion = expectation(description: "SetupIntent completed")
+        let action = STPPaymentHandlerSetupIntentActionParams(
+            apiClient: apiClient,
+            authenticationContext: self,
+            threeDSCustomizationSettings: STPThreeDSCustomizationSettings(),
+            setupIntent: setupIntent,
+            returnURL: nil
+        ) { status, _, error in
+            // Then the specific server message is returned instead of the generic error-code message
+            XCTAssertEqual(status, .failed)
+            XCTAssertEqual(error?.localizedDescription, "Your card has insufficient funds.")
+            completion.fulfill()
+        }
+
+        // When the post-authentication SetupIntent status is handled
+        XCTAssertFalse(paymentHandler._handleSetupIntentStatus(forAction: action))
+        wait(for: [completion], timeout: 1)
+    }
+
+    func testPaymentErrorFallsBackToLocalizedAPIErrorMessage() {
+        // Given a payment error without a server message
+        let paymentHandler = STPPaymentHandler(apiClient: STPAPIClientPollingMock())
+
+        // When the error is created from a known API error code
+        let error = paymentHandler._error(
+            for: .paymentErrorCode,
+            apiErrorCode: "card_declined"
+        )
+
+        // Then the localized API error message is used as a fallback
+        XCTAssertEqual(error.localizedDescription, NSError.stp_cardErrorDeclinedUserMessage())
+    }
+
+    func testPollingBehaviorWithFinalCall() {
+        let mockAPIClient = STPAPIClientPollingMock()
+        let paymentHandler = STPPaymentHandler(apiClient: mockAPIClient)
+        let pollingBudget = PollingBudget(startDate: Date(), duration: 1.0)
+        let expectation = self.expectation(description: "Polling completes")
+
+        var callTimes: [Date] = []
+        let startTime = Date()
+
+        let paymentIntent = STPFixtures.paymentIntent(
+            paymentMethodTypes: ["amazon_pay"],
+            status: .processing,
+            paymentMethod: ["id": "pm_test", "type": "amazon_pay", "created": Date().timeIntervalSince1970]
+        )
+
+        mockAPIClient.retrievePaymentIntentHandler = { _, _, completion in
+            callTimes.append(Date())
+            let status: STPPaymentIntentStatus = callTimes.count >= 2 ? .succeeded : .processing
+
+            let responseDict = paymentIntent.allResponseFields.merging([
+                "status": STPPaymentIntentStatus.string(from: status)
+            ]) { _, new in new }
+
+            let updatedPI = STPPaymentIntent.decodedObject(fromAPIResponse: responseDict)
+
+            // Simulate 15-second network request time for first request
+            DispatchQueue.main.asyncAfter(deadline: .now() + (callTimes.count == 1 ? 1.1 : 0.0)) {
+                completion(updatedPI, nil)
+
+                if callTimes.count >= 2 {
+                    expectation.fulfill()
+                }
+            }
+        }
+
+        let currentAction = STPPaymentHandlerPaymentIntentActionParams(
+            apiClient: mockAPIClient,
+            authenticationContext: self,
+            threeDSCustomizationSettings: STPThreeDSCustomizationSettings(),
+            paymentIntent: paymentIntent,
+            returnURL: nil
+        ) { _, _, _ in }
+
+        paymentHandler.currentAction = currentAction
+        paymentHandler._retrieveAndCheckIntentForCurrentAction(currentAction: currentAction, pollingBudget: pollingBudget)
+
+        wait(for: [expectation], timeout: 30.0)
+
+        XCTAssertEqual(callTimes.count, 2, "Expected exactly 2 network calls: initial + final")
+
+        let firstCallDelay = callTimes[0].timeIntervalSince(startTime)
+        let finalCallDelay = callTimes[1].timeIntervalSince(startTime)
+
+        XCTAssertLessThan(firstCallDelay, 1.0, "First call should happen immediately")
+        XCTAssertGreaterThan(finalCallDelay, 1.1, "Final call should happen after polling budget expires")
+        XCTAssertLessThan(finalCallDelay, 1.3, "Final call should happen after polling budget expires but within a reasonable time")
+    }
+
+    func testPollingBehaviorWithTimeoutThenSuccess() {
+        let mockAPIClient = STPAPIClientPollingMock()
+        let paymentHandler = STPPaymentHandler(apiClient: mockAPIClient)
+        let pollingBudget = PollingBudget(startDate: Date(), duration: 1)
+        let expectation = self.expectation(description: "Polling completes after timeout retry")
+
+        var callTimes: [Date] = []
+        let startTime = Date()
+
+        let paymentIntent = STPFixtures.paymentIntent(
+            paymentMethodTypes: ["card"],
+            status: .processing,
+            paymentMethod: ["id": "pm_test", "type": "card"]
+        )
+
+        mockAPIClient.retrievePaymentIntentHandler = { _, _, completion in
+            callTimes.append(Date())
+
+            if callTimes.count == 1 {
+                // First call simulate timeout error
+                let timeoutError = NSError(
+                    domain: NSURLErrorDomain,
+                    code: NSURLErrorTimedOut,
+                    userInfo: [NSLocalizedDescriptionKey: "The request timed out."]
+                )
+                completion(nil, timeoutError)
+            } else {
+                // Second call return success
+                let responseDict = paymentIntent.allResponseFields.merging([
+                    "status": STPPaymentIntentStatus.string(from: .succeeded)
+                ]) { _, new in new }
+
+                let succeededPI = STPPaymentIntent.decodedObject(fromAPIResponse: responseDict)
+                completion(succeededPI, nil)
+                expectation.fulfill()
+            }
+        }
+
+        let currentAction = STPPaymentHandlerPaymentIntentActionParams(
+            apiClient: mockAPIClient,
+            authenticationContext: self,
+            threeDSCustomizationSettings: STPThreeDSCustomizationSettings(),
+            paymentIntent: paymentIntent,
+            returnURL: nil
+        ) { _, _, _ in }
+
+        paymentHandler.currentAction = currentAction
+        paymentHandler._retrieveAndCheckIntentForCurrentAction(currentAction: currentAction, pollingBudget: pollingBudget)
+
+        wait(for: [expectation], timeout: 15.0)
+
+        XCTAssertEqual(callTimes.count, 2, "Expected exactly 2 network calls: initial timeout + retry success")
+
+        let firstCallDelay = callTimes[0].timeIntervalSince(startTime)
+        let retryCallDelay = callTimes[1].timeIntervalSince(startTime)
+
+        XCTAssertLessThan(firstCallDelay, 0.1, "First call should happen immediately")
+        XCTAssertGreaterThan(retryCallDelay, 1.0, "Retry call should happen after polling delay (>=1 second)")
+        XCTAssertLessThan(retryCallDelay, 1.2, "Retry call should happen within reasonable time (<=1.2 seconds)")
+    }
+
+    func testSetupIntentPollingBehaviorWithTimeoutThenSuccess() {
+        let mockAPIClient = STPAPIClientPollingMock()
+        let paymentHandler = STPPaymentHandler(apiClient: mockAPIClient)
+        let pollingBudget = PollingBudget(startDate: Date(), duration: 1.0)
+        let expectation = self.expectation(description: "SetupIntent polling completes after timeout retry")
+
+        var callTimes: [Date] = []
+        let startTime = Date()
+
+        let setupIntent = STPFixtures.setupIntent(
+            paymentMethodTypes: ["amazon_pay"],
+            status: .processing,
+            paymentMethod: ["id": "pm_test", "type": "card"]
+        )
+
+        mockAPIClient.retrieveSetupIntentHandler = { _, _, completion in
+            callTimes.append(Date())
+
+            if callTimes.count == 1 {
+                // First call: simulate timeout error
+                let timeoutError = NSError(
+                    domain: NSURLErrorDomain,
+                    code: NSURLErrorTimedOut,
+                    userInfo: [NSLocalizedDescriptionKey: "The request timed out."]
+                )
+                completion(nil, timeoutError)
+            } else {
+                // Second call: return success
+                let responseDict = setupIntent.allResponseFields.merging([
+                    "status": STPSetupIntentStatus.string(from: .succeeded)
+                ]) { _, new in new }
+
+                let succeededSI = STPSetupIntent.decodedObject(fromAPIResponse: responseDict)
+                completion(succeededSI, nil)
+                expectation.fulfill()
+            }
+        }
+
+        let currentAction = STPPaymentHandlerSetupIntentActionParams(
+            apiClient: mockAPIClient,
+            authenticationContext: self,
+            threeDSCustomizationSettings: STPThreeDSCustomizationSettings(),
+            setupIntent: setupIntent,
+            returnURL: nil
+        ) { _, _, _ in }
+
+        paymentHandler.currentAction = currentAction
+        paymentHandler._retrieveAndCheckIntentForCurrentAction(currentAction: currentAction, pollingBudget: pollingBudget)
+
+        wait(for: [expectation], timeout: 15.0)
+
+        XCTAssertEqual(callTimes.count, 2, "Expected exactly 2 network calls: initial timeout + retry success")
+
+        let firstCallDelay = callTimes[0].timeIntervalSince(startTime)
+        let retryCallDelay = callTimes[1].timeIntervalSince(startTime)
+
+        XCTAssertLessThan(firstCallDelay, 0.1, "First call should happen immediately")
+        XCTAssertGreaterThan(retryCallDelay, 1.0, "Retry call should happen after polling delay (>=1 second)")
+        XCTAssertLessThan(retryCallDelay, 1.2, "Retry call should happen within reasonable time (<=1.2 seconds)")
+    }
+
+    func testSetupIntentPollingBehaviorWithFinalCall() {
+        let mockAPIClient = STPAPIClientPollingMock()
+        let paymentHandler = STPPaymentHandler(apiClient: mockAPIClient)
+        let pollingBudget = PollingBudget(startDate: Date(), duration: 1.0)
+        let expectation = self.expectation(description: "SetupIntent polling completes with final call")
+
+        var callTimes: [Date] = []
+        let startTime = Date()
+
+        let setupIntent = STPFixtures.setupIntent(
+            paymentMethodTypes: ["amazon_pay"],
+            status: .processing,
+            paymentMethod: ["id": "pm_test", "type": "amazon_pay", "created": 12345]
+        )
+
+        mockAPIClient.retrieveSetupIntentHandler = { _, _, completion in
+            callTimes.append(Date())
+            let status: STPSetupIntentStatus = callTimes.count >= 2 ? .succeeded : .processing
+
+            let responseDict = setupIntent.allResponseFields.merging([
+                "status": STPSetupIntentStatus.string(from: status)
+            ]) { _, new in new }
+
+            let updatedSI = STPSetupIntent.decodedObject(fromAPIResponse: responseDict)
+
+            // Simulate 1.1-second network request time for first request
+            DispatchQueue.main.asyncAfter(deadline: .now() + (callTimes.count == 1 ? 1.1 : 0.0)) {
+                completion(updatedSI, nil)
+
+                if callTimes.count >= 2 {
+                    expectation.fulfill()
+                }
+            }
+        }
+
+        let currentAction = STPPaymentHandlerSetupIntentActionParams(
+            apiClient: mockAPIClient,
+            authenticationContext: self,
+            threeDSCustomizationSettings: STPThreeDSCustomizationSettings(),
+            setupIntent: setupIntent,
+            returnURL: nil
+        ) { _, _, _ in }
+
+        paymentHandler.currentAction = currentAction
+        paymentHandler._retrieveAndCheckIntentForCurrentAction(currentAction: currentAction, pollingBudget: pollingBudget)
+
+        wait(for: [expectation], timeout: 30.0)
+
+        XCTAssertEqual(callTimes.count, 2, "Expected exactly 2 network calls: initial + final")
+
+        let firstCallDelay = callTimes[0].timeIntervalSince(startTime)
+        let finalCallDelay = callTimes[1].timeIntervalSince(startTime)
+
+        XCTAssertLessThan(firstCallDelay, 1.0, "First call should happen immediately")
+        XCTAssertGreaterThan(finalCallDelay, 1.1, "Final call should happen after polling budget expires")
+        XCTAssertLessThan(finalCallDelay, 1.3, "Final call should happen after polling budget expires but within a reasonable time")
+    }
+}
+
+class STPPaymentHandlerTests: APIStubbedTestCase {
+
+    func testPaymentHandlerRetriesWithBackoff() {
+        let oldMaxRetries = StripeAPI.maxRetries
+        StripeAPI.maxRetries = 1
+        STPPaymentHandler.sharedHandler.apiClient = stubbedAPIClient()
+
+        stub { urlRequest in
+            return urlRequest.url?.absoluteString.contains("3ds2/authenticate") ?? false
+        } response: { _ in
+            let jsonText = """
+                        {
+                            "state": "challenge_required",
+                            "livemode": "false",
+                            "ares" : {
+                                "dsTransID": "4e4750e7-6ab5-45a4-accf-9c668ed3b5a7",
+                                "acsTransID": "fa695a82-a48c-455d-9566-a652058dda27",
+                                "p_messageVersion": "1.0.5",
+                                "acsOperatorID": "acsOperatorUL",
+                                "sdkTransID": "D77EB83F-F317-4E29-9852-EBAAB55515B7",
+                                "eci": "00",
+                                "dsReferenceNumber": "3DS_LOA_DIS_PPFU_020100_00010",
+                                "acsReferenceNumber": "3DS_LOA_ACS_PPFU_020100_00009",
+                                "threeDSServerTransID": "fc7a39de-dc41-4b65-ba76-a322769b2efc",
+                                "messageVersion": "2.2.0",
+                                "authenticationValue": "AABBCCDDEEFFAABBCCDDEEFFAAA=",
+                                "messageType": "pArs",
+                                "transStatus": "C",
+                                "acsChallengeMandated": "NO"
+                            }
+                        }
+                """
+            return HTTPStubsResponse(
+                data: jsonText.data(using: .utf8)!,
+                statusCode: 200,
+                headers: nil
+            )
+        }
+
+        stub { urlRequest in
+            return urlRequest.url?.absoluteString.contains("3ds2/challenge_complete") ?? false
+        } response: { _ in
+            let errorResponse = [
+                "error":
+                    [
+                        "message": "This is intentionally failing for this test.",
+                        "type": "invalid_request_error",
+                    ],
+            ]
+            return HTTPStubsResponse(jsonObject: errorResponse, statusCode: 400, headers: nil)
+        }
+
+        // Stub the fetch SetupIntent request, which should be called after the failed challenge_complete
+        let fetchedSetupIntentExpectation = expectation(description: "Fetched SetupIntent")
+        stub { urlRequest in
+            return urlRequest.url?.absoluteString.contains("setup_intents/seti_123") ?? false
+        } response: { _ in
+            fetchedSetupIntentExpectation.fulfill()
+            return HTTPStubsResponse(jsonObject: STPTestUtils.jsonNamed("SetupIntent")!, statusCode: 400, headers: nil)
+        }
+
+        let paymentHandlerExpectation = expectation(
+            description: "paymentHandlerFinished"
+        )
+        var inProgress = true
+
+        // Meaningless cert, generated for this test
+        // Expires 3/2/2121: Apologies to future engineers!
+        let cert = """
+            MIIBijCB9AIBATANBgkqhkiG9w0BAQUFADANMQswCQYDVQQGEwJVUzAgFw0yMTAz
+            MjYxODQyNDVaGA8yMTIxMDMwMjE4NDI0NVowDTELMAkGA1UEBhMCVVMwgZ8wDQYJ
+            KoZIhvcNAQEBBQADgY0AMIGJAoGBAL6rIW6t+8eo1exqhvYt8H1vM+TyHNNychlD
+            hILw745yXZQAy9ByRG3euYEydE3SFINgWBCUuwWmkNfsZUW7Uci1PBMglBFHJrE8
+            8ZvtuJgnPkqmu97a9JkyROiaqAmqoMDP95HiZG5i3a1E/QPpPyYA3VJ/El17Qqkl
+            aHN32qzjAgMBAAEwDQYJKoZIhvcNAQEFBQADgYEAUhxbGQ5sQMDUqFTvibU7RzqL
+            dTaFhdjTDBu5YeIbXXUrJSG2AydXRq7OacRksnQhvNYXimfcgfse46XQG7rKUCfj
+            kbazRiRxMZylTz8zbePAFcVq6zxJ+RBVrv51D+/JgbCcQ50nZiocllR0J9UL8CKZ
+            obaUC2OjBbSuCZwF8Ig=
+            """
+        let rootCA = """
+            MIIBkDCB+gIJAJ3pmjFOkxTXMA0GCSqGSIb3DQEBBQUAMA0xCzAJBgNVBAYTAlVT
+            MB4XDTIxMDMyNjE4NDEzMVoXDTIyMDMyNjE4NDEzMVowDTELMAkGA1UEBhMCVVMw
+            gZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAKmFDGPV77Fk/wgUMwbxjQk+bpUY
+            cTjNBsjK3xMaUWeE17Sry6IguO1iWaXVey9YJ1Dm83PNO/5i9nHh3gmFhEJmc55T
+            g+0tZQigjTcs5/BfmWtrfPYIWqKvIJqkkHrIEJnwavAS5OFGyDArHLwUtsgJbDmW
+            tIeQg3EH/8BSWR0BAgMBAAEwDQYJKoZIhvcNAQEFBQADgYEATY2aQvZZJLPgUr1/
+            oDvRy6KZ6p7n3+jXF8DNvVOIaQRD4Ndk5NfStteIT5XvzfmD6QqpG3nlJ6Wy3oSP
+            03KvO4GWIyP9cuP/QLaEmxJIYKwPrdxLkUHFfzyy8tN54xOWPxN4Up9gVN6pSdVk
+            KWrsPfhPs3G57wir370Q69lV/8A=
+            """
+        let iauss = STPIntentActionUseStripeSDK(
+            encryptionInfo: [
+                "certificate": cert,
+                "directory_server_id": "0000000000",
+                "root_certificate_authorities": [rootCA],
+            ],
+            directoryServerName: "none",
+            directoryServerKeyID: "none",
+            serverTransactionID: "none",
+            threeDSSourceID: "none",
+            publishableKeyOverride: nil,
+            threeDS2IntentOverride: nil,
+            allResponseFields: [:]
+        )
+        let action = STPIntentAction(
+            type: .useStripeSDK,
+            redirectToURL: nil,
+            alipayHandleRedirect: nil,
+            useStripeSDK: iauss,
+            oxxoDisplayDetails: nil,
+            weChatPayRedirectToApp: nil,
+            boletoDisplayDetails: nil,
+            verifyWithMicrodeposits: nil,
+            cashAppRedirectToApp: nil,
+            payNowDisplayQrCode: nil,
+            konbiniDisplayDetails: nil,
+            promptPayDisplayQrCode: nil,
+            swishHandleRedirect: nil,
+            multibancoDisplayDetails: nil,
+            allResponseFields: [:]
+        )
+        let setupIntent = STPSetupIntent(
+            stripeID: "test",
+            automaticPaymentMethods: nil,
+            clientSecret: "seti_123_secret_123",
+            created: Date(),
+            customerID: nil,
+            stripeDescription: nil,
+            livemode: false,
+            nextAction: action,
+            paymentMethodID: "test",
+            paymentMethod: nil,
+            paymentMethodOptions: nil,
+            paymentMethodTypes: [],
+            status: .requiresAction,
+            usage: .none,
+            lastSetupError: nil,
+            allResponseFields: [:]
+        )
+
+        // We expect this request to retry a few times with exponential backoff before calling the completion handler.
+        STPPaymentHandler.sharedHandler._handleNextAction(
+            for: setupIntent,
+            with: self,
+            returnURL: nil
+        ) { (status, _, _) in
+            XCTAssertEqual(status, .failed)
+            inProgress = false
+            paymentHandlerExpectation.fulfill()
+        }
+
+        let checkedStillInProgress = expectation(
+            description: "Checked that we're still in progress after 2s"
+        )
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2.0) {
+            // Make sure we're still in progress after 2 seconds
+            // This shows that we're retrying the 3DS2 request a few times
+            // while applying an appropriate amount of backoff.
+            XCTAssertEqual(inProgress, true)
+            checkedStillInProgress.fulfill()
+        }
+
+        wait(for: [paymentHandlerExpectation, checkedStillInProgress, fetchedSetupIntentExpectation], timeout: 60)
+        STPPaymentHandler.sharedHandler.apiClient = STPAPIClient.shared
+        StripeAPI.maxRetries = oldMaxRetries
+    }
+}
+
+// MARK: - Mock Classes
+class STPAPIClientPollingMock: STPAPIClient {
+    var retrievePaymentIntentHandler: ((String, [String]?, @escaping STPPaymentIntentCompletionBlock) -> Void)?
+    var retrieveSetupIntentHandler: ((String, [String]?, @escaping STPSetupIntentCompletionBlock) -> Void)?
+
+    override func retrievePaymentIntent(withClientSecret secret: String, expand: [String]?, timeout: NSNumber?, completion: @escaping STPPaymentIntentCompletionBlock) {
+        retrievePaymentIntentHandler?(secret, expand, completion)
+    }
+
+    override func retrieveSetupIntent(withClientSecret secret: String, expand: [String]?, timeout: NSNumber?, completion: @escaping STPSetupIntentCompletionBlock) {
+        retrieveSetupIntentHandler?(secret, expand, completion)
+    }
+}
+
+extension STPPaymentHandlerTests: STPAuthenticationContext {
+    func authenticationPresentingViewController() -> UIViewController {
+        return UIViewController()
+    }
+}
+
+extension STPPaymentHandlerStubbedTests: STPAuthenticationContext {
+    func authenticationPresentingViewController() -> UIViewController {
+        return UIViewController()
+    }
+}

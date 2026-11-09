@@ -1,0 +1,1903 @@
+//
+//  STPAPIClient+CryptoOnrampTests.swift
+//  StripeCryptoOnrampTests
+//
+//  Created by Michael Liberatore on 7/17/25.
+//
+
+import Foundation
+import StripeCore
+import StripeCoreTestUtils
+@testable @_spi(CryptoOnrampAlpha) import StripeCryptoOnramp
+@_spi(InternalOnlyAPI) import StripePaymentSheet
+
+import OHHTTPStubs
+import OHHTTPStubsSwift
+import XCTest
+
+final class STPAPIClientCryptoOnrampTests: APIStubbedTestCase {
+
+    private enum Constant {
+        // Common
+        static let requestSecret = "cscs_12345"
+        static let linkSessionKey = "lsk_test_12345"
+        static let consumerAuthTokenHeader = "Stripe-Consumer-Auth-Token"
+        static let errorDomain = "STPAPIClientCryptoOnrampTests.Error"
+        static let validCustomerId = "crc_12345"
+        static let cryptoOnrampAPIVersion = "2026-03-25.preview"
+
+        // /v1/crypto/internal/customers
+        static let createCryptoCustomerAPIPath = "/v1/crypto/internal/customers"
+        static let validLinkAccountInfo = LinkAccountInfo(
+            email: "test@example.com",
+            redactedPhoneNumber: nil,
+            isRegistered: true,
+            sessionState: .verified,
+            consumerSessionClientSecret: requestSecret,
+            linkSessionKey: linkSessionKey
+        )
+
+        // /v1/crypto/internal/fulfill_kyc_requirements
+        static let fulfillKYCRequirementsAPIPath = "/v1/crypto/internal/fulfill_kyc_requirements"
+        static let validFulfillKYCRequirementsRequest = FulfillKYCRequirementsRequest(requirements: [
+            "proof_of_address": .init(
+                requestedBy: "swapped",
+                documents: [
+                    .init(documentSubtype: "utility_provider", fileIds: ["file_poa"]),
+                ],
+                additionalRequirements: nil
+            ),
+            "source_of_funds": .init(
+                requestedBy: "swapped",
+                documents: [
+                    .init(documentSubtype: "payslip", fileIds: ["file_payslip_1", "file_payslip_2"]),
+                    .init(documentSubtype: "bank_statement", fileIds: ["file_bank_statement"]),
+                ],
+                additionalRequirements: .init(
+                    questionnaire: .init(answers: [
+                        .init(questionId: "purchase_purpose", value: "Personal investment"),
+                        .init(questionId: "third_party_advised", value: "No"),
+                        .init(questionId: "funding_sources", value: "Salary and savings"),
+                    ])
+                )
+            ),
+        ])
+
+        // /v1/crypto/internal/kyc_data_collection
+        static let collectKycInfoAPIPath = "/v1/crypto/internal/kyc_data_collection"
+        static let validL0KycInfo = KycInfo(
+            firstName: "John",
+            lastName: "Smith",
+            idNumber: nil,
+            address: .init(
+                city: "Brooklyn",
+                country: "US",
+                line1: "123 Fake Street",
+                line2: "APT 2",
+                postalCode: "11201",
+                state: "New York"
+            ),
+            dateOfBirth: nil
+        )
+        static let validL1KycInfo = KycInfo(
+            firstName: validL0KycInfo.firstName,
+            lastName: validL0KycInfo.lastName,
+            idNumber: "123456789",
+            address: validL0KycInfo.address,
+            dateOfBirth: .init(
+                day: 31,
+                month: 3,
+                year: 1975
+            )
+        )
+        static let kycMockResponseObject = KYCDataCollectionResponse(
+            personId: "person_1A2BcD345EFg6HiJ",
+            firstName: "John",
+            lastName: "Smith",
+            nationalities: [],
+            residenceCountry: "US"
+        )
+        static let validEUKycInfo = KycInfo(
+            firstName: "John",
+            lastName: "Smith",
+            idNumber: "123456789",
+            address: .init(
+                city: "Athens",
+                country: "GR",
+                line1: "1 Fake Street",
+                line2: "Apt 2",
+                postalCode: "11145",
+                state: "Attica"
+            ),
+            dateOfBirth: .init(
+                day: 31,
+                month: 3,
+                year: 1975
+            ),
+            birthCountry: "GR",
+            birthCity: "Athens",
+            nationalities: ["GR", "EE"]
+        )
+
+        // /v1/crypto/internal/kyc_data_retrieve
+        static let retrieveKYCInfoAPIPath = "/v1/crypto/internal/kyc_data_retrieve"
+
+        // /v1/crypto/internal/identifier_requirements
+        static let retrieveMissingIdentifiersAPIPath = "/v1/crypto/internal/identifier_requirements"
+
+        // /v1/crypto/internal/eu_identifiers
+        static let submitIdentifiersAPIPath = "/v1/crypto/internal/eu_identifiers"
+        static let validIdentifiers = [
+            ComplianceIdentifier(type: .eeIK, value: "MiCA123"),
+            ComplianceIdentifier(type: .grAFM, value: "TIN123"),
+        ]
+
+        // /v1/crypto/internal/crs_carf_declaration
+        static let userAttestationAPIPath = "/v1/crypto/internal/crs_carf_declaration"
+
+        // /v1/crypto/internal/partner_terms
+        static let partnerTermsAPIPath = "/v1/crypto/internal/partner_terms"
+
+        // /v1/crypto/internal/refresh_consumer_person
+        static let refreshKYCInfoAPIPath = "/v1/crypto/internal/refresh_consumer_person"
+        static let validKycRefreshInfo = KYCRefreshInfo(
+            firstName: validL1KycInfo.firstName!,
+            lastName: validL1KycInfo.lastName,
+            dateOfBirth: validL1KycInfo.dateOfBirth!,
+            address: validL1KycInfo.address!,
+            idNumberLast4: validL1KycInfo.idNumber.map { String($0.suffix(4)) },
+            idType: .socialSecurityNumber
+        )
+
+        // /v1/crypto/internal/start_identity_verification
+        static let startIdentityVerificationAPIPath = "/v1/crypto/internal/start_identity_verification"
+        static let startIdentityVerificationMockResponseObject = StartIdentityVerificationResponse(
+            id: "vs_1AbcdEF23gH4IJ5klMNoPqRs",
+            url: URL(string: "https://verify.stripe.com/start/test_12345")!,
+            ephemeralKey: "ek_test_12345"
+        )
+
+        // /v1/crypto/internal/wallet
+        static let walletAPIPath = "/v1/crypto/internal/wallet"
+        static let validWalletAddress = "11111111111111111111111111111111"
+        static let validWalletId = "ccw_12345"
+        static let validNetwork = CryptoNetwork.solana
+        static let registerWalletMockResponseObject = RegisterWalletResponse(
+            id: validWalletId
+        )
+
+        // /v1/crypto/internal/wallet_ownership_challenge
+        static let getWalletOwnershipChallengeAPIPath = "/v1/crypto/internal/wallet_ownership_challenge"
+        static let validChallengeId = "woc_test_123"
+        static let validChallengeMessage = "test message"
+        static let validChallengeExpiresAt = "2026-06-17T13:00:00Z"
+
+        // /v1/crypto/internal/wallet_ownership_verification
+        static let submitWalletOwnershipSignatureAPIPath = "/v1/crypto/internal/wallet_ownership_verification"
+        static let validWalletOwnershipSignature = "0x1234567890abcdef"
+
+        // /v1/crypto/internal/onramp_session
+        static let getOnrampSessionAPIPath = "/v1/crypto/internal/onramp_session"
+        static let validOnrampSessionId = "cos_12345"
+        static let validOnrampSessionClientSecret = "cos_12345_secret_12345"
+        static let validPaymentIntentClientSecret = "pi_12345_secret_12345"
+        static let validOnrampSessionResponseObject = OnrampSessionResponse(
+            id: validOnrampSessionId,
+            clientSecret: validOnrampSessionClientSecret,
+            paymentIntentClientSecret: validPaymentIntentClientSecret
+        )
+
+        // /v1/crypto/internal/payment_token
+        static let createPaymentTokenAPIPath = "/v1/crypto/internal/payment_token"
+        static let validPaymentId = "pm_12345"
+        static let validPaymentTokenId = "cpt_12345"
+        static let validCreatePaymentTokenResponseObject = CreatePaymentTokenResponse(id: validPaymentTokenId)
+
+        // /v1/crypto/internal/platform_settings
+        static let getPlatformSettingsAPIPath = "/v1/crypto/internal/platform_settings"
+        static let validPublishableKey = "pk_test_12345"
+        static let validPlatformSettingsResponseObject = PlatformSettingsResponse(publishableKey: validPublishableKey)
+    }
+
+    private struct LinkAccountInfo: PaymentSheetLinkAccountInfoProtocol {
+        let email: String
+        let redactedPhoneNumber: String?
+        let isRegistered: Bool
+        var sessionState: StripePaymentSheet.PaymentSheetLinkAccount.SessionState
+        var consumerSessionClientSecret: String?
+        var linkSessionKey: String?
+    }
+
+    private let jsonEncoder: JSONEncoder = {
+        let jsonEncoder = JSONEncoder()
+        jsonEncoder.keyEncodingStrategy = .convertToSnakeCase
+        return jsonEncoder
+    }()
+
+    func testcreateCryptoCustomerSuccess() async throws {
+        let mockResponseData = try jsonEncoder.encode(CustomerResponse(id: Constant.validCustomerId))
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.createCryptoCustomerAPIPath)
+            XCTAssertEqual(request.httpMethod, "POST")
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            XCTAssertEqual(String(data: httpBody, encoding: .utf8), "credentials[consumer_session_client_secret]=\(Constant.requestSecret)")
+
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        do {
+            let response = try await apiClient.createCryptoCustomer(with: Constant.validLinkAccountInfo)
+            XCTAssertEqual(response.id, Constant.validCustomerId)
+        } catch {
+            XCTFail("Expected a success response but got an error: \(error).")
+        }
+    }
+
+    func testRetrieveKYCRequirementsSuccess() async throws {
+        let mockResponseData = try RetrieveKYCRequirementsResponseMock.sourceOfFundsWithQuestionnaire.data()
+        stub { request in
+            request.url?.path == "/v1/crypto/internal/kyc_requirements"
+        } response: { request in
+            XCTAssertEqual(request.httpMethod, "GET")
+            XCTAssertEqual(
+                request.value(forHTTPHeaderField: "Stripe-Consumer-Auth-Token"),
+                Constant.requestSecret
+            )
+            XCTAssertTrue(request.url?.query?.isEmpty ?? true)
+            return HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        let response = try await apiClient.retrieveKYCRequirements(linkAccountInfo: Constant.validLinkAccountInfo)
+        XCTAssertEqual(response.requirements.count, 1)
+        let requirement = try XCTUnwrap(response.requirements["source_of_funds"])
+        XCTAssertEqual(requirement.requestedBy, "swapped")
+        XCTAssertEqual(requirement.awaitingActionFrom, .user)
+        XCTAssertEqual(requirement.errors, [
+            .init(code: "document_rejected", description: "The submitted document could not be verified."),
+        ])
+
+        let document = try XCTUnwrap(requirement.document)
+        XCTAssertEqual(document.acceptedFormats, ["pdf", "jpeg", "png", "docx", "xlsx", "csv", "txt"])
+        XCTAssertEqual(document.acceptedSubtypes, [
+            .init(id: "payslip", label: "Payslip", description: "Recent payslips from your employer"),
+            .init(id: "bank_statement", label: "Bank statement", description: nil),
+        ])
+        XCTAssertEqual(document.maxFileSizeBytes, 5_000_000)
+        XCTAssertEqual(document.minDocumentTypes, 1)
+        XCTAssertEqual(document.maxDocumentTypes, 2)
+        XCTAssertEqual(document.maxFilesPerDocumentType, 3)
+        XCTAssertEqual(document.documentCollectionPrompt, "How are you funding your transactions? Please list all of your sources. For example, salary, savings, investment earnings, etc.")
+        XCTAssertEqual(document.fileRequirements, "PDF, JPEG/JPG, PNG, DOCX, XLSX, CSV, or TXT, up to 5 MB per file.")
+        XCTAssertEqual(document.instructions, [
+            "Documents must include your name and a balance or financial value.",
+            "Bank statements must be original PDFs issued through online banking; screenshots aren't accepted.",
+        ])
+
+        let questionnaire = try XCTUnwrap(requirement.additionalRequirements?.questionnaire)
+        XCTAssertEqual(questionnaire.questions, [
+            .init(
+                id: "purchase_purpose",
+                prompt: "Why are you purchasing cryptocurrency?",
+                answerType: .freeText,
+                required: true,
+                maxQuestionnaireAnswerCharacters: 5_000
+            ),
+            .init(
+                id: "third_party_advised",
+                prompt: "Has anyone advised, or instructed, you to purchase cryptocurrency? This includes anyone who has messaged you on social media (Telegram, WhatsApp, Twitter, etc.) about investing in or purchasing cryptocurrency.",
+                answerType: .freeText,
+                required: true,
+                maxQuestionnaireAnswerCharacters: 5_000
+            ),
+        ])
+    }
+
+    func testRetrieveKYCRequirementsDecodesEmptyRequirements() async throws {
+        let mockResponseData = try RetrieveKYCRequirementsResponseMock.notRequired.data()
+        stub { request in
+            request.url?.path == "/v1/crypto/internal/kyc_requirements"
+        } response: { _ in
+            HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        let response = try await apiClient.retrieveKYCRequirements(linkAccountInfo: Constant.validLinkAccountInfo)
+        XCTAssertTrue(response.requirements.isEmpty)
+    }
+
+    func testRetrieveKYCRequirementsThrowsWithInvalidArguments() async {
+        let apiClient = stubbedAPIClient()
+
+        var noSecretLinkAccountInfo = Constant.validLinkAccountInfo
+        noSecretLinkAccountInfo.consumerSessionClientSecret = nil
+        await XCTAssertThrowsErrorAsync(_ = try await apiClient.retrieveKYCRequirements(linkAccountInfo: noSecretLinkAccountInfo))
+
+        var unverifiedLinkAccountInfo = Constant.validLinkAccountInfo
+        unverifiedLinkAccountInfo.sessionState = .requiresVerification
+        await XCTAssertThrowsErrorAsync(_ = try await apiClient.retrieveKYCRequirements(linkAccountInfo: unverifiedLinkAccountInfo))
+    }
+
+    func testRetrieveKYCRequirementsDecodesPartnerReview() async throws {
+        let mockResponseData = try RetrieveKYCRequirementsResponseMock.partnerReview.data()
+        stub { request in
+            request.url?.path == "/v1/crypto/internal/kyc_requirements"
+        } response: { _ in
+            HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        let response = try await apiClient.retrieveKYCRequirements(linkAccountInfo: Constant.validLinkAccountInfo)
+        let requirement = try XCTUnwrap(response.requirements["source_of_funds"])
+        XCTAssertEqual(requirement.awaitingActionFrom, .partner)
+        XCTAssertEqual(requirement.errors, [])
+        XCTAssertNil(requirement.document)
+        XCTAssertNil(requirement.additionalRequirements)
+    }
+
+    func testRetrieveKYCRequirementsPreservesUnknownActionParty() async throws {
+        let mockResponseData = try RetrieveKYCRequirementsResponseMock.unknownActionParty.data()
+        stub { request in
+            request.url?.path == "/v1/crypto/internal/kyc_requirements"
+        } response: { _ in
+            HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        let response = try await apiClient.retrieveKYCRequirements(linkAccountInfo: Constant.validLinkAccountInfo)
+        let requirement = try XCTUnwrap(response.requirements["proof_of_address"])
+        XCTAssertEqual(requirement.requestedBy, "future_partner")
+        XCTAssertEqual(requirement.awaitingActionFrom, .unknown("future_party"))
+    }
+
+    func testRetrieveKYCRequirementsPreservesUnknownAnswerType() async throws {
+        let mockResponseData = try RetrieveKYCRequirementsResponseMock.unknownAnswerType.data()
+        stub { request in
+            request.url?.path == "/v1/crypto/internal/kyc_requirements"
+        } response: { _ in
+            HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        let response = try await apiClient.retrieveKYCRequirements(linkAccountInfo: Constant.validLinkAccountInfo)
+        let requirement = try XCTUnwrap(response.requirements["source_of_funds"])
+        let question = try XCTUnwrap(requirement.additionalRequirements?.questionnaire?.questions.first)
+        XCTAssertEqual(question.answerType, .unknown("future_answer_type"))
+    }
+
+    func testFulfillKYCRequirementsEncodesPayloadAndUsesLinkSessionKey() async throws {
+        let mockResponseData = try FulfillKYCRequirementsResponseMock.fulfillKYCRequirementsResponse_200.data()
+        stub { request in
+            request.url?.path == Constant.fulfillKYCRequirementsAPIPath
+        } response: { request in
+            XCTAssertEqual(request.httpMethod, "POST")
+            XCTAssertEqual(request.value(forHTTPHeaderField: "Authorization"), "Bearer \(Constant.linkSessionKey)")
+            XCTAssertEqual(request.value(forHTTPHeaderField: "Stripe-Version"), Constant.cryptoOnrampAPIVersion)
+            XCTAssertNil(request.value(forHTTPHeaderField: Constant.consumerAuthTokenHeader))
+            XCTAssertNil(request.url?.query)
+
+            let body = request.ohhttpStubs_httpBody ?? Data()
+            let bodyString = String(bytes: body, encoding: .utf8) ?? ""
+            let parameters = bodyString.parsedHTTPParametersDictionary.mapValues {
+                $0.removingPercentEncoding ?? $0
+            }
+            XCTAssertEqual(parameters, [
+                "requirements[proof_of_address][requested_by]": "swapped",
+                "requirements[proof_of_address][documents][0][document_subtype]": "utility_provider",
+                "requirements[proof_of_address][documents][0][file_ids][0]": "file_poa",
+                "requirements[source_of_funds][requested_by]": "swapped",
+                "requirements[source_of_funds][documents][0][document_subtype]": "payslip",
+                "requirements[source_of_funds][documents][0][file_ids][0]": "file_payslip_1",
+                "requirements[source_of_funds][documents][0][file_ids][1]": "file_payslip_2",
+                "requirements[source_of_funds][documents][1][document_subtype]": "bank_statement",
+                "requirements[source_of_funds][documents][1][file_ids][0]": "file_bank_statement",
+                "requirements[source_of_funds][additional_requirements][questionnaire][answers][0][question_id]": "purchase_purpose",
+                "requirements[source_of_funds][additional_requirements][questionnaire][answers][0][value]": "Personal investment",
+                "requirements[source_of_funds][additional_requirements][questionnaire][answers][1][question_id]": "third_party_advised",
+                "requirements[source_of_funds][additional_requirements][questionnaire][answers][1][value]": "No",
+                "requirements[source_of_funds][additional_requirements][questionnaire][answers][2][question_id]": "funding_sources",
+                "requirements[source_of_funds][additional_requirements][questionnaire][answers][2][value]": "Salary and savings",
+            ])
+            return HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        apiClient.publishableKey = Constant.validPublishableKey
+        var linkAccountInfo = Constant.validLinkAccountInfo
+        linkAccountInfo.consumerSessionClientSecret = nil
+
+        try await apiClient.fulfillKYCRequirements(
+            Constant.validFulfillKYCRequirementsRequest,
+            linkAccountInfo: linkAccountInfo
+        )
+
+        XCTAssertEqual(apiClient.publishableKey, Constant.validPublishableKey)
+    }
+
+    func testFulfillKYCRequirementsRejectsMissingLinkSessionKey() async throws {
+        let apiClient = stubbedAPIClient()
+        apiClient.publishableKey = Constant.validPublishableKey
+
+        for linkSessionKey in [nil, ""] {
+            var linkAccountInfo = Constant.validLinkAccountInfo
+            linkAccountInfo.linkSessionKey = linkSessionKey
+            do {
+                try await apiClient.fulfillKYCRequirements(
+                    Constant.validFulfillKYCRequirementsRequest,
+                    linkAccountInfo: linkAccountInfo
+                )
+                XCTFail("Expected a missing Link session key error")
+            } catch STPAPIClient.CryptoOnrampAPIError.missingLinkSessionKey {
+                // Expected.
+            }
+        }
+    }
+
+    func testFulfillKYCRequirementsRejectsUnverifiedAccount() async throws {
+        let apiClient = stubbedAPIClient()
+        var linkAccountInfo = Constant.validLinkAccountInfo
+        linkAccountInfo.sessionState = .requiresVerification
+
+        do {
+            try await apiClient.fulfillKYCRequirements(
+                Constant.validFulfillKYCRequirementsRequest,
+                linkAccountInfo: linkAccountInfo
+            )
+            XCTFail("Expected an unverified Link account error")
+        } catch STPAPIClient.CryptoOnrampAPIError.linkAccountNotVerified {
+            // Expected.
+        }
+    }
+
+    func testcreateCryptoCustomerFailure() async {
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.createCryptoCustomerAPIPath)
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(error: NSError(domain: Constant.errorDomain, code: 400))
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            _ = try await apiClient.createCryptoCustomer(with: Constant.validLinkAccountInfo)
+            XCTFail("Expected failure but got success.")
+        } catch {
+            XCTAssertEqual((error as NSError).domain, Constant.errorDomain)
+        }
+    }
+
+    func testcreateCryptoCustomerThrowsWithInvalidArguments() async {
+        let apiClient = stubbedAPIClient()
+
+        var noSecretLinkAccountInfo = Constant.validLinkAccountInfo
+        noSecretLinkAccountInfo.consumerSessionClientSecret = nil
+        await XCTAssertThrowsErrorAsync(_ = try await apiClient.createCryptoCustomer(with: noSecretLinkAccountInfo))
+
+        var unverifiedLinkAccountInfo = Constant.validLinkAccountInfo
+        unverifiedLinkAccountInfo.sessionState = .requiresVerification
+        await XCTAssertThrowsErrorAsync(_ = try await apiClient.createCryptoCustomer(with: unverifiedLinkAccountInfo))
+    }
+
+    func testCollectKycInfoSuccess() async throws {
+        let mockResponseData = try jsonEncoder.encode(Constant.kycMockResponseObject)
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.collectKycInfoAPIPath)
+            XCTAssertEqual(request.httpMethod, "POST")
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            let parameters = String(data: httpBody, encoding: .utf8)?.parsedHTTPParametersDictionary ?? [:]
+
+            XCTAssertEqual(parameters.count, 14)
+            XCTAssertEqual(parameters["credentials[consumer_session_client_secret]"], Constant.requestSecret)
+            XCTAssertEqual(parameters["first_name"], "John")
+            XCTAssertEqual(parameters["last_name"], "Smith")
+            XCTAssertEqual(parameters["id_number"], "123456789")
+            XCTAssertEqual(parameters["id_type"], "social_security_number")
+            XCTAssertEqual(parameters["line1"], "123%20Fake%20Street")
+            XCTAssertEqual(parameters["line2"], "APT%202")
+            XCTAssertEqual(parameters["city"], "Brooklyn")
+            XCTAssertEqual(parameters["state"], "New%20York")
+            XCTAssertEqual(parameters["zip"], "11201")
+            XCTAssertEqual(parameters["country"], "US")
+            XCTAssertEqual(parameters["dob[day]"], "31")
+            XCTAssertEqual(parameters["dob[month]"], "3")
+            XCTAssertEqual(parameters["dob[year]"], "1975")
+
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            let response = try await apiClient.collectKycInfo(info: Constant.validL1KycInfo, linkAccountInfo: Constant.validLinkAccountInfo)
+            XCTAssertEqual(response.personId, "person_1A2BcD345EFg6HiJ")
+            XCTAssertEqual(response.firstName, "John")
+            XCTAssertEqual(response.lastName, "Smith")
+            XCTAssertEqual(response.nationalities, [])
+            XCTAssertEqual(response.residenceCountry, "US")
+        } catch {
+            XCTFail("Expected a success response but got an error: \(error).")
+        }
+    }
+
+    func testCollectKycInfoThrowsWithInvalidArguments() async {
+        let apiClient = stubbedAPIClient()
+
+        var noSecretLinkAccountInfo = Constant.validLinkAccountInfo
+        noSecretLinkAccountInfo.consumerSessionClientSecret = nil
+        await XCTAssertThrowsErrorAsync(_ = try await apiClient.collectKycInfo(info: Constant.validL1KycInfo, linkAccountInfo: noSecretLinkAccountInfo))
+
+        var unverifiedLinkAccountInfo = Constant.validLinkAccountInfo
+        unverifiedLinkAccountInfo.sessionState = .requiresVerification
+        await XCTAssertThrowsErrorAsync(_ = try await apiClient.collectKycInfo(info: Constant.validL1KycInfo, linkAccountInfo: unverifiedLinkAccountInfo))
+    }
+
+    func testCollectKycInfoOmitsOptionalIdentityFieldsWhenUnavailable() async throws {
+        let mockResponseData = try jsonEncoder.encode(Constant.kycMockResponseObject)
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.collectKycInfoAPIPath)
+            XCTAssertEqual(request.httpMethod, "POST")
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            let parameters = String(data: httpBody, encoding: .utf8)?.parsedHTTPParametersDictionary ?? [:]
+            XCTAssertEqual(parameters.count, 9)
+            XCTAssertEqual(parameters["credentials[consumer_session_client_secret]"], Constant.requestSecret)
+
+            // L0 required fields (name and address)
+            XCTAssertEqual(parameters["first_name"], "John")
+            XCTAssertEqual(parameters["last_name"], "Smith")
+            XCTAssertEqual(parameters["line1"], "123%20Fake%20Street")
+            XCTAssertEqual(parameters["line2"], "APT%202")
+            XCTAssertEqual(parameters["city"], "Brooklyn")
+            XCTAssertEqual(parameters["state"], "New%20York")
+            XCTAssertEqual(parameters["zip"], "11201")
+            XCTAssertEqual(parameters["country"], "US")
+
+            /// L0 optional fields, required for L1
+            XCTAssertNil(parameters["id_number"])
+            XCTAssertNil(parameters["id_type"])
+            XCTAssertNil(parameters["dob[day]"])
+            XCTAssertNil(parameters["dob[month]"])
+            XCTAssertNil(parameters["dob[year]"])
+
+            return true
+        } response: { _ in
+            HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        let response = try await apiClient.collectKycInfo(info: Constant.validL0KycInfo, linkAccountInfo: Constant.validLinkAccountInfo)
+
+        XCTAssertEqual(response.personId, Constant.kycMockResponseObject.personId)
+    }
+
+    func testCollectKycInfoL1OnlyOmitsL0Fields() async throws {
+        let mockResponseData = try jsonEncoder.encode(Constant.kycMockResponseObject)
+        let l1OnlyKycInfo = KycInfo(
+            firstName: nil,
+            lastName: nil,
+            idNumber: "123456789",
+            address: nil,
+            dateOfBirth: .init(day: 31, month: 3, year: 1975)
+        )
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.collectKycInfoAPIPath)
+            XCTAssertEqual(request.httpMethod, "POST")
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            let parameters = String(data: httpBody, encoding: .utf8)?.parsedHTTPParametersDictionary ?? [:]
+            XCTAssertEqual(parameters.count, 6)
+            XCTAssertEqual(parameters["credentials[consumer_session_client_secret]"], Constant.requestSecret)
+
+            // L1 required fields not previously collected (ID number+type and DOB)
+            XCTAssertEqual(parameters["id_number"], "123456789")
+            XCTAssertEqual(parameters["id_type"], "social_security_number")
+            XCTAssertEqual(parameters["dob[day]"], "31")
+            XCTAssertEqual(parameters["dob[month]"], "3")
+            XCTAssertEqual(parameters["dob[year]"], "1975")
+
+            // Fields already collected for L0
+            XCTAssertNil(parameters["first_name"])
+            XCTAssertNil(parameters["last_name"])
+            XCTAssertNil(parameters["line1"])
+            XCTAssertNil(parameters["line2"])
+            XCTAssertNil(parameters["city"])
+            XCTAssertNil(parameters["state"])
+            XCTAssertNil(parameters["zip"])
+            XCTAssertNil(parameters["country"])
+
+            return true
+        } response: { _ in
+            HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        let response = try await apiClient.collectKycInfo(info: l1OnlyKycInfo, linkAccountInfo: Constant.validLinkAccountInfo)
+        XCTAssertEqual(response.personId, Constant.kycMockResponseObject.personId)
+    }
+
+    func testCollectKycInfoIncludesEUFieldsWhenAvailable() async throws {
+        let mockResponseData = try jsonEncoder.encode(Constant.kycMockResponseObject)
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.collectKycInfoAPIPath)
+            XCTAssertEqual(request.httpMethod, "POST")
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            let parameters = String(data: httpBody, encoding: .utf8)?.parsedHTTPParametersDictionary ?? [:]
+
+            XCTAssertEqual(parameters.count, 18)
+            XCTAssertEqual(parameters["credentials[consumer_session_client_secret]"], Constant.requestSecret)
+            XCTAssertEqual(parameters["first_name"], "John")
+            XCTAssertEqual(parameters["last_name"], "Smith")
+            XCTAssertEqual(parameters["id_number"], "123456789")
+            XCTAssertEqual(parameters["id_type"], "social_security_number")
+            XCTAssertEqual(parameters["line1"], "1%20Fake%20Street")
+            XCTAssertEqual(parameters["line2"], "Apt%202")
+            XCTAssertEqual(parameters["city"], "Athens")
+            XCTAssertEqual(parameters["state"], "Attica")
+            XCTAssertEqual(parameters["zip"], "11145")
+            XCTAssertEqual(parameters["country"], "GR")
+            XCTAssertEqual(parameters["dob[day]"], "31")
+            XCTAssertEqual(parameters["dob[month]"], "3")
+            XCTAssertEqual(parameters["dob[year]"], "1975")
+            XCTAssertEqual(parameters["birth_country"], "GR")
+            XCTAssertEqual(parameters["birth_city"], "Athens")
+            XCTAssertEqual(parameters["nationalities[0]"], "GR")
+            XCTAssertEqual(parameters["nationalities[1]"], "EE")
+
+            return true
+        } response: { _ in
+            HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        let response = try await apiClient.collectKycInfo(
+            info: Constant.validEUKycInfo,
+            linkAccountInfo: Constant.validLinkAccountInfo
+        )
+        XCTAssertEqual(response.personId, Constant.kycMockResponseObject.personId)
+    }
+
+    func testRetrieveMissingIdentifiersSuccess() async throws {
+        let mockResponseData = try RetrieveMissingIdentifiersResponseMock.retrieveMissingIdentifiersResponse_200.data()
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.retrieveMissingIdentifiersAPIPath)
+            XCTAssertEqual(request.httpMethod, "GET")
+            XCTAssertEqual(
+                request.value(forHTTPHeaderField: Constant.consumerAuthTokenHeader),
+                Constant.requestSecret
+            )
+            XCTAssertTrue(request.url?.query?.isEmpty ?? true)
+
+            return true
+        } response: { _ in
+            HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        let response = try await apiClient.retrieveMissingIdentifiers(linkAccountInfo: Constant.validLinkAccountInfo)
+        XCTAssertTrue(response.carfTinRequired)
+        XCTAssertEqual(response.identifiers.count, 1)
+        XCTAssertEqual(response.identifiers[0].type, .mtNIC)
+        XCTAssertEqual(response.identifiers[0].regulation, .euMiCA)
+        XCTAssertEqual(response.alternatives.count, 1)
+        XCTAssertEqual(response.alternatives[0].originalMissingIdentifiers, [.mtNIC])
+        XCTAssertEqual(response.alternatives[0].alternativeMissingIdentifiers, [.mtPP])
+    }
+
+    func testRetrieveMissingIdentifiersThrowsWithInvalidArguments() async {
+        let apiClient = stubbedAPIClient()
+
+        var noSecretLinkAccountInfo = Constant.validLinkAccountInfo
+        noSecretLinkAccountInfo.consumerSessionClientSecret = nil
+        await XCTAssertThrowsErrorAsync(_ = try await apiClient.retrieveMissingIdentifiers(linkAccountInfo: noSecretLinkAccountInfo))
+
+        var unverifiedLinkAccountInfo = Constant.validLinkAccountInfo
+        unverifiedLinkAccountInfo.sessionState = .requiresVerification
+        await XCTAssertThrowsErrorAsync(_ = try await apiClient.retrieveMissingIdentifiers(linkAccountInfo: unverifiedLinkAccountInfo))
+    }
+
+    func testSubmitIdentifiersSuccessWithValidationResult() async throws {
+        let mockResponseData = try SubmitIdentifiersResponseMock.submitIdentifiersResponse_Invalid_200.data()
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.submitIdentifiersAPIPath)
+            XCTAssertEqual(request.httpMethod, "POST")
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            let parameters = String(data: httpBody, encoding: .utf8)?.parsedHTTPParametersDictionary ?? [:]
+
+            XCTAssertEqual(parameters.count, 5)
+            XCTAssertEqual(parameters["credentials[consumer_session_client_secret]"], Constant.requestSecret)
+            XCTAssertEqual(parameters["identifiers[0][type]"], "ee_ik")
+            XCTAssertEqual(parameters["identifiers[0][value]"], "MiCA123")
+            XCTAssertEqual(parameters["identifiers[1][type]"], "gr_afm")
+            XCTAssertEqual(parameters["identifiers[1][value]"], "TIN123")
+
+            return true
+        } response: { _ in
+            HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        let response = try await apiClient.submitIdentifiers(
+            identifiers: Constant.validIdentifiers,
+            linkAccountInfo: Constant.validLinkAccountInfo
+        )
+
+        XCTAssertFalse(response.completed)
+        XCTAssertFalse(response.carfTinRequired)
+        XCTAssertEqual(response.identifiers.map(\.type), [.mtNIC])
+        XCTAssertEqual(response.identifiers.map(\.regulation), [.euMiCA])
+        XCTAssertEqual(response.alternatives[0].originalMissingIdentifiers, [.mtNIC])
+        XCTAssertEqual(response.alternatives[0].alternativeMissingIdentifiers, [.mtPP])
+        XCTAssertEqual(response.invalidIdentifiers, [.deSTN, .mtNIC])
+    }
+
+    func testSubmitIdentifiersSuccess() async throws {
+        let mockResponseData = try SubmitIdentifiersResponseMock.submitIdentifiersResponse_Valid_200.data()
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.submitIdentifiersAPIPath)
+            XCTAssertEqual(request.httpMethod, "POST")
+            return true
+        } response: { _ in
+            HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        let response = try await apiClient.submitIdentifiers(
+            identifiers: Constant.validIdentifiers,
+            linkAccountInfo: Constant.validLinkAccountInfo
+        )
+
+        XCTAssertTrue(response.completed)
+        XCTAssertFalse(response.carfTinRequired)
+        XCTAssertEqual(response.identifiers, [])
+        XCTAssertEqual(response.alternatives, [])
+        XCTAssertEqual(response.invalidIdentifiers, [])
+    }
+
+    func testSubmitIdentifiersThrowsWithInvalidArguments() async {
+        let apiClient = stubbedAPIClient()
+
+        var noSecretLinkAccountInfo = Constant.validLinkAccountInfo
+        noSecretLinkAccountInfo.consumerSessionClientSecret = nil
+        await XCTAssertThrowsErrorAsync(
+            _ = try await apiClient.submitIdentifiers(
+                identifiers: Constant.validIdentifiers,
+                linkAccountInfo: noSecretLinkAccountInfo
+            )
+        )
+
+        var unverifiedLinkAccountInfo = Constant.validLinkAccountInfo
+        unverifiedLinkAccountInfo.sessionState = .requiresVerification
+        await XCTAssertThrowsErrorAsync(
+            _ = try await apiClient.submitIdentifiers(
+                identifiers: Constant.validIdentifiers,
+                linkAccountInfo: unverifiedLinkAccountInfo
+            )
+        )
+    }
+
+    func testRetrieveUserAttestationSuccess() async throws {
+        let mockResponseData = try RetrieveUserAttestationResponseMock.retrieveUserAttestationResponse_200.data()
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.userAttestationAPIPath)
+            XCTAssertEqual(request.httpMethod, "GET")
+            XCTAssertEqual(
+                request.value(forHTTPHeaderField: Constant.consumerAuthTokenHeader),
+                Constant.requestSecret
+            )
+            XCTAssertTrue(request.url?.query?.isEmpty ?? true)
+
+            return true
+        } response: { _ in
+            HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        let response = try await apiClient.retrieveUserAttestation(linkAccountInfo: Constant.validLinkAccountInfo)
+
+        XCTAssertEqual(response.html, "<p>test</p>")
+        XCTAssertEqual(response.version, "0")
+    }
+
+    func testRetrieveUserAttestationThrowsWithInvalidArguments() async {
+        let apiClient = stubbedAPIClient()
+
+        var noSecretLinkAccountInfo = Constant.validLinkAccountInfo
+        noSecretLinkAccountInfo.consumerSessionClientSecret = nil
+        await XCTAssertThrowsErrorAsync(_ = try await apiClient.retrieveUserAttestation(linkAccountInfo: noSecretLinkAccountInfo))
+
+        var unverifiedLinkAccountInfo = Constant.validLinkAccountInfo
+        unverifiedLinkAccountInfo.sessionState = .requiresVerification
+        await XCTAssertThrowsErrorAsync(_ = try await apiClient.retrieveUserAttestation(linkAccountInfo: unverifiedLinkAccountInfo))
+    }
+
+    func testConfirmUserAttestationSuccess() async throws {
+        let mockResponseData = try ConfirmUserAttestationResponseMock.confirmUserAttestationResponse_200.data()
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.userAttestationAPIPath)
+            XCTAssertEqual(request.httpMethod, "POST")
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            let parameters = String(data: httpBody, encoding: .utf8)?.parsedHTTPParametersDictionary ?? [:]
+
+            XCTAssertEqual(parameters.count, 1)
+            XCTAssertEqual(parameters["credentials[consumer_session_client_secret]"], Constant.requestSecret)
+
+            return true
+        } response: { _ in
+            HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        _ = try await apiClient.confirmUserAttestation(linkAccountInfo: Constant.validLinkAccountInfo)
+    }
+
+    func testConfirmUserAttestationThrowsWithInvalidArguments() async {
+        let apiClient = stubbedAPIClient()
+
+        var noSecretLinkAccountInfo = Constant.validLinkAccountInfo
+        noSecretLinkAccountInfo.consumerSessionClientSecret = nil
+        await XCTAssertThrowsErrorAsync(_ = try await apiClient.confirmUserAttestation(linkAccountInfo: noSecretLinkAccountInfo))
+
+        var unverifiedLinkAccountInfo = Constant.validLinkAccountInfo
+        unverifiedLinkAccountInfo.sessionState = .requiresVerification
+        await XCTAssertThrowsErrorAsync(_ = try await apiClient.confirmUserAttestation(linkAccountInfo: unverifiedLinkAccountInfo))
+    }
+
+    func testRetrievePartnerTermsAndConditionsRequiredSuccess() async throws {
+        let mockResponseData = try RetrievePartnerTermsResponseMock.retrievePartnerTermsResponse_TermsAndConditionsRequired_200.data()
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.partnerTermsAPIPath)
+            XCTAssertEqual(request.httpMethod, "GET")
+
+            guard let queryParametersString = request.url?.query else {
+                XCTFail("Expected query parameters but found none.")
+                return false
+            }
+
+            let parameters = queryParametersString.removingPercentEncoding?.parsedHTTPParametersDictionary ?? [:]
+            XCTAssertEqual(parameters.count, 1)
+            XCTAssertEqual(parameters["declaration_type"], "transaction_terms")
+            XCTAssertEqual(request.value(forHTTPHeaderField: Constant.consumerAuthTokenHeader), Constant.requestSecret)
+
+            return true
+        } response: { _ in
+            HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        let response = try await apiClient.retrievePartnerTerms(
+            declarationType: .transactionTerms,
+            linkAccountInfo: Constant.validLinkAccountInfo
+        )
+
+        XCTAssertEqual(
+            response,
+            .required(
+                partner: "swapped",
+                declaration: .init(
+                    id: "copt_decl_123",
+                    type: .transactionTerms,
+                    html: "<p>Partner terms and conditions</p>"
+                )
+            )
+        )
+    }
+
+    func testRetrievePartnerTermsOfServiceRequiredSuccess() async throws {
+        let mockResponseData = try RetrievePartnerTermsResponseMock.retrievePartnerTermsResponse_TOSRequired_200.data()
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.partnerTermsAPIPath)
+
+            guard let queryParametersString = request.url?.query else {
+                XCTFail("Expected query parameters but found none.")
+                return false
+            }
+
+            let parameters = queryParametersString.removingPercentEncoding?.parsedHTTPParametersDictionary ?? [:]
+            XCTAssertEqual(parameters.count, 1)
+            XCTAssertEqual(parameters["declaration_type"], "terms_of_service")
+            XCTAssertEqual(request.value(forHTTPHeaderField: Constant.consumerAuthTokenHeader), Constant.requestSecret)
+
+            return true
+        } response: { _ in
+            HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        let response = try await apiClient.retrievePartnerTerms(
+            declarationType: .termsOfService,
+            linkAccountInfo: Constant.validLinkAccountInfo
+        )
+
+        XCTAssertEqual(
+            response,
+            .required(
+                partner: "swapped",
+                declaration: .init(
+                    id: "copt_decl_456",
+                    type: .termsOfService,
+                    html: "<p>Partner terms of service</p>"
+                )
+            )
+        )
+    }
+
+    func testRetrievePartnerTermsNotRequiredSuccess() async throws {
+        let mockResponseData = try RetrievePartnerTermsResponseMock.retrievePartnerTermsResponse_NotRequired_200.data()
+
+        stub { request in
+            request.url?.path == Constant.partnerTermsAPIPath
+        } response: { _ in
+            HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        let response = try await apiClient.retrievePartnerTerms(
+            declarationType: .transactionTerms,
+            linkAccountInfo: Constant.validLinkAccountInfo
+        )
+
+        XCTAssertEqual(response, .notRequired)
+    }
+
+    func testRetrievePartnerTermsThrowsWithInvalidArguments() async {
+        let apiClient = stubbedAPIClient()
+
+        var noSecretLinkAccountInfo = Constant.validLinkAccountInfo
+        noSecretLinkAccountInfo.consumerSessionClientSecret = nil
+        await XCTAssertThrowsErrorAsync(
+            _ = try await apiClient.retrievePartnerTerms(
+                declarationType: .transactionTerms,
+                linkAccountInfo: noSecretLinkAccountInfo
+            )
+        )
+
+        var unverifiedLinkAccountInfo = Constant.validLinkAccountInfo
+        unverifiedLinkAccountInfo.sessionState = .requiresVerification
+        await XCTAssertThrowsErrorAsync(
+            _ = try await apiClient.retrievePartnerTerms(
+                declarationType: .transactionTerms,
+                linkAccountInfo: unverifiedLinkAccountInfo
+            )
+        )
+    }
+
+    func testConfirmPartnerTermsSuccess() async throws {
+        let mockResponseData = try ConfirmPartnerTermsResponseMock.confirmPartnerTermsResponse_200.data()
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.partnerTermsAPIPath)
+            XCTAssertEqual(request.httpMethod, "POST")
+            XCTAssertEqual(request.value(forHTTPHeaderField: Constant.consumerAuthTokenHeader), Constant.requestSecret)
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            let parameters = String(data: httpBody, encoding: .utf8)?.parsedHTTPParametersDictionary ?? [:]
+
+            XCTAssertEqual(parameters.count, 1)
+            XCTAssertEqual(parameters["declaration_id"], "copt_decl_123")
+
+            return true
+        } response: { _ in
+            HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        _ = try await apiClient.confirmPartnerTerms(
+            declarationId: "copt_decl_123",
+            linkAccountInfo: Constant.validLinkAccountInfo
+        )
+    }
+
+    func testConfirmPartnerTermsThrowsWithInvalidArguments() async {
+        let apiClient = stubbedAPIClient()
+
+        var noSecretLinkAccountInfo = Constant.validLinkAccountInfo
+        noSecretLinkAccountInfo.consumerSessionClientSecret = nil
+        await XCTAssertThrowsErrorAsync(
+            _ = try await apiClient.confirmPartnerTerms(
+                declarationId: "copt_decl_123",
+                linkAccountInfo: noSecretLinkAccountInfo
+            )
+        )
+
+        var unverifiedLinkAccountInfo = Constant.validLinkAccountInfo
+        unverifiedLinkAccountInfo.sessionState = .requiresVerification
+        await XCTAssertThrowsErrorAsync(
+            _ = try await apiClient.confirmPartnerTerms(
+                declarationId: "copt_decl_123",
+                linkAccountInfo: unverifiedLinkAccountInfo
+            )
+        )
+    }
+
+    func testRefreshKycInfoSuccess() async throws {
+        let mockResponseData = try RefreshKYCInfoResponseMock.refreshKYCInfoResponse_200.data()
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.refreshKYCInfoAPIPath)
+            XCTAssertEqual(request.httpMethod, "POST")
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            let parameters = String(data: httpBody, encoding: .utf8)?.parsedHTTPParametersDictionary ?? [:]
+
+            XCTAssertEqual(parameters.count, 14)
+            XCTAssertEqual(parameters["credentials[consumer_session_client_secret]"], Constant.requestSecret)
+            XCTAssertEqual(parameters["first_name"], "John")
+            XCTAssertEqual(parameters["last_name"], "Smith")
+            XCTAssertEqual(parameters["id_number_last4"], "6789")
+            XCTAssertEqual(parameters["id_type"], "social_security_number")
+            XCTAssertEqual(parameters["line1"], "123%20Fake%20Street")
+            XCTAssertEqual(parameters["line2"], "APT%202")
+            XCTAssertEqual(parameters["city"], "Brooklyn")
+            XCTAssertEqual(parameters["state"], "New%20York")
+            XCTAssertEqual(parameters["zip"], "11201")
+            XCTAssertEqual(parameters["country"], "US")
+            XCTAssertEqual(parameters["dob[day]"], "31")
+            XCTAssertEqual(parameters["dob[month]"], "3")
+            XCTAssertEqual(parameters["dob[year]"], "1975")
+
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            let response = try await apiClient.refreshKycInfo(
+                info: Constant.validKycRefreshInfo,
+                linkAccountInfo: Constant.validLinkAccountInfo
+            )
+            XCTAssertTrue(response.allResponseFields.isEmpty)
+        } catch {
+            XCTFail("Expected a success response but got an error: \(error).")
+        }
+
+    }
+
+    func testRefreshKycInfoThrowsWithInvalidArguments() async {
+        let apiClient = stubbedAPIClient()
+
+        var noSecretLinkAccountInfo = Constant.validLinkAccountInfo
+        noSecretLinkAccountInfo.consumerSessionClientSecret = nil
+        await XCTAssertThrowsErrorAsync(
+            _ = try await apiClient.refreshKycInfo(
+                info: Constant.validKycRefreshInfo,
+                linkAccountInfo: noSecretLinkAccountInfo
+            )
+        )
+
+        var unverifiedLinkAccountInfo = Constant.validLinkAccountInfo
+        unverifiedLinkAccountInfo.sessionState = .requiresVerification
+        await XCTAssertThrowsErrorAsync(
+            _ = try await apiClient.refreshKycInfo(
+                info: Constant.validKycRefreshInfo,
+                linkAccountInfo: unverifiedLinkAccountInfo
+            )
+        )
+    }
+
+    func testRetrieveKycInfoSuccess() async throws {
+        let mockResponseData = try RetrieveKYCInfoResponseMock.retrieveKYCInfoResponse_200.data()
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.retrieveKYCInfoAPIPath)
+            XCTAssertEqual(request.httpMethod, "POST")
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            let parameters = String(data: httpBody, encoding: .utf8)?.parsedHTTPParametersDictionary ?? [:]
+
+            XCTAssertEqual(parameters.count, 1)
+            XCTAssertEqual(parameters["credentials[consumer_session_client_secret]"], Constant.requestSecret)
+
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            let response = try await apiClient.retrieveKycInfo(linkAccountInfo: Constant.validLinkAccountInfo)
+            let kycInfo = response.kycInfo
+            XCTAssertEqual(kycInfo.firstName, "John")
+            XCTAssertEqual(kycInfo.lastName, "Smith")
+
+            let dateOfBirth = kycInfo.dateOfBirth
+            XCTAssertEqual(dateOfBirth.day, 31)
+            XCTAssertEqual(dateOfBirth.month, 3)
+            XCTAssertEqual(dateOfBirth.year, 1975)
+
+            let address = kycInfo.address
+            XCTAssertEqual(address.line1, "123 Fake Street")
+            XCTAssertEqual(address.line2, "APT 2")
+            XCTAssertEqual(address.city, "Brooklyn")
+            XCTAssertEqual(address.state, "New York")
+            XCTAssertEqual(address.postalCode, "11201")
+            XCTAssertEqual(address.country, "US")
+        } catch {
+            XCTFail("Expected a success response but got an error: \(error).")
+        }
+    }
+
+    func testRetrieveKycInfoThrowsWithInvalidArguments() async {
+        let apiClient = stubbedAPIClient()
+
+        var noSecretLinkAccountInfo = Constant.validLinkAccountInfo
+        noSecretLinkAccountInfo.consumerSessionClientSecret = nil
+        await XCTAssertThrowsErrorAsync(_ = try await apiClient.retrieveKycInfo(linkAccountInfo: noSecretLinkAccountInfo))
+
+        var unverifiedLinkAccountInfo = Constant.validLinkAccountInfo
+        unverifiedLinkAccountInfo.sessionState = .requiresVerification
+        await XCTAssertThrowsErrorAsync(_ = try await apiClient.retrieveKycInfo(linkAccountInfo: unverifiedLinkAccountInfo))
+    }
+
+    func testStartIdentityVerificationSuccess() async throws {
+        let mockResponseData = try jsonEncoder.encode(Constant.startIdentityVerificationMockResponseObject)
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.startIdentityVerificationAPIPath)
+            XCTAssertEqual(request.httpMethod, "POST")
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            let parameters = String(data: httpBody, encoding: .utf8)?.parsedHTTPParametersDictionary ?? [:]
+
+            XCTAssertEqual(parameters.count, 2)
+            XCTAssertEqual(parameters["credentials[consumer_session_client_secret]"], Constant.requestSecret)
+            XCTAssertEqual(parameters["is_mobile"], "true")
+
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            let response = try await apiClient.startIdentityVerification(linkAccountInfo: Constant.validLinkAccountInfo)
+            XCTAssertEqual(response.id, "vs_1AbcdEF23gH4IJ5klMNoPqRs")
+            XCTAssertEqual(response.url, URL(string: "https://verify.stripe.com/start/test_12345"))
+            XCTAssertEqual(response.ephemeralKey, "ek_test_12345")
+        } catch {
+            XCTFail("Expected a success response but got an error: \(error).")
+        }
+
+    }
+
+    func testStartIdentityVerificationThrowsWithInvalidArguments() async {
+        let apiClient = stubbedAPIClient()
+
+        var noSecretLinkAccountInfo = Constant.validLinkAccountInfo
+        noSecretLinkAccountInfo.consumerSessionClientSecret = nil
+        await XCTAssertThrowsErrorAsync(_ = try await apiClient.startIdentityVerification(linkAccountInfo: noSecretLinkAccountInfo))
+
+        var unverifiedLinkAccountInfo = Constant.validLinkAccountInfo
+        unverifiedLinkAccountInfo.sessionState = .requiresVerification
+        await XCTAssertThrowsErrorAsync(_ = try await apiClient.startIdentityVerification(linkAccountInfo: unverifiedLinkAccountInfo))
+    }
+
+    func testCollectWalletAddressSuccess() async throws {
+        let mockResponseData = try jsonEncoder.encode(Constant.registerWalletMockResponseObject)
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.walletAPIPath)
+            XCTAssertEqual(request.httpMethod, "POST")
+            XCTAssertEqual(request.value(forHTTPHeaderField: "Stripe-Version"), Constant.cryptoOnrampAPIVersion)
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            let parameters = String(data: httpBody, encoding: .utf8)?.parsedHTTPParametersDictionary ?? [:]
+
+            XCTAssertEqual(parameters.count, 3)
+            XCTAssertEqual(parameters["credentials[consumer_session_client_secret]"], Constant.requestSecret)
+            XCTAssertEqual(parameters["wallet_address"], Constant.validWalletAddress)
+            XCTAssertEqual(parameters["network"], Constant.validNetwork.rawValue)
+
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            let response = try await apiClient.collectWalletAddress(
+                walletAddress: Constant.validWalletAddress,
+                network: Constant.validNetwork,
+                linkAccountInfo: Constant.validLinkAccountInfo
+            )
+            XCTAssertEqual(response.id, Constant.registerWalletMockResponseObject.id)
+        } catch {
+            XCTFail("Expected a success response but got an error: \(error).")
+        }
+    }
+
+    func testCollectWalletAddressFailure() async {
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.walletAPIPath)
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(error: NSError(domain: Constant.errorDomain, code: 400))
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            _ = try await apiClient.collectWalletAddress(
+                walletAddress: Constant.validWalletAddress,
+                network: Constant.validNetwork,
+                linkAccountInfo: Constant.validLinkAccountInfo
+            )
+            XCTFail("Expected failure but got success.")
+        } catch {
+            XCTAssertEqual((error as NSError).domain, Constant.errorDomain)
+        }
+    }
+
+    func testCollectWalletAddressThrowsWithInvalidArguments() async {
+        let apiClient = stubbedAPIClient()
+
+        var noSecretLinkAccountInfo = Constant.validLinkAccountInfo
+        noSecretLinkAccountInfo.consumerSessionClientSecret = nil
+        await XCTAssertThrowsErrorAsync(
+            _ = try await apiClient.collectWalletAddress(
+                walletAddress: Constant.validWalletAddress,
+                network: Constant.validNetwork,
+                linkAccountInfo: noSecretLinkAccountInfo
+            )
+        )
+
+        var unverifiedLinkAccountInfo = Constant.validLinkAccountInfo
+        unverifiedLinkAccountInfo.sessionState = .requiresVerification
+        await XCTAssertThrowsErrorAsync(
+            _ = try await apiClient.collectWalletAddress(
+                walletAddress: Constant.validWalletAddress,
+                network: Constant.validNetwork,
+                linkAccountInfo: unverifiedLinkAccountInfo
+            )
+        )
+    }
+
+    func testDeleteWalletAddressSuccess() async throws {
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.walletAPIPath)
+            XCTAssertEqual(request.httpMethod, "DELETE")
+            XCTAssertEqual(request.value(forHTTPHeaderField: "Authorization"), "Bearer \(Constant.validPublishableKey)")
+            XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/x-www-form-urlencoded")
+            XCTAssertEqual(request.value(forHTTPHeaderField: "Stripe-Version"), Constant.cryptoOnrampAPIVersion)
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            let parameters = String(data: httpBody, encoding: .utf8)?.parsedHTTPParametersDictionary ?? [:]
+
+            XCTAssertEqual(parameters.count, 2)
+            XCTAssertEqual(parameters["credentials[consumer_session_client_secret]"], Constant.requestSecret)
+            XCTAssertEqual(parameters["wallet_token"], Constant.validWalletId)
+
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(jsonObject: [:], statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+        apiClient.publishableKey = Constant.validPublishableKey
+
+        do {
+            try await apiClient.deleteWalletAddress(
+                walletId: Constant.validWalletId,
+                linkAccountInfo: Constant.validLinkAccountInfo
+            )
+        } catch {
+            XCTFail("Expected a success response but got an error: \(error).")
+        }
+    }
+
+    func testDeleteWalletAddressFailure() async {
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.walletAPIPath)
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(error: NSError(domain: Constant.errorDomain, code: 400))
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            try await apiClient.deleteWalletAddress(
+                walletId: Constant.validWalletId,
+                linkAccountInfo: Constant.validLinkAccountInfo
+            )
+            XCTFail("Expected failure but got success.")
+        } catch {
+            XCTAssertEqual((error as NSError).domain, Constant.errorDomain)
+        }
+    }
+
+    func testDeleteWalletAddressThrowsWithInvalidArguments() async {
+        let apiClient = stubbedAPIClient()
+
+        var noSecretLinkAccountInfo = Constant.validLinkAccountInfo
+        noSecretLinkAccountInfo.consumerSessionClientSecret = nil
+        await XCTAssertThrowsErrorAsync(
+            _ = try await apiClient.deleteWalletAddress(
+                walletId: Constant.validWalletId,
+                linkAccountInfo: noSecretLinkAccountInfo
+            )
+        )
+
+        var unverifiedLinkAccountInfo = Constant.validLinkAccountInfo
+        unverifiedLinkAccountInfo.sessionState = .requiresVerification
+        await XCTAssertThrowsErrorAsync(
+            _ = try await apiClient.deleteWalletAddress(
+                walletId: Constant.validWalletId,
+                linkAccountInfo: unverifiedLinkAccountInfo
+            )
+        )
+    }
+
+    func testGetWalletOwnershipChallengeSuccess() async throws {
+        let mockResponseData = try WalletOwnershipChallengeResponseMock.walletOwnershipChallengeResponse_200.data()
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.getWalletOwnershipChallengeAPIPath)
+            XCTAssertEqual(request.httpMethod, "POST")
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            let parameters = String(data: httpBody, encoding: .utf8)?.parsedHTTPParametersDictionary ?? [:]
+
+            XCTAssertEqual(parameters.count, 3)
+            XCTAssertEqual(parameters["credentials[consumer_session_client_secret]"], Constant.requestSecret)
+            XCTAssertEqual(parameters["wallet_address"], Constant.validWalletAddress)
+            XCTAssertEqual(parameters["network"], Constant.validNetwork.rawValue)
+
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            let response = try await apiClient.getWalletOwnershipChallenge(
+                walletAddress: Constant.validWalletAddress,
+                network: Constant.validNetwork,
+                linkAccountInfo: Constant.validLinkAccountInfo
+            )
+            XCTAssertEqual(response.challengeId, Constant.validChallengeId)
+            XCTAssertEqual(response.walletAddress, Constant.validWalletAddress)
+            XCTAssertEqual(response.network, Constant.validNetwork)
+            XCTAssertEqual(response.message, Constant.validChallengeMessage)
+            XCTAssertEqual(response.expiresAt, Constant.validChallengeExpiresAt)
+        } catch {
+            XCTFail("Expected a success response but got an error: \(error).")
+        }
+    }
+
+    func testGetWalletOwnershipChallengeFailure() async {
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.getWalletOwnershipChallengeAPIPath)
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(error: NSError(domain: Constant.errorDomain, code: 400))
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            _ = try await apiClient.getWalletOwnershipChallenge(
+                walletAddress: Constant.validWalletAddress,
+                network: Constant.validNetwork,
+                linkAccountInfo: Constant.validLinkAccountInfo
+            )
+            XCTFail("Expected failure but got success.")
+        } catch {
+            XCTAssertEqual((error as NSError).domain, Constant.errorDomain)
+        }
+    }
+
+    func testGetWalletOwnershipChallengeThrowsWithInvalidArguments() async {
+        let apiClient = stubbedAPIClient()
+
+        var noSecretLinkAccountInfo = Constant.validLinkAccountInfo
+        noSecretLinkAccountInfo.consumerSessionClientSecret = nil
+        await XCTAssertThrowsErrorAsync(
+            _ = try await apiClient.getWalletOwnershipChallenge(
+                walletAddress: Constant.validWalletAddress,
+                network: Constant.validNetwork,
+                linkAccountInfo: noSecretLinkAccountInfo
+            )
+        )
+
+        var unverifiedLinkAccountInfo = Constant.validLinkAccountInfo
+        unverifiedLinkAccountInfo.sessionState = .requiresVerification
+        await XCTAssertThrowsErrorAsync(
+            _ = try await apiClient.getWalletOwnershipChallenge(
+                walletAddress: Constant.validWalletAddress,
+                network: Constant.validNetwork,
+                linkAccountInfo: unverifiedLinkAccountInfo
+            )
+        )
+    }
+
+    func testSubmitWalletOwnershipSignatureSuccess() async throws {
+        let mockResponseData = try SubmitWalletOwnershipSignatureResponseMock.submitWalletOwnershipSignatureResponse_200.data()
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.submitWalletOwnershipSignatureAPIPath)
+            XCTAssertEqual(request.httpMethod, "POST")
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            let parameters = String(data: httpBody, encoding: .utf8)?.parsedHTTPParametersDictionary ?? [:]
+
+            XCTAssertEqual(parameters.count, 3)
+            XCTAssertEqual(parameters["credentials[consumer_session_client_secret]"], Constant.requestSecret)
+            XCTAssertEqual(parameters["challenge_id"], Constant.validChallengeId)
+            XCTAssertEqual(parameters["signature"], Constant.validWalletOwnershipSignature)
+
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            let response = try await apiClient.submitWalletOwnershipSignature(
+                challengeId: Constant.validChallengeId,
+                signature: Constant.validWalletOwnershipSignature,
+                linkAccountInfo: Constant.validLinkAccountInfo
+            )
+            XCTAssertEqual(response.id, Constant.registerWalletMockResponseObject.id)
+            XCTAssertEqual(response.walletAddress, Constant.validWalletAddress)
+            XCTAssertEqual(response.network, Constant.validNetwork)
+            XCTAssertTrue(response.verifiedOwnership)
+        } catch {
+            XCTFail("Expected a success response but got an error: \(error).")
+        }
+    }
+
+    func testSubmitWalletOwnershipSignatureFailure() async {
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.submitWalletOwnershipSignatureAPIPath)
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(error: NSError(domain: Constant.errorDomain, code: 400))
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            _ = try await apiClient.submitWalletOwnershipSignature(
+                challengeId: Constant.validChallengeId,
+                signature: Constant.validWalletOwnershipSignature,
+                linkAccountInfo: Constant.validLinkAccountInfo
+            )
+            XCTFail("Expected failure but got success.")
+        } catch {
+            XCTAssertEqual((error as NSError).domain, Constant.errorDomain)
+        }
+    }
+
+    func testSubmitWalletOwnershipSignatureThrowsWithInvalidArguments() async {
+        let apiClient = stubbedAPIClient()
+
+        var noSecretLinkAccountInfo = Constant.validLinkAccountInfo
+        noSecretLinkAccountInfo.consumerSessionClientSecret = nil
+        await XCTAssertThrowsErrorAsync(
+            _ = try await apiClient.submitWalletOwnershipSignature(
+                challengeId: Constant.validChallengeId,
+                signature: Constant.validWalletOwnershipSignature,
+                linkAccountInfo: noSecretLinkAccountInfo
+            )
+        )
+
+        var unverifiedLinkAccountInfo = Constant.validLinkAccountInfo
+        unverifiedLinkAccountInfo.sessionState = .requiresVerification
+        await XCTAssertThrowsErrorAsync(
+            _ = try await apiClient.submitWalletOwnershipSignature(
+                challengeId: Constant.validChallengeId,
+                signature: Constant.validWalletOwnershipSignature,
+                linkAccountInfo: unverifiedLinkAccountInfo
+            )
+        )
+    }
+
+    func testGetOnrampSessionSuccess() async throws {
+        let mockResponseData = try jsonEncoder.encode(Constant.validOnrampSessionResponseObject)
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.getOnrampSessionAPIPath)
+            XCTAssertEqual(request.httpMethod, "GET")
+
+            guard let queryParametersString = request.url?.query else {
+                XCTFail("Expected query parameters but found none.")
+                return false
+            }
+
+            let parameters = queryParametersString.parsedHTTPParametersDictionary
+            XCTAssertEqual(parameters.count, 2)
+            XCTAssertEqual(parameters["crypto_onramp_session"], Constant.validOnrampSessionId)
+            XCTAssertEqual(parameters["client_secret"], Constant.validOnrampSessionClientSecret)
+
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            let response = try await apiClient.getOnrampSession(
+                sessionId: Constant.validOnrampSessionId,
+                sessionClientSecret: Constant.validOnrampSessionClientSecret
+            )
+            XCTAssertEqual(response.id, Constant.validOnrampSessionId)
+            XCTAssertEqual(response.clientSecret, Constant.validOnrampSessionClientSecret)
+            XCTAssertEqual(response.paymentIntentClientSecret, Constant.validPaymentIntentClientSecret)
+        } catch {
+            XCTFail("Expected a success response but got an error: \(error).")
+        }
+
+    }
+
+    func testGetOnrampSessionFailure() async throws {
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.getOnrampSessionAPIPath)
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(error: NSError(domain: Constant.errorDomain, code: 400))
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            _ = try await apiClient.getOnrampSession(
+                sessionId: Constant.validOnrampSessionId,
+                sessionClientSecret: Constant.validOnrampSessionClientSecret
+            )
+            XCTFail("Expected failure but got success.")
+        } catch {
+            XCTAssertEqual((error as NSError).domain, Constant.errorDomain)
+        }
+    }
+
+    func testCreatePaymentTokenSuccess() async throws {
+        let mockResponseData = try jsonEncoder.encode(Constant.validCreatePaymentTokenResponseObject)
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.createPaymentTokenAPIPath)
+            XCTAssertEqual(request.httpMethod, "POST")
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            let parameters = String(data: httpBody, encoding: .utf8)?.parsedHTTPParametersDictionary ?? [:]
+
+            XCTAssertEqual(parameters.count, 3)
+            XCTAssertEqual(parameters["payment_method"], Constant.validPaymentId)
+            XCTAssertEqual(parameters["crypto_customer_id"], Constant.validCustomerId)
+            XCTAssertEqual(parameters["ui_mode"], "headless")
+
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            let response = try await apiClient.createPaymentToken(
+                for: Constant.validPaymentId,
+                cryptoCustomerId: Constant.validCustomerId
+            )
+            XCTAssertEqual(response.id, Constant.validPaymentTokenId)
+        } catch {
+            XCTFail("Expected a success response but got an error: \(error).")
+        }
+    }
+
+    func testCreatePaymentTokenFailure() async throws {
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.createPaymentTokenAPIPath)
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(error: NSError(domain: Constant.errorDomain, code: 400))
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            _ = try await apiClient.createPaymentToken(
+                for: Constant.validPaymentId,
+                cryptoCustomerId: Constant.validCustomerId
+            )
+            XCTFail("Expected failure but got success.")
+        } catch {
+            XCTAssertEqual((error as NSError).domain, Constant.errorDomain)
+        }
+    }
+
+    func testGetPlatformSettingsSuccess() async throws {
+        let mockResponseData = try jsonEncoder.encode(Constant.validPlatformSettingsResponseObject)
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.getPlatformSettingsAPIPath)
+            XCTAssertEqual(request.httpMethod, "GET")
+            XCTAssertEqual(request.value(forHTTPHeaderField: "Stripe-Version"), Constant.cryptoOnrampAPIVersion)
+
+            guard let queryParametersString = request.url?.query else {
+                XCTFail("Expected query parameters but found none.")
+                return false
+            }
+
+            let parameters = queryParametersString.parsedHTTPParametersDictionary
+
+            XCTAssertEqual(parameters.count, 2)
+            XCTAssertEqual(parameters["crypto_customer_id"], Constant.validCustomerId)
+            XCTAssertEqual(parameters["ui_mode"], "headless")
+
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            let response = try await apiClient.getPlatformSettings(cryptoCustomerId: Constant.validCustomerId)
+            XCTAssertEqual(response.publishableKey, Constant.validPublishableKey)
+        } catch {
+            XCTFail("Expected a success response but got an error: \(error).")
+        }
+    }
+
+    func testCreatePaymentTokenSendsCountryHintWhenProvided() async throws {
+        // Given a stub asserting the country hint is included in the request
+        let mockResponseData = try jsonEncoder.encode(Constant.validCreatePaymentTokenResponseObject)
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.createPaymentTokenAPIPath)
+
+            guard let httpBody = request.ohhttpStubs_httpBody else {
+                XCTFail("Expected an httpBody data but found none.")
+                return false
+            }
+
+            let parameters = String(data: httpBody, encoding: .utf8)?.parsedHTTPParametersDictionary ?? [:]
+
+            XCTAssertEqual(parameters.count, 4)
+            XCTAssertEqual(parameters["payment_method"], Constant.validPaymentId)
+            XCTAssertEqual(parameters["crypto_customer_id"], Constant.validCustomerId)
+            XCTAssertEqual(parameters["ui_mode"], "headless")
+            XCTAssertEqual(parameters["country_hint"], "GB")
+
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        // When creating a payment token with a country hint
+        let response = try await apiClient.createPaymentToken(
+            for: Constant.validPaymentId,
+            cryptoCustomerId: Constant.validCustomerId,
+            countryHint: "GB"
+        )
+
+        // Then the token is returned
+        XCTAssertEqual(response.id, Constant.validPaymentTokenId)
+    }
+
+    func testGetPlatformSettingsSendsCountryHintWhenProvided() async throws {
+        // Given a stub asserting the country hint is included in the request
+        let mockResponseData = try jsonEncoder.encode(Constant.validPlatformSettingsResponseObject)
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.getPlatformSettingsAPIPath)
+
+            guard let queryParametersString = request.url?.query else {
+                XCTFail("Expected query parameters but found none.")
+                return false
+            }
+
+            let parameters = queryParametersString.parsedHTTPParametersDictionary
+
+            XCTAssertEqual(parameters.count, 3)
+            XCTAssertEqual(parameters["crypto_customer_id"], Constant.validCustomerId)
+            XCTAssertEqual(parameters["ui_mode"], "headless")
+            XCTAssertEqual(parameters["country_hint"], "GB")
+
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        // When retrieving platform settings with a country hint
+        let response = try await apiClient.getPlatformSettings(
+            cryptoCustomerId: Constant.validCustomerId,
+            countryHint: "GB"
+        )
+
+        // Then the platform publishable key is returned
+        XCTAssertEqual(response.publishableKey, Constant.validPublishableKey)
+    }
+
+    func testGetPlatformSettingsSurfacesUnsupportedCountryError() async throws {
+        // Given a stub returning an unsupported-country API error
+        let errorResponse: [String: Any] = [
+            "error": [
+                "type": "invalid_request_error",
+                "code": "crypto_onramp_transactions_unavailable_in_country",
+                "message": "Onramp transactions are unavailable in this country.",
+            ],
+        ]
+
+        stub { request in
+            request.url?.path == Constant.getPlatformSettingsAPIPath
+        } response: { _ in
+            return HTTPStubsResponse(jsonObject: errorResponse, statusCode: 400, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            // When retrieving platform settings with an unsupported country hint
+            _ = try await apiClient.getPlatformSettings(cryptoCustomerId: nil, countryHint: "ZZ")
+            XCTFail("Expected failure but got success.")
+        } catch {
+            // Then the API error is surfaced unchanged
+            guard let stripeError = error as? StripeError, case let .apiError(apiError) = stripeError else {
+                XCTFail("Expected a Stripe API error but got: \(error).")
+                return
+            }
+
+            XCTAssertEqual(apiError.code, "crypto_onramp_transactions_unavailable_in_country")
+        }
+    }
+
+    func testGetPlatformSettingsOmitsCryptoCustomerIdWhenNotProvided() async throws {
+        // Given a stub asserting no crypto customer ID is sent
+        let mockResponseData = try jsonEncoder.encode(Constant.validPlatformSettingsResponseObject)
+
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.getPlatformSettingsAPIPath)
+
+            guard let queryParametersString = request.url?.query else {
+                XCTFail("Expected query parameters but found none.")
+                return false
+            }
+
+            let parameters = queryParametersString.parsedHTTPParametersDictionary
+
+            XCTAssertEqual(parameters.count, 1)
+            XCTAssertNil(parameters["crypto_customer_id"])
+            XCTAssertEqual(parameters["ui_mode"], "headless")
+
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(data: mockResponseData, statusCode: 200, headers: nil)
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        // When retrieving platform settings without a crypto customer ID
+        let response = try await apiClient.getPlatformSettings(cryptoCustomerId: nil)
+
+        // Then the platform publishable key is returned
+        XCTAssertEqual(response.publishableKey, Constant.validPublishableKey)
+    }
+
+    func testGetPlatformSettingsFailure() async throws {
+        stub { request in
+            XCTAssertEqual(request.url?.path, Constant.getPlatformSettingsAPIPath)
+            return true
+        } response: { _ in
+            return HTTPStubsResponse(error: NSError(domain: Constant.errorDomain, code: 400))
+        }
+
+        let apiClient = stubbedAPIClient()
+
+        do {
+            _ = try await apiClient.getPlatformSettings(cryptoCustomerId: Constant.validCustomerId)
+            XCTFail("Expected failure but got success.")
+        } catch {
+            XCTAssertEqual((error as NSError).domain, Constant.errorDomain)
+        }
+    }
+}
+
+private extension String {
+    var parsedHTTPParametersDictionary: [String: String] {
+        let pairs = components(separatedBy: "&")
+        return pairs.reduce(into: [:]) { result, pair in
+            let splitPair = pair.components(separatedBy: "=")
+            guard splitPair.count == 2 else { return }
+            result[splitPair[0]] = splitPair[1]
+        }
+    }
+}

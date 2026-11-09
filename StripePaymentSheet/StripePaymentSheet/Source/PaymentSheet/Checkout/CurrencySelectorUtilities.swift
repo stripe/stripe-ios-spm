@@ -1,0 +1,151 @@
+//
+//  CurrencySelectorUtilities.swift
+//  StripePaymentSheet
+//
+//  Created by Nick Porter on 4/23/26.
+//
+
+@_spi(InternalOnlyAPI) import StripeCore
+@_spi(InternalOnlyAPI) import StripePayments
+@_spi(InternalOnlyAPI) import StripeUICore
+import UIKit
+
+/// Shared utilities for currency selector components (standalone and in-form).
+enum CurrencySelectorUtilities {
+
+    /// A normalized currency code that provides typed access for API vs display use.
+    struct CurrencyCode: Equatable {
+        /// Lowercase form for comparisons, identifiers, and API calls (e.g. "usd").
+        let apiValue: String
+        /// Uppercase form for user-facing UI (e.g. "USD").
+        let displayValue: String
+
+        init(_ rawValue: String) {
+            self.apiValue = rawValue.lowercased()
+            self.displayValue = rawValue.uppercased()
+        }
+    }
+
+    // MARK: - Two-option builder
+
+    /// Local currency on the left, integration (merchant) currency on the right.
+    /// Uses `exchangeRateMeta` for stable ordering that doesn't change on reload.
+    ///
+    /// - Parameter flagPrefixProvider: Returns an attributed flag icon for each currency code.
+    static func buildSelectorItems(
+        exchangeRateMeta: CheckoutElementsController.Session.ExchangeRateMeta,
+        localizedPricesMetas: [STPCheckoutSessionLocalizedPriceMeta],
+        labelContent: CurrencySelectorElement.Appearance.LabelContent = .currencyCode,
+        flagPrefixProvider: (String) -> NSAttributedString = { _ in NSAttributedString() }
+    ) -> (left: TwoOptionSelectorItem, right: TwoOptionSelectorItem) {
+        let localCurrency = CurrencyCode(exchangeRateMeta.localizedCurrency)
+        let integrationCurrency = CurrencyCode(exchangeRateMeta.integrationCurrency)
+
+        let localMeta = localizedPricesMetas.first { CurrencyCode($0.currency) == localCurrency }
+        let integrationMeta = localizedPricesMetas.first { CurrencyCode($0.currency) == integrationCurrency }
+
+        let left = localMeta.map {
+            makeSelectorItem(currency: CurrencyCode($0.currency), total: $0.total, labelContent: labelContent, flagPrefix: flagPrefixProvider(localCurrency.apiValue))
+        } ?? makeSelectorItem(currency: localCurrency, total: 0, labelContent: labelContent, flagPrefix: flagPrefixProvider(localCurrency.apiValue))
+
+        let right = integrationMeta.map {
+            makeSelectorItem(currency: CurrencyCode($0.currency), total: $0.total, labelContent: labelContent, flagPrefix: flagPrefixProvider(integrationCurrency.apiValue))
+        } ?? makeSelectorItem(currency: integrationCurrency, total: 0, labelContent: labelContent, flagPrefix: flagPrefixProvider(integrationCurrency.apiValue))
+
+        return (left: left, right: right)
+    }
+
+    static func makeSelectorItem(currency: CurrencyCode, total: Int, labelContent: CurrencySelectorElement.Appearance.LabelContent = .currencyCode, flagPrefix: NSAttributedString) -> TwoOptionSelectorItem {
+        let displayText = NSMutableAttributedString(attributedString: flagPrefix)
+        if displayText.length > 0 {
+            displayText.append(NSAttributedString(string: " \u{2009}"))
+        }
+        let accessibilityLabel: String
+        switch labelContent {
+        case .currencyCode:
+            displayText.append(NSAttributedString(string: currency.displayValue))
+            accessibilityLabel = currency.displayValue
+        case .amount:
+            let formattedAmount = String.localizedAmountDisplayString(for: total, currency: currency.apiValue)
+            displayText.append(NSAttributedString(string: formattedAmount))
+            accessibilityLabel = "\(formattedAmount) \(currency.displayValue)"
+        case .automatic:
+            assertionFailure(".automatic should be resolved before reaching makeSelectorItem")
+            displayText.append(NSAttributedString(string: currency.displayValue))
+            accessibilityLabel = currency.displayValue
+        }
+        return TwoOptionSelectorItem(
+            id: currency.apiValue,
+            displayText: displayText,
+            accessibilityLabel: accessibilityLabel,
+            accessibilityIdentifier: "currency_option_\(currency.apiValue)"
+        )
+    }
+
+    // MARK: - Caption
+
+    /// Shows the exchange rate when the local currency is selected,
+    /// or a bank-fees disclaimer when the merchant's currency is selected.
+    static func caption(
+        forSelectedCurrency selectedCurrency: String,
+        exchangeRateMeta meta: CheckoutElementsController.Session.ExchangeRateMeta
+    ) -> String {
+        let isIntegrationCurrencySelected = selectedCurrency == CurrencyCode(meta.integrationCurrency).apiValue
+        if isIntegrationCurrencySelected {
+            return meta.integrationCaption ?? String.Localized.bankExchangeRateDisclaimer
+        }
+
+        return meta.caption ?? ""
+    }
+
+    /// Returns the expandable detail text for the exchange rate, or nil if not applicable.
+    static func detailText(exchangeRateMeta meta: CheckoutElementsController.Session.ExchangeRateMeta) -> String? {
+        return meta.details
+    }
+
+    // MARK: - Availability
+
+    /// Returns the adaptive pricing data needed to show a currency selector,
+    /// or `nil` if adaptive pricing is not available for the given session.
+    static func adaptivePricingData(
+        from session: CheckoutElementsController.Session?
+    ) -> (session: CheckoutElementsController.Session, exchangeRateMeta: CheckoutElementsController.Session.ExchangeRateMeta, currency: String)? {
+        guard let session,
+              session.adaptivePricingActive,
+              !session.localizedPricesMetas.isEmpty,
+              let exchangeRateMeta = session.exchangeRateMeta,
+              let currency = session.activePresentmentCurrency
+        else { return nil }
+        return (session, exchangeRateMeta, currency)
+    }
+
+    // MARK: - Flag emoji
+
+    // Most currency codes already start with the country code (USD→US, GBP→GB) per ISO 4217.
+    // ANG is the one exception among Stripe-supported currencies — it maps to NL, not the
+    // defunct "AN" (Netherlands Antilles). X-prefixed codes (XAF, XOF, etc.) are multi-country
+    // so we just skip the flag entirely.
+    // See also: stripe-js CURRENCY_TO_FLAG_CODES in src/lib/inner/components/FlagIcon/
+
+    private static let regionCodeOverrides: [String: String] = [
+        "ang": "NL",
+    ]
+
+    private static let unmappedCurrencies: Set<String> = [
+        "xaf", "xcd", "xof", "xpf",
+    ]
+
+    /// Region code for the currency, or nil for multi-country currencies (XAF, XOF, etc.)
+    static func regionCode(for currency: CurrencyCode) -> String? {
+        if unmappedCurrencies.contains(currency.apiValue) { return nil }
+        if let override = regionCodeOverrides[currency.apiValue] { return override }
+        return String(currency.displayValue.prefix(2))
+    }
+
+    static func flagEmoji(for currency: CurrencyCode) -> String {
+        guard let regionCode = regionCode(for: currency) else {
+            return ""
+        }
+        return String.regionFlagEmoji(for: regionCode) ?? ""
+    }
+}

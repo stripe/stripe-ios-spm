@@ -1,0 +1,45 @@
+//
+//  LinkABTest.swift
+//  StripePaymentSheet
+//
+//  Created by Mat Schmid on 5/21/25.
+//
+
+import Foundation
+
+struct LinkABTest: LoggableExperiment {
+    static let experimentName = "link_ab_test"
+    private let baseExperiment: BaseLinkHoldbackExperiment
+
+    let name: String = experimentName
+    let arbId: String
+
+    var group: ExperimentGroup {
+        baseExperiment.group
+    }
+
+    var dimensions: [String: String] {
+        baseExperiment.dimensionsDictionary
+    }
+
+    init(
+        arbId: String,
+        session elementsSession: STPElementsSession,
+        isLinkEnabled: Bool,
+        defaultBillingDetails: PaymentSheet.BillingDetails,
+        linkAccount: PaymentSheetLinkAccount?,
+        integrationShape: ExperimentIntegrationShape
+    ) {
+        let baseExperiment = BaseLinkHoldbackExperiment(
+            experimentName: Self.experimentName,
+            elementsSession: elementsSession,
+            isLinkEnabled: isLinkEnabled,
+            defaultBillingDetails: defaultBillingDetails,
+            linkAccount: linkAccount,
+            integrationShape: integrationShape
+        )
+
+        self.arbId = arbId
+        self.baseExperiment = baseExperiment
+    }
+}

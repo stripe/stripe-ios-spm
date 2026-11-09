@@ -1,0 +1,335 @@
+//
+//  PaymentElement+Configuration.swift
+//  StripePaymentSheet
+//
+//  Created by Yuki Tokuhiro on 7/10/26.
+//
+
+import PassKit
+@_spi(InternalOnlyAPI) import StripeCore
+@_spi(InternalOnlyAPI) import StripePayments
+
+extension PaymentElement {
+    /// Configuration for PaymentElement
+    public struct Configuration {
+        // MARK: - Public
+
+        /// Initializes a Configuration with default values.
+        public init() {}
+
+        /// Configuration for Apple Pay.
+        public var applePayConfiguration: ApplePayConfiguration = .init()
+
+        /// Configuration for Link.
+        public var linkConfiguration: LinkConfiguration?
+
+        /// PaymentSheet offers users an option to save some payment methods for later use.
+        /// Default value is `.automatic`.
+        public var savePaymentMethodOptInBehavior: SavePaymentMethodOptInBehavior = .automatic {
+            didSet {
+                paymentSheetConfiguration.savePaymentMethodOptInBehavior = savePaymentMethodOptInBehavior
+                embeddedConfiguration.savePaymentMethodOptInBehavior = savePaymentMethodOptInBehavior
+            }
+        }
+
+        /// Describes the appearance of PaymentElement.
+        public var appearance: Appearance = .default {
+            didSet {
+                paymentSheetConfiguration.appearance = appearance
+                embeddedConfiguration.appearance = appearance
+            }
+        }
+
+        /// The list of preferred networks that should be used to process payments made with a co-branded card.
+        /// This value will only be used if your user hasn't selected a network themselves.
+        public var preferredNetworks: [STPCardBrand]? {
+            didSet {
+                paymentSheetConfiguration.preferredNetworks = preferredNetworks
+                embeddedConfiguration.preferredNetworks = preferredNetworks
+            }
+        }
+
+        /// By default, PaymentElement accepts all card brands supported by Stripe.
+        /// You can specify which card brands to allow or disallow.
+        /// - Note: This is only a client-side solution.
+        /// - Note: Card brand filtering is not currently supported by Apple Pay or Link.
+        public var cardBrandAcceptance: CardBrandAcceptance = .all {
+            didSet {
+                paymentSheetConfiguration.cardBrandAcceptance = cardBrandAcceptance
+                embeddedConfiguration.cardBrandAcceptance = cardBrandAcceptance
+            }
+        }
+
+        /// Optional configuration to display a custom message when a saved payment method is removed.
+        public var removeSavedPaymentMethodMessage: String? {
+            didSet {
+                paymentSheetConfiguration.removeSavedPaymentMethodMessage = removeSavedPaymentMethodMessage
+                embeddedConfiguration.removeSavedPaymentMethodMessage = removeSavedPaymentMethodMessage
+            }
+        }
+
+        /// By default, PaymentElement will use a dynamic ordering that optimizes payment method display for the customer.
+        public var paymentMethodOrder: [String]? {
+            didSet {
+                paymentSheetConfiguration.paymentMethodOrder = paymentMethodOrder
+                embeddedConfiguration.paymentMethodOrder = paymentMethodOrder
+            }
+        }
+
+        /// By default, the card form will provide a button to open the card scanner.
+        /// If true, the card form will instead initialize with the card scanner already open.
+        public var opensCardScannerAutomatically: Bool = false {
+            didSet {
+                paymentSheetConfiguration.opensCardScannerAutomatically = opensCardScannerAutomatically
+                embeddedConfiguration.opensCardScannerAutomatically = opensCardScannerAutomatically
+            }
+        }
+
+        /// A map for specifying when legal agreements are displayed for each payment method type.
+        public var termsDisplay: [STPPaymentMethodType: PaymentSheet.TermsDisplay] = [:] {
+            didSet {
+                paymentSheetConfiguration.termsDisplay = termsDisplay
+                embeddedConfiguration.termsDisplay = termsDisplay
+            }
+        }
+
+        /// The layout of payment methods in the sheet. Defaults to `.automatic`.
+        /// - Note: Only used if you call `presentPaymentElement`.
+        public var paymentMethodLayout: PaymentMethodLayout = .automatic {
+            didSet {
+                paymentSheetConfiguration.paymentMethodLayout = paymentMethodLayout
+            }
+        }
+
+        /// Controls whether PaymentElement displays mandate text below its embedded view and presents a SEPA mandate before confirmation when needed. Defaults to `true`.
+        /// If set to `false`, your integration must display `PaymentOptionDisplayData.mandateText` to the customer near your “Buy” button to comply with regulations.
+        /// - Note: This doesn't affect mandates displayed in the sheet and is ignored if you call `presentPaymentElement`.
+        public var displaysMandateText: Bool = true {
+            didSet {
+                embeddedConfiguration.embeddedViewDisplaysMandateText = displaysMandateText
+            }
+        }
+
+        /// Determines the behavior when a row is selected.
+        /// - Note: Ignored if you call `presentPaymentElement`
+        public var rowSelectionBehavior: RowSelectionBehavior = .default {
+            didSet {
+                embeddedConfiguration.rowSelectionBehavior = embeddedRowSelectionBehavior
+            }
+        }
+
+        /// Describes how you handle row selections in PaymentElement.
+        public enum RowSelectionBehavior {
+            /// When a payment option is selected, the customer taps a button to continue payment.
+            case `default`
+
+            /// When a payment option is selected, `didSelectPaymentOption` is triggered.
+            /// You can implement this method to immediately perform an action e.g. go back to the checkout screen.
+            case immediateAction(didSelectPaymentOption: () -> Void)
+        }
+
+        // MARK: - Internal
+
+        private var paymentSheetConfiguration = PaymentSheet.Configuration()
+        private var embeddedConfiguration: EmbeddedPaymentElement.Configuration = {
+            var configuration = EmbeddedPaymentElement.Configuration()
+            configuration.embeddedViewDisplaysMandateText = true
+            return configuration
+        }()
+
+        /// `applePayMerchantId` when Apple Pay should be enabled, or `nil` when the shared merchant ID
+        /// is unset or this element's `applePayConfiguration.display` is `.never`.
+        private func effectiveApplePayMerchantId(_ applePayMerchantId: String?) -> String? {
+            applePayConfiguration.display == .never ? nil : applePayMerchantId
+        }
+
+        // TODO: Have both configuration conversion methods accept Checkout configuration and session,
+        // apply address overrides here, and remove the CheckoutElementsControllerLoader wrappers.
+        func makeEmbeddedConfiguration(
+            apiClient: STPAPIClient,
+            returnURL: String,
+            defaults: CheckoutElementsController.Configuration.Defaults,
+            merchantDisplayName: String,
+            merchantCountryCode: String,
+            applePayMerchantId: String?,
+            userInterfaceStyle: CheckoutElementsController.UserInterfaceStyle
+        ) -> EmbeddedPaymentElement.Configuration {
+            var configuration = embeddedConfiguration
+            configuration.allowsDelayedPaymentMethods = true
+            configuration.allowsPaymentMethodsRequiringShippingAddress = true
+            configuration.apiClient = apiClient
+            configuration.returnURL = returnURL
+            configuration.apply(linkConfiguration: linkConfiguration)
+            configuration.applePay = effectiveApplePayMerchantId(applePayMerchantId).map {
+                applePayConfiguration.paymentSheetConfiguration(merchantId: $0, merchantCountryCode: merchantCountryCode)
+            }
+            configuration.merchantDisplayName = merchantDisplayName
+            configuration.style = userInterfaceStyle
+            if let billingDetails = defaults.billingDetails {
+                configuration.defaultBillingDetails.set(billingDetails)
+            }
+            configuration.defaultBillingDetails.phone = defaults.phone
+            return configuration
+        }
+
+        func makeFlowControllerConfiguration(
+            apiClient: STPAPIClient,
+            returnURL: String,
+            defaults: CheckoutElementsController.Configuration.Defaults,
+            merchantDisplayName: String,
+            merchantCountryCode: String,
+            applePayMerchantId: String?,
+            userInterfaceStyle: CheckoutElementsController.UserInterfaceStyle
+        ) -> PaymentSheet.Configuration {
+            var configuration = paymentSheetConfiguration
+            configuration.allowsDelayedPaymentMethods = true
+            configuration.allowsPaymentMethodsRequiringShippingAddress = true
+            configuration.apiClient = apiClient
+            configuration.returnURL = returnURL
+            configuration.apply(linkConfiguration: linkConfiguration)
+            configuration.applePay = effectiveApplePayMerchantId(applePayMerchantId).map {
+                applePayConfiguration.paymentSheetConfiguration(merchantId: $0, merchantCountryCode: merchantCountryCode)
+            }
+            configuration.merchantDisplayName = merchantDisplayName
+            configuration.style = userInterfaceStyle
+            if let billingDetails = defaults.billingDetails {
+                configuration.defaultBillingDetails.set(billingDetails)
+            }
+            configuration.defaultBillingDetails.phone = defaults.phone
+            return configuration
+        }
+    }
+}
+
+extension PaymentElement.Configuration {
+    /// Configuration related to Apple Pay
+    public struct ApplePayConfiguration {
+        /// Controls whether Apple Pay is displayed in Payment Element.
+        public enum Display: String {
+            /// Show Apple Pay when it is available.
+            case automatic
+            /// Never show Apple Pay in Payment Element.
+            case never
+        }
+
+        /// Controls whether Apple Pay is displayed in Payment Element.
+        public var display: Display = .automatic
+
+        /// Defines the label that will be displayed in the Apple Pay button.
+        /// See <https://developer.apple.com/design/human-interface-guidelines/technologies/apple-pay/buttons-and-marks/>
+        /// for all available options.
+        public var buttonType: PKPaymentButtonType?
+
+        /// Creates an Apple Pay configuration.
+        /// - Parameters:
+        ///   - display: Controls whether Apple Pay is displayed in Payment Element. Defaults to `.automatic`.
+        ///   - buttonType: The type of Apple Pay button to display. Defaults to `nil`.
+        public init(
+            display: Display = .automatic,
+            buttonType: PKPaymentButtonType? = nil
+        ) {
+            self.display = display
+            self.buttonType = buttonType
+        }
+    }
+
+    /// Configuration related to Link
+    public struct LinkConfiguration {
+        /// The Link display mode.
+        public var display: Display = .automatic
+
+        /// Creates a Link configuration.
+        public init(display: Display = .automatic) {
+            self.display = display
+        }
+
+        /// Display configuration for Link
+        public enum Display: String {
+            /// Link will be displayed when available.
+            case automatic
+            /// Link will never be displayed.
+            case never
+            /// Link remains enabled (e.g. for automatic Link verification, Instant Bank Payments, Link Card Brand, and inline signup)
+            /// but its button/row will not be shown in the payment element UI.
+            case walletButtonHidden
+        }
+    }
+}
+
+private extension PaymentElement.Configuration.ApplePayConfiguration {
+    func paymentSheetConfiguration(merchantId: String, merchantCountryCode: String) -> PaymentSheet.ApplePayConfiguration {
+        return PaymentSheet.ApplePayConfiguration(
+            merchantId: merchantId,
+            merchantCountryCode: merchantCountryCode,
+            buttonType: buttonType ?? .plain
+        )
+    }
+}
+
+private extension PaymentSheet.Configuration {
+    mutating func apply(linkConfiguration: PaymentElement.Configuration.LinkConfiguration?) {
+        switch linkConfiguration?.display {
+        case .none, .automatic:
+            link.display = .automatic
+        case .never:
+            link.display = .never
+        case .walletButtonHidden:
+            link.display = .walletButtonHidden
+        }
+    }
+}
+
+private extension EmbeddedPaymentElement.Configuration {
+    mutating func apply(linkConfiguration: PaymentElement.Configuration.LinkConfiguration?) {
+        switch linkConfiguration?.display {
+        case .none, .automatic:
+            link.display = .automatic
+        case .never:
+            link.display = .never
+        case .walletButtonHidden:
+            link.display = .walletButtonHidden
+        }
+    }
+}
+
+// MARK: - Typealiases
+
+extension PaymentElement {
+    /// Describes the appearance of PaymentElement
+    public typealias Appearance = PaymentSheet.Appearance
+    public typealias SavePaymentMethodOptInBehavior = PaymentSheet.SavePaymentMethodOptInBehavior
+    public typealias PaymentMethodLayout = PaymentSheet.PaymentMethodLayout
+    public typealias CardBrandAcceptance = PaymentSheet.CardBrandAcceptance
+    public typealias BrandCategory = PaymentSheet.CardBrandAcceptance.BrandCategory
+}
+
+private extension PaymentElement.Configuration {
+    var embeddedRowSelectionBehavior: EmbeddedPaymentElement.Configuration.RowSelectionBehavior {
+        switch rowSelectionBehavior {
+        case .default:
+            return .default
+        case .immediateAction(let didSelectPaymentOption):
+            return .immediateAction(didSelectPaymentOption: didSelectPaymentOption)
+        }
+    }
+}
+
+extension PaymentSheet.BillingDetails {
+    mutating func set(_ billingDetails: CheckoutElementsController.Configuration.Defaults.BillingDetails) {
+        name = billingDetails.name
+        if let billingAddress = billingDetails.address {
+            address.set(billingAddress)
+        }
+    }
+}
+
+private extension PaymentSheet.Address {
+    mutating func set(_ address: CheckoutElementsController.Address) {
+        city = address.city
+        country = address.country
+        line1 = address.line1
+        line2 = address.line2
+        postalCode = address.postalCode
+        state = address.state
+    }
+}
